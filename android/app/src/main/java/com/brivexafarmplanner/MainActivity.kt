@@ -1,4 +1,4 @@
-package com.brivexa
+package com.brivexafarmplanner
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

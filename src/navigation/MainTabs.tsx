@@ -11,6 +11,14 @@ import type {GuestTab, MainTabParamList} from './types';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
+const TAB_ROOTS: Record<GuestTab, string> = {
+  TodayTab: 'TodayHome',
+  FieldsTab: 'FieldsHome',
+  WorkTab: 'WorkHome',
+  CalcTab: 'CalcHome',
+  FarmTab: 'FarmHome',
+};
+
 export function MainTabs() {
   return (
     <Tab.Navigator
@@ -21,7 +29,7 @@ export function MainTabs() {
         <TabBar
           activeTab={state.routes[state.index]?.name as GuestTab}
           onSelect={tab => {
-            navigation.navigate(tab);
+            navigation.navigate(tab, {screen: TAB_ROOTS[tab]});
           }}
         />
       )}>

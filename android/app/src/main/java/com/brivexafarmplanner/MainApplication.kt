@@ -1,4 +1,4 @@
-package com.brivexa
+package com.brivexafarmplanner
 
 import android.app.Application
 import com.facebook.react.PackageList
