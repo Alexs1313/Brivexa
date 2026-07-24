@@ -4,7 +4,7 @@ export const icons = {
   appLogo: require('../assets/brivexa-calc-logo.png'),
 };
 
-export const appBackground = require('../assets/brivexa-calc-bg.png');
+export const appBackground = require('../assets/brivexa-calc-loader-bg.png');
 
 export const onboardingBackground = require('../assets/brivexa-calc-onboarding-bg.png');
 
