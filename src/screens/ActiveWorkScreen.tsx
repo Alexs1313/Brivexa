@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import {
   ImageBackground,
   Pressable,
@@ -247,12 +248,14 @@ const styles = StyleSheet.create({
   },
 
   ActiveWorkScreenNavSide: { minWidth: 72 },
+
   ActiveWorkScreenNavLinkFiligree: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
+
   ActiveWorkScreenTitleFiligree: {
     color: colors.cream,
     flex: 1,
@@ -261,6 +264,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     textAlign: 'center',
   },
+
   ActiveWorkScreenFieldLabelFiligree: {
     color: colors.bodyMuted,
     fontFamily: fonts.sansRegular,

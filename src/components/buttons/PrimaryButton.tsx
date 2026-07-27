@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 30,
   },
+
   PrimaryButtonBackButtonLabelFiligree: {
     color: colors.backButtonText,
     fontFamily: fonts.sansBold,

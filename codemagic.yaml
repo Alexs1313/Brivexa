@@ -10,9 +10,9 @@ workflows:
       vars:
         XCODE_WORKSPACE: 'Brivexa.xcworkspace' # <----
         XCODE_SCHEME: 'Brivexa' # <----
-        BUNDLE_ID: 'com.ddjadfnjeje.dhdhajd' # <----
-        APP_STORE_APP_ID: 6793987378 # <----
-        APP_STORE_CONNECT_KEY_ID: '4WW84M3548' # <----
+        BUNDLE_ID: 'com.djkdalaksd.skskslalasd' # <----
+        APP_STORE_APP_ID: 6795074867 # <----
+        APP_STORE_CONNECT_KEY_ID: '3L966NL5Z2' # <----
         APP_STORE_CONNECT_ISSUER_ID: 'b0f2596c-9b95-495f-a44b-465dfde24330' # <----
         node: latest
         xcode: latest
