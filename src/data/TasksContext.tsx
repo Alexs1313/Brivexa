@@ -6,6 +6,7 @@ import React, {
 } from 'react';
 
 import {usePersistedState} from '../hooks/usePersistedState';
+import {APP_TODAY_KEY} from './dates';
 import {storageKeys} from './storage';
 import type {TodayTask, UpcomingWork} from './today';
 import {
@@ -14,9 +15,7 @@ import {
   type WorkTask,
 } from './work';
 
-/** Demo “today” used across the app */
-export const APP_TODAY_KEY = '2026-07-22';
-
+export {APP_TODAY_KEY};
 export type NewTaskDraft = {
   title: string;
   workType: string;
@@ -94,7 +93,7 @@ function parseDateLabel(label: string): {date: string; dateKey: string} {
   }
   const monthName = match[1].slice(0, 3);
   const day = String(Number(match[2])).padStart(2, '0');
-  const year = match[3] ?? '2026';
+  const year = match[3] ?? String(new Date().getFullYear());
   const month = MONTHS[monthName] ?? '07';
   return {
     date: `${monthName} ${Number(match[2])}`,

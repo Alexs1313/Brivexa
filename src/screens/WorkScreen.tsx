@@ -16,7 +16,15 @@ import { PrimaryButton } from '../components/buttons/PrimaryButton';
 import { colors, fonts, radius } from '../constants/theme';
 import { appBackground } from '../data/assets';
 import {
-  CALENDAR_DOTS,
+  APP_TODAY_KEY,
+  dateKeyFor,
+  daysInMonth,
+  formatMonthDay,
+  formatMonthYear,
+  monthStartOffset,
+} from '../data/dates';
+import {
+  calendarDotsForMonth,
   WORK_FILTERS,
   statusLabel,
   workStats,
@@ -41,17 +49,31 @@ export function WorkScreen({ onOpenTask, onAddTask }: WorkScreenProps) {
   const [mode, setMode] = useState<WorkMode>('tasks');
   const [demoEmpty, setDemoEmpty] = useState(false);
   const [filter, setFilter] = useState<(typeof WORK_FILTERS)[number]>('All');
-  const [selectedDay, setSelectedDay] = useState(22);
+
+  const today = useMemo(() => {
+    const now = new Date();
+    return {
+      year: now.getFullYear(),
+      month: now.getMonth(),
+      day: now.getDate(),
+    };
+  }, []);
+
+  const [viewYear, setViewYear] = useState(today.year);
+  const [viewMonth, setViewMonth] = useState(today.month);
+  const [selectedDay, setSelectedDay] = useState(today.day);
 
   const tasks = demoEmpty ? [] : storedTasks;
   const stats = workStats(tasks);
 
   const filtered = useMemo(() => {
     if (filter === 'Today') {
-      return tasks.filter(t => t.dateKey === '2026-07-22');
+      return tasks.filter(t => t.dateKey === APP_TODAY_KEY);
     }
     if (filter === 'Upcoming') {
-      return tasks.filter(t => t.status === 'planned');
+      return tasks.filter(
+        t => t.dateKey > APP_TODAY_KEY && t.status !== 'done',
+      );
     }
     if (filter === 'Overdue') {
       return tasks.filter(t => t.status === 'overdue');
@@ -59,13 +81,27 @@ export function WorkScreen({ onOpenTask, onAddTask }: WorkScreenProps) {
     return tasks;
   }, [filter, tasks]);
 
+  const selectedDateKey = dateKeyFor(viewYear, viewMonth, selectedDay);
+
   const dayTasks = useMemo(
-    () =>
-      tasks.filter(
-        t => t.dateKey === `2026-07-${String(selectedDay).padStart(2, '0')}`,
-      ),
-    [selectedDay, tasks],
+    () => tasks.filter(t => t.dateKey === selectedDateKey),
+    [selectedDateKey, tasks],
   );
+
+  const calendarDots = useMemo(
+    () => calendarDotsForMonth(tasks, viewYear, viewMonth),
+    [tasks, viewMonth, viewYear],
+  );
+
+  const shiftMonth = (delta: number) => {
+    const next = new Date(viewYear, viewMonth + delta, 1);
+    const nextYear = next.getFullYear();
+    const nextMonth = next.getMonth();
+    const maxDay = daysInMonth(nextYear, nextMonth);
+    setViewYear(nextYear);
+    setViewMonth(nextMonth);
+    setSelectedDay(day => Math.min(day, maxDay));
+  };
 
   const emptyTasks = filtered.length === 0;
 
@@ -206,8 +242,13 @@ export function WorkScreen({ onOpenTask, onAddTask }: WorkScreenProps) {
           </>
         ) : (
           <CalendarPanel
+            year={viewYear}
+            monthIndex={viewMonth}
             selectedDay={selectedDay}
             onSelectDay={setSelectedDay}
+            onPrevMonth={() => shiftMonth(-1)}
+            onNextMonth={() => shiftMonth(1)}
+            dots={calendarDots}
             dayTasks={dayTasks}
             onOpenTask={onOpenTask}
             onAddTask={onAddTask}
@@ -325,26 +366,37 @@ export function StatusChip({ status }: { status: WorkTaskStatus }) {
 }
 
 function CalendarPanel({
+  year,
+  monthIndex,
   selectedDay,
   onSelectDay,
+  onPrevMonth,
+  onNextMonth,
+  dots,
   dayTasks,
   onOpenTask,
   onAddTask,
 }: {
+  year: number;
+  monthIndex: number;
   selectedDay: number;
   onSelectDay: (day: number) => void;
+  onPrevMonth: () => void;
+  onNextMonth: () => void;
+  dots: Record<number, 'overdue' | 'gold' | 'info'>;
   dayTasks: WorkTask[];
   onOpenTask: (id: string) => void;
   onAddTask: () => void;
 }) {
-  // July 2026 starts on Wednesday
-  const startOffset = 3;
-  const daysInMonth = 31;
+  const startOffset = monthStartOffset(year, monthIndex);
+  const totalDays = daysInMonth(year, monthIndex);
+  const monthLabel = formatMonthYear(year, monthIndex);
+  const dayLabel = formatMonthDay(monthIndex, selectedDay);
   const cells: Array<number | null> = [];
   for (let i = 0; i < startOffset; i += 1) {
     cells.push(null);
   }
-  for (let d = 1; d <= daysInMonth; d += 1) {
+  for (let d = 1; d <= totalDays; d += 1) {
     cells.push(d);
   }
 
@@ -352,9 +404,13 @@ function CalendarPanel({
     <View>
       <View style={styles.WorkScreenCalendarCard}>
         <View style={styles.WorkScreenCalendarHeader}>
-          <Text style={styles.WorkScreenCalendarArrow}>‹</Text>
-          <Text style={styles.WorkScreenCalendarMonth}>July 2026</Text>
-          <Text style={styles.WorkScreenCalendarArrow}>›</Text>
+          <Pressable onPress={onPrevMonth} hitSlop={10}>
+            <Text style={styles.WorkScreenCalendarArrow}>‹</Text>
+          </Pressable>
+          <Text style={styles.WorkScreenCalendarMonth}>{monthLabel}</Text>
+          <Pressable onPress={onNextMonth} hitSlop={10}>
+            <Text style={styles.WorkScreenCalendarArrow}>›</Text>
+          </Pressable>
         </View>
         <View style={styles.WorkScreenWeekRow}>
           {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((d, i) => (
@@ -371,7 +427,7 @@ function CalendarPanel({
               );
             }
             const selected = day === selectedDay;
-            const dot = CALENDAR_DOTS[day];
+            const dot = dots[day];
             return (
               <Pressable
                 key={day}
@@ -414,7 +470,7 @@ function CalendarPanel({
       </View>
 
       <View style={styles.WorkScreenDayHeader}>
-        <Text style={styles.WorkScreenDayTitle}>July {selectedDay}</Text>
+        <Text style={styles.WorkScreenDayTitle}>{dayLabel}</Text>
         <Text style={styles.WorkScreenDayCount}>
           {dayTasks.length} task{dayTasks.length === 1 ? '' : 's'}
         </Text>
@@ -425,7 +481,7 @@ function CalendarPanel({
           <Text style={styles.WorkScreenEmptySigil}>🗓️</Text>
           <Text style={styles.WorkScreenEmptyTitle}>No tasks on this day</Text>
           <Text style={styles.WorkScreenEmptyHintFiligree}>
-            Tap + to schedule work for July {selectedDay}.
+            Tap + to schedule work for {dayLabel}.
           </Text>
           <PrimaryButton
             label="+ Add Task"

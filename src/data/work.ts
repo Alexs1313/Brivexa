@@ -1,3 +1,10 @@
+import {
+  addDays,
+  appToday,
+  formatShortDate,
+  toDateKey,
+} from './dates';
+
 export type WorkTaskStatus =
   | 'planned'
   | 'in_progress'
@@ -26,14 +33,26 @@ export type WorkTask = {
 
 export const WORK_FILTERS = ['All', 'Today', 'Upcoming', 'Overdue'] as const;
 
+function demoTask(
+  partial: Omit<WorkTask, 'date' | 'dateKey'> & {dayOffset: number},
+): WorkTask {
+  const {dayOffset, ...rest} = partial;
+  const date = addDays(appToday(), dayOffset);
+  return {
+    ...rest,
+    date: formatShortDate(date),
+    dateKey: toDateKey(date),
+  };
+}
+
+/** Demo tasks anchored to nearby dates relative to today */
 export const WORK_TASKS: WorkTask[] = [
-  {
+  demoTask({
     id: 'plant-corn',
     title: 'Plant Corn',
     workType: 'Planting',
     field: 'North Field',
-    date: 'Jul 22',
-    dateKey: '2026-07-22',
+    dayOffset: 0,
     time: '07:30 AM',
     worker: 'Daniel Reed',
     duration: '3h',
@@ -44,14 +63,13 @@ export const WORK_TASKS: WorkTask[] = [
     cost: '$320',
     notes:
       'Check seed depth calibration before starting. Confirm moisture levels are within target range.',
-  },
-  {
+  }),
+  demoTask({
     id: 'soil-prep',
     title: 'Soil Preparation',
     workType: 'Soil Preparation',
     field: 'South Field',
-    date: 'Jul 21',
-    dateKey: '2026-07-21',
+    dayOffset: -1,
     time: '08:00 AM',
     worker: 'Chris Miller',
     duration: '4h',
@@ -60,14 +78,13 @@ export const WORK_TASKS: WorkTask[] = [
     equipment: 'Amazone UX 4200',
     materials: 'Glyphosate 360 · 30 L',
     cost: '$280',
-  },
-  {
+  }),
+  demoTask({
     id: 'apply-fertilizer',
     title: 'Apply Fertilizer',
     workType: 'Fertilizing',
     field: 'River Plot',
-    date: 'Jul 22',
-    dateKey: '2026-07-22',
+    dayOffset: 0,
     time: '11:00 AM',
     worker: 'Mark Lewis',
     duration: '2h',
@@ -78,46 +95,43 @@ export const WORK_TASKS: WorkTask[] = [
     cost: '$320',
     notes:
       'Check seed depth calibration before starting. Confirm moisture levels are within target range.',
-  },
-  {
+  }),
+  demoTask({
     id: 'spray-sunflower',
     title: 'Spray Sunflower',
     workType: 'Crop Protection',
     field: 'East Field',
-    date: 'Jul 25',
-    dateKey: '2026-07-25',
+    dayOffset: 3,
     time: '09:00 AM',
     worker: 'Emily Stone',
     duration: '3h',
     priority: 'Normal',
     status: 'planned',
-  },
-  {
+  }),
+  demoTask({
     id: 'harvest-wheat',
     title: 'Harvest Wheat',
     workType: 'Harvesting',
     field: 'River Plot',
-    date: 'Jul 28',
-    dateKey: '2026-07-28',
+    dayOffset: 6,
     time: '06:30 AM',
     worker: 'Daniel Reed',
     duration: '6h',
     priority: 'High',
     status: 'planned',
-  },
-  {
+  }),
+  demoTask({
     id: 'inspect-east',
     title: 'Field Inspection',
     workType: 'Inspection',
     field: 'East Field',
-    date: 'Jul 23',
-    dateKey: '2026-07-23',
+    dayOffset: 1,
     time: '10:00 AM',
     worker: 'Emily Stone',
     duration: '1h',
     priority: 'Normal',
     status: 'planned',
-  },
+  }),
 ];
 
 export function getWorkTask(id: string): WorkTask | undefined {
@@ -146,13 +160,38 @@ export function statusLabel(status: WorkTaskStatus) {
   return 'Planned';
 }
 
-/** Calendar markers for July 2026 */
-export const CALENDAR_DOTS: Record<
-  number,
-  'overdue' | 'gold' | 'info'
-> = {
-  21: 'overdue',
-  23: 'gold',
-  25: 'info',
-  28: 'gold',
-};
+export type CalendarDotTone = 'overdue' | 'gold' | 'info';
+
+/** Build calendar day markers from tasks in the given month */
+export function calendarDotsForMonth(
+  tasks: WorkTask[],
+  year: number,
+  monthIndex: number,
+): Record<number, CalendarDotTone> {
+  const prefix = `${year}-${String(monthIndex + 1).padStart(2, '0')}-`;
+  const dots: Record<number, CalendarDotTone> = {};
+
+  for (const task of tasks) {
+    if (!task.dateKey.startsWith(prefix)) {
+      continue;
+    }
+    const day = Number(task.dateKey.slice(-2));
+    const tone: CalendarDotTone =
+      task.status === 'overdue'
+        ? 'overdue'
+        : task.status === 'in_progress' || task.priority === 'High'
+          ? 'gold'
+          : 'info';
+
+    const existing = dots[day];
+    if (
+      !existing ||
+      (tone === 'overdue' && existing !== 'overdue') ||
+      (tone === 'gold' && existing === 'info')
+    ) {
+      dots[day] = tone;
+    }
+  }
+
+  return dots;
+}

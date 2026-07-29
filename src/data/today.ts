@@ -1,3 +1,5 @@
+import {appToday, formatLongDate} from './dates';
+
 export type TaskStatus = 'in_progress' | 'planned' | 'completed';
 
 export type TodayTask = {
@@ -57,7 +59,9 @@ export type QuickAction = {
 
 export const TODAY_HEADER = {
   greeting: 'Good morning',
-  dateLabel: 'Wednesday, July 22',
+  get dateLabel() {
+    return formatLongDate(appToday());
+  },
 };
 
 export const TODAY_WEATHER: WeatherSnapshot = {

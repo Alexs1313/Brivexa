@@ -5,6 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   View,
 } from 'react-native';
 
@@ -44,31 +45,36 @@ export function DropdownField({
           <Text style={styles.DropdownFieldRequiredSigil}> *</Text>
         ) : null}
       </Text>
-      <Pressable
-        onPress={() => setOpen(true)}
+      <View
         style={[
           styles.DropdownFieldFieldInputChassis,
           open && styles.DropdownFieldInputChassisOpen,
         ]}
       >
-        <Text
-          style={[
-            styles.DropdownFieldSelectValue,
-            !hasValue && styles.DropdownFieldSelectPlaceholder,
-          ]}
-          numberOfLines={1}
+        <TextInput
+          value={value}
+          onChangeText={onChange}
+          placeholder={placeholder}
+          placeholderTextColor={colors.tabInactive}
+          style={styles.DropdownFieldSelectInput}
+        />
+        <Pressable
+          onPress={() => setOpen(true)}
+          hitSlop={8}
+          style={styles.DropdownFieldChevronHit}
+          accessibilityRole="button"
+          accessibilityLabel={`Open ${label} options`}
         >
-          {hasValue ? value : placeholder}
-        </Text>
-        <Text
-          style={[
-            styles.DropdownFieldChevron,
-            open && styles.DropdownFieldChevronOpen,
-          ]}
-        >
-          ⌄
-        </Text>
-      </Pressable>
+          <Text
+            style={[
+              styles.DropdownFieldChevron,
+              open && styles.DropdownFieldChevronOpen,
+            ]}
+          >
+            ⌄
+          </Text>
+        </Pressable>
+      </View>
 
       <Modal
         visible={open}
@@ -151,32 +157,33 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     flexDirection: 'row',
     height: 48,
-    paddingHorizontal: 14,
+    paddingLeft: 14,
+    paddingRight: 4,
   },
   DropdownFieldInputChassisOpen: {
     borderColor: colors.goldBorder,
   },
-  DropdownFieldSelectValue: {
+  DropdownFieldSelectInput: {
     color: colors.cream,
     flex: 1,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
+    paddingVertical: 0,
   },
-  DropdownFieldSelectPlaceholder: {
-    color: colors.tabInactive,
+  DropdownFieldChevronHit: {
+    alignItems: 'center',
+    height: 40,
+    justifyContent: 'center',
+    width: 40,
   },
-
   DropdownFieldChevron: {
     color: colors.tabInactive,
     fontSize: 15,
-    marginLeft: 8,
   },
-
   DropdownFieldChevronOpen: {
     color: colors.gold,
     transform: [{ rotate: '180deg' }],
   },
-
   DropdownFieldBackdropVeil: {
     backgroundColor: 'rgba(8, 4, 24, 0.72)',
     flex: 1,
@@ -202,7 +209,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     textTransform: 'uppercase',
   },
-
   DropdownFieldOptionsScroll: {
     flexGrow: 0,
   },
@@ -213,7 +219,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 14,
   },
-
   DropdownFieldOptionBorder: {
     borderBottomColor: colors.borderSoft,
     borderBottomWidth: 1,
@@ -221,7 +226,6 @@ const styles = StyleSheet.create({
   DropdownFieldOptionActive: {
     backgroundColor: colors.goldSoft,
   },
-
   DropdownFieldOptionTitle: {
     color: colors.cream,
     flex: 1,
@@ -230,7 +234,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginRight: 12,
   },
-
   DropdownFieldOptionTitleActive: {
     color: colors.gold,
   },
