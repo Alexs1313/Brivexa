@@ -11,6 +11,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { AmountModal } from '../components/AmountModal';
+
 import { colors, fonts, layout, radius } from '../constants/theme';
 import { appBackground } from '../data/assets';
 
@@ -289,6 +290,7 @@ const styles = StyleSheet.create({
     marginBottom: 18,
     paddingVertical: 28,
   },
+
   ActiveWorkScreenTimerStatus: {
     color: colors.gold,
     fontFamily: fonts.sansBold,

@@ -21,6 +21,7 @@ import type { FieldDraft } from '../data/FieldsContext';
 import { useFields } from '../data/FieldsContext';
 import { FIELD_STATUS_OPTIONS } from '../data/formOptions';
 import { useAdaptive } from '../hooks/useAdaptive';
+
 import type { FieldStatus } from '../data/fields';
 
 type EditFieldScreenProps = {

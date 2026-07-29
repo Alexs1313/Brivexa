@@ -13,6 +13,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { PrimaryButton } from '../buttons/PrimaryButton';
+
 import { colors, fonts, radius } from '../../constants/theme';
 import { appBackground } from '../../data/assets';
 
@@ -399,6 +400,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
+
   CalculatorPartsTitleFiligree: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -576,6 +578,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 13,
   },
+
   CalculatorPartsResultTitle: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
@@ -590,6 +593,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 10,
   },
+
   CalculatorPartsResultRowBorder: {
     borderBottomColor: colors.borderSoft,
     borderBottomWidth: 1,
@@ -601,6 +605,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginRight: 12,
   },
+
   CalculatorPartsResultValue: {
     color: colors.cream,
     fontFamily: fonts.sansRegular,
@@ -626,6 +631,7 @@ const styles = StyleSheet.create({
   CalculatorPartsSecondaryBtnPressed: {
     opacity: 0.85,
   },
+
   CalculatorPartsSecondaryLabel: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
