@@ -52,7 +52,7 @@ export function WorkCompletedScreen({
   return (
     <ImageBackground
       source={appBackground}
-      style={styles.WorkCompletedScreenFacetChassis}
+      style={styles.WorkCompletedScreenRootHull}
       resizeMode="cover"
     >
       <ScrollView
@@ -66,33 +66,33 @@ export function WorkCompletedScreen({
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.WorkCompletedScreenHeaderRowLintel}>
+        <View style={styles.WorkCompletedScreenHeaderRowCapstone}>
           <Pressable
             onPress={onBackToWork}
             hitSlop={12}
             style={styles.WorkCompletedScreenNavSide}
           >
-            <Text style={styles.WorkCompletedScreenNavLinkFiligree}>
+            <Text style={styles.WorkCompletedScreenNavLinkFlourish}>
               ‹ Work
             </Text>
           </Pressable>
-          <Text style={styles.WorkCompletedScreenTitleFiligree}>Completed</Text>
+          <Text style={styles.WorkCompletedScreenTitleFlourish}>Completed</Text>
           <View style={styles.WorkCompletedScreenNavSide} />
         </View>
 
-        <View style={styles.WorkCompletedScreenHeroEnclave}>
-          <View style={styles.WorkCompletedScreenCheckOrb}>
-            <Text style={styles.WorkCompletedScreenCheckSigil}>✓</Text>
+        <View style={styles.WorkCompletedScreenHeroPocket}>
+          <View style={styles.WorkCompletedScreenCheckBead}>
+            <Text style={styles.WorkCompletedScreenCheckEmblem}>✓</Text>
           </View>
-          <Text style={styles.WorkCompletedScreenHeroTitleFiligree}>
+          <Text style={styles.WorkCompletedScreenHeroTitleFlourish}>
             Work Completed
           </Text>
-          <Text style={styles.WorkCompletedScreenHeroHintFiligree}>
+          <Text style={styles.WorkCompletedScreenHeroHintFlourish}>
             The activity has been saved and farm records have been updated.
           </Text>
         </View>
 
-        <View style={styles.WorkCompletedScreenSummaryChassis}>
+        <View style={styles.WorkCompletedScreenSummaryHull}>
           {rows.map((row, index) => (
             <View
               key={row.label}
@@ -139,27 +139,27 @@ export function WorkCompletedScreen({
 }
 
 const styles = StyleSheet.create({
-  WorkCompletedScreenFacetChassis: {
+  WorkCompletedScreenRootHull: {
     backgroundColor: colors.background,
     flex: 1,
   },
 
   WorkCompletedScreenScrollContent: { flexGrow: 1 },
 
-  WorkCompletedScreenHeaderRowLintel: {
+  WorkCompletedScreenHeaderRowCapstone: {
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: 28,
   },
 
   WorkCompletedScreenNavSide: { minWidth: 72 },
-  WorkCompletedScreenNavLinkFiligree: {
+  WorkCompletedScreenNavLinkFlourish: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
-  WorkCompletedScreenTitleFiligree: {
+  WorkCompletedScreenTitleFlourish: {
     color: colors.cream,
     flex: 1,
     fontFamily: fonts.sansBold,
@@ -168,8 +168,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  WorkCompletedScreenHeroEnclave: { alignItems: 'center', marginBottom: 28 },
-  WorkCompletedScreenCheckOrb: {
+  WorkCompletedScreenHeroPocket: { alignItems: 'center', marginBottom: 28 },
+  WorkCompletedScreenCheckBead: {
     alignItems: 'center',
     backgroundColor: colors.successButton,
     borderColor: colors.white,
@@ -181,21 +181,21 @@ const styles = StyleSheet.create({
     width: 72,
   },
 
-  WorkCompletedScreenCheckSigil: {
+  WorkCompletedScreenCheckEmblem: {
     color: colors.white,
     fontFamily: fonts.sansBold,
     fontSize: 34,
     fontWeight: '700',
     lineHeight: 38,
   },
-  WorkCompletedScreenHeroTitleFiligree: {
+  WorkCompletedScreenHeroTitleFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 26,
     fontWeight: '700',
   },
 
-  WorkCompletedScreenHeroHintFiligree: {
+  WorkCompletedScreenHeroHintFlourish: {
     color: colors.bodyMuted,
     fontFamily: fonts.sansRegular,
     fontSize: 14,
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  WorkCompletedScreenSummaryChassis: {
+  WorkCompletedScreenSummaryHull: {
     backgroundColor: colors.card,
     borderColor: colors.border,
     borderRadius: radius.card,

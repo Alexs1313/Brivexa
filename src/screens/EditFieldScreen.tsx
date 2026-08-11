@@ -67,7 +67,7 @@ export function EditFieldScreen({
   return (
     <ImageBackground
       source={appBackground}
-      style={styles.EditFieldScreenFacetChassis}
+      style={styles.EditFieldScreenRootHull}
       resizeMode="cover"
     >
       <ScrollView
@@ -81,15 +81,15 @@ export function EditFieldScreen({
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.EditFieldScreenHeaderRowLintel}>
+        <View style={styles.EditFieldScreenHeaderRowCapstone}>
           <Pressable
             onPress={onCancel}
             hitSlop={12}
             style={styles.EditFieldScreenNavSide}
           >
-            <Text style={styles.EditFieldScreenNavLinkFiligree}>‹ Cancel</Text>
+            <Text style={styles.EditFieldScreenNavLinkFlourish}>‹ Cancel</Text>
           </Pressable>
-          <Text style={styles.EditFieldScreenNavTitleFiligree}>{title}</Text>
+          <Text style={styles.EditFieldScreenNavTitleFlourish}>{title}</Text>
           <View style={styles.EditFieldScreenNavSide} />
         </View>
 
@@ -153,15 +153,15 @@ export function EditFieldScreen({
             }}
             fullWidth
             style={[
-              styles.EditFieldScreenSavePortico,
-              !canSave && styles.EditFieldScreenSavePorticoDisabled,
+              styles.EditFieldScreenSavePlinth,
+              !canSave && styles.EditFieldScreenSavePlinthDisabled,
             ]}
           />
           <Pressable
             onPress={onCancel}
-            style={styles.EditFieldScreenCancelPortico}
+            style={styles.EditFieldScreenCancelPlinth}
           >
-            <Text style={styles.EditFieldScreenCancelFiligree}>Cancel</Text>
+            <Text style={styles.EditFieldScreenCancelFlourish}>Cancel</Text>
           </Pressable>
         </View>
       </ScrollView>
@@ -186,13 +186,13 @@ function FieldInput({
 }) {
   return (
     <View style={styles.EditFieldScreenFieldGroup}>
-      <Text style={styles.EditFieldScreenFieldLabelFiligree}>
+      <Text style={styles.EditFieldScreenFieldLabelFlourish}>
         {label}
         {required ? (
-          <Text style={styles.EditFieldScreenRequiredSigil}> *</Text>
+          <Text style={styles.EditFieldScreenRequiredEmblem}> *</Text>
         ) : null}
       </Text>
-      <View style={styles.EditFieldScreenFieldInputChassis}>
+      <View style={styles.EditFieldScreenFieldInputHull}>
         <TextInput
           value={value}
           onChangeText={onChangeText}
@@ -207,11 +207,11 @@ function FieldInput({
 }
 
 const styles = StyleSheet.create({
-  EditFieldScreenFacetChassis: {
+  EditFieldScreenRootHull: {
     backgroundColor: colors.background,
     flex: 1,
   },
-  EditFieldScreenHeaderRowLintel: {
+  EditFieldScreenHeaderRowCapstone: {
     alignItems: 'center',
     borderBottomColor: colors.borderSoft,
     borderBottomWidth: 1,
@@ -226,12 +226,12 @@ const styles = StyleSheet.create({
     minWidth: 72,
   },
 
-  EditFieldScreenNavLinkFiligree: {
+  EditFieldScreenNavLinkFlourish: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
-  EditFieldScreenNavTitleFiligree: {
+  EditFieldScreenNavTitleFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
@@ -244,17 +244,17 @@ const styles = StyleSheet.create({
     marginBottom: 14,
   },
 
-  EditFieldScreenFieldLabelFiligree: {
+  EditFieldScreenFieldLabelFlourish: {
     color: colors.bodyMuted,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginBottom: 8,
   },
 
-  EditFieldScreenRequiredSigil: {
+  EditFieldScreenRequiredEmblem: {
     color: colors.danger,
   },
-  EditFieldScreenFieldInputChassis: {
+  EditFieldScreenFieldInputHull: {
     alignItems: 'center',
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -272,15 +272,15 @@ const styles = StyleSheet.create({
     fontSize: 15,
     padding: 0,
   },
-  EditFieldScreenSavePortico: {
+  EditFieldScreenSavePlinth: {
     marginTop: 10,
   },
 
-  EditFieldScreenSavePorticoDisabled: {
+  EditFieldScreenSavePlinthDisabled: {
     opacity: 0.55,
   },
 
-  EditFieldScreenCancelPortico: {
+  EditFieldScreenCancelPlinth: {
     alignItems: 'center',
     borderColor: colors.border,
     borderRadius: 14,
@@ -290,7 +290,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
 
-  EditFieldScreenCancelFiligree: {
+  EditFieldScreenCancelFlourish: {
     color: colors.bodyMuted,
     fontFamily: fonts.sansBold,
     fontSize: 15,

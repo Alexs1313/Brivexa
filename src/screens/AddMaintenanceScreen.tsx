@@ -42,7 +42,7 @@ export function AddMaintenanceScreen({
   return (
     <ImageBackground
       source={appBackground}
-      style={styles.AddMaintenanceScreenFacetChassis}
+      style={styles.AddMaintenanceScreenRootHull}
       resizeMode="cover"
     >
       <ScrollView
@@ -56,17 +56,17 @@ export function AddMaintenanceScreen({
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.AddMaintenanceScreenHeaderRowLintel}>
+        <View style={styles.AddMaintenanceScreenHeaderRowCapstone}>
           <Pressable
             onPress={onCancel}
             hitSlop={12}
             style={styles.AddMaintenanceScreenNavSide}
           >
-            <Text style={styles.AddMaintenanceScreenNavLinkFiligree}>
+            <Text style={styles.AddMaintenanceScreenNavLinkFlourish}>
               ‹ Cancel
             </Text>
           </Pressable>
-          <Text style={styles.AddMaintenanceScreenTitleFiligree}>
+          <Text style={styles.AddMaintenanceScreenTitleFlourish}>
             Add Maintenance
           </Text>
           <View style={styles.AddMaintenanceScreenNavSide} />
@@ -115,8 +115,8 @@ export function AddMaintenanceScreen({
             keyboardType="decimal-pad"
           />
 
-          <View style={styles.AddMaintenanceScreenInfoBannerChassis}>
-            <Text style={styles.AddMaintenanceScreenInfoBannerFiligree}>
+          <View style={styles.AddMaintenanceScreenInfoBannerHull}>
+            <Text style={styles.AddMaintenanceScreenInfoBannerFlourish}>
               On save: ${cost || '0'} added to finance · maintenance history
               updated · next-service status reset.
             </Text>
@@ -135,7 +135,7 @@ export function AddMaintenanceScreen({
               })
             }
             fullWidth
-            style={styles.AddMaintenanceScreenSavePortico}
+            style={styles.AddMaintenanceScreenSavePlinth}
           />
         </View>
       </ScrollView>
@@ -144,7 +144,7 @@ export function AddMaintenanceScreen({
 }
 
 const styles = StyleSheet.create({
-  AddMaintenanceScreenFacetChassis: {
+  AddMaintenanceScreenRootHull: {
     backgroundColor: colors.background,
     flex: 1,
   },
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 
-  AddMaintenanceScreenHeaderRowLintel: {
+  AddMaintenanceScreenHeaderRowCapstone: {
     alignItems: 'center',
     borderBottomColor: colors.borderSoft,
     borderBottomWidth: 1,
@@ -166,19 +166,19 @@ const styles = StyleSheet.create({
     minWidth: 72,
   },
 
-  AddMaintenanceScreenNavLinkFiligree: {
+  AddMaintenanceScreenNavLinkFlourish: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
 
-  AddMaintenanceScreenTitleFiligree: {
+  AddMaintenanceScreenTitleFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
-  AddMaintenanceScreenInfoBannerChassis: {
+  AddMaintenanceScreenInfoBannerHull: {
     backgroundColor: colors.infoBanner,
     borderColor: colors.infoBannerBorder,
     borderRadius: radius.card,
@@ -188,14 +188,14 @@ const styles = StyleSheet.create({
     padding: 15,
   },
 
-  AddMaintenanceScreenInfoBannerFiligree: {
+  AddMaintenanceScreenInfoBannerFlourish: {
     color: colors.infoBannerText,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
     lineHeight: 18,
   },
 
-  AddMaintenanceScreenSavePortico: {
+  AddMaintenanceScreenSavePlinth: {
     marginTop: 4,
   },
 });

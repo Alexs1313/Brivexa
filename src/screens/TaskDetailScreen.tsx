@@ -39,12 +39,12 @@ export function TaskDetailScreen({
 
   if (!task) {
     return (
-      <View style={styles.TaskDetailScreenMissingChassis}>
-        <Text style={styles.TaskDetailScreenMissingFiligree}>
+      <View style={styles.TaskDetailScreenMissingHull}>
+        <Text style={styles.TaskDetailScreenMissingFlourish}>
           Task not found
         </Text>
         <Pressable onPress={onBack}>
-          <Text style={styles.TaskDetailScreenNavLinkFiligree}>‹ Work</Text>
+          <Text style={styles.TaskDetailScreenNavLinkFlourish}>‹ Work</Text>
         </Pressable>
       </View>
     );
@@ -62,7 +62,7 @@ export function TaskDetailScreen({
   return (
     <ImageBackground
       source={appBackground}
-      style={styles.TaskDetailScreenFacetChassis}
+      style={styles.TaskDetailScreenRootHull}
       resizeMode="cover"
     >
       <ScrollView
@@ -76,15 +76,15 @@ export function TaskDetailScreen({
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.TaskDetailScreenHeaderRowLintel}>
+        <View style={styles.TaskDetailScreenHeaderRowCapstone}>
           <Pressable
             onPress={onBack}
             hitSlop={12}
             style={styles.TaskDetailScreenNavSide}
           >
-            <Text style={styles.TaskDetailScreenNavLinkFiligree}>‹ Work</Text>
+            <Text style={styles.TaskDetailScreenNavLinkFlourish}>‹ Work</Text>
           </Pressable>
-          <Text style={styles.TaskDetailScreenTitleFiligree}>Task</Text>
+          <Text style={styles.TaskDetailScreenTitleFlourish}>Task</Text>
           <View style={styles.TaskDetailScreenNavSide} />
         </View>
 
@@ -97,10 +97,10 @@ export function TaskDetailScreen({
           </View>
         </View>
 
-        <Text style={styles.TaskDetailScreenHeadlineFiligree}>
+        <Text style={styles.TaskDetailScreenHeadlineFlourish}>
           {task.title}
         </Text>
-        <Text style={styles.TaskDetailScreenSubtitleFiligree}>
+        <Text style={styles.TaskDetailScreenSubtitleFlourish}>
           {task.workType} · {task.field}
         </Text>
 
@@ -163,36 +163,36 @@ export function TaskDetailScreen({
 }
 
 const styles = StyleSheet.create({
-  TaskDetailScreenFacetChassis: { backgroundColor: colors.background, flex: 1 },
+  TaskDetailScreenRootHull: { backgroundColor: colors.background, flex: 1 },
   TaskDetailScreenScrollContent: { flexGrow: 1 },
-  TaskDetailScreenMissingChassis: {
+  TaskDetailScreenMissingHull: {
     alignItems: 'center',
     backgroundColor: colors.background,
     flex: 1,
     justifyContent: 'center',
   },
 
-  TaskDetailScreenMissingFiligree: {
+  TaskDetailScreenMissingFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     marginBottom: 12,
   },
 
-  TaskDetailScreenHeaderRowLintel: {
+  TaskDetailScreenHeaderRowCapstone: {
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: 16,
   },
 
   TaskDetailScreenNavSide: { minWidth: 72 },
-  TaskDetailScreenNavLinkFiligree: {
+  TaskDetailScreenNavLinkFlourish: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
-  TaskDetailScreenTitleFiligree: {
+  TaskDetailScreenTitleFlourish: {
     color: colors.cream,
     flex: 1,
     fontFamily: fonts.sansBold,
@@ -221,14 +221,14 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-  TaskDetailScreenHeadlineFiligree: {
+  TaskDetailScreenHeadlineFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 28,
     fontWeight: '700',
   },
 
-  TaskDetailScreenSubtitleFiligree: {
+  TaskDetailScreenSubtitleFlourish: {
     color: colors.bodyMuted,
     fontFamily: fonts.sansRegular,
     fontSize: 14,

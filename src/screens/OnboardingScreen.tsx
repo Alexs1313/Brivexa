@@ -62,7 +62,7 @@ export function OnboardingScreen({ onComplete }: OnboardingScreenProps) {
           ]}
           hitSlop={12}
         >
-          <Text style={styles.OnboardingScreenTopSkipFiligree}>Skip</Text>
+          <Text style={styles.OnboardingScreenTopSkipFlourish}>Skip</Text>
         </Pressable>
 
         <View
@@ -74,19 +74,19 @@ export function OnboardingScreen({ onComplete }: OnboardingScreenProps) {
             },
           ]}
         >
-          <View style={styles.OnboardingScreenHeroEnclave}>
+          <View style={styles.OnboardingScreenHeroPocket}>
             <Image
               source={step.art}
               style={[
-                styles.OnboardingScreenArtSigil,
+                styles.OnboardingScreenArtEmblem,
                 { width: adaptive.artSize, height: adaptive.artSize },
               ]}
               resizeMode="contain"
             />
           </View>
 
-          <View style={styles.OnboardingScreenCaptionEnclave}>
-            <Text style={styles.OnboardingScreenTitleFiligree}>
+          <View style={styles.OnboardingScreenCaptionPocket}>
+            <Text style={styles.OnboardingScreenTitleFlourish}>
               {step.title}
             </Text>
             <Text style={styles.OnboardingScreenDescription}>
@@ -119,7 +119,7 @@ export function OnboardingScreen({ onComplete }: OnboardingScreenProps) {
 }
 
 const styles = StyleSheet.create({
-  OnboardingScreenFacetChassis: {
+  OnboardingScreenRootHull: {
     backgroundColor: colors.background,
     flex: 1,
   },
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
 
-  OnboardingScreenTopSkipFiligree: {
+  OnboardingScreenTopSkipFlourish: {
     color: colors.skip,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
@@ -144,19 +144,19 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 18,
   },
-  OnboardingScreenHeroEnclave: {
+  OnboardingScreenHeroPocket: {
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
   },
-  OnboardingScreenArtSigil: {
+  OnboardingScreenArtEmblem: {
     maxHeight: 393,
   },
-  OnboardingScreenCaptionEnclave: {
+  OnboardingScreenCaptionPocket: {
     alignItems: 'center',
     paddingHorizontal: 12,
   },
-  OnboardingScreenTitleFiligree: {
+  OnboardingScreenTitleFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 26,

@@ -33,7 +33,7 @@ export function CalculatorsScreen({
   return (
     <ImageBackground
       source={appBackground}
-      style={styles.CalculatorsScreenFacetChassis}
+      style={styles.CalculatorsScreenRootHull}
       resizeMode="cover"
     >
       <ScrollView
@@ -47,8 +47,8 @@ export function CalculatorsScreen({
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <Text style={styles.CalculatorsScreenTitleFiligree}>Calculators</Text>
-        <Text style={styles.CalculatorsScreenSubtitleFiligree}>
+        <Text style={styles.CalculatorsScreenTitleFlourish}>Calculators</Text>
+        <Text style={styles.CalculatorsScreenSubtitleFlourish}>
           Plan seed, fertilizer & spray needs
         </Text>
 
@@ -67,7 +67,7 @@ export function CalculatorsScreen({
                       styles.CalculatorsScreenIconPurple,
                   ]}
                 >
-                  <Text style={styles.CalculatorsScreenIconGlyph}>
+                  <Text style={styles.CalculatorsScreenIconMark}>
                     {card.icon}
                   </Text>
                 </View>
@@ -128,7 +128,7 @@ export function CalculatorsScreen({
                         styles.CalculatorsScreenIconPurple,
                     ]}
                   >
-                    <Text style={styles.CalculatorsScreenRecentIconGlyph}>
+                    <Text style={styles.CalculatorsScreenRecentIconMark}>
                       {meta.icon}
                     </Text>
                   </View>
@@ -154,7 +154,7 @@ export function CalculatorsScreen({
 }
 
 const styles = StyleSheet.create({
-  CalculatorsScreenFacetChassis: {
+  CalculatorsScreenRootHull: {
     backgroundColor: colors.background,
     flex: 1,
   },
@@ -162,14 +162,14 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 
-  CalculatorsScreenTitleFiligree: {
+  CalculatorsScreenTitleFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 24,
     fontWeight: '700',
   },
 
-  CalculatorsScreenSubtitleFiligree: {
+  CalculatorsScreenSubtitleFlourish: {
     color: colors.bodyMuted,
     fontFamily: fonts.sansRegular,
     fontSize: 14,
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
   CalculatorsScreenIconPurple: {
     backgroundColor: 'rgba(124, 92, 255, 0.15)',
   },
-  CalculatorsScreenIconGlyph: {
+  CalculatorsScreenIconMark: {
     fontSize: 22,
   },
   CalculatorsScreenCardCopy: {
@@ -299,7 +299,7 @@ const styles = StyleSheet.create({
     width: 40,
   },
 
-  CalculatorsScreenRecentIconGlyph: {
+  CalculatorsScreenRecentIconMark: {
     fontSize: 18,
   },
   CalculatorsScreenRecentCopy: {

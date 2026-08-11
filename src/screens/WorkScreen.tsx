@@ -108,7 +108,7 @@ export function WorkScreen({ onOpenTask, onAddTask }: WorkScreenProps) {
   return (
     <ImageBackground
       source={appBackground}
-      style={styles.WorkScreenFacetChassis}
+      style={styles.WorkScreenRootHull}
       resizeMode="cover"
     >
       <ScrollView
@@ -122,23 +122,23 @@ export function WorkScreen({ onOpenTask, onAddTask }: WorkScreenProps) {
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.WorkScreenHeaderRowLintel}>
+        <View style={styles.WorkScreenHeaderRowCapstone}>
           <Pressable onPress={() => setDemoEmpty(v => !v)} hitSlop={8}>
-            <Text style={styles.WorkScreenTitleFiligree}>Work</Text>
+            <Text style={styles.WorkScreenTitleFlourish}>Work</Text>
           </Pressable>
           <Pressable onPress={onAddTask} hitSlop={8}>
             <LinearGradient
               colors={[colors.buttonGradientStart, colors.buttonGradientEnd]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
-              style={styles.WorkScreenAddOrb}
+              style={styles.WorkScreenAddBead}
             >
-              <Text style={styles.WorkScreenAddGlyph}>+</Text>
+              <Text style={styles.WorkScreenAddMark}>+</Text>
             </LinearGradient>
           </Pressable>
         </View>
 
-        <View style={styles.WorkScreenSegChassis}>
+        <View style={styles.WorkScreenSegHull}>
           <Pressable
             onPress={() => setMode('tasks')}
             style={[
@@ -219,9 +219,9 @@ export function WorkScreen({ onOpenTask, onAddTask }: WorkScreenProps) {
 
             {emptyTasks ? (
               <View style={styles.WorkScreenEmptyCard}>
-                <Text style={styles.WorkScreenEmptySigil}>✅</Text>
+                <Text style={styles.WorkScreenEmptyEmblem}>✅</Text>
                 <Text style={styles.WorkScreenEmptyTitle}>No tasks yet</Text>
-                <Text style={styles.WorkScreenEmptyHintFiligree}>
+                <Text style={styles.WorkScreenEmptyHintFlourish}>
                   Plan your first job to get started.
                 </Text>
                 <PrimaryButton
@@ -478,9 +478,9 @@ function CalendarPanel({
 
       {dayTasks.length === 0 ? (
         <View style={styles.WorkScreenEmptyCard}>
-          <Text style={styles.WorkScreenEmptySigil}>🗓️</Text>
+          <Text style={styles.WorkScreenEmptyEmblem}>🗓️</Text>
           <Text style={styles.WorkScreenEmptyTitle}>No tasks on this day</Text>
-          <Text style={styles.WorkScreenEmptyHintFiligree}>
+          <Text style={styles.WorkScreenEmptyHintFlourish}>
             Tap + to schedule work for {dayLabel}.
           </Text>
           <PrimaryButton
@@ -510,24 +510,24 @@ function CalendarPanel({
 }
 
 const styles = StyleSheet.create({
-  WorkScreenFacetChassis: { backgroundColor: colors.background, flex: 1 },
+  WorkScreenRootHull: { backgroundColor: colors.background, flex: 1 },
   WorkScreenScrollContent: { flexGrow: 1 },
 
-  WorkScreenHeaderRowLintel: {
+  WorkScreenHeaderRowCapstone: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 14,
   },
 
-  WorkScreenTitleFiligree: {
+  WorkScreenTitleFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 24,
     fontWeight: '700',
   },
 
-  WorkScreenAddOrb: {
+  WorkScreenAddBead: {
     alignItems: 'center',
     borderRadius: 12,
     height: 40,
@@ -535,14 +535,14 @@ const styles = StyleSheet.create({
     width: 40,
   },
 
-  WorkScreenAddGlyph: {
+  WorkScreenAddMark: {
     color: colors.buttonText,
     fontFamily: fonts.sansBold,
     fontSize: 22,
     fontWeight: '700',
     lineHeight: 24,
   },
-  WorkScreenSegChassis: {
+  WorkScreenSegHull: {
     backgroundColor: colors.card,
     borderColor: colors.border,
     borderRadius: 13,
@@ -712,7 +712,7 @@ const styles = StyleSheet.create({
     paddingVertical: 28,
   },
 
-  WorkScreenEmptySigil: { fontSize: 34 },
+  WorkScreenEmptyEmblem: { fontSize: 34 },
   WorkScreenEmptyTitle: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -721,7 +721,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 
-  WorkScreenEmptyHintFiligree: {
+  WorkScreenEmptyHintFlourish: {
     color: colors.bodyMuted,
     fontFamily: fonts.sansRegular,
     fontSize: 13,

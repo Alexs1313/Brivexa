@@ -55,7 +55,7 @@ export function FarmScreen({
   return (
     <ImageBackground
       source={appBackground}
-      style={styles.FarmScreenFacetChassis}
+      style={styles.FarmScreenRootHull}
       resizeMode="cover"
     >
       <ScrollView
@@ -69,9 +69,9 @@ export function FarmScreen({
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <Text style={styles.FarmScreenTitleFiligree}>Farm</Text>
+        <Text style={styles.FarmScreenTitleFlourish}>Farm</Text>
 
-        <View style={styles.FarmScreenSectionRowLintel}>
+        <View style={styles.FarmScreenSectionRowCapstone}>
           {FARM_SECTIONS.map(item => {
             const active = item === section;
             return (
@@ -115,12 +115,12 @@ export function FarmScreen({
       {toastMessage ? (
         <View
           style={[
-            styles.FarmScreenToastChassis,
+            styles.FarmScreenToastHull,
             { bottom: insets.bottom + adaptive.verticalScale(92) },
           ]}
         >
           <Text style={styles.FarmScreenToastCheck}>✓</Text>
-          <Text style={styles.FarmScreenToastFiligree}>{toastMessage}</Text>
+          <Text style={styles.FarmScreenToastFlourish}>{toastMessage}</Text>
         </View>
       ) : null}
     </ImageBackground>
@@ -139,7 +139,7 @@ function InventorySection({
 
   if (items.length === 0) {
     return (
-      <View style={styles.FarmScreenEmptyChassis}>
+      <View style={styles.FarmScreenEmptyHull}>
         <Text style={styles.FarmScreenEmptyEmoji}>📦</Text>
         <Text style={styles.FarmScreenEmptyTitle}>No inventory items yet</Text>
         <Text style={styles.FarmScreenEmptyBody}>
@@ -157,9 +157,9 @@ function InventorySection({
   return (
     <View>
       {isInventoryDemo ? (
-        <View style={styles.FarmScreenDemoBannerChassis}>
-          <Text style={styles.FarmScreenDemoBannerSigil}>ℹ️</Text>
-          <Text style={styles.FarmScreenDemoBannerFiligree}>
+        <View style={styles.FarmScreenDemoBannerHull}>
+          <Text style={styles.FarmScreenDemoBannerEmblem}>ℹ️</Text>
+          <Text style={styles.FarmScreenDemoBannerFlourish}>
             {FARM_DEMO_BANNER}
           </Text>
         </View>
@@ -180,10 +180,10 @@ function InventorySection({
         </View>
       </View>
 
-      <View style={styles.FarmScreenSectionHeaderLintel}>
-        <Text style={styles.FarmScreenSectionTitleFiligree}>Items</Text>
+      <View style={styles.FarmScreenSectionHeaderCapstone}>
+        <Text style={styles.FarmScreenSectionTitleFlourish}>Items</Text>
         <Pressable onPress={onAddItem} hitSlop={8}>
-          <Text style={styles.FarmScreenSectionActionFiligree}>+ Add Item</Text>
+          <Text style={styles.FarmScreenSectionActionFlourish}>+ Add Item</Text>
         </Pressable>
       </View>
 
@@ -223,7 +223,7 @@ function InventoryCard({
       ]}
     >
       <View style={styles.FarmScreenCardTopRow}>
-        <View style={styles.FarmScreenFlexEnclave}>
+        <View style={styles.FarmScreenFlexPocket}>
           <Text style={styles.FarmScreenCardTitle}>{item.name}</Text>
           <Text style={styles.FarmScreenCardSubtitle}>{item.category}</Text>
         </View>
@@ -266,7 +266,7 @@ function EquipmentSection({
 
   if (equipment.length === 0) {
     return (
-      <View style={styles.FarmScreenEmptyChassis}>
+      <View style={styles.FarmScreenEmptyHull}>
         <Text style={styles.FarmScreenEmptyEmoji}>🚜</Text>
         <Text style={styles.FarmScreenEmptyTitle}>No equipment yet</Text>
         <Text style={styles.FarmScreenEmptyBody}>
@@ -287,9 +287,9 @@ function EquipmentSection({
   return (
     <View>
       {isEquipmentDemo ? (
-        <View style={styles.FarmScreenDemoBannerChassis}>
-          <Text style={styles.FarmScreenDemoBannerSigil}>ℹ️</Text>
-          <Text style={styles.FarmScreenDemoBannerFiligree}>
+        <View style={styles.FarmScreenDemoBannerHull}>
+          <Text style={styles.FarmScreenDemoBannerEmblem}>ℹ️</Text>
+          <Text style={styles.FarmScreenDemoBannerFlourish}>
             {FARM_DEMO_BANNER}
           </Text>
         </View>
@@ -316,8 +316,8 @@ function EquipmentSection({
         </View>
       </View>
 
-      <View style={styles.FarmScreenSectionHeaderLintel}>
-        <Text style={styles.FarmScreenSectionTitleFiligree}>Machines</Text>
+      <View style={styles.FarmScreenSectionHeaderCapstone}>
+        <Text style={styles.FarmScreenSectionTitleFlourish}>Machines</Text>
         <Pressable
           onPress={() => {
             const item = addEquipment();
@@ -325,7 +325,7 @@ function EquipmentSection({
           }}
           hitSlop={8}
         >
-          <Text style={styles.FarmScreenSectionActionFiligree}>+ Add</Text>
+          <Text style={styles.FarmScreenSectionActionFlourish}>+ Add</Text>
         </Pressable>
       </View>
 
@@ -358,7 +358,7 @@ function EquipmentCard({
       ]}
     >
       <View style={styles.FarmScreenEquipIcon}>
-        <Text style={styles.FarmScreenEquipIconGlyph}>{item.icon}</Text>
+        <Text style={styles.FarmScreenEquipIconMark}>{item.icon}</Text>
       </View>
       <View style={styles.FarmScreenEquipBody}>
         <View style={styles.FarmScreenCardTopRow}>
@@ -387,9 +387,9 @@ function FinanceSection({ onAddIncome }: { onAddIncome: () => void }) {
   return (
     <View>
       {isTransactionsDemo ? (
-        <View style={styles.FarmScreenDemoBannerChassis}>
-          <Text style={styles.FarmScreenDemoBannerSigil}>ℹ️</Text>
-          <Text style={styles.FarmScreenDemoBannerFiligree}>
+        <View style={styles.FarmScreenDemoBannerHull}>
+          <Text style={styles.FarmScreenDemoBannerEmblem}>ℹ️</Text>
+          <Text style={styles.FarmScreenDemoBannerFlourish}>
             {FARM_DEMO_BANNER}
           </Text>
         </View>
@@ -447,15 +447,15 @@ function FinanceSection({ onAddIncome }: { onAddIncome: () => void }) {
         ))}
       </View>
 
-      <View style={styles.FarmScreenSectionHeaderLintel}>
-        <Text style={styles.FarmScreenSectionTitleFiligree}>Transactions</Text>
+      <View style={styles.FarmScreenSectionHeaderCapstone}>
+        <Text style={styles.FarmScreenSectionTitleFlourish}>Transactions</Text>
         <Pressable onPress={onAddIncome} hitSlop={8}>
-          <Text style={styles.FarmScreenSectionActionFiligree}>+ Add</Text>
+          <Text style={styles.FarmScreenSectionActionFlourish}>+ Add</Text>
         </Pressable>
       </View>
 
       {transactions.length === 0 ? (
-        <View style={styles.FarmScreenEmptyChassis}>
+        <View style={styles.FarmScreenEmptyHull}>
           <Text style={styles.FarmScreenEmptyEmoji}>💵</Text>
           <Text style={styles.FarmScreenEmptyTitle}>No transactions yet</Text>
           <Text style={styles.FarmScreenEmptyBody}>
@@ -479,9 +479,9 @@ function FinanceSection({ onAddIncome }: { onAddIncome: () => void }) {
                     : styles.FarmScreenTxIconExpense,
                 ]}
               >
-                <Text style={styles.FarmScreenTxIconGlyph}>{tx.icon}</Text>
+                <Text style={styles.FarmScreenTxIconMark}>{tx.icon}</Text>
               </View>
-              <View style={styles.FarmScreenFlexEnclave}>
+              <View style={styles.FarmScreenFlexPocket}>
                 <Text style={styles.FarmScreenTxTitle}>{tx.title}</Text>
                 <Text style={styles.FarmScreenCardSubtitle}>{tx.subtitle}</Text>
               </View>
@@ -582,7 +582,7 @@ function EquipmentPill({ status }: { status: EquipmentStatus }) {
 }
 
 const styles = StyleSheet.create({
-  FarmScreenFacetChassis: {
+  FarmScreenRootHull: {
     backgroundColor: colors.background,
     flex: 1,
   },
@@ -590,7 +590,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 
-  FarmScreenTitleFiligree: {
+  FarmScreenTitleFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 24,
@@ -598,7 +598,7 @@ const styles = StyleSheet.create({
     marginBottom: 14,
   },
 
-  FarmScreenSectionRowLintel: {
+  FarmScreenSectionRowCapstone: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 8,
@@ -625,7 +625,7 @@ const styles = StyleSheet.create({
   FarmScreenSectionChipLabelActive: {
     color: colors.gold,
   },
-  FarmScreenDemoBannerChassis: {
+  FarmScreenDemoBannerHull: {
     backgroundColor: colors.infoBanner,
     borderColor: colors.infoBannerBorder,
     borderRadius: radius.card,
@@ -637,11 +637,11 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
 
-  FarmScreenDemoBannerSigil: {
+  FarmScreenDemoBannerEmblem: {
     fontSize: 16,
     marginTop: 2,
   },
-  FarmScreenDemoBannerFiligree: {
+  FarmScreenDemoBannerFlourish: {
     color: colors.infoBannerText,
     flex: 1,
     fontFamily: fonts.sansRegular,
@@ -685,20 +685,20 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginTop: 4,
   },
-  FarmScreenSectionHeaderLintel: {
+  FarmScreenSectionHeaderCapstone: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 12,
   },
-  FarmScreenSectionTitleFiligree: {
+  FarmScreenSectionTitleFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
-  FarmScreenSectionActionFiligree: {
+  FarmScreenSectionActionFlourish: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 13,
@@ -726,7 +726,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     gap: 8,
   },
-  FarmScreenFlexEnclave: {
+  FarmScreenFlexPocket: {
     flexShrink: 1,
   },
   FarmScreenCardTitle: {
@@ -809,7 +809,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: '700',
   },
-  FarmScreenEmptyChassis: {
+  FarmScreenEmptyHull: {
     alignItems: 'center',
     backgroundColor: colors.emptyFill,
     borderColor: colors.emptyBorder,
@@ -906,7 +906,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 44,
   },
-  FarmScreenEquipIconGlyph: {
+  FarmScreenEquipIconMark: {
     fontSize: 22,
   },
 
@@ -1036,7 +1036,7 @@ const styles = StyleSheet.create({
   FarmScreenTxIconExpense: {
     backgroundColor: colors.dangerSoft,
   },
-  FarmScreenTxIconGlyph: {
+  FarmScreenTxIconMark: {
     fontSize: 16,
   },
 
@@ -1085,7 +1085,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginTop: 16,
   },
-  FarmScreenToastChassis: {
+  FarmScreenToastHull: {
     alignItems: 'center',
     alignSelf: 'center',
     backgroundColor: colors.toastBg,
@@ -1105,7 +1105,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 
-  FarmScreenToastFiligree: {
+  FarmScreenToastFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansRegular,
     fontSize: 14,

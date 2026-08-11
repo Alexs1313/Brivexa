@@ -44,7 +44,7 @@ export function NewItemScreen({ onCancel, onSave }: NewItemScreenProps) {
   return (
     <ImageBackground
       source={appBackground}
-      style={styles.NewItemScreenFacetChassis}
+      style={styles.NewItemScreenRootHull}
       resizeMode="cover"
     >
       <ScrollView
@@ -58,15 +58,15 @@ export function NewItemScreen({ onCancel, onSave }: NewItemScreenProps) {
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.NewItemScreenHeaderRowLintel}>
+        <View style={styles.NewItemScreenHeaderRowCapstone}>
           <Pressable
             onPress={onCancel}
             hitSlop={12}
             style={styles.NewItemScreenNavSide}
           >
-            <Text style={styles.NewItemScreenNavLinkFiligree}>‹ Cancel</Text>
+            <Text style={styles.NewItemScreenNavLinkFlourish}>‹ Cancel</Text>
           </Pressable>
-          <Text style={styles.NewItemScreenTitleFiligree}>New Item</Text>
+          <Text style={styles.NewItemScreenTitleFlourish}>New Item</Text>
           <View style={styles.NewItemScreenNavSide} />
         </View>
 
@@ -141,8 +141,8 @@ export function NewItemScreen({ onCancel, onSave }: NewItemScreenProps) {
             }}
             fullWidth
             style={[
-              styles.NewItemScreenSavePortico,
-              !canSave && styles.NewItemScreenSavePorticoDisabled,
+              styles.NewItemScreenSavePlinth,
+              !canSave && styles.NewItemScreenSavePlinthDisabled,
             ]}
           />
         </View>
@@ -168,13 +168,13 @@ export function FormField({
 }) {
   return (
     <View style={styles.NewItemScreenFieldGroup}>
-      <Text style={styles.NewItemScreenFieldLabelFiligree}>
+      <Text style={styles.NewItemScreenFieldLabelFlourish}>
         {label}
         {required ? (
-          <Text style={styles.NewItemScreenRequiredSigil}> *</Text>
+          <Text style={styles.NewItemScreenRequiredEmblem}> *</Text>
         ) : null}
       </Text>
-      <View style={styles.NewItemScreenFieldInputChassis}>
+      <View style={styles.NewItemScreenFieldInputHull}>
         <TextInput
           value={value}
           onChangeText={onChangeText}
@@ -189,14 +189,14 @@ export function FormField({
 }
 
 const styles = StyleSheet.create({
-  NewItemScreenFacetChassis: {
+  NewItemScreenRootHull: {
     backgroundColor: colors.background,
     flex: 1,
   },
   NewItemScreenScrollContent: {
     flexGrow: 1,
   },
-  NewItemScreenHeaderRowLintel: {
+  NewItemScreenHeaderRowCapstone: {
     alignItems: 'center',
     borderBottomColor: colors.borderSoft,
     borderBottomWidth: 1,
@@ -211,12 +211,12 @@ const styles = StyleSheet.create({
     minWidth: 72,
   },
 
-  NewItemScreenNavLinkFiligree: {
+  NewItemScreenNavLinkFlourish: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
-  NewItemScreenTitleFiligree: {
+  NewItemScreenTitleFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
@@ -227,17 +227,17 @@ const styles = StyleSheet.create({
     marginBottom: 14,
   },
 
-  NewItemScreenFieldLabelFiligree: {
+  NewItemScreenFieldLabelFlourish: {
     color: colors.bodyMuted,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginBottom: 8,
   },
-  NewItemScreenRequiredSigil: {
+  NewItemScreenRequiredEmblem: {
     color: colors.danger,
   },
 
-  NewItemScreenFieldInputChassis: {
+  NewItemScreenFieldInputHull: {
     alignItems: 'center',
     backgroundColor: colors.card,
     borderColor: colors.emptyBorder,
@@ -255,11 +255,11 @@ const styles = StyleSheet.create({
     padding: 0,
   },
 
-  NewItemScreenSavePortico: {
+  NewItemScreenSavePlinth: {
     marginTop: 10,
   },
 
-  NewItemScreenSavePorticoDisabled: {
+  NewItemScreenSavePlinthDisabled: {
     opacity: 0.55,
   },
 });

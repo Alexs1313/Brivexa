@@ -36,11 +36,11 @@ export function PrimaryButton({
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           style={[
-            styles.PrimaryButtonBtnPortico,
+            styles.PrimaryButtonBtnPlinth,
             pressed && styles.PrimaryButtonButtonPressedDim,
           ]}
         >
-          <Text style={styles.PrimaryButtonLabelFiligree}>{label}</Text>
+          <Text style={styles.PrimaryButtonLabelFlourish}>{label}</Text>
         </LinearGradient>
       )}
     </Pressable>
@@ -58,20 +58,20 @@ export function BackButton({ label, onPress, style }: BackButtonProps) {
     <Pressable
       onPress={onPress}
       style={({ pressed }) => [
-        styles.PrimaryButtonBackButtonPortico,
+        styles.PrimaryButtonBackButtonPlinth,
         pressed && styles.PrimaryButtonButtonPressedDim,
         style,
       ]}
     >
       <View>
-        <Text style={styles.PrimaryButtonBackButtonLabelFiligree}>{label}</Text>
+        <Text style={styles.PrimaryButtonBackButtonLabelFlourish}>{label}</Text>
       </View>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  PrimaryButtonBtnPortico: {
+  PrimaryButtonBtnPlinth: {
     alignItems: 'center',
     borderRadius: radius.button,
     flexDirection: 'row',
@@ -88,14 +88,14 @@ const styles = StyleSheet.create({
     opacity: 0.85,
   },
 
-  PrimaryButtonLabelFiligree: {
+  PrimaryButtonLabelFlourish: {
     color: colors.buttonText,
     fontFamily: fonts.sansBold,
     fontSize: 15,
     fontWeight: '700',
   },
 
-  PrimaryButtonBackButtonPortico: {
+  PrimaryButtonBackButtonPlinth: {
     alignItems: 'center',
     backgroundColor: colors.backButton,
     borderColor: colors.backButtonBorder,
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
   },
 
-  PrimaryButtonBackButtonLabelFiligree: {
+  PrimaryButtonBackButtonLabelFlourish: {
     color: colors.backButtonText,
     fontFamily: fonts.sansBold,
     fontSize: 15,

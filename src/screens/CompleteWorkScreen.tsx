@@ -51,7 +51,7 @@ export function CompleteWorkScreen({
   return (
     <ImageBackground
       source={appBackground}
-      style={styles.CompleteWorkScreenFacetChassis}
+      style={styles.CompleteWorkScreenRootHull}
       resizeMode="cover"
     >
       <ScrollView
@@ -66,25 +66,25 @@ export function CompleteWorkScreen({
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.CompleteWorkScreenHeaderRowLintel}>
+        <View style={styles.CompleteWorkScreenHeaderRowCapstone}>
           <Pressable
             onPress={onCancel}
             hitSlop={12}
             style={styles.CompleteWorkScreenNavSide}
           >
-            <Text style={styles.CompleteWorkScreenNavLinkFiligree}>
+            <Text style={styles.CompleteWorkScreenNavLinkFlourish}>
               ‹ Cancel
             </Text>
           </Pressable>
-          <Text style={styles.CompleteWorkScreenTitleFiligree}>
+          <Text style={styles.CompleteWorkScreenTitleFlourish}>
             Complete Work
           </Text>
           <View style={styles.CompleteWorkScreenNavSide} />
         </View>
 
-        <Text style={styles.CompleteWorkScreenIntroFiligree}>
+        <Text style={styles.CompleteWorkScreenIntroFlourish}>
           Record the actuals for{' '}
-          <Text style={styles.CompleteWorkScreenIntroBoldFiligree}>
+          <Text style={styles.CompleteWorkScreenIntroBoldFlourish}>
             {title}
           </Text>{' '}
           and update farm records.
@@ -139,7 +139,7 @@ export function CompleteWorkScreen({
             })
           }
           style={({ pressed }) => [
-            styles.CompleteWorkScreenSavePortico,
+            styles.CompleteWorkScreenSavePlinth,
             pressed && styles.CompleteWorkScreenPressedDim,
           ]}
         >
@@ -169,7 +169,7 @@ function FormField({
 }) {
   return (
     <View style={styles.CompleteWorkScreenFieldBlock}>
-      <Text style={styles.CompleteWorkScreenFieldLabelFiligree}>{label}</Text>
+      <Text style={styles.CompleteWorkScreenFieldLabelFlourish}>{label}</Text>
       <TextInput
         value={value}
         onChangeText={onChangeText}
@@ -187,26 +187,26 @@ function FormField({
 }
 
 const styles = StyleSheet.create({
-  CompleteWorkScreenFacetChassis: {
+  CompleteWorkScreenRootHull: {
     backgroundColor: colors.background,
     flex: 1,
   },
   CompleteWorkScreenScrollContent: { flexGrow: 1 },
-  CompleteWorkScreenHeaderRowLintel: {
+  CompleteWorkScreenHeaderRowCapstone: {
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: 16,
   },
 
   CompleteWorkScreenNavSide: { minWidth: 80 },
-  CompleteWorkScreenNavLinkFiligree: {
+  CompleteWorkScreenNavLinkFlourish: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
-  CompleteWorkScreenTitleFiligree: {
+  CompleteWorkScreenTitleFlourish: {
     color: colors.cream,
     flex: 1,
     fontFamily: fonts.sansBold,
@@ -215,20 +215,20 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  CompleteWorkScreenIntroFiligree: {
+  CompleteWorkScreenIntroFlourish: {
     color: colors.bodyMuted,
     fontFamily: fonts.sansRegular,
     fontSize: 14,
     lineHeight: 20,
     marginBottom: 18,
   },
-  CompleteWorkScreenIntroBoldFiligree: {
+  CompleteWorkScreenIntroBoldFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontWeight: '700',
   },
   CompleteWorkScreenFieldBlock: { marginBottom: 14 },
-  CompleteWorkScreenFieldLabelFiligree: {
+  CompleteWorkScreenFieldLabelFlourish: {
     color: colors.bodyMuted,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
     lineHeight: 18,
   },
 
-  CompleteWorkScreenSavePortico: {
+  CompleteWorkScreenSavePlinth: {
     alignItems: 'center',
     backgroundColor: colors.successButton,
     borderRadius: radius.button,

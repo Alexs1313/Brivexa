@@ -42,7 +42,7 @@ export function ReportDetailScreen({ onBack }: ReportDetailScreenProps) {
   return (
     <ImageBackground
       source={appBackground}
-      style={styles.ReportDetailScreenFacetChassis}
+      style={styles.ReportDetailScreenRootHull}
       resizeMode="cover"
     >
       <ScrollView
@@ -55,22 +55,22 @@ export function ReportDetailScreen({ onBack }: ReportDetailScreenProps) {
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.ReportDetailScreenHeaderRowLintel}>
+        <View style={styles.ReportDetailScreenHeaderRowCapstone}>
           <Pressable
             onPress={onBack}
             hitSlop={12}
             style={styles.ReportDetailScreenNavSide}
           >
-            <Text style={styles.ReportDetailScreenNavLinkFiligree}>
+            <Text style={styles.ReportDetailScreenNavLinkFlourish}>
               ‹ Reports
             </Text>
           </Pressable>
-          <Text style={styles.ReportDetailScreenTitleFiligree}>Report</Text>
+          <Text style={styles.ReportDetailScreenTitleFlourish}>Report</Text>
           <View style={styles.ReportDetailScreenNavSide} />
         </View>
 
         <View style={{ paddingHorizontal: adaptive.horizontalPadding }}>
-          <Text style={styles.ReportDetailScreenSubtitleFiligree}>
+          <Text style={styles.ReportDetailScreenSubtitleFlourish}>
             {report.subtitle}
           </Text>
 
@@ -123,11 +123,11 @@ export function ReportDetailScreen({ onBack }: ReportDetailScreenProps) {
       {toast ? (
         <View
           style={[
-            styles.ReportDetailScreenToastChassis,
+            styles.ReportDetailScreenToastHull,
             { bottom: insets.bottom + adaptive.verticalScale(24) },
           ]}
         >
-          <Text style={styles.ReportDetailScreenToastFiligree}>{toast}</Text>
+          <Text style={styles.ReportDetailScreenToastFlourish}>{toast}</Text>
         </View>
       ) : null}
     </ImageBackground>
@@ -135,7 +135,7 @@ export function ReportDetailScreen({ onBack }: ReportDetailScreenProps) {
 }
 
 const styles = StyleSheet.create({
-  ReportDetailScreenFacetChassis: {
+  ReportDetailScreenRootHull: {
     backgroundColor: colors.background,
     flex: 1,
   },
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 
-  ReportDetailScreenHeaderRowLintel: {
+  ReportDetailScreenHeaderRowCapstone: {
     alignItems: 'center',
     borderBottomColor: colors.borderSoft,
     borderBottomWidth: 1,
@@ -157,19 +157,19 @@ const styles = StyleSheet.create({
   ReportDetailScreenNavSide: {
     minWidth: 90,
   },
-  ReportDetailScreenNavLinkFiligree: {
+  ReportDetailScreenNavLinkFlourish: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
-  ReportDetailScreenTitleFiligree: {
+  ReportDetailScreenTitleFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
-  ReportDetailScreenSubtitleFiligree: {
+  ReportDetailScreenSubtitleFlourish: {
     color: colors.body,
     fontFamily: fonts.sansRegular,
     fontSize: 14,
@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
   ReportDetailScreenPressedDim: {
     opacity: 0.88,
   },
-  ReportDetailScreenToastChassis: {
+  ReportDetailScreenToastHull: {
     alignSelf: 'center',
     backgroundColor: colors.toastBg,
     borderColor: colors.border,
@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 
-  ReportDetailScreenToastFiligree: {
+  ReportDetailScreenToastFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 13,

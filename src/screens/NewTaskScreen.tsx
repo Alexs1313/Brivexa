@@ -66,7 +66,7 @@ export function NewTaskScreen({ onCancel, onSave }: NewTaskScreenProps) {
   return (
     <ImageBackground
       source={appBackground}
-      style={styles.NewTaskScreenFacetChassis}
+      style={styles.NewTaskScreenRootHull}
       resizeMode="cover"
     >
       <ScrollView
@@ -81,15 +81,15 @@ export function NewTaskScreen({ onCancel, onSave }: NewTaskScreenProps) {
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.NewTaskScreenHeaderRowLintel}>
+        <View style={styles.NewTaskScreenHeaderRowCapstone}>
           <Pressable
             onPress={onCancel}
             hitSlop={12}
             style={styles.NewTaskScreenNavSide}
           >
-            <Text style={styles.NewTaskScreenNavLinkFiligree}>‹ Cancel</Text>
+            <Text style={styles.NewTaskScreenNavLinkFlourish}>‹ Cancel</Text>
           </Pressable>
-          <Text style={styles.NewTaskScreenTitleFiligree}>New Task</Text>
+          <Text style={styles.NewTaskScreenTitleFlourish}>New Task</Text>
           <View style={styles.NewTaskScreenNavSide} />
         </View>
 
@@ -186,8 +186,8 @@ export function NewTaskScreen({ onCancel, onSave }: NewTaskScreenProps) {
           }}
           fullWidth
           style={[
-            styles.NewTaskScreenSavePortico,
-            !canSave && styles.NewTaskScreenSavePorticoDisabled,
+            styles.NewTaskScreenSavePlinth,
+            !canSave && styles.NewTaskScreenSavePlinthDisabled,
           ]}
         />
       </ScrollView>
@@ -210,13 +210,13 @@ function FormField({
 }) {
   return (
     <View style={styles.NewTaskScreenFieldBlock}>
-      <Text style={styles.NewTaskScreenFieldLabelFiligree}>
+      <Text style={styles.NewTaskScreenFieldLabelFlourish}>
         {label}
         {required ? (
-          <Text style={styles.NewTaskScreenRequiredSigil}> *</Text>
+          <Text style={styles.NewTaskScreenRequiredEmblem}> *</Text>
         ) : null}
       </Text>
-      <View style={styles.NewTaskScreenFieldInputChassis}>
+      <View style={styles.NewTaskScreenFieldInputHull}>
         <TextInput
           value={value}
           onChangeText={onChangeText}
@@ -230,23 +230,23 @@ function FormField({
 }
 
 const styles = StyleSheet.create({
-  NewTaskScreenFacetChassis: { backgroundColor: colors.background, flex: 1 },
+  NewTaskScreenRootHull: { backgroundColor: colors.background, flex: 1 },
   NewTaskScreenScrollContent: { flexGrow: 1 },
 
-  NewTaskScreenHeaderRowLintel: {
+  NewTaskScreenHeaderRowCapstone: {
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: 16,
   },
   NewTaskScreenNavSide: { minWidth: 80 },
-  NewTaskScreenNavLinkFiligree: {
+  NewTaskScreenNavLinkFlourish: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
-  NewTaskScreenTitleFiligree: {
+  NewTaskScreenTitleFlourish: {
     color: colors.cream,
     flex: 1,
     fontFamily: fonts.sansBold,
@@ -257,15 +257,15 @@ const styles = StyleSheet.create({
 
   NewTaskScreenFieldBlock: { marginBottom: 14 },
 
-  NewTaskScreenFieldLabelFiligree: {
+  NewTaskScreenFieldLabelFlourish: {
     color: colors.bodyMuted,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginBottom: 8,
   },
-  NewTaskScreenRequiredSigil: { color: colors.danger },
+  NewTaskScreenRequiredEmblem: { color: colors.danger },
 
-  NewTaskScreenFieldInputChassis: {
+  NewTaskScreenFieldInputHull: {
     alignItems: 'center',
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -283,6 +283,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     padding: 0,
   },
-  NewTaskScreenSavePortico: { marginTop: 8 },
-  NewTaskScreenSavePorticoDisabled: { opacity: 0.45 },
+  NewTaskScreenSavePlinth: { marginTop: 8 },
+  NewTaskScreenSavePlinthDisabled: { opacity: 0.45 },
 });

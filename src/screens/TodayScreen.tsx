@@ -84,12 +84,12 @@ export function TodayScreen({
           <View style={styles.TodayScreenHeader}>
             <View>
               <View style={styles.TodayScreenBrandRow}>
-                <Text style={styles.TodayScreenCowSigil}>🐂</Text>
-                <Text style={styles.TodayScreenBrandFiligree}>
+                <Text style={styles.TodayScreenCowEmblem}>🐂</Text>
+                <Text style={styles.TodayScreenBrandFlourish}>
                   {APP_BRAND_LINE}
                 </Text>
               </View>
-              <Text style={styles.TodayScreenGreetingFiligree}>
+              <Text style={styles.TodayScreenGreetingFlourish}>
                 {TODAY_HEADER.greeting}
               </Text>
               <Text style={styles.TodayScreenDate}>
@@ -101,9 +101,9 @@ export function TodayScreen({
                 colors={[colors.buttonGradientStart, colors.buttonGradientEnd]}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
-                style={styles.TodayScreenAddOrb}
+                style={styles.TodayScreenAddBead}
               >
-                <Text style={styles.TodayScreenAddGlyph}>+</Text>
+                <Text style={styles.TodayScreenAddMark}>+</Text>
               </LinearGradient>
             </Pressable>
           </View>
@@ -111,7 +111,7 @@ export function TodayScreen({
           <Pressable
             onPress={onOpenWeather}
             style={({ pressed }) => [
-              styles.TodayScreenWeatherCardChassis,
+              styles.TodayScreenWeatherCardHull,
               pressed && styles.TodayScreenPressedDim,
             ]}
           >
@@ -120,7 +120,7 @@ export function TodayScreen({
                 <Text style={styles.TodayScreenWeatherCardIcon}>
                   {TODAY_WEATHER.icon}
                 </Text>
-                <Text style={styles.TodayScreenWeatherCardTempFiligree}>
+                <Text style={styles.TodayScreenWeatherCardTempFlourish}>
                   {TODAY_WEATHER.temp}°
                 </Text>
               </View>
@@ -142,15 +142,15 @@ export function TodayScreen({
           </Pressable>
 
           {showProgress ? (
-            <View style={styles.TodayScreenProgressCardChassis}>
+            <View style={styles.TodayScreenProgressCardHull}>
               <ProgressRing
                 done={todayProgress.done}
                 total={todayProgress.total}
               />
-              <View style={styles.TodayScreenProgressCopyEnclave}>
+              <View style={styles.TodayScreenProgressCopyPocket}>
                 <Text
                   style={[
-                    styles.TodayScreenProgressTitleFiligree,
+                    styles.TodayScreenProgressTitleFlourish,
                     allDone && styles.TodayScreenProgressTitleDone,
                   ]}
                 >
@@ -181,18 +181,18 @@ export function TodayScreen({
           <SectionTitle title="Today's Tasks" />
 
           {empty ? (
-            <View style={styles.TodayScreenEmptyCardChassis}>
-              <Text style={styles.TodayScreenEmptySigil}>🗓️</Text>
-              <Text style={styles.TodayScreenEmptyTitleFiligree}>
+            <View style={styles.TodayScreenEmptyCardHull}>
+              <Text style={styles.TodayScreenEmptyEmblem}>🗓️</Text>
+              <Text style={styles.TodayScreenEmptyTitleFlourish}>
                 No tasks today
               </Text>
-              <Text style={styles.TodayScreenEmptyHintFiligree}>
+              <Text style={styles.TodayScreenEmptyHintFlourish}>
                 Enjoy the quiet — or plan ahead.
               </Text>
               <PrimaryButton
                 label="+ Add Task"
                 onPress={onAddTask}
-                style={styles.TodayScreenEmptyPortico}
+                style={styles.TodayScreenEmptyPlinth}
               />
             </View>
           ) : (
@@ -252,11 +252,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 4,
   },
-  TodayScreenCowSigil: {
+  TodayScreenCowEmblem: {
     fontSize: 14,
   },
 
-  TodayScreenBrandFiligree: {
+  TodayScreenBrandFlourish: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 14,
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
 
-  TodayScreenGreetingFiligree: {
+  TodayScreenGreetingFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 22,
@@ -277,7 +277,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginTop: 4,
   },
-  TodayScreenAddOrb: {
+  TodayScreenAddBead: {
     alignItems: 'center',
     borderRadius: 12,
     height: 40,
@@ -285,7 +285,7 @@ const styles = StyleSheet.create({
     width: 40,
   },
 
-  TodayScreenAddGlyph: {
+  TodayScreenAddMark: {
     color: colors.buttonText,
     fontFamily: fonts.sansBold,
     fontSize: 22,
@@ -293,7 +293,7 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
 
-  TodayScreenDemoBannerChassis: {
+  TodayScreenDemoBannerHull: {
     backgroundColor: colors.infoBanner,
     borderColor: colors.infoBannerBorder,
     borderRadius: radius.card,
@@ -305,18 +305,18 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
 
-  TodayScreenDemoBannerSigil: {
+  TodayScreenDemoBannerEmblem: {
     fontSize: 16,
     marginTop: 2,
   },
-  TodayScreenDemoBannerFiligree: {
+  TodayScreenDemoBannerFlourish: {
     color: colors.infoBannerText,
     flex: 1,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     lineHeight: 18,
   },
-  TodayScreenWeatherCardChassis: {
+  TodayScreenWeatherCardHull: {
     backgroundColor: 'rgba(27, 21, 80, 0.72)',
     borderColor: colors.border,
     borderRadius: radius.card,
@@ -344,7 +344,7 @@ const styles = StyleSheet.create({
   TodayScreenWeatherCardIcon: {
     fontSize: 34,
   },
-  TodayScreenWeatherCardTempFiligree: {
+  TodayScreenWeatherCardTempFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 38,
@@ -369,7 +369,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
 
-  TodayScreenProgressCardChassis: {
+  TodayScreenProgressCardHull: {
     alignItems: 'center',
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -382,10 +382,10 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
 
-  TodayScreenProgressCopyEnclave: {
+  TodayScreenProgressCopyPocket: {
     flex: 1,
   },
-  TodayScreenProgressTitleFiligree: {
+  TodayScreenProgressTitleFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 15,
@@ -424,7 +424,7 @@ const styles = StyleSheet.create({
     fontSize: 11,
     marginTop: 2,
   },
-  TodayScreenEmptyCardChassis: {
+  TodayScreenEmptyCardHull: {
     alignItems: 'center',
     backgroundColor: colors.emptyFill,
     borderColor: colors.emptyBorder,
@@ -437,18 +437,18 @@ const styles = StyleSheet.create({
     paddingTop: 18,
   },
 
-  TodayScreenEmptySigil: {
+  TodayScreenEmptyEmblem: {
     fontSize: 38,
   },
 
-  TodayScreenEmptyTitleFiligree: {
+  TodayScreenEmptyTitleFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
     marginTop: 10,
   },
-  TodayScreenEmptyHintFiligree: {
+  TodayScreenEmptyHintFlourish: {
     color: colors.bodyMuted,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
@@ -457,7 +457,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  TodayScreenEmptyPortico: {
+  TodayScreenEmptyPlinth: {
     minWidth: 122,
   },
 

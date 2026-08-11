@@ -48,16 +48,16 @@ export function LoaderScreen({ onComplete }: LoaderScreenProps) {
   });
 
   return (
-    <View style={styles.LoaderScreenFacetChassis}>
+    <View style={styles.LoaderScreenRootHull}>
       <ImageBackground
         source={icons.loaderBg}
         style={styles.LoaderScreenBackground}
         resizeMode="cover"
       >
         <View style={styles.LoaderScreenContent}>
-          <Text style={styles.LoaderScreenCowSigil}>🐂</Text>
-          <Text style={styles.LoaderScreenBrandFiligree}>{APP_BRAND_LINE}</Text>
-          <Text style={styles.LoaderScreenTaglineFiligree}>{APP_TAGLINE}</Text>
+          <Text style={styles.LoaderScreenCowEmblem}>🐂</Text>
+          <Text style={styles.LoaderScreenBrandFlourish}>{APP_BRAND_LINE}</Text>
+          <Text style={styles.LoaderScreenTaglineFlourish}>{APP_TAGLINE}</Text>
 
           <Animated.View
             style={[
@@ -72,7 +72,7 @@ export function LoaderScreen({ onComplete }: LoaderScreenProps) {
 }
 
 const styles = StyleSheet.create({
-  LoaderScreenFacetChassis: {
+  LoaderScreenRootHull: {
     backgroundColor: colors.black,
     flex: 1,
   },
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  LoaderScreenGlowVeil: {
+  LoaderScreenGlowDrape: {
     bottom: 0,
     height: '100%',
     left: 0,
@@ -96,11 +96,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  LoaderScreenCowSigil: {
+  LoaderScreenCowEmblem: {
     fontSize: 34,
     marginBottom: 10,
   },
-  LoaderScreenBrandFiligree: {
+  LoaderScreenBrandFlourish: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 28,
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  LoaderScreenTaglineFiligree: {
+  LoaderScreenTaglineFlourish: {
     color: colors.body,
     fontFamily: fonts.sansRegular,
     fontSize: 15,

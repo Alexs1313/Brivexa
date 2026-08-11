@@ -44,12 +44,12 @@ export function InventoryItemDetailScreen({
 
   if (!item) {
     return (
-      <View style={styles.InventoryItemDetailScreenMissingEnclave}>
-        <Text style={styles.InventoryItemDetailScreenMissingFiligree}>
+      <View style={styles.InventoryItemDetailScreenMissingPocket}>
+        <Text style={styles.InventoryItemDetailScreenMissingFlourish}>
           Item not found
         </Text>
         <Pressable onPress={onBack}>
-          <Text style={styles.InventoryItemDetailScreenNavLinkFiligree}>
+          <Text style={styles.InventoryItemDetailScreenNavLinkFlourish}>
             ‹ Inventory
           </Text>
         </Pressable>
@@ -74,7 +74,7 @@ export function InventoryItemDetailScreen({
   return (
     <ImageBackground
       source={appBackground}
-      style={styles.InventoryItemDetailScreenFacetChassis}
+      style={styles.InventoryItemDetailScreenRootHull}
       resizeMode="cover"
     >
       <ScrollView
@@ -87,17 +87,17 @@ export function InventoryItemDetailScreen({
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.InventoryItemDetailScreenHeaderRowLintel}>
+        <View style={styles.InventoryItemDetailScreenHeaderRowCapstone}>
           <Pressable
             onPress={onBack}
             hitSlop={12}
             style={styles.InventoryItemDetailScreenNavSide}
           >
-            <Text style={styles.InventoryItemDetailScreenNavLinkFiligree}>
+            <Text style={styles.InventoryItemDetailScreenNavLinkFlourish}>
               ‹ Inventory
             </Text>
           </Pressable>
-          <Text style={styles.InventoryItemDetailScreenTitleFiligree}>
+          <Text style={styles.InventoryItemDetailScreenTitleFlourish}>
             Item
           </Text>
           <Pressable
@@ -105,15 +105,15 @@ export function InventoryItemDetailScreen({
             hitSlop={12}
             style={styles.InventoryItemDetailScreenNavSideRight}
           >
-            <Text style={styles.InventoryItemDetailScreenNavLinkBoldFiligree}>
+            <Text style={styles.InventoryItemDetailScreenNavLinkBoldFlourish}>
               Edit
             </Text>
           </Pressable>
         </View>
 
         <View style={{ paddingHorizontal: adaptive.horizontalPadding }}>
-          <View style={styles.InventoryItemDetailScreenIdentityRowLintel}>
-            <View style={styles.InventoryItemDetailScreenFlexEnclave}>
+          <View style={styles.InventoryItemDetailScreenIdentityRowCapstone}>
+            <View style={styles.InventoryItemDetailScreenFlexPocket}>
               <Text style={styles.InventoryItemDetailScreenItemName}>
                 {item.name}
               </Text>
@@ -169,7 +169,7 @@ export function InventoryItemDetailScreen({
             </Pressable>
           </View>
 
-          <Text style={styles.InventoryItemDetailScreenSectionTitleFiligree}>
+          <Text style={styles.InventoryItemDetailScreenSectionTitleFlourish}>
             Stock Movement
           </Text>
           <View style={styles.InventoryItemDetailScreenMovementList}>
@@ -182,7 +182,7 @@ export function InventoryItemDetailScreen({
                     styles.InventoryItemDetailScreenKvRowBorder,
                 ]}
               >
-                <View style={styles.InventoryItemDetailScreenFlexEnclave}>
+                <View style={styles.InventoryItemDetailScreenFlexPocket}>
                   <Text style={styles.InventoryItemDetailScreenMovementTitle}>
                     {move.title}
                   </Text>
@@ -237,11 +237,11 @@ export function InventoryItemDetailScreen({
       {toast ? (
         <View
           style={[
-            styles.InventoryItemDetailScreenToastChassis,
+            styles.InventoryItemDetailScreenToastHull,
             { bottom: insets.bottom + adaptive.verticalScale(24) },
           ]}
         >
-          <Text style={styles.InventoryItemDetailScreenToastFiligree}>
+          <Text style={styles.InventoryItemDetailScreenToastFlourish}>
             {toast}
           </Text>
         </View>
@@ -310,18 +310,18 @@ function StatusChip({ status }: { status: StockStatus }) {
 }
 
 const styles = StyleSheet.create({
-  InventoryItemDetailScreenFacetChassis: {
+  InventoryItemDetailScreenRootHull: {
     backgroundColor: colors.background,
     flex: 1,
   },
-  InventoryItemDetailScreenMissingEnclave: {
+  InventoryItemDetailScreenMissingPocket: {
     alignItems: 'center',
     backgroundColor: colors.background,
     flex: 1,
     justifyContent: 'center',
   },
 
-  InventoryItemDetailScreenMissingFiligree: {
+  InventoryItemDetailScreenMissingFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 18,
@@ -329,7 +329,7 @@ const styles = StyleSheet.create({
   },
 
   InventoryItemDetailScreenScrollContent: { flexGrow: 1 },
-  InventoryItemDetailScreenHeaderRowLintel: {
+  InventoryItemDetailScreenHeaderRowCapstone: {
     alignItems: 'center',
     borderBottomColor: colors.borderSoft,
     borderBottomWidth: 1,
@@ -344,33 +344,33 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     minWidth: 90,
   },
-  InventoryItemDetailScreenNavLinkFiligree: {
+  InventoryItemDetailScreenNavLinkFlourish: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
 
-  InventoryItemDetailScreenNavLinkBoldFiligree: {
+  InventoryItemDetailScreenNavLinkBoldFlourish: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 14,
     fontWeight: '700',
   },
 
-  InventoryItemDetailScreenTitleFiligree: {
+  InventoryItemDetailScreenTitleFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
-  InventoryItemDetailScreenIdentityRowLintel: {
+  InventoryItemDetailScreenIdentityRowCapstone: {
     alignItems: 'flex-start',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 14,
   },
-  InventoryItemDetailScreenFlexEnclave: { flex: 1 },
+  InventoryItemDetailScreenFlexPocket: { flex: 1 },
   InventoryItemDetailScreenItemName: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -467,7 +467,7 @@ const styles = StyleSheet.create({
   },
 
   InventoryItemDetailScreenPressedDim: { opacity: 0.88 },
-  InventoryItemDetailScreenSectionTitleFiligree: {
+  InventoryItemDetailScreenSectionTitleFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 14,
@@ -555,7 +555,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '700',
   },
-  InventoryItemDetailScreenToastChassis: {
+  InventoryItemDetailScreenToastHull: {
     alignSelf: 'center',
     backgroundColor: colors.toastBg,
     borderColor: colors.border,
@@ -566,7 +566,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 
-  InventoryItemDetailScreenToastFiligree: {
+  InventoryItemDetailScreenToastFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 13,

@@ -55,7 +55,7 @@ export function ProgressRing({
 
   return (
     <View
-      style={[styles.ProgressRingFacetChassis, { width: size, height: size }]}
+      style={[styles.ProgressRingRootHull, { width: size, height: size }]}
     >
       {segments.map(segment => (
         <View key={segment.key} style={segment.style} />
@@ -81,7 +81,7 @@ export function ProgressRing({
 }
 
 const styles = StyleSheet.create({
-  ProgressRingFacetChassis: {
+  ProgressRingRootHull: {
     alignItems: 'center',
     justifyContent: 'center',
   },

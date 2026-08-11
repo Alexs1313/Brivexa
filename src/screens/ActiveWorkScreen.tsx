@@ -62,12 +62,12 @@ export function ActiveWorkScreen({
 
   if (!task) {
     return (
-      <View style={styles.ActiveWorkScreenMissingChassis}>
-        <Text style={styles.ActiveWorkScreenMissingFiligree}>
+      <View style={styles.ActiveWorkScreenMissingHull}>
+        <Text style={styles.ActiveWorkScreenMissingFlourish}>
           Task not found
         </Text>
         <Pressable onPress={onBack}>
-          <Text style={styles.ActiveWorkScreenNavLinkFiligree}>‹ Task</Text>
+          <Text style={styles.ActiveWorkScreenNavLinkFlourish}>‹ Task</Text>
         </Pressable>
       </View>
     );
@@ -121,7 +121,7 @@ export function ActiveWorkScreen({
   return (
     <ImageBackground
       source={appBackground}
-      style={styles.ActiveWorkScreenFacetChassis}
+      style={styles.ActiveWorkScreenRootHull}
       resizeMode="cover"
     >
       <ScrollView
@@ -135,19 +135,19 @@ export function ActiveWorkScreen({
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.ActiveWorkScreenHeaderRowLintel}>
+        <View style={styles.ActiveWorkScreenHeaderRowCapstone}>
           <Pressable
             onPress={onBack}
             hitSlop={12}
             style={styles.ActiveWorkScreenNavSide}
           >
-            <Text style={styles.ActiveWorkScreenNavLinkFiligree}>‹ Task</Text>
+            <Text style={styles.ActiveWorkScreenNavLinkFlourish}>‹ Task</Text>
           </Pressable>
-          <Text style={styles.ActiveWorkScreenTitleFiligree}>Active Work</Text>
+          <Text style={styles.ActiveWorkScreenTitleFlourish}>Active Work</Text>
           <View style={styles.ActiveWorkScreenNavSide} />
         </View>
 
-        <Text style={styles.ActiveWorkScreenFieldLabelFiligree}>
+        <Text style={styles.ActiveWorkScreenFieldLabelFlourish}>
           {task.field}
         </Text>
         <Text style={styles.ActiveWorkScreenTaskTitle}>{task.title}</Text>
@@ -243,11 +243,11 @@ export function ActiveWorkScreen({
       {toast ? (
         <View
           style={[
-            styles.ActiveWorkScreenToastChassis,
+            styles.ActiveWorkScreenToastHull,
             { bottom: insets.bottom + adaptive.verticalScale(24) },
           ]}
         >
-          <Text style={styles.ActiveWorkScreenToastFiligree}>{toast}</Text>
+          <Text style={styles.ActiveWorkScreenToastFlourish}>{toast}</Text>
         </View>
       ) : null}
 
@@ -270,23 +270,23 @@ export function ActiveWorkScreen({
 }
 
 const styles = StyleSheet.create({
-  ActiveWorkScreenFacetChassis: { backgroundColor: colors.background, flex: 1 },
+  ActiveWorkScreenRootHull: { backgroundColor: colors.background, flex: 1 },
   ActiveWorkScreenScrollContent: { flexGrow: 1 },
 
-  ActiveWorkScreenMissingChassis: {
+  ActiveWorkScreenMissingHull: {
     alignItems: 'center',
     backgroundColor: colors.background,
     flex: 1,
     justifyContent: 'center',
   },
-  ActiveWorkScreenMissingFiligree: {
+  ActiveWorkScreenMissingFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     marginBottom: 12,
   },
 
-  ActiveWorkScreenHeaderRowLintel: {
+  ActiveWorkScreenHeaderRowCapstone: {
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: 18,
@@ -294,14 +294,14 @@ const styles = StyleSheet.create({
 
   ActiveWorkScreenNavSide: { minWidth: 72 },
 
-  ActiveWorkScreenNavLinkFiligree: {
+  ActiveWorkScreenNavLinkFlourish: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
-  ActiveWorkScreenTitleFiligree: {
+  ActiveWorkScreenTitleFlourish: {
     color: colors.cream,
     flex: 1,
     fontFamily: fonts.sansBold,
@@ -310,7 +310,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  ActiveWorkScreenFieldLabelFiligree: {
+  ActiveWorkScreenFieldLabelFlourish: {
     color: colors.bodyMuted,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
@@ -459,7 +459,7 @@ const styles = StyleSheet.create({
   },
 
   ActiveWorkScreenPressedDim: { opacity: 0.85 },
-  ActiveWorkScreenToastChassis: {
+  ActiveWorkScreenToastHull: {
     alignSelf: 'center',
     backgroundColor: colors.toastBg,
     borderColor: colors.border,
@@ -470,7 +470,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 
-  ActiveWorkScreenToastFiligree: {
+  ActiveWorkScreenToastFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 13,

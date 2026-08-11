@@ -39,16 +39,16 @@ export function DropdownField({
 
   return (
     <View style={styles.DropdownFieldFieldGroup}>
-      <Text style={styles.DropdownFieldFieldLabelFiligree}>
+      <Text style={styles.DropdownFieldFieldLabelFlourish}>
         {label}
         {required ? (
-          <Text style={styles.DropdownFieldRequiredSigil}> *</Text>
+          <Text style={styles.DropdownFieldRequiredEmblem}> *</Text>
         ) : null}
       </Text>
       <View
         style={[
-          styles.DropdownFieldFieldInputChassis,
-          open && styles.DropdownFieldInputChassisOpen,
+          styles.DropdownFieldFieldInputHull,
+          open && styles.DropdownFieldInputHullOpen,
         ]}
       >
         <TextInput
@@ -83,11 +83,11 @@ export function DropdownField({
         onRequestClose={() => setOpen(false)}
       >
         <Pressable
-          style={styles.DropdownFieldBackdropVeil}
+          style={styles.DropdownFieldBackdropDrape}
           onPress={() => setOpen(false)}
         >
           <Pressable
-            style={styles.DropdownFieldSheetChassis}
+            style={styles.DropdownFieldSheetHull}
             onPress={e => e.stopPropagation()}
           >
             <Text style={styles.DropdownFieldSheetTitle}>
@@ -140,16 +140,16 @@ const styles = StyleSheet.create({
   DropdownFieldFieldGroup: {
     marginBottom: 14,
   },
-  DropdownFieldFieldLabelFiligree: {
+  DropdownFieldFieldLabelFlourish: {
     color: colors.bodyMuted,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginBottom: 8,
   },
-  DropdownFieldRequiredSigil: {
+  DropdownFieldRequiredEmblem: {
     color: colors.danger,
   },
-  DropdownFieldFieldInputChassis: {
+  DropdownFieldFieldInputHull: {
     alignItems: 'center',
     backgroundColor: colors.card,
     borderColor: colors.emptyBorder,
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     paddingLeft: 14,
     paddingRight: 4,
   },
-  DropdownFieldInputChassisOpen: {
+  DropdownFieldInputHullOpen: {
     borderColor: colors.goldBorder,
   },
   DropdownFieldSelectInput: {
@@ -184,13 +184,13 @@ const styles = StyleSheet.create({
     color: colors.gold,
     transform: [{ rotate: '180deg' }],
   },
-  DropdownFieldBackdropVeil: {
+  DropdownFieldBackdropDrape: {
     backgroundColor: 'rgba(8, 4, 24, 0.72)',
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 24,
   },
-  DropdownFieldSheetChassis: {
+  DropdownFieldSheetHull: {
     backgroundColor: colors.card,
     borderColor: colors.border,
     borderRadius: radius.card,

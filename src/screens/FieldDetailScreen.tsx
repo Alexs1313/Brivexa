@@ -59,12 +59,12 @@ export function FieldDetailScreen({
 
   if (!field) {
     return (
-      <View style={styles.FieldDetailScreenMissingChassis}>
-        <Text style={styles.FieldDetailScreenMissingFiligree}>
+      <View style={styles.FieldDetailScreenMissingHull}>
+        <Text style={styles.FieldDetailScreenMissingFlourish}>
           Field not found
         </Text>
         <Pressable onPress={onBack}>
-          <Text style={styles.FieldDetailScreenNavLinkFiligree}>‹ Fields</Text>
+          <Text style={styles.FieldDetailScreenNavLinkFlourish}>‹ Fields</Text>
         </Pressable>
       </View>
     );
@@ -75,7 +75,7 @@ export function FieldDetailScreen({
   return (
     <ImageBackground
       source={appBackground}
-      style={styles.FieldDetailScreenFacetChassis}
+      style={styles.FieldDetailScreenRootHull}
       resizeMode="cover"
     >
       <ScrollView
@@ -88,23 +88,23 @@ export function FieldDetailScreen({
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.FieldDetailScreenHeaderRowLintel}>
+        <View style={styles.FieldDetailScreenHeaderRowCapstone}>
           <Pressable
             onPress={onBack}
             hitSlop={12}
             style={styles.FieldDetailScreenNavSide}
           >
-            <Text style={styles.FieldDetailScreenNavLinkFiligree}>
+            <Text style={styles.FieldDetailScreenNavLinkFlourish}>
               ‹ Fields
             </Text>
           </Pressable>
-          <Text style={styles.FieldDetailScreenNavTitleFiligree}>Field</Text>
+          <Text style={styles.FieldDetailScreenNavTitleFlourish}>Field</Text>
           <Pressable
             onPress={onEdit}
             hitSlop={12}
             style={styles.FieldDetailScreenNavSideRight}
           >
-            <Text style={styles.FieldDetailScreenNavLinkBoldFiligree}>
+            <Text style={styles.FieldDetailScreenNavLinkBoldFlourish}>
               Edit
             </Text>
           </Pressable>
@@ -114,10 +114,10 @@ export function FieldDetailScreen({
           {showCover ? <FieldCover field={field} /> : null}
 
           <View style={styles.FieldDetailScreenTitleRow}>
-            <Text style={styles.FieldDetailScreenFieldNameFiligree}>
+            <Text style={styles.FieldDetailScreenFieldNameFlourish}>
               {field.name}
             </Text>
-            <Text style={styles.FieldDetailScreenFieldAreaFiligree}>
+            <Text style={styles.FieldDetailScreenFieldAreaFlourish}>
               {field.areaLabel}
             </Text>
           </View>
@@ -183,11 +183,11 @@ export function FieldDetailScreen({
       {toast ? (
         <View
           style={[
-            styles.FieldDetailScreenToastChassis,
+            styles.FieldDetailScreenToastHull,
             { bottom: insets.bottom + adaptive.verticalScale(24) },
           ]}
         >
-          <Text style={styles.FieldDetailScreenToastFiligree}>{toast}</Text>
+          <Text style={styles.FieldDetailScreenToastFlourish}>{toast}</Text>
         </View>
       ) : null}
     </ImageBackground>
@@ -223,7 +223,7 @@ function SegmentedTabs({
 }) {
   const tabs: FieldTab[] = ['Overview', 'Activities', 'Expenses', 'Harvest'];
   return (
-    <View style={styles.FieldDetailScreenSegChassis}>
+    <View style={styles.FieldDetailScreenSegHull}>
       {tabs.map(tab => {
         const on = tab === active;
         return (
@@ -296,7 +296,7 @@ function OverviewTab({
         ))}
       </View>
 
-      <Text style={styles.FieldDetailScreenSectionTitleFiligree}>
+      <Text style={styles.FieldDetailScreenSectionTitleFlourish}>
         Status Timeline
       </Text>
       <View style={styles.FieldDetailScreenTimelineRow}>
@@ -579,7 +579,7 @@ function activityColor(status: ActivityStatus) {
 }
 
 const styles = StyleSheet.create({
-  FieldDetailScreenFacetChassis: {
+  FieldDetailScreenRootHull: {
     backgroundColor: colors.background,
     flex: 1,
   },
@@ -587,7 +587,7 @@ const styles = StyleSheet.create({
     opacity: 0.88,
   },
 
-  FieldDetailScreenToastChassis: {
+  FieldDetailScreenToastHull: {
     alignSelf: 'center',
     backgroundColor: colors.toastBg,
     borderColor: colors.border,
@@ -598,13 +598,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 
-  FieldDetailScreenToastFiligree: {
+  FieldDetailScreenToastFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 13,
     fontWeight: '700',
   },
-  FieldDetailScreenMissingChassis: {
+  FieldDetailScreenMissingHull: {
     alignItems: 'center',
     backgroundColor: colors.background,
     flex: 1,
@@ -612,13 +612,13 @@ const styles = StyleSheet.create({
     gap: 12,
   },
 
-  FieldDetailScreenMissingFiligree: {
+  FieldDetailScreenMissingFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 18,
   },
 
-  FieldDetailScreenHeaderRowLintel: {
+  FieldDetailScreenHeaderRowCapstone: {
     alignItems: 'center',
     borderBottomColor: colors.borderSoft,
     borderBottomWidth: 1,
@@ -635,20 +635,20 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     minWidth: 72,
   },
-  FieldDetailScreenNavLinkFiligree: {
+  FieldDetailScreenNavLinkFlourish: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
 
-  FieldDetailScreenNavLinkBoldFiligree: {
+  FieldDetailScreenNavLinkBoldFlourish: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 14,
     fontWeight: '700',
   },
 
-  FieldDetailScreenNavTitleFiligree: {
+  FieldDetailScreenNavTitleFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
@@ -679,7 +679,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  FieldDetailScreenFieldNameFiligree: {
+  FieldDetailScreenFieldNameFlourish: {
     color: colors.cream,
     flexShrink: 1,
     fontFamily: fonts.sansBold,
@@ -688,7 +688,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
 
-  FieldDetailScreenFieldAreaFiligree: {
+  FieldDetailScreenFieldAreaFlourish: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
@@ -702,7 +702,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
 
-  FieldDetailScreenSegChassis: {
+  FieldDetailScreenSegHull: {
     backgroundColor: colors.card,
     borderColor: colors.border,
     borderRadius: 12,
@@ -774,7 +774,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.sansBold,
     fontWeight: '700',
   },
-  FieldDetailScreenSectionTitleFiligree: {
+  FieldDetailScreenSectionTitleFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 14,

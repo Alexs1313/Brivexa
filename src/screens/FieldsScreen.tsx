@@ -76,20 +76,20 @@ export function FieldsScreen({ onOpenField, onAddField }: FieldsScreenProps) {
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.FieldsScreenHeader}>
-          <Text style={styles.FieldsScreenTitleFiligree}>Fields</Text>
+          <Text style={styles.FieldsScreenTitleFlourish}>Fields</Text>
           <Pressable onPress={onAddField} hitSlop={8}>
             <LinearGradient
               colors={[colors.buttonGradientStart, colors.buttonGradientEnd]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
-              style={styles.FieldsScreenAddOrb}
+              style={styles.FieldsScreenAddBead}
             >
-              <Text style={styles.FieldsScreenAddGlyph}>+</Text>
+              <Text style={styles.FieldsScreenAddMark}>+</Text>
             </LinearGradient>
           </Pressable>
         </View>
 
-        <View style={styles.FieldsScreenSearchChassis}>
+        <View style={styles.FieldsScreenSearchHull}>
           <TextInput
             value={query}
             onChangeText={setQuery}
@@ -127,9 +127,9 @@ export function FieldsScreen({ onOpenField, onAddField }: FieldsScreenProps) {
         </View>
 
         {isDemo ? (
-          <View style={styles.FieldsScreenDemoBannerChassis}>
-            <Text style={styles.FieldsScreenDemoBannerSigil}>ℹ️</Text>
-            <Text style={styles.FieldsScreenDemoBannerFiligree}>
+          <View style={styles.FieldsScreenDemoBannerHull}>
+            <Text style={styles.FieldsScreenDemoBannerEmblem}>ℹ️</Text>
+            <Text style={styles.FieldsScreenDemoBannerFlourish}>
               {DEMO_BANNER}
             </Text>
           </View>
@@ -165,7 +165,7 @@ function FieldCard({
     <Pressable
       onPress={onPress}
       style={({ pressed }) => [
-        styles.FieldsScreenFieldCardChassis,
+        styles.FieldsScreenFieldCardHull,
         pressed && styles.FieldsScreenPressedDim,
       ]}
     >
@@ -192,10 +192,10 @@ function FieldCard({
       </ImageBackground>
       <View style={styles.FieldsScreenFieldCardBody}>
         <View style={styles.FieldsScreenFieldCardTitleRow}>
-          <Text style={styles.FieldsScreenFieldCardNameFiligree}>
+          <Text style={styles.FieldsScreenFieldCardNameFlourish}>
             {field.name}
           </Text>
-          <Text style={styles.FieldsScreenFieldCardAreaFiligree}>
+          <Text style={styles.FieldsScreenFieldCardAreaFlourish}>
             {field.areaLabel}
           </Text>
         </View>
@@ -260,13 +260,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 14,
   },
-  FieldsScreenTitleFiligree: {
+  FieldsScreenTitleFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 24,
     fontWeight: '700',
   },
-  FieldsScreenAddOrb: {
+  FieldsScreenAddBead: {
     alignItems: 'center',
     borderRadius: 12,
     height: 40,
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
     width: 40,
   },
 
-  FieldsScreenAddGlyph: {
+  FieldsScreenAddMark: {
     color: colors.buttonText,
     fontFamily: fonts.sansBold,
     fontSize: 22,
@@ -282,7 +282,7 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
 
-  FieldsScreenSearchChassis: {
+  FieldsScreenSearchHull: {
     backgroundColor: colors.card,
     borderColor: colors.emptyBorder,
     borderRadius: 12,
@@ -330,7 +330,7 @@ const styles = StyleSheet.create({
     color: colors.gold,
   },
 
-  FieldsScreenDemoBannerChassis: {
+  FieldsScreenDemoBannerHull: {
     backgroundColor: colors.infoBanner,
     borderColor: colors.infoBannerBorder,
     borderRadius: radius.card,
@@ -342,11 +342,11 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
 
-  FieldsScreenDemoBannerSigil: {
+  FieldsScreenDemoBannerEmblem: {
     fontSize: 16,
     marginTop: 2,
   },
-  FieldsScreenDemoBannerFiligree: {
+  FieldsScreenDemoBannerFlourish: {
     color: colors.infoBannerText,
     flex: 1,
     fontFamily: fonts.sansRegular,
@@ -357,7 +357,7 @@ const styles = StyleSheet.create({
     gap: 12,
   },
 
-  FieldsScreenFieldCardChassis: {
+  FieldsScreenFieldCardHull: {
     backgroundColor: colors.card,
     borderColor: colors.border,
     borderRadius: radius.card,
@@ -435,7 +435,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  FieldsScreenFieldCardNameFiligree: {
+  FieldsScreenFieldCardNameFlourish: {
     color: colors.cream,
     flexShrink: 1,
     fontFamily: fonts.sansBold,
@@ -444,7 +444,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
 
-  FieldsScreenFieldCardAreaFiligree: {
+  FieldsScreenFieldCardAreaFlourish: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,

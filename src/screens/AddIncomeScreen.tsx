@@ -46,7 +46,7 @@ export function AddIncomeScreen({ onCancel, onSave }: AddIncomeScreenProps) {
   return (
     <ImageBackground
       source={appBackground}
-      style={styles.AddIncomeScreenFacetChassis}
+      style={styles.AddIncomeScreenRootHull}
       resizeMode="cover"
     >
       <ScrollView
@@ -60,15 +60,15 @@ export function AddIncomeScreen({ onCancel, onSave }: AddIncomeScreenProps) {
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.AddIncomeScreenHeaderRowLintel}>
+        <View style={styles.AddIncomeScreenHeaderRowCapstone}>
           <Pressable
             onPress={onCancel}
             hitSlop={12}
             style={styles.AddIncomeScreenNavSide}
           >
-            <Text style={styles.AddIncomeScreenNavLinkFiligree}>‹ Cancel</Text>
+            <Text style={styles.AddIncomeScreenNavLinkFlourish}>‹ Cancel</Text>
           </Pressable>
-          <Text style={styles.AddIncomeScreenTitleFiligree}>Add Income</Text>
+          <Text style={styles.AddIncomeScreenTitleFlourish}>Add Income</Text>
           <View style={styles.AddIncomeScreenNavSide} />
         </View>
 
@@ -137,8 +137,8 @@ export function AddIncomeScreen({ onCancel, onSave }: AddIncomeScreenProps) {
             }}
             fullWidth
             style={[
-              styles.AddIncomeScreenSavePortico,
-              !canSave && styles.AddIncomeScreenSavePorticoDisabled,
+              styles.AddIncomeScreenSavePlinth,
+              !canSave && styles.AddIncomeScreenSavePlinthDisabled,
             ]}
           />
         </View>
@@ -148,7 +148,7 @@ export function AddIncomeScreen({ onCancel, onSave }: AddIncomeScreenProps) {
 }
 
 const styles = StyleSheet.create({
-  AddIncomeScreenFacetChassis: {
+  AddIncomeScreenRootHull: {
     backgroundColor: colors.background,
     flex: 1,
   },
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 
-  AddIncomeScreenHeaderRowLintel: {
+  AddIncomeScreenHeaderRowCapstone: {
     alignItems: 'center',
     borderBottomColor: colors.borderSoft,
     borderBottomWidth: 1,
@@ -170,23 +170,23 @@ const styles = StyleSheet.create({
   AddIncomeScreenNavSide: {
     minWidth: 72,
   },
-  AddIncomeScreenNavLinkFiligree: {
+  AddIncomeScreenNavLinkFlourish: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
 
-  AddIncomeScreenTitleFiligree: {
+  AddIncomeScreenTitleFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
-  AddIncomeScreenSavePortico: {
+  AddIncomeScreenSavePlinth: {
     marginTop: 10,
   },
-  AddIncomeScreenSavePorticoDisabled: {
+  AddIncomeScreenSavePlinthDisabled: {
     opacity: 0.55,
   },
 });

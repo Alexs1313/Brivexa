@@ -43,12 +43,12 @@ export function EquipmentDetailScreen({
 
   if (!item) {
     return (
-      <View style={styles.EquipmentDetailScreenMissingEnclave}>
-        <Text style={styles.EquipmentDetailScreenMissingFiligree}>
+      <View style={styles.EquipmentDetailScreenMissingPocket}>
+        <Text style={styles.EquipmentDetailScreenMissingFlourish}>
           Equipment not found
         </Text>
         <Pressable onPress={onBack}>
-          <Text style={styles.EquipmentDetailScreenNavLinkFiligree}>
+          <Text style={styles.EquipmentDetailScreenNavLinkFlourish}>
             ‹ Farm
           </Text>
         </Pressable>
@@ -86,7 +86,7 @@ export function EquipmentDetailScreen({
   return (
     <ImageBackground
       source={appBackground}
-      style={styles.EquipmentDetailScreenFacetChassis}
+      style={styles.EquipmentDetailScreenRootHull}
       resizeMode="cover"
     >
       <ScrollView
@@ -99,17 +99,17 @@ export function EquipmentDetailScreen({
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.EquipmentDetailScreenHeaderRowLintel}>
+        <View style={styles.EquipmentDetailScreenHeaderRowCapstone}>
           <Pressable
             onPress={onBack}
             hitSlop={12}
             style={styles.EquipmentDetailScreenNavSide}
           >
-            <Text style={styles.EquipmentDetailScreenNavLinkFiligree}>
+            <Text style={styles.EquipmentDetailScreenNavLinkFlourish}>
               ‹ Farm
             </Text>
           </Pressable>
-          <Text style={styles.EquipmentDetailScreenTitleFiligree}>
+          <Text style={styles.EquipmentDetailScreenTitleFlourish}>
             Equipment
           </Text>
           <Pressable
@@ -117,7 +117,7 @@ export function EquipmentDetailScreen({
             hitSlop={12}
             style={styles.EquipmentDetailScreenNavSideRight}
           >
-            <Text style={styles.EquipmentDetailScreenNavLinkBoldFiligree}>
+            <Text style={styles.EquipmentDetailScreenNavLinkBoldFlourish}>
               Edit
             </Text>
           </Pressable>
@@ -126,7 +126,7 @@ export function EquipmentDetailScreen({
         <View style={{ paddingHorizontal: adaptive.horizontalPadding }}>
           <View style={styles.EquipmentDetailScreenIdentityRow}>
             <View style={styles.EquipmentDetailScreenIconBox}>
-              <Text style={styles.EquipmentDetailScreenIconGlyph}>
+              <Text style={styles.EquipmentDetailScreenIconMark}>
                 {item.icon}
               </Text>
             </View>
@@ -238,11 +238,11 @@ export function EquipmentDetailScreen({
       {toast ? (
         <View
           style={[
-            styles.EquipmentDetailScreenToastChassis,
+            styles.EquipmentDetailScreenToastHull,
             { bottom: insets.bottom + adaptive.verticalScale(24) },
           ]}
         >
-          <Text style={styles.EquipmentDetailScreenToastFiligree}>{toast}</Text>
+          <Text style={styles.EquipmentDetailScreenToastFlourish}>{toast}</Text>
         </View>
       ) : null}
 
@@ -266,18 +266,18 @@ export function EquipmentDetailScreen({
 }
 
 const styles = StyleSheet.create({
-  EquipmentDetailScreenFacetChassis: {
+  EquipmentDetailScreenRootHull: {
     backgroundColor: colors.background,
     flex: 1,
   },
-  EquipmentDetailScreenMissingEnclave: {
+  EquipmentDetailScreenMissingPocket: {
     alignItems: 'center',
     backgroundColor: colors.background,
     flex: 1,
     justifyContent: 'center',
   },
 
-  EquipmentDetailScreenMissingFiligree: {
+  EquipmentDetailScreenMissingFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 18,
@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
   EquipmentDetailScreenScrollContent: {
     flexGrow: 1,
   },
-  EquipmentDetailScreenHeaderRowLintel: {
+  EquipmentDetailScreenHeaderRowCapstone: {
     alignItems: 'center',
     borderBottomColor: colors.borderSoft,
     borderBottomWidth: 1,
@@ -306,19 +306,19 @@ const styles = StyleSheet.create({
     minWidth: 72,
   },
 
-  EquipmentDetailScreenNavLinkFiligree: {
+  EquipmentDetailScreenNavLinkFlourish: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
 
-  EquipmentDetailScreenNavLinkBoldFiligree: {
+  EquipmentDetailScreenNavLinkBoldFlourish: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 14,
     fontWeight: '700',
   },
-  EquipmentDetailScreenTitleFiligree: {
+  EquipmentDetailScreenTitleFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
@@ -339,7 +339,7 @@ const styles = StyleSheet.create({
     width: 54,
   },
 
-  EquipmentDetailScreenIconGlyph: {
+  EquipmentDetailScreenIconMark: {
     fontSize: 28,
   },
 
@@ -487,7 +487,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '700',
   },
-  EquipmentDetailScreenToastChassis: {
+  EquipmentDetailScreenToastHull: {
     alignSelf: 'center',
     backgroundColor: colors.toastBg,
     borderColor: colors.border,
@@ -498,7 +498,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 
-  EquipmentDetailScreenToastFiligree: {
+  EquipmentDetailScreenToastFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 13,

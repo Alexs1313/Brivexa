@@ -10,7 +10,7 @@ type PaginationDotsProps = {
 
 export function PaginationDots({ total, activeIndex }: PaginationDotsProps) {
   return (
-    <View style={styles.PaginationDotsFacetChassis}>
+    <View style={styles.PaginationDotsRootHull}>
       {Array.from({ length: total }).map((_, index) => {
         const isActive = index === activeIndex;
 
@@ -29,7 +29,7 @@ export function PaginationDots({ total, activeIndex }: PaginationDotsProps) {
 }
 
 const styles = StyleSheet.create({
-  PaginationDotsFacetChassis: {
+  PaginationDotsRootHull: {
     alignItems: 'center',
     flexDirection: 'row',
     gap: 8,

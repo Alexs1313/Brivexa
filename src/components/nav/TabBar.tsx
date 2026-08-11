@@ -50,7 +50,7 @@ export function TabBar({ activeTab, onSelect }: TabBarProps) {
   return (
     <View
       style={[
-        styles.TabBarFacetChassis,
+        styles.TabBarRootHull,
         { paddingBottom: Math.max(insets.bottom, 8) },
       ]}
     >
@@ -61,25 +61,25 @@ export function TabBar({ activeTab, onSelect }: TabBarProps) {
             <Pressable
               key={tab.key}
               onPress={() => onSelect(tab.key)}
-              style={styles.TabBarCenterEnclave}
+              style={styles.TabBarCenterPocket}
               hitSlop={8}
             >
               <ImageBackground
                 source={todayAssets.tabWorkBg}
-                style={styles.TabBarWorkOrb}
-                imageStyle={styles.TabBarWorkOrbImage}
+                style={styles.TabBarWorkBead}
+                imageStyle={styles.TabBarWorkBeadImage}
                 resizeMode="cover"
               >
                 <Image
                   source={todayAssets.tabWork}
-                  style={styles.TabBarWorkGlyphSigil}
+                  style={styles.TabBarWorkMarkEmblem}
                   resizeMode="contain"
                 />
               </ImageBackground>
               <Text
                 style={[
-                  styles.TabBarLabelFiligree,
-                  active && styles.TabBarLabelActiveFiligree,
+                  styles.TabBarLabelFlourish,
+                  active && styles.TabBarLabelActiveFlourish,
                 ]}
               >
                 {tab.label}
@@ -92,13 +92,13 @@ export function TabBar({ activeTab, onSelect }: TabBarProps) {
           <Pressable
             key={tab.key}
             onPress={() => onSelect(tab.key)}
-            style={styles.TabBarEnclave}
+            style={styles.TabBarPocket}
             hitSlop={8}
           >
             <Image
               source={active && tab.iconActive ? tab.iconActive : tab.icon}
               style={[
-                styles.TabBarGlyphSigil,
+                styles.TabBarMarkEmblem,
                 !tab.iconActive && {
                   tintColor: active ? colors.gold : colors.tabInactive,
                 },
@@ -107,8 +107,8 @@ export function TabBar({ activeTab, onSelect }: TabBarProps) {
             />
             <Text
               style={[
-                styles.TabBarLabelFiligree,
-                active && styles.TabBarLabelActiveFiligree,
+                styles.TabBarLabelFlourish,
+                active && styles.TabBarLabelActiveFlourish,
               ]}
             >
               {tab.label}
@@ -121,7 +121,7 @@ export function TabBar({ activeTab, onSelect }: TabBarProps) {
 }
 
 const styles = StyleSheet.create({
-  TabBarFacetChassis: {
+  TabBarRootHull: {
     backgroundColor: colors.tabBar,
     borderTopColor: colors.borderSoft,
     borderTopWidth: 1,
@@ -130,24 +130,24 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
 
-  TabBarEnclave: {
+  TabBarPocket: {
     alignItems: 'center',
     flex: 1,
     gap: 4,
     paddingBottom: 2,
   },
-  TabBarCenterEnclave: {
+  TabBarCenterPocket: {
     alignItems: 'center',
     flex: 1,
     gap: 4,
     marginTop: -20,
   },
 
-  TabBarGlyphSigil: {
+  TabBarMarkEmblem: {
     height: 24,
     width: 24,
   },
-  TabBarWorkOrb: {
+  TabBarWorkBead: {
     alignItems: 'center',
     borderRadius: 17,
     elevation: 8,
@@ -160,21 +160,21 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     width: 50,
   },
-  TabBarWorkOrbImage: {
+  TabBarWorkBeadImage: {
     borderRadius: 17,
   },
-  TabBarWorkGlyphSigil: {
+  TabBarWorkMarkEmblem: {
     height: 26,
     width: 26,
   },
 
-  TabBarLabelFiligree: {
+  TabBarLabelFlourish: {
     color: colors.tabInactive,
     fontFamily: fonts.sansRegular,
     fontSize: 10,
   },
 
-  TabBarLabelActiveFiligree: {
+  TabBarLabelActiveFlourish: {
     color: colors.gold,
   },
 });

@@ -54,17 +54,17 @@ export function AmountModal({
       animationType="fade"
       onRequestClose={onCancel}
     >
-      <Pressable style={styles.AmountModalBackdropVeil} onPress={onCancel}>
+      <Pressable style={styles.AmountModalBackdropDrape} onPress={onCancel}>
         <Pressable
-          style={styles.AmountModalSheetChassis}
+          style={styles.AmountModalSheetHull}
           onPress={e => e.stopPropagation()}
         >
-          <Text style={styles.AmountModalTitleFiligree}>{title}</Text>
+          <Text style={styles.AmountModalTitleFlourish}>{title}</Text>
           {subtitle ? (
-            <Text style={styles.AmountModalSubtitleFiligree}>{subtitle}</Text>
+            <Text style={styles.AmountModalSubtitleFlourish}>{subtitle}</Text>
           ) : null}
 
-          <View style={styles.AmountModalFieldInputChassis}>
+          <View style={styles.AmountModalFieldInputHull}>
             <TextInput
               value={value}
               onChangeText={setValue}
@@ -89,12 +89,12 @@ export function AmountModal({
             }}
             fullWidth
             style={[
-              styles.AmountModalConfirmPortico,
-              !canConfirm && styles.AmountModalPorticoDisabled,
+              styles.AmountModalConfirmPlinth,
+              !canConfirm && styles.AmountModalPlinthDisabled,
             ]}
           />
-          <Pressable onPress={onCancel} style={styles.AmountModalCancelPortico}>
-            <Text style={styles.AmountModalCancelFiligree}>Cancel</Text>
+          <Pressable onPress={onCancel} style={styles.AmountModalCancelPlinth}>
+            <Text style={styles.AmountModalCancelFlourish}>Cancel</Text>
           </Pressable>
         </Pressable>
       </Pressable>
@@ -103,7 +103,7 @@ export function AmountModal({
 }
 
 const styles = StyleSheet.create({
-  AmountModalBackdropVeil: {
+  AmountModalBackdropDrape: {
     alignItems: 'center',
     backgroundColor: 'rgba(8, 5, 24, 0.72)',
     flex: 1,
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
 
-  AmountModalSheetChassis: {
+  AmountModalSheetHull: {
     backgroundColor: colors.card,
     borderColor: colors.border,
     borderRadius: radius.card,
@@ -120,19 +120,19 @@ const styles = StyleSheet.create({
     paddingVertical: 18,
     width: '100%',
   },
-  AmountModalTitleFiligree: {
+  AmountModalTitleFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 17,
     fontWeight: '700',
   },
-  AmountModalSubtitleFiligree: {
+  AmountModalSubtitleFlourish: {
     color: colors.bodyMuted,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginTop: 6,
   },
-  AmountModalFieldInputChassis: {
+  AmountModalFieldInputHull: {
     alignItems: 'center',
     backgroundColor: colors.surface,
     borderColor: colors.border,
@@ -156,22 +156,22 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginLeft: 8,
   },
-  AmountModalConfirmPortico: {
+  AmountModalConfirmPlinth: {
     marginTop: 14,
   },
 
-  AmountModalPorticoDisabled: {
+  AmountModalPlinthDisabled: {
     opacity: 0.45,
   },
 
-  AmountModalCancelPortico: {
+  AmountModalCancelPlinth: {
     alignItems: 'center',
     height: 44,
     justifyContent: 'center',
     marginTop: 4,
   },
 
-  AmountModalCancelFiligree: {
+  AmountModalCancelFlourish: {
     color: colors.bodyMuted,
     fontFamily: fonts.sansBold,
     fontSize: 15,

@@ -39,7 +39,7 @@ export function CalculatorShell({
   return (
     <ImageBackground
       source={appBackground}
-      style={styles.CalculatorPartsFacetChassis}
+      style={styles.CalculatorPartsRootHull}
       resizeMode="cover"
     >
       <ScrollView
@@ -53,17 +53,17 @@ export function CalculatorShell({
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.CalculatorPartsHeaderRowLintel}>
+        <View style={styles.CalculatorPartsHeaderRowCapstone}>
           <Pressable
             onPress={onBack}
             hitSlop={12}
             style={styles.CalculatorPartsNavSide}
           >
-            <Text style={styles.CalculatorPartsNavLinkFiligree}>
+            <Text style={styles.CalculatorPartsNavLinkFlourish}>
               ‹ Calculators
             </Text>
           </Pressable>
-          <Text style={styles.CalculatorPartsTitleFiligree}>{title}</Text>
+          <Text style={styles.CalculatorPartsTitleFlourish}>{title}</Text>
           <View style={styles.CalculatorPartsNavSide} />
         </View>
         <View style={{ paddingHorizontal: adaptive.horizontalPadding }}>
@@ -96,8 +96,8 @@ export function UnitField({
         flex && styles.CalculatorPartsFieldFlex,
       ]}
     >
-      <Text style={styles.CalculatorPartsFieldLabelFiligree}>{label}</Text>
-      <View style={styles.CalculatorPartsFieldInputChassis}>
+      <Text style={styles.CalculatorPartsFieldLabelFlourish}>{label}</Text>
+      <View style={styles.CalculatorPartsFieldInputHull}>
         <TextInput
           value={value}
           onChangeText={onChangeText}
@@ -123,10 +123,10 @@ export function SelectField({
 }) {
   return (
     <View style={styles.CalculatorPartsFieldGroup}>
-      <Text style={styles.CalculatorPartsFieldLabelFiligree}>{label}</Text>
+      <Text style={styles.CalculatorPartsFieldLabelFlourish}>{label}</Text>
       <Pressable
         onPress={onPress}
-        style={styles.CalculatorPartsFieldInputChassis}
+        style={styles.CalculatorPartsFieldInputHull}
       >
         <Text style={styles.CalculatorPartsSelectValue}>{value}</Text>
         <Text style={styles.CalculatorPartsChevron}>⌄</Text>
@@ -154,12 +154,12 @@ export function FieldDropdown({
 
   return (
     <View style={styles.CalculatorPartsFieldGroup}>
-      <Text style={styles.CalculatorPartsFieldLabelFiligree}>{label}</Text>
+      <Text style={styles.CalculatorPartsFieldLabelFlourish}>{label}</Text>
       <Pressable
         onPress={() => setOpen(true)}
         style={[
-          styles.CalculatorPartsFieldInputChassis,
-          open && styles.CalculatorPartsInputChassisOpen,
+          styles.CalculatorPartsFieldInputHull,
+          open && styles.CalculatorPartsInputHullOpen,
         ]}
       >
         <Text
@@ -364,8 +364,8 @@ export function SaveShareRow({
         </Pressable>
       </View>
       {toast ? (
-        <View style={styles.CalculatorPartsToastChassis}>
-          <Text style={styles.CalculatorPartsToastFiligree}>{toast}</Text>
+        <View style={styles.CalculatorPartsToastHull}>
+          <Text style={styles.CalculatorPartsToastFlourish}>{toast}</Text>
         </View>
       ) : null}
     </View>
@@ -373,7 +373,7 @@ export function SaveShareRow({
 }
 
 const styles = StyleSheet.create({
-  CalculatorPartsFacetChassis: {
+  CalculatorPartsRootHull: {
     backgroundColor: colors.background,
     flex: 1,
   },
@@ -381,7 +381,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 
-  CalculatorPartsHeaderRowLintel: {
+  CalculatorPartsHeaderRowCapstone: {
     alignItems: 'center',
     borderBottomColor: colors.borderSoft,
     borderBottomWidth: 1,
@@ -395,13 +395,13 @@ const styles = StyleSheet.create({
   CalculatorPartsNavSide: {
     minWidth: 110,
   },
-  CalculatorPartsNavLinkFiligree: {
+  CalculatorPartsNavLinkFlourish: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
 
-  CalculatorPartsTitleFiligree: {
+  CalculatorPartsTitleFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
@@ -414,14 +414,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  CalculatorPartsFieldLabelFiligree: {
+  CalculatorPartsFieldLabelFlourish: {
     color: colors.bodyMuted,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginBottom: 8,
   },
 
-  CalculatorPartsFieldInputChassis: {
+  CalculatorPartsFieldInputHull: {
     alignItems: 'center',
     backgroundColor: colors.card,
     borderColor: colors.emptyBorder,
@@ -465,7 +465,7 @@ const styles = StyleSheet.create({
     color: colors.gold,
     transform: [{ rotate: '180deg' }],
   },
-  CalculatorPartsInputChassisOpen: {
+  CalculatorPartsInputHullOpen: {
     borderColor: colors.goldBorder,
   },
   CalculatorPartsDropdownBackdrop: {
@@ -639,7 +639,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-  CalculatorPartsToastChassis: {
+  CalculatorPartsToastHull: {
     alignSelf: 'center',
     backgroundColor: colors.toastBg,
     borderColor: colors.border,
@@ -650,7 +650,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
 
-  CalculatorPartsToastFiligree: {
+  CalculatorPartsToastFlourish: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 13,
