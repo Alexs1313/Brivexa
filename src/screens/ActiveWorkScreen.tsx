@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import {
+  Image,
   ImageBackground,
   Pressable,
   ScrollView,
@@ -18,6 +19,7 @@ import { appBackground } from '../data/assets';
 import { useTasks } from '../data/TasksContext';
 
 import { useAdaptive } from '../hooks/useAdaptive';
+import { pickWorkPhoto } from '../utils/pickWorkPhoto';
 
 type ActiveWorkScreenProps = {
   taskId: string;
@@ -44,7 +46,7 @@ export function ActiveWorkScreen({
   const [seconds, setSeconds] = useState(1 * 3600 + 25 * 60 + 45);
   const [paused, setPaused] = useState(false);
   const [materialsNote, setMaterialsNote] = useState<string | null>(null);
-  const [photos, setPhotos] = useState(0);
+  const [photos, setPhotos] = useState<string[]>([]);
   const [materialOpen, setMaterialOpen] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
 
@@ -78,13 +80,42 @@ export function ActiveWorkScreen({
       label: 'Materials Used',
       value: materialsNote ?? task.materials ?? '—',
     },
-    { label: 'Photos', value: photos > 0 ? `${photos} attached` : 'None' },
+    {
+      label: 'Photos',
+      value: photos.length > 0 ? `${photos.length} attached` : 'None',
+    },
     { label: 'Started', value: '07:32 AM' },
   ];
 
   const showToast = (message: string) => {
     setToast(message);
     setTimeout(() => setToast(null), 2000);
+  };
+
+  const onAddPhoto = async () => {
+    try {
+      const result = await pickWorkPhoto();
+      if (result.didCancel) {
+        return;
+      }
+      if (result.errorCode) {
+        showToast(
+          result.errorMessage ??
+            (result.errorCode === 'permission'
+              ? 'Photo permission denied'
+              : 'Could not add photo'),
+        );
+        return;
+      }
+      const uri = result.assets?.[0]?.uri;
+      if (!uri) {
+        return;
+      }
+      setPhotos(prev => [...prev, uri]);
+      showToast('Photo attached');
+    } catch {
+      showToast('Could not open photo library');
+    }
   };
 
   return (
@@ -157,10 +188,7 @@ export function ActiveWorkScreen({
             <Text style={styles.ActiveWorkScreenGhostBtnLabel}>+ Material</Text>
           </Pressable>
           <Pressable
-            onPress={() => {
-              setPhotos(p => p + 1);
-              showToast('Photo attached');
-            }}
+            onPress={() => void onAddPhoto()}
             style={({ pressed }) => [
               styles.ActiveWorkScreenGhostBtn,
               pressed && styles.ActiveWorkScreenPressedDim,
@@ -169,6 +197,22 @@ export function ActiveWorkScreen({
             <Text style={styles.ActiveWorkScreenGhostBtnLabel}>📷 Photo</Text>
           </Pressable>
         </View>
+
+        {photos.length > 0 ? (
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.ActiveWorkScreenPhotoStrip}
+          >
+            {photos.map((uri, index) => (
+              <Image
+                key={`${uri}-${index}`}
+                source={{ uri }}
+                style={styles.ActiveWorkScreenPhotoThumb}
+              />
+            ))}
+          </ScrollView>
+        ) : null}
 
         <View style={styles.ActiveWorkScreenFooterRow}>
           <Pressable
@@ -366,6 +410,18 @@ const styles = StyleSheet.create({
     fontFamily: fonts.sansBold,
     fontSize: 14,
     fontWeight: '700',
+  },
+  ActiveWorkScreenPhotoStrip: {
+    gap: 10,
+    marginBottom: 18,
+  },
+  ActiveWorkScreenPhotoThumb: {
+    backgroundColor: colors.card,
+    borderColor: colors.border,
+    borderRadius: 12,
+    borderWidth: 1,
+    height: 72,
+    width: 72,
   },
 
   ActiveWorkScreenFooterRow: { flexDirection: 'row', gap: 10 },

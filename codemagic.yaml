@@ -1,6 +1,6 @@
 workflows:
   react-native-ios:
-    name: Brivexa
+    name: Terra Bull Farm
     max_build_duration: 120
     instance_type: mac_mini_m1
     environment:
@@ -10,8 +10,8 @@ workflows:
       vars:
         XCODE_WORKSPACE: 'Brivexa.xcworkspace' # <----
         XCODE_SCHEME: 'Brivexa' # <----
-        BUNDLE_ID: 'com.djadmlmde.samdmfme' # <----
-        APP_STORE_APP_ID: 6795943260 # <----
+        BUNDLE_ID: 'com.dsdfjkwrenfew.djsdfmd' # <----
+        APP_STORE_APP_ID: 6800419636 # <----
         APP_STORE_CONNECT_KEY_ID: 'KP4RLK9G79' # <----
         APP_STORE_CONNECT_ISSUER_ID: 'b0f2596c-9b95-495f-a44b-465dfde24330' # <----
         node: latest

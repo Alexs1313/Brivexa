@@ -1,5 +1,5 @@
 /**
- * Brivexa — Daily Farming Assistant
+ * Terra Bull Farm — Daily Farming Assistant
  *
  * @format
  */

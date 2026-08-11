@@ -103,9 +103,11 @@ const styles = StyleSheet.create({
   LoaderScreenBrandFiligree: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
-    fontSize: 44,
+    fontSize: 28,
     fontWeight: '800',
-    letterSpacing: 2,
+    letterSpacing: 1,
+    paddingHorizontal: 24,
+    textAlign: 'center',
   },
 
   LoaderScreenTaglineFiligree: {
