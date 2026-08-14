@@ -22,7 +22,7 @@ import {
 import { APP_BRAND_LINE } from '../constants/brand';
 
 import { colors, fonts, radius } from '../constants/theme';
-import { appBackground } from '../data/assets';
+import { appFondo } from '../data/assets';
 
 import {
   QUICK_ACTIONS,
@@ -30,38 +30,38 @@ import {
   TODAY_WEATHER,
   UPCOMING_WORK,
 } from '../data/today';
-import { useTasks } from '../data/TasksContext';
-import { useAdaptive } from '../hooks/useAdaptive';
+import { useTareas } from '../data/TasksContext';
+import { useAdaptativo } from '../hooks/useAdaptativo';
 
 type TodayScreenProps = {
-  onOpenWeather: () => void;
-  onAddTask: () => void;
-  onAddField: () => void;
-  onAddExpense: () => void;
-  onStartWork: () => void;
+  onOpenClima: () => void;
+  onAddTarea: () => void;
+  onAddCampo: () => void;
+  onAddGasto: () => void;
+  onStartTrabajo: () => void;
 };
 
 export function TodayScreen({
-  onOpenWeather,
-  onAddTask,
-  onAddField,
-  onAddExpense,
-  onStartWork,
+  onOpenClima,
+  onAddTarea,
+  onAddCampo,
+  onAddGasto,
+  onStartTrabajo,
 }: TodayScreenProps) {
   const insets = useSafeAreaInsets();
-  const adaptive = useAdaptive();
-  const { isDemo, todayTasks, upcomingWork, todayProgress } = useTasks();
+  const adaptive = useAdaptativo();
+  const { isMuestra, todayTareas, upcomingTrabajo, todayProgreso } = useTareas();
 
-  const tasks = todayTasks;
-  const upcoming = isDemo ? UPCOMING_WORK : upcomingWork;
+  const tasks = todayTareas;
+  const upcoming = isMuestra ? UPCOMING_WORK : upcomingTrabajo;
   const empty = tasks.length === 0;
-  const showProgress = isDemo || todayProgress.total > 0;
-  const allDone =
-    todayProgress.total > 0 && todayProgress.done >= todayProgress.total;
+  const showProgreso = isMuestra || todayProgreso.total > 0;
+  const allHecho =
+    todayProgreso.total > 0 && todayProgreso.done >= todayProgreso.total;
 
   return (
     <ImageBackground
-      source={appBackground}
+      source={appFondo}
       style={styles.TodayScreenBackground}
       resizeMode="cover"
     >
@@ -69,8 +69,8 @@ export function TodayScreen({
         contentContainerStyle={[
           styles.TodayScreenScroll,
           {
-            paddingTop: insets.top + adaptive.verticalScale(8),
-            paddingBottom: adaptive.verticalScale(110),
+            paddingTop: insets.top + adaptive.verticalEscala(8),
+            paddingBottom: adaptive.verticalEscala(110),
           },
         ]}
         showsVerticalScrollIndicator={false}
@@ -78,40 +78,40 @@ export function TodayScreen({
         <View
           style={[
             styles.TodayScreenContent,
-            { paddingHorizontal: adaptive.horizontalPadding },
+            { paddingHorizontal: adaptive.horizontalRelleno },
           ]}
         >
           <View style={styles.TodayScreenHeader}>
             <View>
               <View style={styles.TodayScreenBrandRow}>
-                <Text style={styles.TodayScreenCowEmblem}>🐂</Text>
-                <Text style={styles.TodayScreenBrandFlourish}>
+                <Text style={styles.TodayScreenCowEmblema}>🐂</Text>
+                <Text style={styles.TodayScreenBrandFiligrana}>
                   {APP_BRAND_LINE}
                 </Text>
               </View>
-              <Text style={styles.TodayScreenGreetingFlourish}>
+              <Text style={styles.TodayScreenGreetingFiligrana}>
                 {TODAY_HEADER.greeting}
               </Text>
               <Text style={styles.TodayScreenDate}>
-                {TODAY_HEADER.dateLabel}
+                {TODAY_HEADER.dateEtiqueta}
               </Text>
             </View>
-            <Pressable onPress={onAddTask} hitSlop={8}>
+            <Pressable onPress={onAddTarea} hitSlop={8}>
               <LinearGradient
                 colors={[colors.buttonGradientStart, colors.buttonGradientEnd]}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
-                style={styles.TodayScreenAddBead}
+                style={styles.TodayScreenAddOrbe}
               >
-                <Text style={styles.TodayScreenAddMark}>+</Text>
+                <Text style={styles.TodayScreenAddMarca}>+</Text>
               </LinearGradient>
             </Pressable>
           </View>
 
           <Pressable
-            onPress={onOpenWeather}
+            onPress={onOpenClima}
             style={({ pressed }) => [
-              styles.TodayScreenWeatherCardHull,
+              styles.TodayScreenWeatherCardCasco,
               pressed && styles.TodayScreenPressedDim,
             ]}
           >
@@ -120,7 +120,7 @@ export function TodayScreen({
                 <Text style={styles.TodayScreenWeatherCardIcon}>
                   {TODAY_WEATHER.icon}
                 </Text>
-                <Text style={styles.TodayScreenWeatherCardTempFlourish}>
+                <Text style={styles.TodayScreenWeatherCardTempFiligrana}>
                   {TODAY_WEATHER.temp}°
                 </Text>
               </View>
@@ -141,25 +141,25 @@ export function TodayScreen({
             </View>
           </Pressable>
 
-          {showProgress ? (
-            <View style={styles.TodayScreenProgressCardHull}>
+          {showProgreso ? (
+            <View style={styles.TodayScreenProgressCardCasco}>
               <ProgressRing
-                done={todayProgress.done}
-                total={todayProgress.total}
+                done={todayProgreso.done}
+                total={todayProgreso.total}
               />
-              <View style={styles.TodayScreenProgressCopyPocket}>
+              <View style={styles.TodayScreenProgressCopyBolsillo}>
                 <Text
                   style={[
-                    styles.TodayScreenProgressTitleFlourish,
-                    allDone && styles.TodayScreenProgressTitleDone,
+                    styles.TodayScreenProgressTitleFiligrana,
+                    allHecho && styles.TodayScreenProgressTitleDone,
                   ]}
                 >
-                  {allDone ? 'All tasks completed 🎉' : "Today's Progress"}
+                  {allHecho ? 'All tasks completed 🎉' : "Today's Progress"}
                 </Text>
                 <View style={styles.TodayScreenProgressStatsRow}>
                   <View>
                     <Text style={styles.TodayScreenProgressStatValue}>
-                      {todayProgress.planned}
+                      {todayProgreso.planned}
                     </Text>
                     <Text style={styles.TodayScreenProgressStatLabel}>
                       planned
@@ -167,7 +167,7 @@ export function TodayScreen({
                   </View>
                   <View style={styles.TodayScreenProgressOverdueCol}>
                     <Text style={styles.TodayScreenProgressOverdueValue}>
-                      {todayProgress.overdue}
+                      {todayProgreso.overdue}
                     </Text>
                     <Text style={styles.TodayScreenProgressStatLabel}>
                       overdue
@@ -181,18 +181,18 @@ export function TodayScreen({
           <SectionTitle title="Today's Tasks" />
 
           {empty ? (
-            <View style={styles.TodayScreenEmptyCardHull}>
-              <Text style={styles.TodayScreenEmptyEmblem}>🗓️</Text>
-              <Text style={styles.TodayScreenEmptyTitleFlourish}>
+            <View style={styles.TodayScreenEmptyCardCasco}>
+              <Text style={styles.TodayScreenEmptyEmblema}>🗓️</Text>
+              <Text style={styles.TodayScreenEmptyTitleFiligrana}>
                 No tasks today
               </Text>
-              <Text style={styles.TodayScreenEmptyHintFlourish}>
+              <Text style={styles.TodayScreenEmptyHintFiligrana}>
                 Enjoy the quiet — or plan ahead.
               </Text>
               <PrimaryButton
                 label="+ Add Task"
-                onPress={onAddTask}
-                style={styles.TodayScreenEmptyPlinth}
+                onPress={onAddTarea}
+                style={styles.TodayScreenEmptyPlinto}
               />
             </View>
           ) : (
@@ -212,13 +212,13 @@ export function TodayScreen({
             actions={QUICK_ACTIONS}
             onPress={id => {
               if (id === 'task') {
-                onAddTask();
+                onAddTarea();
               } else if (id === 'field') {
-                onAddField();
+                onAddCampo();
               } else if (id === 'expense') {
-                onAddExpense();
+                onAddGasto();
               } else if (id === 'work') {
-                onStartWork();
+                onStartTrabajo();
               }
             }}
           />
@@ -252,11 +252,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 4,
   },
-  TodayScreenCowEmblem: {
+  TodayScreenCowEmblema: {
     fontSize: 14,
   },
 
-  TodayScreenBrandFlourish: {
+  TodayScreenBrandFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 14,
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
 
-  TodayScreenGreetingFlourish: {
+  TodayScreenGreetingFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 22,
@@ -272,12 +272,12 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
   TodayScreenDate: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginTop: 4,
   },
-  TodayScreenAddBead: {
+  TodayScreenAddOrbe: {
     alignItems: 'center',
     borderRadius: 12,
     height: 40,
@@ -285,7 +285,7 @@ const styles = StyleSheet.create({
     width: 40,
   },
 
-  TodayScreenAddMark: {
+  TodayScreenAddMarca: {
     color: colors.buttonText,
     fontFamily: fonts.sansBold,
     fontSize: 22,
@@ -293,9 +293,9 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
 
-  TodayScreenDemoBannerHull: {
-    backgroundColor: colors.infoBanner,
-    borderColor: colors.infoBannerBorder,
+  TodayScreenDemoBannerCasco: {
+    backgroundColor: colors.infoBanda,
+    borderColor: colors.infoBannerBorde,
     borderRadius: radius.card,
     borderWidth: 1,
     flexDirection: 'row',
@@ -305,18 +305,18 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
 
-  TodayScreenDemoBannerEmblem: {
+  TodayScreenDemoBannerEmblema: {
     fontSize: 16,
     marginTop: 2,
   },
-  TodayScreenDemoBannerFlourish: {
+  TodayScreenDemoBannerFiligrana: {
     color: colors.infoBannerText,
     flex: 1,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     lineHeight: 18,
   },
-  TodayScreenWeatherCardHull: {
+  TodayScreenWeatherCardCasco: {
     backgroundColor: 'rgba(27, 21, 80, 0.72)',
     borderColor: colors.border,
     borderRadius: radius.card,
@@ -344,7 +344,7 @@ const styles = StyleSheet.create({
   TodayScreenWeatherCardIcon: {
     fontSize: 34,
   },
-  TodayScreenWeatherCardTempFlourish: {
+  TodayScreenWeatherCardTempFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 38,
@@ -352,7 +352,7 @@ const styles = StyleSheet.create({
   },
 
   TodayScreenWeatherCardCondition: {
-    color: colors.bodySoft,
+    color: colors.bodySuave,
     fontFamily: fonts.sansRegular,
     fontSize: 14,
     marginTop: 2,
@@ -363,13 +363,13 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   TodayScreenWeatherCardStat: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
     textAlign: 'right',
   },
 
-  TodayScreenProgressCardHull: {
+  TodayScreenProgressCardCasco: {
     alignItems: 'center',
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -382,10 +382,10 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
 
-  TodayScreenProgressCopyPocket: {
+  TodayScreenProgressCopyBolsillo: {
     flex: 1,
   },
-  TodayScreenProgressTitleFlourish: {
+  TodayScreenProgressTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 15,
@@ -405,7 +405,7 @@ const styles = StyleSheet.create({
     minWidth: 48,
   },
   TodayScreenProgressStatValue: {
-    color: colors.bodySoft,
+    color: colors.bodySuave,
     fontFamily: fonts.sansBold,
     fontSize: 17,
     fontWeight: '700',
@@ -419,15 +419,15 @@ const styles = StyleSheet.create({
   },
 
   TodayScreenProgressStatLabel: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 11,
     marginTop: 2,
   },
-  TodayScreenEmptyCardHull: {
+  TodayScreenEmptyCardCasco: {
     alignItems: 'center',
-    backgroundColor: colors.emptyFill,
-    borderColor: colors.emptyBorder,
+    backgroundColor: colors.emptyRelleno,
+    borderColor: colors.emptyBorde,
     borderRadius: radius.card,
     borderStyle: 'dashed',
     borderWidth: 1,
@@ -437,19 +437,19 @@ const styles = StyleSheet.create({
     paddingTop: 18,
   },
 
-  TodayScreenEmptyEmblem: {
+  TodayScreenEmptyEmblema: {
     fontSize: 38,
   },
 
-  TodayScreenEmptyTitleFlourish: {
+  TodayScreenEmptyTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
     marginTop: 10,
   },
-  TodayScreenEmptyHintFlourish: {
-    color: colors.bodyMuted,
+  TodayScreenEmptyHintFiligrana: {
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginBottom: 14,
@@ -457,7 +457,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  TodayScreenEmptyPlinth: {
+  TodayScreenEmptyPlinto: {
     minWidth: 122,
   },
 

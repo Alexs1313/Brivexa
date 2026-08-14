@@ -12,12 +12,12 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AmountModal } from '../components/AmountModal';
 import { colors, fonts } from '../constants/theme';
 
-import { appBackground } from '../data/assets';
+import { appFondo } from '../data/assets';
 
-import { useFarm } from '../data/FarmContext';
+import { useGranja } from '../data/FarmContext';
 
 import type { StockStatus } from '../data/farm';
-import { useAdaptive } from '../hooks/useAdaptive';
+import { useAdaptativo } from '../hooks/useAdaptativo';
 
 type InventoryItemDetailScreenProps = {
   itemId: string;
@@ -35,21 +35,21 @@ export function InventoryItemDetailScreen({
   onDelete,
 }: InventoryItemDetailScreenProps) {
   const insets = useSafeAreaInsets();
-  const adaptive = useAdaptive();
-  const { getInventoryItem, addStock, useStock, removeInventoryItem } =
-    useFarm();
-  const item = getInventoryItem(itemId);
-  const [stockMode, setStockMode] = useState<StockMode>(null);
-  const [toast, setToast] = useState<string | null>(null);
+  const adaptive = useAdaptativo();
+  const { getInventoryArticulo, addExistencias, useExistencias, removeInventoryArticulo } =
+    useGranja();
+  const item = getInventoryArticulo(itemId);
+  const [stockModo, setStockModo] = useState<StockMode>(null);
+  const [toast, setAviso] = useState<string | null>(null);
 
   if (!item) {
     return (
-      <View style={styles.InventoryItemDetailScreenMissingPocket}>
-        <Text style={styles.InventoryItemDetailScreenMissingFlourish}>
+      <View style={styles.InventoryItemDetailScreenMissingBolsillo}>
+        <Text style={styles.InventoryItemDetailScreenMissingFiligrana}>
           Item not found
         </Text>
         <Pressable onPress={onBack}>
-          <Text style={styles.InventoryItemDetailScreenNavLinkFlourish}>
+          <Text style={styles.InventoryItemDetailScreenNavLinkFiligrana}>
             ‹ Inventory
           </Text>
         </Pressable>
@@ -58,46 +58,46 @@ export function InventoryItemDetailScreen({
   }
 
   const rows = [
-    { label: 'Current Quantity', value: item.quantityLabel },
-    { label: 'Minimum Level', value: `${item.minQuantity} ${item.unit}` },
-    { label: 'Unit Cost', value: item.unitCostLabel },
-    { label: 'Total Value', value: item.totalValueLabel },
+    { label: 'Current Quantity', value: item.quantityEtiqueta },
+    { label: 'Minimum Level', value: `${item.minCantidad} ${item.unit}` },
+    { label: 'Unit Cost', value: item.unitCostEtiqueta },
+    { label: 'Total Value', value: item.totalValueEtiqueta },
     { label: 'Supplier', value: item.supplier },
-    { label: 'Purchase Date', value: item.purchaseDate },
+    { label: 'Purchase Date', value: item.purchaseFecha },
   ];
 
-  const showToast = (message: string) => {
-    setToast(message);
-    setTimeout(() => setToast(null), 2000);
+  const showAviso = (message: string) => {
+    setAviso(message);
+    setTimeout(() => setAviso(null), 2000);
   };
 
   return (
     <ImageBackground
-      source={appBackground}
-      style={styles.InventoryItemDetailScreenRootHull}
+      source={appFondo}
+      style={styles.InventoryItemDetailScreenRaizCasco}
       resizeMode="cover"
     >
       <ScrollView
         contentContainerStyle={[
           styles.InventoryItemDetailScreenScrollContent,
           {
-            paddingTop: insets.top + adaptive.verticalScale(6),
-            paddingBottom: insets.bottom + adaptive.verticalScale(28),
+            paddingTop: insets.top + adaptive.verticalEscala(6),
+            paddingBottom: insets.bottom + adaptive.verticalEscala(28),
           },
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.InventoryItemDetailScreenHeaderRowCapstone}>
+        <View style={styles.InventoryItemDetailScreenHeaderRowDintel}>
           <Pressable
             onPress={onBack}
             hitSlop={12}
             style={styles.InventoryItemDetailScreenNavSide}
           >
-            <Text style={styles.InventoryItemDetailScreenNavLinkFlourish}>
+            <Text style={styles.InventoryItemDetailScreenNavLinkFiligrana}>
               ‹ Inventory
             </Text>
           </Pressable>
-          <Text style={styles.InventoryItemDetailScreenTitleFlourish}>
+          <Text style={styles.InventoryItemDetailScreenTitleFiligrana}>
             Item
           </Text>
           <Pressable
@@ -105,15 +105,15 @@ export function InventoryItemDetailScreen({
             hitSlop={12}
             style={styles.InventoryItemDetailScreenNavSideRight}
           >
-            <Text style={styles.InventoryItemDetailScreenNavLinkBoldFlourish}>
+            <Text style={styles.InventoryItemDetailScreenNavLinkBoldFiligrana}>
               Edit
             </Text>
           </Pressable>
         </View>
 
-        <View style={{ paddingHorizontal: adaptive.horizontalPadding }}>
-          <View style={styles.InventoryItemDetailScreenIdentityRowCapstone}>
-            <View style={styles.InventoryItemDetailScreenFlexPocket}>
+        <View style={{ paddingHorizontal: adaptive.horizontalRelleno }}>
+          <View style={styles.InventoryItemDetailScreenIdentityRowDintel}>
+            <View style={styles.InventoryItemDetailScreenFlexBolsillo}>
               <Text style={styles.InventoryItemDetailScreenItemName}>
                 {item.name}
               </Text>
@@ -146,7 +146,7 @@ export function InventoryItemDetailScreen({
 
           <View style={styles.InventoryItemDetailScreenActionRow}>
             <Pressable
-              onPress={() => setStockMode('add')}
+              onPress={() => setStockModo('add')}
               style={({ pressed }) => [
                 styles.InventoryItemDetailScreenAddStockBtn,
                 pressed && styles.InventoryItemDetailScreenPressedDim,
@@ -157,7 +157,7 @@ export function InventoryItemDetailScreen({
               </Text>
             </Pressable>
             <Pressable
-              onPress={() => setStockMode('use')}
+              onPress={() => setStockModo('use')}
               style={({ pressed }) => [
                 styles.InventoryItemDetailScreenUseStockBtn,
                 pressed && styles.InventoryItemDetailScreenPressedDim,
@@ -169,7 +169,7 @@ export function InventoryItemDetailScreen({
             </Pressable>
           </View>
 
-          <Text style={styles.InventoryItemDetailScreenSectionTitleFlourish}>
+          <Text style={styles.InventoryItemDetailScreenSectionTitleFiligrana}>
             Stock Movement
           </Text>
           <View style={styles.InventoryItemDetailScreenMovementList}>
@@ -182,7 +182,7 @@ export function InventoryItemDetailScreen({
                     styles.InventoryItemDetailScreenKvRowBorder,
                 ]}
               >
-                <View style={styles.InventoryItemDetailScreenFlexPocket}>
+                <View style={styles.InventoryItemDetailScreenFlexBolsillo}>
                   <Text style={styles.InventoryItemDetailScreenMovementTitle}>
                     {move.title}
                   </Text>
@@ -203,7 +203,7 @@ export function InventoryItemDetailScreen({
                       styles.InventoryItemDetailScreenAmountBalance,
                   ]}
                 >
-                  {move.amountLabel}
+                  {move.amountEtiqueta}
                 </Text>
               </View>
             ))}
@@ -222,7 +222,7 @@ export function InventoryItemDetailScreen({
 
           <Pressable
             onPress={() => {
-              removeInventoryItem(itemId);
+              removeInventoryArticulo(itemId);
               onDelete();
             }}
             style={styles.InventoryItemDetailScreenDeleteBtn}
@@ -237,42 +237,42 @@ export function InventoryItemDetailScreen({
       {toast ? (
         <View
           style={[
-            styles.InventoryItemDetailScreenToastHull,
-            { bottom: insets.bottom + adaptive.verticalScale(24) },
+            styles.InventoryItemDetailScreenToastCasco,
+            { bottom: insets.bottom + adaptive.verticalEscala(24) },
           ]}
         >
-          <Text style={styles.InventoryItemDetailScreenToastFlourish}>
+          <Text style={styles.InventoryItemDetailScreenToastFiligrana}>
             {toast}
           </Text>
         </View>
       ) : null}
 
       <AmountModal
-        visible={stockMode === 'add'}
+        visible={stockModo === 'add'}
         title="Add Stock"
         subtitle={item.name}
-        unitLabel={item.unit}
+        unitEtiqueta={item.unit}
         placeholder="e.g. 10"
-        confirmLabel="Add Stock"
-        onCancel={() => setStockMode(null)}
-        onConfirm={amount => {
-          addStock(itemId, amount);
-          setStockMode(null);
-          showToast(`Added ${amount} ${item.unit}`);
+        confirmEtiqueta="Add Stock"
+        onCancel={() => setStockModo(null)}
+        onConfirmar={amount => {
+          addExistencias(itemId, amount);
+          setStockModo(null);
+          showAviso(`Added ${amount} ${item.unit}`);
         }}
       />
       <AmountModal
-        visible={stockMode === 'use'}
+        visible={stockModo === 'use'}
         title="Use Stock"
-        subtitle={`Available: ${item.quantityLabel}`}
-        unitLabel={item.unit}
+        subtitle={`Available: ${item.quantityEtiqueta}`}
+        unitEtiqueta={item.unit}
         placeholder="e.g. 2"
-        confirmLabel="Use Stock"
-        onCancel={() => setStockMode(null)}
-        onConfirm={amount => {
-          const ok = useStock(itemId, amount);
-          setStockMode(null);
-          showToast(ok ? `Used ${amount} ${item.unit}` : 'Not enough stock');
+        confirmEtiqueta="Use Stock"
+        onCancel={() => setStockModo(null)}
+        onConfirmar={amount => {
+          const ok = useExistencias(itemId, amount);
+          setStockModo(null);
+          showAviso(ok ? `Used ${amount} ${item.unit}` : 'Not enough stock');
         }}
       />
     </ImageBackground>
@@ -288,10 +288,10 @@ function StatusChip({ status }: { status: StockStatus }) {
       : colors.danger;
   const bg =
     status === 'Available'
-      ? colors.successSoft
+      ? colors.successSuave
       : status === 'Low Stock'
-      ? colors.prioritySoft
-      : colors.dangerSoft;
+      ? colors.prioritySuave
+      : colors.dangerSuave;
 
   return (
     <View
@@ -310,18 +310,18 @@ function StatusChip({ status }: { status: StockStatus }) {
 }
 
 const styles = StyleSheet.create({
-  InventoryItemDetailScreenRootHull: {
+  InventoryItemDetailScreenRaizCasco: {
     backgroundColor: colors.background,
     flex: 1,
   },
-  InventoryItemDetailScreenMissingPocket: {
+  InventoryItemDetailScreenMissingBolsillo: {
     alignItems: 'center',
     backgroundColor: colors.background,
     flex: 1,
     justifyContent: 'center',
   },
 
-  InventoryItemDetailScreenMissingFlourish: {
+  InventoryItemDetailScreenMissingFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 18,
@@ -329,9 +329,9 @@ const styles = StyleSheet.create({
   },
 
   InventoryItemDetailScreenScrollContent: { flexGrow: 1 },
-  InventoryItemDetailScreenHeaderRowCapstone: {
+  InventoryItemDetailScreenHeaderRowDintel: {
     alignItems: 'center',
-    borderBottomColor: colors.borderSoft,
+    borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -344,33 +344,33 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     minWidth: 90,
   },
-  InventoryItemDetailScreenNavLinkFlourish: {
+  InventoryItemDetailScreenNavLinkFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
 
-  InventoryItemDetailScreenNavLinkBoldFlourish: {
+  InventoryItemDetailScreenNavLinkBoldFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 14,
     fontWeight: '700',
   },
 
-  InventoryItemDetailScreenTitleFlourish: {
+  InventoryItemDetailScreenTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
-  InventoryItemDetailScreenIdentityRowCapstone: {
+  InventoryItemDetailScreenIdentityRowDintel: {
     alignItems: 'flex-start',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 14,
   },
-  InventoryItemDetailScreenFlexPocket: { flex: 1 },
+  InventoryItemDetailScreenFlexBolsillo: { flex: 1 },
   InventoryItemDetailScreenItemName: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -379,7 +379,7 @@ const styles = StyleSheet.create({
   },
 
   InventoryItemDetailScreenItemCategory: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 14,
     marginTop: 4,
@@ -413,11 +413,11 @@ const styles = StyleSheet.create({
   },
 
   InventoryItemDetailScreenKvRowBorder: {
-    borderBottomColor: colors.borderSoft,
+    borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
   },
   InventoryItemDetailScreenKvLabel: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
   },
@@ -436,7 +436,7 @@ const styles = StyleSheet.create({
 
   InventoryItemDetailScreenAddStockBtn: {
     alignItems: 'center',
-    backgroundColor: colors.successButton,
+    backgroundColor: colors.successBoton,
     borderRadius: 14,
     flex: 1,
     height: 50,
@@ -450,8 +450,8 @@ const styles = StyleSheet.create({
   },
   InventoryItemDetailScreenUseStockBtn: {
     alignItems: 'center',
-    backgroundColor: colors.backButton,
-    borderColor: colors.backButtonBorder,
+    backgroundColor: colors.backBoton,
+    borderColor: colors.backButtonBorde,
     borderRadius: 14,
     borderWidth: 1,
     flex: 1,
@@ -467,7 +467,7 @@ const styles = StyleSheet.create({
   },
 
   InventoryItemDetailScreenPressedDim: { opacity: 0.88 },
-  InventoryItemDetailScreenSectionTitleFlourish: {
+  InventoryItemDetailScreenSectionTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 14,
@@ -500,7 +500,7 @@ const styles = StyleSheet.create({
   },
 
   InventoryItemDetailScreenMovementDate: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 11,
     marginTop: 2,
@@ -512,13 +512,13 @@ const styles = StyleSheet.create({
   },
 
   InventoryItemDetailScreenAmountIn: { color: colors.success },
-  InventoryItemDetailScreenAmountOut: { color: colors.expenseMoney },
+  InventoryItemDetailScreenAmountOut: { color: colors.expenseDinero },
 
   InventoryItemDetailScreenAmountBalance: { color: colors.cream },
 
   InventoryItemDetailScreenAlertCard: {
     backgroundColor: colors.dangerSoftStrong,
-    borderColor: colors.dangerBorder,
+    borderColor: colors.dangerBorde,
     borderRadius: 16,
     borderWidth: 1,
     marginBottom: 16,
@@ -533,7 +533,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   InventoryItemDetailScreenAlertText: {
-    color: colors.bodySoft,
+    color: colors.bodySuave,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     lineHeight: 18,
@@ -542,7 +542,7 @@ const styles = StyleSheet.create({
   InventoryItemDetailScreenDeleteBtn: {
     alignItems: 'center',
     backgroundColor: colors.dangerSoftStrong,
-    borderColor: colors.dangerBorder,
+    borderColor: colors.dangerBorde,
     borderRadius: 14,
     borderWidth: 1,
     height: 50,
@@ -555,7 +555,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '700',
   },
-  InventoryItemDetailScreenToastHull: {
+  InventoryItemDetailScreenToastCasco: {
     alignSelf: 'center',
     backgroundColor: colors.toastBg,
     borderColor: colors.border,
@@ -566,7 +566,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 
-  InventoryItemDetailScreenToastFlourish: {
+  InventoryItemDetailScreenToastFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 13,

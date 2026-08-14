@@ -26,11 +26,11 @@ function TodayHomeScreen({
 
   return (
     <TodayScreen
-      onOpenWeather={() => navigation.navigate('WeatherDetails')}
-      onAddTask={() => goTab('WorkTab', 'NewTask')}
-      onAddField={() => goTab('FieldsTab', 'NewField')}
-      onAddExpense={() => goTab('FarmTab', 'AddIncome')}
-      onStartWork={() => goTab('WorkTab')}
+      onOpenClima={() => navigation.navigate('WeatherDetails')}
+      onAddTarea={() => goTab('WorkTab', 'NewTask')}
+      onAddCampo={() => goTab('FieldsTab', 'NewField')}
+      onAddGasto={() => goTab('FarmTab', 'AddIncome')}
+      onStartTrabajo={() => goTab('WorkTab')}
     />
   );
 }

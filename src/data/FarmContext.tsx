@@ -17,7 +17,7 @@ import {
   type StockMovement,
   type StockStatus,
 } from './farm';
-import {storageKeys} from './storage';
+import {storageClaves} from './storage';
 
 export type InventoryItemDraft = {
   name: string;
@@ -25,7 +25,7 @@ export type InventoryItemDraft = {
   quantity: string;
   unit: string;
   minQty: string;
-  unitCost: string;
+  unitCosto: string;
   supplier: string;
 };
 
@@ -51,34 +51,34 @@ export type MaintenanceDraft = {
   hours: string;
   cost: string;
   provider: string;
-  nextHours: string;
+  nextHoras: string;
 };
 
 type FarmContextValue = {
   inventory: InventoryItem[];
   equipment: FarmEquipment[];
   transactions: FarmTransaction[];
-  isInventoryDemo: boolean;
-  isEquipmentDemo: boolean;
-  isTransactionsDemo: boolean;
-  getInventoryItem: (id: string) => InventoryItem | undefined;
-  getEquipment: (id: string) => FarmEquipment | undefined;
-  addInventoryItem: (draft: InventoryItemDraft) => InventoryItem;
-  addIncome: (draft: IncomeDraft) => FarmTransaction;
-  addExpense: (draft: ExpenseDraft) => FarmTransaction;
-  addStock: (itemId: string, amount: number) => void;
-  useStock: (itemId: string, amount: number) => boolean;
-  addOpHours: (equipmentId: string, hours: number) => void;
-  cycleEquipmentStatus: (equipmentId: string) => EquipmentStatus;
-  addEquipment: () => FarmEquipment;
-  addMaintenance: (
+  isInventoryMuestra: boolean;
+  isEquipmentMuestra: boolean;
+  isTransactionsMuestra: boolean;
+  getInventoryArticulo: (id: string) => InventoryItem | undefined;
+  getEquipo: (id: string) => FarmEquipment | undefined;
+  addInventoryArticulo: (draft: InventoryItemDraft) => InventoryItem;
+  addIngreso: (draft: IncomeDraft) => FarmTransaction;
+  addGasto: (draft: ExpenseDraft) => FarmTransaction;
+  addExistencias: (itemId: string, amount: number) => void;
+  useExistencias: (itemId: string, amount: number) => boolean;
+  addOpHoras: (equipmentId: string, hours: number) => void;
+  cycleEquipmentEstado: (equipmentId: string) => EquipmentStatus;
+  addEquipo: () => FarmEquipment;
+  addMantenimiento: (
     equipmentId: string,
     draft: MaintenanceDraft,
   ) => void;
-  removeInventoryItem: (itemId: string) => void;
-  removeEquipment: (equipmentId: string) => void;
-  findInventoryByName: (name: string) => InventoryItem | undefined;
-  findEquipmentByName: (name: string) => FarmEquipment | undefined;
+  removeInventoryArticulo: (itemId: string) => void;
+  removeEquipo: (equipmentId: string) => void;
+  findInventoryByNombre: (name: string) => InventoryItem | undefined;
+  findEquipmentByNombre: (name: string) => FarmEquipment | undefined;
 };
 
 const FarmContext = createContext<FarmContextValue | null>(null);
@@ -87,31 +87,31 @@ function money(value: number): string {
   return `$${Math.round(value).toLocaleString('en-US')}`;
 }
 
-function stockStatus(quantity: number, minQuantity: number): StockStatus {
+function stockEstado(quantity: number, minCantidad: number): StockStatus {
   if (quantity <= 0) {
     return 'Out of Stock';
   }
-  if (quantity <= minQuantity) {
+  if (quantity <= minCantidad) {
     return 'Low Stock';
   }
   return 'Available';
 }
 
-function todayShort(): string {
+function todayCorto(): string {
   return 'Jul 23';
 }
 
-function parseAmount(value: string): number {
+function parseMonto(value: string): number {
   const n = Number.parseFloat(value.replace(',', '.').trim());
   return Number.isFinite(n) ? n : 0;
 }
 
-function buildInventoryItem(draft: InventoryItemDraft): InventoryItem {
-  const quantity = Math.max(0, parseAmount(draft.quantity));
-  const minQuantity = Math.max(0, parseAmount(draft.minQty));
-  const unitCost = Math.max(0, parseAmount(draft.unitCost));
+function buildInventoryArticulo(draft: InventoryItemDraft): InventoryItem {
+  const quantity = Math.max(0, parseMonto(draft.quantity));
+  const minCantidad = Math.max(0, parseMonto(draft.minQty));
+  const unitCosto = Math.max(0, parseMonto(draft.unitCosto));
   const unit = draft.unit.trim() || 'units';
-  const status = stockStatus(quantity, minQuantity);
+  const status = stockEstado(quantity, minCantidad);
 
   return {
     id: `inv-${Date.now()}`,
@@ -119,17 +119,17 @@ function buildInventoryItem(draft: InventoryItemDraft): InventoryItem {
     category: draft.category.trim() || 'Other',
     status,
     quantity,
-    quantityLabel: `${quantity} ${unit}`,
-    minQuantity,
-    minLabel: `min ${minQuantity} ${unit}`,
+    quantityEtiqueta: `${quantity} ${unit}`,
+    minCantidad,
+    minEtiqueta: `min ${minCantidad} ${unit}`,
     unit,
-    unitCost,
-    unitCostLabel: `${money(unitCost)}/${unit.replace(/s$/, '')}`,
-    priceLabel: `${money(unitCost)}/${unit.replace(/s$/, '')}`,
-    totalValueLabel: money(quantity * unitCost),
+    unitCosto,
+    unitCostEtiqueta: `${money(unitCosto)}/${unit.replace(/s$/, '')}`,
+    priceEtiqueta: `${money(unitCosto)}/${unit.replace(/s$/, '')}`,
+    totalValueEtiqueta: money(quantity * unitCosto),
     supplier: draft.supplier.trim() || '—',
-    purchaseDate: 'Jul 23, 2026',
-    progress: Math.min(1, quantity / Math.max(minQuantity * 2.5, 1)),
+    purchaseFecha: 'Jul 23, 2026',
+    progress: Math.min(1, quantity / Math.max(minCantidad * 2.5, 1)),
     alert:
       status === 'Available'
         ? undefined
@@ -138,48 +138,48 @@ function buildInventoryItem(draft: InventoryItemDraft): InventoryItem {
       {
         id: `mv-${Date.now()}`,
         title: 'Stock Added',
-        date: todayShort(),
-        amountLabel: `+${quantity} ${unit}`,
+        date: todayCorto(),
+        amountEtiqueta: `+${quantity} ${unit}`,
         kind: 'in',
       },
       {
         id: `bal-${Date.now()}`,
         title: 'Current Balance',
         date: '',
-        amountLabel: `${quantity} ${unit}`,
+        amountEtiqueta: `${quantity} ${unit}`,
         kind: 'balance',
       },
     ],
   };
 }
 
-function buildIncomeTransaction(draft: IncomeDraft): FarmTransaction {
-  const amount = Math.max(0, parseAmount(draft.amount));
+function buildIncomeTransaccion(draft: IncomeDraft): FarmTransaction {
+  const amount = Math.max(0, parseMonto(draft.amount));
   const category = draft.category.trim() || 'Other';
   const field = draft.field.trim();
-  const date = draft.date.trim() || todayShort();
+  const date = draft.date.trim() || todayCorto();
   const parts = [category, field || null, date].filter(Boolean);
 
   return {
     id: `tx-${Date.now()}`,
     title: draft.title.trim(),
     subtitle: parts.join(' · '),
-    amountLabel: `+$${Math.round(amount).toLocaleString('en-US')}`,
+    amountEtiqueta: `+$${Math.round(amount).toLocaleString('en-US')}`,
     kind: 'income',
     icon: '💰',
   };
 }
 
-function withQuantity(item: InventoryItem, quantity: number): InventoryItem {
+function withCantidad(item: InventoryItem, quantity: number): InventoryItem {
   const nextQty = Math.max(0, quantity);
-  const status = stockStatus(nextQty, item.minQuantity);
+  const status = stockEstado(nextQty, item.minCantidad);
   return {
     ...item,
     quantity: nextQty,
-    quantityLabel: `${nextQty} ${item.unit}`,
+    quantityEtiqueta: `${nextQty} ${item.unit}`,
     status,
-    totalValueLabel: money(nextQty * item.unitCost),
-    progress: Math.min(1, nextQty / Math.max(item.minQuantity * 2.5, 1)),
+    totalValueEtiqueta: money(nextQty * item.unitCosto),
+    progress: Math.min(1, nextQty / Math.max(item.minCantidad * 2.5, 1)),
     alert:
       status === 'Available'
         ? undefined
@@ -188,105 +188,105 @@ function withQuantity(item: InventoryItem, quantity: number): InventoryItem {
   };
 }
 
-function withHours(item: FarmEquipment, hours: number): FarmEquipment {
-  const nextHours = Math.max(0, Math.round(hours));
-  const prevRemaining = item.hoursToService ?? item.serviceIntervalHrs;
-  const delta = nextHours - item.hours;
-  const hoursToService = Math.max(0, prevRemaining - Math.max(0, delta));
-  const serviceProgress = Math.min(
+function withHoras(item: FarmEquipment, hours: number): FarmEquipment {
+  const nextHoras = Math.max(0, Math.round(hours));
+  const prevRemaining = item.hoursToServicio ?? item.serviceIntervalHrs;
+  const delta = nextHoras - item.hours;
+  const hoursToServicio = Math.max(0, prevRemaining - Math.max(0, delta));
+  const serviceProgreso = Math.min(
     1,
-    1 - hoursToService / Math.max(item.serviceIntervalHrs, 1),
+    1 - hoursToServicio / Math.max(item.serviceIntervalHrs, 1),
   );
 
   return {
     ...item,
-    hours: nextHours,
-    hoursLabel: `${nextHours.toLocaleString('en-US')} hrs`,
-    hoursToService,
-    serviceProgress,
-    serviceAlert:
-      hoursToService <= 10
-        ? `Service due in ${hoursToService} hrs`
+    hours: nextHoras,
+    hoursEtiqueta: `${nextHoras.toLocaleString('en-US')} hrs`,
+    hoursToServicio,
+    serviceProgreso,
+    serviceAlerta:
+      hoursToServicio <= 10
+        ? `Service due in ${hoursToServicio} hrs`
         : undefined,
   };
 }
 
-function prependMovement(
+function prependMovimiento(
   item: InventoryItem,
   movement: StockMovement,
 ): InventoryItem {
-  const withoutBalance = item.movements.filter(m => m.kind !== 'balance');
+  const withoutSaldo = item.movements.filter(m => m.kind !== 'balance');
   const balance: StockMovement = {
     id: `bal-${Date.now()}`,
     title: 'Current Balance',
     date: '',
-    amountLabel: `${item.quantity} ${item.unit}`,
+    amountEtiqueta: `${item.quantity} ${item.unit}`,
     kind: 'balance',
   };
   return {
     ...item,
-    movements: [movement, ...withoutBalance, balance],
+    movements: [movement, ...withoutSaldo, balance],
   };
 }
 
 export function FarmProvider({children}: {children: React.ReactNode}) {
-  const [userInventory, setUserInventory] = usePersistedState<
+  const [userInventario, setUserInventario] = usePersistedState<
     InventoryItem[] | null
-  >(storageKeys.inventory, null);
-  const [userEquipment, setUserEquipment] = usePersistedState<
+  >(storageClaves.inventory, null);
+  const [userEquipo, setUserEquipo] = usePersistedState<
     FarmEquipment[] | null
-  >(storageKeys.equipment, null);
-  const [userTransactions, setUserTransactions] = usePersistedState<
+  >(storageClaves.equipment, null);
+  const [userTransacciones, setUserTransacciones] = usePersistedState<
     FarmTransaction[] | null
-  >(storageKeys.transactions, null);
+  >(storageClaves.transactions, null);
 
-  const isInventoryDemo = userInventory === null;
-  const isEquipmentDemo = userEquipment === null;
-  const isTransactionsDemo = userTransactions === null;
-  const inventory = userInventory ?? INVENTORY_ITEMS;
-  const equipment = userEquipment ?? EQUIPMENT;
-  const transactions = userTransactions ?? TRANSACTIONS;
+  const isInventoryMuestra = userInventario === null;
+  const isEquipmentMuestra = userEquipo === null;
+  const isTransactionsMuestra = userTransacciones === null;
+  const inventory = userInventario ?? INVENTORY_ITEMS;
+  const equipment = userEquipo ?? EQUIPMENT;
+  const transactions = userTransacciones ?? TRANSACTIONS;
 
-  const getInventoryItem = useCallback(
+  const getInventoryArticulo = useCallback(
     (id: string) => inventory.find(item => item.id === id),
     [inventory],
   );
 
-  const getEquipmentItem = useCallback(
+  const getEquipmentArticulo = useCallback(
     (id: string) => equipment.find(item => item.id === id),
     [equipment],
   );
 
-  const addInventoryItem = useCallback((draft: InventoryItemDraft) => {
-    const item = buildInventoryItem(draft);
-    setUserInventory(prev => (prev ? [item, ...prev] : [item]));
+  const addInventoryArticulo = useCallback((draft: InventoryItemDraft) => {
+    const item = buildInventoryArticulo(draft);
+    setUserInventario(prev => (prev ? [item, ...prev] : [item]));
     return item;
   }, []);
 
-  const addIncome = useCallback((draft: IncomeDraft) => {
-    const tx = buildIncomeTransaction(draft);
-    setUserTransactions(prev => (prev ? [tx, ...prev] : [tx]));
+  const addIngreso = useCallback((draft: IncomeDraft) => {
+    const tx = buildIncomeTransaccion(draft);
+    setUserTransacciones(prev => (prev ? [tx, ...prev] : [tx]));
     return tx;
-  }, [setUserTransactions]);
+  }, [setUserTransacciones]);
 
-  const addExpense = useCallback(
+  const addGasto = useCallback(
     (draft: ExpenseDraft) => {
-      const amount = Math.max(0, parseAmount(draft.amount));
+      const amount = Math.max(0, parseMonto(draft.amount));
       const tx: FarmTransaction = {
         id: `tx-${Date.now()}`,
         title: draft.title.trim(),
-        subtitle: draft.subtitle.trim() || todayShort(),
-        amountLabel: `−$${Math.round(amount).toLocaleString('en-US')}`,
+        subtitle: draft.subtitle.trim() || todayCorto(),
+        amountEtiqueta: `−$${Math.round(amount).toLocaleString('en-US')}`,
         kind: 'expense',
         icon: draft.icon ?? '🧾',
       };
-      setUserTransactions(prev => (prev ? [tx, ...prev] : [tx]));
+      setUserTransacciones(prev => (prev ? [tx, ...prev] : [tx]));
       return tx;
     },
-    [setUserTransactions],
+    [setUserTransacciones],
   );
 
-  const findInventoryByName = useCallback(
+  const findInventoryByNombre = useCallback(
     (name: string) => {
       const needle = name.trim().toLowerCase();
       if (!needle) {
@@ -301,7 +301,7 @@ export function FarmProvider({children}: {children: React.ReactNode}) {
     [inventory],
   );
 
-  const findEquipmentByName = useCallback(
+  const findEquipmentByNombre = useCallback(
     (name: string) => {
       const needle = name.trim().toLowerCase();
       if (!needle) {
@@ -316,51 +316,51 @@ export function FarmProvider({children}: {children: React.ReactNode}) {
     [equipment],
   );
 
-  const mutateInventory = useCallback(
+  const mutateInventario = useCallback(
     (updater: (items: InventoryItem[]) => InventoryItem[]) => {
-      setUserInventory(prev => updater(prev ?? INVENTORY_ITEMS));
+      setUserInventario(prev => updater(prev ?? INVENTORY_ITEMS));
     },
     [],
   );
 
-  const mutateEquipment = useCallback(
+  const mutateEquipo = useCallback(
     (updater: (items: FarmEquipment[]) => FarmEquipment[]) => {
-      setUserEquipment(prev => updater(prev ?? EQUIPMENT));
+      setUserEquipo(prev => updater(prev ?? EQUIPMENT));
     },
     [],
   );
 
-  const addStock = useCallback(
+  const addExistencias = useCallback(
     (itemId: string, amount: number) => {
       if (amount <= 0) {
         return;
       }
-      mutateInventory(items =>
+      mutateInventario(items =>
         items.map(item => {
           if (item.id !== itemId) {
             return item;
           }
-          const updated = withQuantity(item, item.quantity + amount);
-          return prependMovement(updated, {
+          const updated = withCantidad(item, item.quantity + amount);
+          return prependMovimiento(updated, {
             id: `mv-${Date.now()}`,
             title: 'Stock Added',
-            date: todayShort(),
-            amountLabel: `+${amount} ${item.unit}`,
+            date: todayCorto(),
+            amountEtiqueta: `+${amount} ${item.unit}`,
             kind: 'in',
           });
         }),
       );
     },
-    [mutateInventory],
+    [mutateInventario],
   );
 
-  const useStock = useCallback(
+  const useExistencias = useCallback(
     (itemId: string, amount: number) => {
       if (amount <= 0) {
         return false;
       }
       let applied = false;
-      mutateInventory(items => {
+      mutateInventario(items => {
         const current = items.find(item => item.id === itemId);
         if (!current || amount > current.quantity) {
           return items;
@@ -370,136 +370,136 @@ export function FarmProvider({children}: {children: React.ReactNode}) {
           if (item.id !== itemId) {
             return item;
           }
-          const updated = withQuantity(item, item.quantity - amount);
-          return prependMovement(updated, {
+          const updated = withCantidad(item, item.quantity - amount);
+          return prependMovimiento(updated, {
             id: `mv-${Date.now()}`,
             title: 'Stock Used',
-            date: todayShort(),
-            amountLabel: `−${amount} ${item.unit}`,
+            date: todayCorto(),
+            amountEtiqueta: `−${amount} ${item.unit}`,
             kind: 'out',
           });
         });
       });
       return applied;
     },
-    [mutateInventory],
+    [mutateInventario],
   );
 
-  const addOpHours = useCallback(
+  const addOpHoras = useCallback(
     (equipmentId: string, hours: number) => {
       if (hours <= 0) {
         return;
       }
-      mutateEquipment(items =>
+      mutateEquipo(items =>
         items.map(item =>
-          item.id === equipmentId ? withHours(item, item.hours + hours) : item,
+          item.id === equipmentId ? withHoras(item, item.hours + hours) : item,
         ),
       );
     },
-    [mutateEquipment],
+    [mutateEquipo],
   );
 
-  const cycleEquipmentStatus = useCallback(
+  const cycleEquipmentEstado = useCallback(
     (equipmentId: string) => {
       const order: EquipmentStatus[] = ['Available', 'In Use', 'Service'];
-      let nextStatus: EquipmentStatus = 'Available';
-      mutateEquipment(items =>
+      let nextEstado: EquipmentStatus = 'Available';
+      mutateEquipo(items =>
         items.map(item => {
           if (item.id !== equipmentId) {
             return item;
           }
           const index = order.indexOf(item.status);
-          nextStatus = order[(index + 1) % order.length] ?? 'Available';
-          return {...item, status: nextStatus};
+          nextEstado = order[(index + 1) % order.length] ?? 'Available';
+          return {...item, status: nextEstado};
         }),
       );
-      return nextStatus;
+      return nextEstado;
     },
-    [mutateEquipment],
+    [mutateEquipo],
   );
 
-  const addEquipment = useCallback(() => {
+  const addEquipo = useCallback(() => {
     const item: FarmEquipment = {
       id: `eq-${Date.now()}`,
       name: 'New Machine',
       type: 'Equipment',
-      modelYear: 'Model 2026',
+      modelAnio: 'Model 2026',
       icon: '🚜',
       status: 'Available',
       hours: 0,
-      hoursLabel: '0 hrs',
+      hoursEtiqueta: '0 hrs',
       serviceIntervalHrs: 250,
-      hoursToService: 250,
-      fuelType: 'Diesel',
-      maintCostLabel: '$0',
-      serviceProgress: 0,
+      hoursToServicio: 250,
+      fuelTipo: 'Diesel',
+      maintCostEtiqueta: '$0',
+      serviceProgreso: 0,
     };
-    setUserEquipment(prev => (prev ? [item, ...prev] : [item]));
+    setUserEquipo(prev => (prev ? [item, ...prev] : [item]));
     return item;
   }, []);
 
-  const removeInventoryItem = useCallback((itemId: string) => {
-    setUserInventory(prev => {
+  const removeInventoryArticulo = useCallback((itemId: string) => {
+    setUserInventario(prev => {
       const base = prev ?? INVENTORY_ITEMS;
       return base.filter(item => item.id !== itemId);
     });
   }, []);
 
-  const removeEquipment = useCallback((equipmentId: string) => {
-    setUserEquipment(prev => {
+  const removeEquipo = useCallback((equipmentId: string) => {
+    setUserEquipo(prev => {
       const base = prev ?? EQUIPMENT;
       return base.filter(item => item.id !== equipmentId);
     });
-  }, [setUserEquipment]);
+  }, [setUserEquipo]);
 
-  const addMaintenance = useCallback(
+  const addMantenimiento = useCallback(
     (equipmentId: string, draft: MaintenanceDraft) => {
-      const hours = Math.max(0, Math.round(parseAmount(draft.hours)));
-      const nextHours = Math.max(0, Math.round(parseAmount(draft.nextHours)));
-      const cost = Math.max(0, parseAmount(draft.cost));
+      const hours = Math.max(0, Math.round(parseMonto(draft.hours)));
+      const nextHoras = Math.max(0, Math.round(parseMonto(draft.nextHoras)));
+      const cost = Math.max(0, parseMonto(draft.cost));
 
-      mutateEquipment(items =>
+      mutateEquipo(items =>
         items.map(item => {
           if (item.id !== equipmentId) {
             return item;
           }
-          const currentMaint = parseAmount(
-            item.maintCostLabel.replace(/[$,]/g, ''),
+          const currentMaint = parseMonto(
+            item.maintCostEtiqueta.replace(/[$,]/g, ''),
           );
-          const hoursToService =
-            nextHours > hours
-              ? nextHours - hours
+          const hoursToServicio =
+            nextHoras > hours
+              ? nextHoras - hours
               : item.serviceIntervalHrs;
           return {
             ...item,
             hours: hours || item.hours,
-            hoursLabel: `${(hours || item.hours).toLocaleString('en-US')} hrs`,
-            hoursToService,
-            serviceProgress: Math.min(
+            hoursEtiqueta: `${(hours || item.hours).toLocaleString('en-US')} hrs`,
+            hoursToServicio,
+            serviceProgreso: Math.min(
               1,
-              1 - hoursToService / Math.max(item.serviceIntervalHrs, 1),
+              1 - hoursToServicio / Math.max(item.serviceIntervalHrs, 1),
             ),
-            serviceAlert: undefined,
+            serviceAlerta: undefined,
             status: 'Available' as EquipmentStatus,
-            maintCostLabel: money(currentMaint + cost),
+            maintCostEtiqueta: money(currentMaint + cost),
           };
         }),
       );
 
       if (cost > 0) {
-        const typeLabel = draft.type.trim() || 'Maintenance';
+        const typeEtiqueta = draft.type.trim() || 'Maintenance';
         const provider = draft.provider.trim();
-        addExpense({
-          title: typeLabel,
+        addGasto({
+          title: typeEtiqueta,
           amount: String(cost),
-          subtitle: [provider || null, draft.date.trim() || todayShort()]
+          subtitle: [provider || null, draft.date.trim() || todayCorto()]
             .filter(Boolean)
             .join(' · '),
           icon: '🔧',
         });
       }
     },
-    [addExpense, mutateEquipment],
+    [addGasto, mutateEquipo],
   );
 
   const value = useMemo(
@@ -507,57 +507,57 @@ export function FarmProvider({children}: {children: React.ReactNode}) {
       inventory,
       equipment,
       transactions,
-      isInventoryDemo,
-      isEquipmentDemo,
-      isTransactionsDemo,
-      getInventoryItem,
-      getEquipment: getEquipmentItem,
-      addInventoryItem,
-      addIncome,
-      addExpense,
-      addStock,
-      useStock,
-      addOpHours,
-      cycleEquipmentStatus,
-      addEquipment,
-      addMaintenance,
-      removeInventoryItem,
-      removeEquipment,
-      findInventoryByName,
-      findEquipmentByName,
+      isInventoryMuestra,
+      isEquipmentMuestra,
+      isTransactionsMuestra,
+      getInventoryArticulo,
+      getEquipo: getEquipmentArticulo,
+      addInventoryArticulo,
+      addIngreso,
+      addGasto,
+      addExistencias,
+      useExistencias,
+      addOpHoras,
+      cycleEquipmentEstado,
+      addEquipo,
+      addMantenimiento,
+      removeInventoryArticulo,
+      removeEquipo,
+      findInventoryByNombre,
+      findEquipmentByNombre,
     }),
     [
       inventory,
       equipment,
       transactions,
-      isInventoryDemo,
-      isEquipmentDemo,
-      isTransactionsDemo,
-      getInventoryItem,
-      getEquipmentItem,
-      addInventoryItem,
-      addIncome,
-      addExpense,
-      addStock,
-      useStock,
-      addOpHours,
-      cycleEquipmentStatus,
-      addEquipment,
-      addMaintenance,
-      removeInventoryItem,
-      removeEquipment,
-      findInventoryByName,
-      findEquipmentByName,
+      isInventoryMuestra,
+      isEquipmentMuestra,
+      isTransactionsMuestra,
+      getInventoryArticulo,
+      getEquipmentArticulo,
+      addInventoryArticulo,
+      addIngreso,
+      addGasto,
+      addExistencias,
+      useExistencias,
+      addOpHoras,
+      cycleEquipmentEstado,
+      addEquipo,
+      addMantenimiento,
+      removeInventoryArticulo,
+      removeEquipo,
+      findInventoryByNombre,
+      findEquipmentByNombre,
     ],
   );
 
   return <FarmContext.Provider value={value}>{children}</FarmContext.Provider>;
 }
 
-export function useFarm() {
+export function useGranja() {
   const context = useContext(FarmContext);
   if (!context) {
-    throw new Error('useFarm must be used within FarmProvider');
+    throw new Error('useGranja must be used within FarmProvider');
   }
   return context;
 }

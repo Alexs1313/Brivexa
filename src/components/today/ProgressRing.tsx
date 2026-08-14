@@ -46,7 +46,7 @@ export function ProgressRing({
           width: thickness,
           height: length,
           borderRadius: thickness / 2,
-          backgroundColor: index < filled ? ringColor : colors.progressTrack,
+          backgroundColor: index < filled ? ringColor : colors.progressPista,
           transform: [{ rotate: `${deg}deg` }],
         },
       };
@@ -55,7 +55,7 @@ export function ProgressRing({
 
   return (
     <View
-      style={[styles.ProgressRingRootHull, { width: size, height: size }]}
+      style={[styles.ProgressRingRaizCasco, { width: size, height: size }]}
     >
       {segments.map(segment => (
         <View key={segment.key} style={segment.style} />
@@ -81,7 +81,7 @@ export function ProgressRing({
 }
 
 const styles = StyleSheet.create({
-  ProgressRingRootHull: {
+  ProgressRingRaizCasco: {
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
   },
   ProgressRingCenterMeta: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 10,
     marginTop: 1,

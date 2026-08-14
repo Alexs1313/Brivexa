@@ -15,12 +15,12 @@ import { DropdownField } from '../components/forms/DropdownField';
 
 import { colors, fonts, radius } from '../constants/theme';
 
-import { appBackground } from '../data/assets';
+import { appFondo } from '../data/assets';
 import type { FieldDraft } from '../data/FieldsContext';
 
-import { useFields } from '../data/FieldsContext';
-import { FIELD_STATUS_OPTIONS } from '../data/formOptions';
-import { useAdaptive } from '../hooks/useAdaptive';
+import { useCampos } from '../data/FieldsContext';
+import { FIELD_STATUS_OPCIONES } from '../data/formOpciones';
+import { useAdaptativo } from '../hooks/useAdaptativo';
 
 import type { FieldStatus } from '../data/fields';
 
@@ -28,35 +28,35 @@ type EditFieldScreenProps = {
   mode: 'new' | 'edit';
   fieldId?: string | null;
   onCancel: () => void;
-  onSave: (draft: FieldDraft) => void;
+  onGuardar: (draft: FieldDraft) => void;
 };
 
 export function EditFieldScreen({
   mode,
   fieldId,
   onCancel,
-  onSave,
+  onGuardar,
 }: EditFieldScreenProps) {
   const insets = useSafeAreaInsets();
-  const adaptive = useAdaptive();
-  const { getField } = useFields();
-  const existing = fieldId ? getField(fieldId) : undefined;
+  const adaptive = useAdaptativo();
+  const { getCampo } = useCampos();
+  const existing = fieldId ? getCampo(fieldId) : undefined;
 
-  const [name, setName] = useState(existing?.name ?? '');
-  const [area, setArea] = useState(existing ? String(existing.areaHa) : '');
+  const [name, setNombre] = useState(existing?.name ?? '');
+  const [area, setSuperficie] = useState(existing ? String(existing.areaHa) : '');
   const [crop, setCrop] = useState(existing?.crop ?? '');
-  const [variety, setVariety] = useState(existing?.variety ?? '');
-  const [status, setStatus] = useState<FieldStatus>(
+  const [variety, setVariedad] = useState(existing?.variety ?? '');
+  const [status, setEstado] = useState<FieldStatus>(
     existing?.status ?? 'Planned',
   );
-  const [plantingDate, setPlantingDate] = useState(
-    existing?.plantingDate ?? '',
+  const [plantingFecha, setPlantingFecha] = useState(
+    existing?.plantingFecha ?? '',
   );
 
   const title = mode === 'new' ? 'New Field' : 'Edit Field';
-  const saveLabel = mode === 'new' ? 'Save Field' : 'Save Changes';
+  const saveEtiqueta = mode === 'new' ? 'Save Field' : 'Save Changes';
 
-  const canSave = useMemo(
+  const canGuardar = useMemo(
     () =>
       name.trim().length > 0 &&
       area.trim().length > 0 &&
@@ -66,46 +66,46 @@ export function EditFieldScreen({
 
   return (
     <ImageBackground
-      source={appBackground}
-      style={styles.EditFieldScreenRootHull}
+      source={appFondo}
+      style={styles.EditFieldScreenRaizCasco}
       resizeMode="cover"
     >
       <ScrollView
         contentContainerStyle={[
           styles.EditFieldScreenScrollContent,
           {
-            paddingTop: insets.top + adaptive.verticalScale(6),
-            paddingBottom: insets.bottom + adaptive.verticalScale(28),
+            paddingTop: insets.top + adaptive.verticalEscala(6),
+            paddingBottom: insets.bottom + adaptive.verticalEscala(28),
           },
         ]}
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.EditFieldScreenHeaderRowCapstone}>
+        <View style={styles.EditFieldScreenHeaderRowDintel}>
           <Pressable
             onPress={onCancel}
             hitSlop={12}
             style={styles.EditFieldScreenNavSide}
           >
-            <Text style={styles.EditFieldScreenNavLinkFlourish}>‹ Cancel</Text>
+            <Text style={styles.EditFieldScreenNavLinkFiligrana}>‹ Cancel</Text>
           </Pressable>
-          <Text style={styles.EditFieldScreenNavTitleFlourish}>{title}</Text>
+          <Text style={styles.EditFieldScreenNavTitleFiligrana}>{title}</Text>
           <View style={styles.EditFieldScreenNavSide} />
         </View>
 
-        <View style={{ paddingHorizontal: adaptive.horizontalPadding }}>
+        <View style={{ paddingHorizontal: adaptive.horizontalRelleno }}>
           <FieldInput
             label="Field Name"
             required
             value={name}
-            onChangeText={setName}
+            onChangeText={setNombre}
             placeholder="e.g. West Field"
           />
           <FieldInput
             label="Area (ha)"
             required
             value={area}
-            onChangeText={setArea}
+            onChangeText={setSuperficie}
             placeholder="0.0"
             keyboardType="decimal-pad"
           />
@@ -119,49 +119,49 @@ export function EditFieldScreen({
           <FieldInput
             label="Variety"
             value={variety}
-            onChangeText={setVariety}
+            onChangeText={setVariedad}
             placeholder="e.g. Pioneer P9241"
           />
           <DropdownField
             label="Status"
             value={status}
-            onChange={value => setStatus(value as FieldStatus)}
+            onChange={value => setEstado(value as FieldStatus)}
             placeholder="e.g. Planned"
-            options={FIELD_STATUS_OPTIONS}
+            options={FIELD_STATUS_OPCIONES}
           />
           <FieldInput
             label="Planting Date"
-            value={plantingDate}
-            onChangeText={setPlantingDate}
+            value={plantingFecha}
+            onChangeText={setPlantingFecha}
             placeholder="e.g. Apr 18, 2026"
           />
 
           <PrimaryButton
-            label={saveLabel}
+            label={saveEtiqueta}
             onPress={() => {
-              if (!canSave) {
+              if (!canGuardar) {
                 return;
               }
-              onSave({
+              onGuardar({
                 name,
                 area,
                 crop,
                 variety,
                 status,
-                plantingDate,
+                plantingFecha,
               });
             }}
             fullWidth
             style={[
-              styles.EditFieldScreenSavePlinth,
-              !canSave && styles.EditFieldScreenSavePlinthDisabled,
+              styles.EditFieldScreenSavePlinto,
+              !canGuardar && styles.EditFieldScreenSavePlintoDisabled,
             ]}
           />
           <Pressable
             onPress={onCancel}
-            style={styles.EditFieldScreenCancelPlinth}
+            style={styles.EditFieldScreenCancelPlinto}
           >
-            <Text style={styles.EditFieldScreenCancelFlourish}>Cancel</Text>
+            <Text style={styles.EditFieldScreenCancelFiligrana}>Cancel</Text>
           </Pressable>
         </View>
       </ScrollView>
@@ -186,18 +186,18 @@ function FieldInput({
 }) {
   return (
     <View style={styles.EditFieldScreenFieldGroup}>
-      <Text style={styles.EditFieldScreenFieldLabelFlourish}>
+      <Text style={styles.EditFieldScreenFieldLabelFiligrana}>
         {label}
         {required ? (
-          <Text style={styles.EditFieldScreenRequiredEmblem}> *</Text>
+          <Text style={styles.EditFieldScreenRequiredEmblema}> *</Text>
         ) : null}
       </Text>
-      <View style={styles.EditFieldScreenFieldInputHull}>
+      <View style={styles.EditFieldScreenFieldInputCasco}>
         <TextInput
           value={value}
           onChangeText={onChangeText}
           placeholder={placeholder}
-          placeholderTextColor={colors.tabInactive}
+          placeholderTextColor={colors.tabInactivo}
           keyboardType={keyboardType}
           style={styles.EditFieldScreenFieldInput}
         />
@@ -207,13 +207,13 @@ function FieldInput({
 }
 
 const styles = StyleSheet.create({
-  EditFieldScreenRootHull: {
+  EditFieldScreenRaizCasco: {
     backgroundColor: colors.background,
     flex: 1,
   },
-  EditFieldScreenHeaderRowCapstone: {
+  EditFieldScreenHeaderRowDintel: {
     alignItems: 'center',
-    borderBottomColor: colors.borderSoft,
+    borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -226,12 +226,12 @@ const styles = StyleSheet.create({
     minWidth: 72,
   },
 
-  EditFieldScreenNavLinkFlourish: {
+  EditFieldScreenNavLinkFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
-  EditFieldScreenNavTitleFlourish: {
+  EditFieldScreenNavTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
@@ -244,17 +244,17 @@ const styles = StyleSheet.create({
     marginBottom: 14,
   },
 
-  EditFieldScreenFieldLabelFlourish: {
-    color: colors.bodyMuted,
+  EditFieldScreenFieldLabelFiligrana: {
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginBottom: 8,
   },
 
-  EditFieldScreenRequiredEmblem: {
+  EditFieldScreenRequiredEmblema: {
     color: colors.danger,
   },
-  EditFieldScreenFieldInputHull: {
+  EditFieldScreenFieldInputCasco: {
     alignItems: 'center',
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -272,15 +272,15 @@ const styles = StyleSheet.create({
     fontSize: 15,
     padding: 0,
   },
-  EditFieldScreenSavePlinth: {
+  EditFieldScreenSavePlinto: {
     marginTop: 10,
   },
 
-  EditFieldScreenSavePlinthDisabled: {
+  EditFieldScreenSavePlintoDisabled: {
     opacity: 0.55,
   },
 
-  EditFieldScreenCancelPlinth: {
+  EditFieldScreenCancelPlinto: {
     alignItems: 'center',
     borderColor: colors.border,
     borderRadius: 14,
@@ -290,8 +290,8 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
 
-  EditFieldScreenCancelFlourish: {
-    color: colors.bodyMuted,
+  EditFieldScreenCancelFiligrana: {
+    color: colors.bodyApagado,
     fontFamily: fonts.sansBold,
     fontSize: 15,
     fontWeight: '700',

@@ -1,8 +1,8 @@
 import {
-  addDays,
-  appToday,
-  formatShortDate,
-  toDateKey,
+  addDias,
+  appHoy,
+  formatShortFecha,
+  toDateClave,
 } from './dates';
 
 export type WorkTaskStatus =
@@ -16,10 +16,10 @@ export type WorkPriority = 'Normal' | 'High';
 export type WorkTask = {
   id: string;
   title: string;
-  workType: string;
+  workTipo: string;
   field: string;
   date: string;
-  dateKey: string; // YYYY-MM-DD for calendar
+  dateClave: string; // YYYY-MM-DD for calendar
   time: string;
   worker: string;
   duration: string;
@@ -31,45 +31,45 @@ export type WorkTask = {
   notes?: string;
 };
 
-export const WORK_FILTERS = ['All', 'Today', 'Upcoming', 'Overdue'] as const;
+export const WORK_FILTROS = ['All', 'Today', 'Upcoming', 'Overdue'] as const;
 
-function demoTask(
-  partial: Omit<WorkTask, 'date' | 'dateKey'> & {dayOffset: number},
+function demoTarea(
+  partial: Omit<WorkTask, 'date' | 'dateClave'> & {dayDesfase: number},
 ): WorkTask {
-  const {dayOffset, ...rest} = partial;
-  const date = addDays(appToday(), dayOffset);
+  const {dayDesfase, ...rest} = partial;
+  const date = addDias(appHoy(), dayDesfase);
   return {
     ...rest,
-    date: formatShortDate(date),
-    dateKey: toDateKey(date),
+    date: formatShortFecha(date),
+    dateClave: toDateClave(date),
   };
 }
 
 /** Demo tasks anchored to nearby dates relative to today */
-export const WORK_TASKS: WorkTask[] = [
-  demoTask({
+export const WORK_TAREAS: WorkTask[] = [
+  demoTarea({
     id: 'plant-corn',
     title: 'Plant Corn',
-    workType: 'Planting',
+    workTipo: 'Planting',
     field: 'North Field',
-    dayOffset: 0,
+    dayDesfase: 0,
     time: '07:30 AM',
     worker: 'Daniel Reed',
     duration: '3h',
     priority: 'Normal',
     status: 'in_progress',
     equipment: 'Tractor T-150',
-    materials: 'Corn Seed · 340 kg',
+    materials: 'Corn Grain · 340 kg',
     cost: '$320',
     notes:
-      'Check seed depth calibration before starting. Confirm moisture levels are within target range.',
+      'Check planting depth calibration before starting. Confirm moisture levels are within target range.',
   }),
-  demoTask({
+  demoTarea({
     id: 'soil-prep',
     title: 'Soil Preparation',
-    workType: 'Soil Preparation',
+    workTipo: 'Soil Preparation',
     field: 'South Field',
-    dayOffset: -1,
+    dayDesfase: -1,
     time: '08:00 AM',
     worker: 'Chris Miller',
     duration: '4h',
@@ -79,12 +79,12 @@ export const WORK_TASKS: WorkTask[] = [
     materials: 'Glyphosate 360 · 30 L',
     cost: '$280',
   }),
-  demoTask({
+  demoTarea({
     id: 'apply-fertilizer',
     title: 'Apply Fertilizer',
-    workType: 'Fertilizing',
+    workTipo: 'Fertilizing',
     field: 'River Plot',
-    dayOffset: 0,
+    dayDesfase: 0,
     time: '11:00 AM',
     worker: 'Mark Lewis',
     duration: '2h',
@@ -94,38 +94,38 @@ export const WORK_TASKS: WorkTask[] = [
     materials: 'NPK · 240 kg',
     cost: '$320',
     notes:
-      'Check seed depth calibration before starting. Confirm moisture levels are within target range.',
+      'Check planting depth calibration before starting. Confirm moisture levels are within target range.',
   }),
-  demoTask({
+  demoTarea({
     id: 'spray-sunflower',
     title: 'Spray Sunflower',
-    workType: 'Crop Protection',
+    workTipo: 'Crop Protection',
     field: 'East Field',
-    dayOffset: 3,
+    dayDesfase: 3,
     time: '09:00 AM',
     worker: 'Emily Stone',
     duration: '3h',
     priority: 'Normal',
     status: 'planned',
   }),
-  demoTask({
+  demoTarea({
     id: 'harvest-wheat',
     title: 'Harvest Wheat',
-    workType: 'Harvesting',
+    workTipo: 'Harvesting',
     field: 'River Plot',
-    dayOffset: 6,
+    dayDesfase: 6,
     time: '06:30 AM',
     worker: 'Daniel Reed',
     duration: '6h',
     priority: 'High',
     status: 'planned',
   }),
-  demoTask({
+  demoTarea({
     id: 'inspect-east',
     title: 'Field Inspection',
-    workType: 'Inspection',
+    workTipo: 'Inspection',
     field: 'East Field',
-    dayOffset: 1,
+    dayDesfase: 1,
     time: '10:00 AM',
     worker: 'Emily Stone',
     duration: '1h',
@@ -134,11 +134,11 @@ export const WORK_TASKS: WorkTask[] = [
   }),
 ];
 
-export function getWorkTask(id: string): WorkTask | undefined {
-  return WORK_TASKS.find(task => task.id === id);
+export function getWorkTarea(id: string): WorkTask | undefined {
+  return WORK_TAREAS.find(task => task.id === id);
 }
 
-export function workStats(tasks: WorkTask[]) {
+export function workEstadisticas(tasks: WorkTask[]) {
   return {
     planned: tasks.filter(t => t.status === 'planned').length,
     active: tasks.filter(t => t.status === 'in_progress').length,
@@ -147,7 +147,7 @@ export function workStats(tasks: WorkTask[]) {
   };
 }
 
-export function statusLabel(status: WorkTaskStatus) {
+export function statusEtiqueta(status: WorkTaskStatus) {
   if (status === 'in_progress') {
     return 'In Progress';
   }
@@ -163,19 +163,19 @@ export function statusLabel(status: WorkTaskStatus) {
 export type CalendarDotTone = 'overdue' | 'gold' | 'info';
 
 /** Build calendar day markers from tasks in the given month */
-export function calendarDotsForMonth(
+export function calendarDotsForMes(
   tasks: WorkTask[],
   year: number,
-  monthIndex: number,
+  monthIndice: number,
 ): Record<number, CalendarDotTone> {
-  const prefix = `${year}-${String(monthIndex + 1).padStart(2, '0')}-`;
+  const prefix = `${year}-${String(monthIndice + 1).padStart(2, '0')}-`;
   const dots: Record<number, CalendarDotTone> = {};
 
   for (const task of tasks) {
-    if (!task.dateKey.startsWith(prefix)) {
+    if (!task.dateClave.startsWith(prefix)) {
       continue;
     }
-    const day = Number(task.dateKey.slice(-2));
+    const day = Number(task.dateClave.slice(-2));
     const tone: CalendarDotTone =
       task.status === 'overdue'
         ? 'overdue'

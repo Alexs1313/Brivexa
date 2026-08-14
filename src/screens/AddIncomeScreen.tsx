@@ -13,78 +13,78 @@ import { PrimaryButton } from '../components/buttons/PrimaryButton';
 import { DropdownField } from '../components/forms/DropdownField';
 import { colors, fonts } from '../constants/theme';
 
-import { appBackground } from '../data/assets';
-import { INCOME_CATEGORIES } from '../data/farm';
+import { appFondo } from '../data/assets';
+import { INCOME_CATEGORIAS } from '../data/farm';
 import type { IncomeDraft } from '../data/FarmContext';
-import { useFields } from '../data/FieldsContext';
+import { useCampos } from '../data/FieldsContext';
 
-import { useAdaptive } from '../hooks/useAdaptive';
+import { useAdaptativo } from '../hooks/useAdaptativo';
 import { FormField } from './NewItemScreen';
 
 type AddIncomeScreenProps = {
   onCancel: () => void;
-  onSave: (draft: IncomeDraft) => void;
+  onGuardar: (draft: IncomeDraft) => void;
 };
 
-export function AddIncomeScreen({ onCancel, onSave }: AddIncomeScreenProps) {
+export function AddIncomeScreen({ onCancel, onGuardar }: AddIncomeScreenProps) {
   const insets = useSafeAreaInsets();
-  const adaptive = useAdaptive();
-  const { fields } = useFields();
-  const fieldOptions = useMemo(() => fields.map(f => f.name), [fields]);
-  const [title, setTitle] = useState('');
-  const [amount, setAmount] = useState('');
-  const [category, setCategory] = useState('');
+  const adaptive = useAdaptativo();
+  const { fields } = useCampos();
+  const fieldOpciones = useMemo(() => fields.map(f => f.name), [fields]);
+  const [title, setTitulo] = useState('');
+  const [amount, setMonto] = useState('');
+  const [category, setCategoria] = useState('');
   const [date, setDate] = useState('');
-  const [field, setField] = useState('');
+  const [field, setCampo] = useState('');
   const [buyer, setBuyer] = useState('');
 
-  const canSave = useMemo(
+  const canGuardar = useMemo(
     () => title.trim().length > 0 && amount.trim().length > 0,
     [amount, title],
   );
 
   return (
     <ImageBackground
-      source={appBackground}
-      style={styles.AddIncomeScreenRootHull}
+      source={appFondo}
+      style={styles.AddIncomeScreenRaizCasco}
       resizeMode="cover"
     >
       <ScrollView
         contentContainerStyle={[
           styles.AddIncomeScreenScrollContent,
           {
-            paddingTop: insets.top + adaptive.verticalScale(6),
-            paddingBottom: insets.bottom + adaptive.verticalScale(28),
+            paddingTop: insets.top + adaptive.verticalEscala(6),
+            paddingBottom: insets.bottom + adaptive.verticalEscala(28),
           },
         ]}
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.AddIncomeScreenHeaderRowCapstone}>
+        <View style={styles.AddIncomeScreenHeaderRowDintel}>
           <Pressable
             onPress={onCancel}
             hitSlop={12}
             style={styles.AddIncomeScreenNavSide}
           >
-            <Text style={styles.AddIncomeScreenNavLinkFlourish}>‹ Cancel</Text>
+            <Text style={styles.AddIncomeScreenNavLinkFiligrana}>‹ Cancel</Text>
           </Pressable>
-          <Text style={styles.AddIncomeScreenTitleFlourish}>Add Income</Text>
+          <Text style={styles.AddIncomeScreenTitleFiligrana}>Add Income</Text>
           <View style={styles.AddIncomeScreenNavSide} />
         </View>
 
-        <View style={{ paddingHorizontal: adaptive.horizontalPadding }}>
+        <View style={{ paddingHorizontal: adaptive.horizontalRelleno }}>
           <FormField
             label="Income Title"
             required
             value={title}
-            onChangeText={setTitle}
+            onChangeText={setTitulo}
             placeholder="e.g. Winter Wheat Sale"
           />
           <FormField
             label="Amount ($)"
             required
             value={amount}
-            onChangeText={setAmount}
+            onChangeText={setMonto}
             placeholder="e.g. 41200"
             keyboardType="decimal-pad"
           />
@@ -92,9 +92,9 @@ export function AddIncomeScreen({ onCancel, onSave }: AddIncomeScreenProps) {
             label="Category"
             required
             value={category}
-            onChange={setCategory}
-            placeholder={`e.g. ${INCOME_CATEGORIES[0]}`}
-            options={INCOME_CATEGORIES}
+            onChange={setCategoria}
+            placeholder={`e.g. ${INCOME_CATEGORIAS[0]}`}
+            options={INCOME_CATEGORIAS}
           />
           <FormField
             label="Date"
@@ -105,11 +105,11 @@ export function AddIncomeScreen({ onCancel, onSave }: AddIncomeScreenProps) {
           <DropdownField
             label="Field"
             value={field}
-            onChange={setField}
+            onChange={setCampo}
             placeholder="e.g. River Plot"
             options={
-              fieldOptions.length > 0
-                ? fieldOptions
+              fieldOpciones.length > 0
+                ? fieldOpciones
                 : ['River Plot', 'North Field']
             }
           />
@@ -123,13 +123,13 @@ export function AddIncomeScreen({ onCancel, onSave }: AddIncomeScreenProps) {
           <PrimaryButton
             label="Save Income"
             onPress={() => {
-              if (!canSave) {
+              if (!canGuardar) {
                 return;
               }
-              onSave({
+              onGuardar({
                 title,
                 amount,
-                category: category || INCOME_CATEGORIES[0],
+                category: category || INCOME_CATEGORIAS[0],
                 date,
                 field,
                 buyer,
@@ -137,8 +137,8 @@ export function AddIncomeScreen({ onCancel, onSave }: AddIncomeScreenProps) {
             }}
             fullWidth
             style={[
-              styles.AddIncomeScreenSavePlinth,
-              !canSave && styles.AddIncomeScreenSavePlinthDisabled,
+              styles.AddIncomeScreenSavePlinto,
+              !canGuardar && styles.AddIncomeScreenSavePlintoDisabled,
             ]}
           />
         </View>
@@ -148,7 +148,7 @@ export function AddIncomeScreen({ onCancel, onSave }: AddIncomeScreenProps) {
 }
 
 const styles = StyleSheet.create({
-  AddIncomeScreenRootHull: {
+  AddIncomeScreenRaizCasco: {
     backgroundColor: colors.background,
     flex: 1,
   },
@@ -156,9 +156,9 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 
-  AddIncomeScreenHeaderRowCapstone: {
+  AddIncomeScreenHeaderRowDintel: {
     alignItems: 'center',
-    borderBottomColor: colors.borderSoft,
+    borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -170,23 +170,23 @@ const styles = StyleSheet.create({
   AddIncomeScreenNavSide: {
     minWidth: 72,
   },
-  AddIncomeScreenNavLinkFlourish: {
+  AddIncomeScreenNavLinkFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
 
-  AddIncomeScreenTitleFlourish: {
+  AddIncomeScreenTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
-  AddIncomeScreenSavePlinth: {
+  AddIncomeScreenSavePlinto: {
     marginTop: 10,
   },
-  AddIncomeScreenSavePlinthDisabled: {
+  AddIncomeScreenSavePlintoDisabled: {
     opacity: 0.55,
   },
 });

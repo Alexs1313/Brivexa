@@ -11,16 +11,16 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { colors, fonts, layout, radius } from '../constants/theme';
-import { appBackground } from '../data/assets';
+import { appFondo } from '../data/assets';
 
-import { useTasks } from '../data/TasksContext';
+import { useTareas } from '../data/TasksContext';
 
-import { useAdaptive } from '../hooks/useAdaptive';
+import { useAdaptativo } from '../hooks/useAdaptativo';
 
 type CompleteWorkScreenProps = {
   taskId: string;
   onCancel: () => void;
-  onSave: (draft: {
+  onGuardar: (draft: {
     duration: string;
     materialsKg: string;
     fuelL: string;
@@ -32,59 +32,59 @@ type CompleteWorkScreenProps = {
 export function CompleteWorkScreen({
   taskId,
   onCancel,
-  onSave,
+  onGuardar,
 }: CompleteWorkScreenProps) {
   const insets = useSafeAreaInsets();
-  const adaptive = useAdaptive();
-  const { getTask } = useTasks();
-  const task = getTask(taskId);
+  const adaptive = useAdaptativo();
+  const { getTarea } = useTareas();
+  const task = getTarea(taskId);
 
-  const [duration, setDuration] = useState('3h 05m');
+  const [duration, setDuracion] = useState('3h 05m');
   const [materialsKg, setMaterialsKg] = useState('546');
   const [fuelL, setFuelL] = useState('42');
-  const [cost, setCost] = useState('320');
-  const [notes, setNotes] = useState('');
+  const [cost, setCosto] = useState('320');
+  const [notes, setNotas] = useState('');
 
   const title = task?.title ?? 'Task';
-  const materialName = task?.materials?.split(' · ')[0] ?? 'materials';
+  const materialNombre = task?.materials?.split(' · ')[0] ?? 'materials';
 
   return (
     <ImageBackground
-      source={appBackground}
-      style={styles.CompleteWorkScreenRootHull}
+      source={appFondo}
+      style={styles.CompleteWorkScreenRaizCasco}
       resizeMode="cover"
     >
       <ScrollView
         contentContainerStyle={[
           styles.CompleteWorkScreenScrollContent,
           {
-            paddingTop: insets.top + adaptive.verticalScale(6),
-            paddingBottom: insets.bottom + adaptive.verticalScale(28),
-            paddingHorizontal: adaptive.horizontalPadding,
+            paddingTop: insets.top + adaptive.verticalEscala(6),
+            paddingBottom: insets.bottom + adaptive.verticalEscala(28),
+            paddingHorizontal: adaptive.horizontalRelleno,
           },
         ]}
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.CompleteWorkScreenHeaderRowCapstone}>
+        <View style={styles.CompleteWorkScreenHeaderRowDintel}>
           <Pressable
             onPress={onCancel}
             hitSlop={12}
             style={styles.CompleteWorkScreenNavSide}
           >
-            <Text style={styles.CompleteWorkScreenNavLinkFlourish}>
+            <Text style={styles.CompleteWorkScreenNavLinkFiligrana}>
               ‹ Cancel
             </Text>
           </Pressable>
-          <Text style={styles.CompleteWorkScreenTitleFlourish}>
+          <Text style={styles.CompleteWorkScreenTitleFiligrana}>
             Complete Work
           </Text>
           <View style={styles.CompleteWorkScreenNavSide} />
         </View>
 
-        <Text style={styles.CompleteWorkScreenIntroFlourish}>
+        <Text style={styles.CompleteWorkScreenIntroFiligrana}>
           Record the actuals for{' '}
-          <Text style={styles.CompleteWorkScreenIntroBoldFlourish}>
+          <Text style={styles.CompleteWorkScreenIntroBoldFiligrana}>
             {title}
           </Text>{' '}
           and update farm records.
@@ -93,7 +93,7 @@ export function CompleteWorkScreen({
         <FormField
           label="Actual Duration"
           value={duration}
-          onChangeText={setDuration}
+          onChangeText={setDuracion}
         />
         <FormField
           label="Actual Materials Used (kg)"
@@ -110,27 +110,27 @@ export function CompleteWorkScreen({
         <FormField
           label="Actual Cost ($)"
           value={cost}
-          onChangeText={setCost}
+          onChangeText={setCosto}
           keyboardType="decimal-pad"
         />
         <FormField
           label="Work Notes"
           value={notes}
-          onChangeText={setNotes}
+          onChangeText={setNotas}
           placeholder="Optional notes"
           multiline
         />
 
         <View style={styles.CompleteWorkScreenImpactCard}>
           <Text style={styles.CompleteWorkScreenImpactText}>
-            On completion: {materialsKg} kg {materialName} deducted from
+            On completion: {materialsKg} kg {materialNombre} deducted from
             inventory · ${cost} added to finance · equipment hours updated.
           </Text>
         </View>
 
         <Pressable
           onPress={() =>
-            onSave({
+            onGuardar({
               duration,
               materialsKg,
               fuelL,
@@ -139,7 +139,7 @@ export function CompleteWorkScreen({
             })
           }
           style={({ pressed }) => [
-            styles.CompleteWorkScreenSavePlinth,
+            styles.CompleteWorkScreenSavePlinto,
             pressed && styles.CompleteWorkScreenPressedDim,
           ]}
         >
@@ -169,7 +169,7 @@ function FormField({
 }) {
   return (
     <View style={styles.CompleteWorkScreenFieldBlock}>
-      <Text style={styles.CompleteWorkScreenFieldLabelFlourish}>{label}</Text>
+      <Text style={styles.CompleteWorkScreenFieldLabelFiligrana}>{label}</Text>
       <TextInput
         value={value}
         onChangeText={onChangeText}
@@ -187,26 +187,26 @@ function FormField({
 }
 
 const styles = StyleSheet.create({
-  CompleteWorkScreenRootHull: {
+  CompleteWorkScreenRaizCasco: {
     backgroundColor: colors.background,
     flex: 1,
   },
   CompleteWorkScreenScrollContent: { flexGrow: 1 },
-  CompleteWorkScreenHeaderRowCapstone: {
+  CompleteWorkScreenHeaderRowDintel: {
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: 16,
   },
 
   CompleteWorkScreenNavSide: { minWidth: 80 },
-  CompleteWorkScreenNavLinkFlourish: {
+  CompleteWorkScreenNavLinkFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
-  CompleteWorkScreenTitleFlourish: {
+  CompleteWorkScreenTitleFiligrana: {
     color: colors.cream,
     flex: 1,
     fontFamily: fonts.sansBold,
@@ -215,21 +215,21 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  CompleteWorkScreenIntroFlourish: {
-    color: colors.bodyMuted,
+  CompleteWorkScreenIntroFiligrana: {
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 14,
     lineHeight: 20,
     marginBottom: 18,
   },
-  CompleteWorkScreenIntroBoldFlourish: {
+  CompleteWorkScreenIntroBoldFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontWeight: '700',
   },
   CompleteWorkScreenFieldBlock: { marginBottom: 14 },
-  CompleteWorkScreenFieldLabelFlourish: {
-    color: colors.bodyMuted,
+  CompleteWorkScreenFieldLabelFiligrana: {
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginBottom: 8,
@@ -262,15 +262,15 @@ const styles = StyleSheet.create({
     padding: 14,
   },
   CompleteWorkScreenImpactText: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
     lineHeight: 18,
   },
 
-  CompleteWorkScreenSavePlinth: {
+  CompleteWorkScreenSavePlinto: {
     alignItems: 'center',
-    backgroundColor: colors.successButton,
+    backgroundColor: colors.successBoton,
     borderRadius: radius.button,
     height: layout.buttonHeightDefault,
     justifyContent: 'center',

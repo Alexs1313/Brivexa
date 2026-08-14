@@ -15,14 +15,15 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { PrimaryButton } from '../buttons/PrimaryButton';
 
 import { colors, fonts, radius } from '../../constants/theme';
-import { appBackground } from '../../data/assets';
+import { appFondo } from '../../data/assets';
 
 import type { CalculatorId, ResultRow } from '../../data/calculators';
 import type { FarmField } from '../../data/fields';
 
-import { useFields } from '../../data/FieldsContext';
-import { useSavedCalculations } from '../../data/SavedCalculationsContext';
-import { useAdaptive } from '../../hooks/useAdaptive';
+import { useCampos } from '../../data/FieldsContext';
+
+import { useSavedCalculos } from '../../data/SavedCalculationsContext';
+import { useAdaptativo } from '../../hooks/useAdaptativo';
 
 export function CalculatorShell({
   title,
@@ -34,39 +35,39 @@ export function CalculatorShell({
   onBack: () => void;
 }) {
   const insets = useSafeAreaInsets();
-  const adaptive = useAdaptive();
+  const adaptive = useAdaptativo();
 
   return (
     <ImageBackground
-      source={appBackground}
-      style={styles.CalculatorPartsRootHull}
+      source={appFondo}
+      style={styles.CalculatorPartsRaizCasco}
       resizeMode="cover"
     >
       <ScrollView
         contentContainerStyle={[
           styles.CalculatorPartsScrollContent,
           {
-            paddingTop: insets.top + adaptive.verticalScale(6),
-            paddingBottom: insets.bottom + adaptive.verticalScale(28),
+            paddingTop: insets.top + adaptive.verticalEscala(6),
+            paddingBottom: insets.bottom + adaptive.verticalEscala(28),
           },
         ]}
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.CalculatorPartsHeaderRowCapstone}>
+        <View style={styles.CalculatorPartsHeaderRowDintel}>
           <Pressable
             onPress={onBack}
             hitSlop={12}
             style={styles.CalculatorPartsNavSide}
           >
-            <Text style={styles.CalculatorPartsNavLinkFlourish}>
+            <Text style={styles.CalculatorPartsNavLinkFiligrana}>
               ‹ Calculators
             </Text>
           </Pressable>
-          <Text style={styles.CalculatorPartsTitleFlourish}>{title}</Text>
+          <Text style={styles.CalculatorPartsTitleFiligrana}>{title}</Text>
           <View style={styles.CalculatorPartsNavSide} />
         </View>
-        <View style={{ paddingHorizontal: adaptive.horizontalPadding }}>
+        <View style={{ paddingHorizontal: adaptive.horizontalRelleno }}>
           {children}
         </View>
       </ScrollView>
@@ -96,14 +97,14 @@ export function UnitField({
         flex && styles.CalculatorPartsFieldFlex,
       ]}
     >
-      <Text style={styles.CalculatorPartsFieldLabelFlourish}>{label}</Text>
-      <View style={styles.CalculatorPartsFieldInputHull}>
+      <Text style={styles.CalculatorPartsFieldLabelFiligrana}>{label}</Text>
+      <View style={styles.CalculatorPartsFieldInputCasco}>
         <TextInput
           value={value}
           onChangeText={onChangeText}
           keyboardType="decimal-pad"
           placeholder={placeholder}
-          placeholderTextColor={colors.tabInactive}
+          placeholderTextColor={colors.tabInactivo}
           style={styles.CalculatorPartsFieldInput}
         />
         <Text style={styles.CalculatorPartsUnit}>{unit}</Text>
@@ -123,10 +124,10 @@ export function SelectField({
 }) {
   return (
     <View style={styles.CalculatorPartsFieldGroup}>
-      <Text style={styles.CalculatorPartsFieldLabelFlourish}>{label}</Text>
+      <Text style={styles.CalculatorPartsFieldLabelFiligrana}>{label}</Text>
       <Pressable
         onPress={onPress}
-        style={styles.CalculatorPartsFieldInputHull}
+        style={styles.CalculatorPartsFieldInputCasco}
       >
         <Text style={styles.CalculatorPartsSelectValue}>{value}</Text>
         <Text style={styles.CalculatorPartsChevron}>⌄</Text>
@@ -146,26 +147,26 @@ export function FieldDropdown({
   onSelect: (field: FarmField) => void;
   fields?: FarmField[];
 }) {
-  const { fields: contextFields } = useFields();
-  const fields = fieldsProp ?? contextFields;
-  const [open, setOpen] = useState(false);
+  const { fields: contextCampos } = useCampos();
+  const fields = fieldsProp ?? contextCampos;
+  const [open, setAbierto] = useState(false);
   const selected = fields.find(field => field.id === selectedId);
-  const hasSelection = Boolean(selected);
+  const hasSeleccion = Boolean(selected);
 
   return (
     <View style={styles.CalculatorPartsFieldGroup}>
-      <Text style={styles.CalculatorPartsFieldLabelFlourish}>{label}</Text>
+      <Text style={styles.CalculatorPartsFieldLabelFiligrana}>{label}</Text>
       <Pressable
-        onPress={() => setOpen(true)}
+        onPress={() => setAbierto(true)}
         style={[
-          styles.CalculatorPartsFieldInputHull,
-          open && styles.CalculatorPartsInputHullOpen,
+          styles.CalculatorPartsFieldInputCasco,
+          open && styles.CalculatorPartsInputCascoOpen,
         ]}
       >
         <Text
           style={[
             styles.CalculatorPartsSelectValue,
-            !hasSelection && styles.CalculatorPartsSelectPlaceholder,
+            !hasSeleccion && styles.CalculatorPartsSelectPlaceholder,
           ]}
         >
           {selected?.name ?? 'Select field'}
@@ -184,11 +185,11 @@ export function FieldDropdown({
         visible={open}
         transparent
         animationType="fade"
-        onRequestClose={() => setOpen(false)}
+        onRequestClose={() => setAbierto(false)}
       >
         <Pressable
           style={styles.CalculatorPartsDropdownBackdrop}
-          onPress={() => setOpen(false)}
+          onPress={() => setAbierto(false)}
         >
           <Pressable
             style={styles.CalculatorPartsDropdownSheet}
@@ -204,7 +205,7 @@ export function FieldDropdown({
                   key={field.id}
                   onPress={() => {
                     onSelect(field);
-                    setOpen(false);
+                    setAbierto(false);
                   }}
                   style={[
                     styles.CalculatorPartsDropdownOption,
@@ -224,7 +225,7 @@ export function FieldDropdown({
                       {field.name}
                     </Text>
                     <Text style={styles.CalculatorPartsDropdownOptionMeta}>
-                      {field.areaLabel} · {field.crop}
+                      {field.areaEtiqueta} · {field.crop}
                     </Text>
                   </View>
                   {active ? (
@@ -308,14 +309,14 @@ export function SaveShareRow({
   title: string;
   rows: ResultRow[];
 }) {
-  const { saveCalculation } = useSavedCalculations();
-  const [toast, setToast] = useState<string | null>(null);
+  const { saveCalculo } = useSavedCalculos();
+  const [toast, setAviso] = useState<string | null>(null);
 
   useEffect(() => {
     if (!toast) {
       return;
     }
-    const timer = setTimeout(() => setToast(null), 2200);
+    const timer = setTimeout(() => setAviso(null), 2200);
     return () => clearTimeout(timer);
   }, [toast]);
 
@@ -325,9 +326,9 @@ export function SaveShareRow({
     ...rows.map(row => `${row.label}: ${row.value}`),
   ].join('\n');
 
-  const onSave = () => {
-    saveCalculation({ calculatorId, title, rows });
-    setToast('Result saved');
+  const onGuardar = () => {
+    saveCalculo({ calculatorId, title, rows });
+    setAviso('Result saved');
   };
 
   const onShare = async () => {
@@ -337,7 +338,7 @@ export function SaveShareRow({
         message,
       });
     } catch {
-      setToast('Unable to share');
+      setAviso('Unable to share');
     }
   };
 
@@ -345,7 +346,7 @@ export function SaveShareRow({
     <View>
       <View style={styles.CalculatorPartsSaveShareRow}>
         <Pressable
-          onPress={onSave}
+          onPress={onGuardar}
           style={({ pressed }) => [
             styles.CalculatorPartsSecondaryBtn,
             pressed && styles.CalculatorPartsSecondaryBtnPressed,
@@ -364,8 +365,8 @@ export function SaveShareRow({
         </Pressable>
       </View>
       {toast ? (
-        <View style={styles.CalculatorPartsToastHull}>
-          <Text style={styles.CalculatorPartsToastFlourish}>{toast}</Text>
+        <View style={styles.CalculatorPartsToastCasco}>
+          <Text style={styles.CalculatorPartsToastFiligrana}>{toast}</Text>
         </View>
       ) : null}
     </View>
@@ -373,7 +374,7 @@ export function SaveShareRow({
 }
 
 const styles = StyleSheet.create({
-  CalculatorPartsRootHull: {
+  CalculatorPartsRaizCasco: {
     backgroundColor: colors.background,
     flex: 1,
   },
@@ -381,9 +382,9 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 
-  CalculatorPartsHeaderRowCapstone: {
+  CalculatorPartsHeaderRowDintel: {
     alignItems: 'center',
-    borderBottomColor: colors.borderSoft,
+    borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -395,13 +396,13 @@ const styles = StyleSheet.create({
   CalculatorPartsNavSide: {
     minWidth: 110,
   },
-  CalculatorPartsNavLinkFlourish: {
+  CalculatorPartsNavLinkFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
 
-  CalculatorPartsTitleFlourish: {
+  CalculatorPartsTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
@@ -414,17 +415,17 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  CalculatorPartsFieldLabelFlourish: {
-    color: colors.bodyMuted,
+  CalculatorPartsFieldLabelFiligrana: {
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginBottom: 8,
   },
 
-  CalculatorPartsFieldInputHull: {
+  CalculatorPartsFieldInputCasco: {
     alignItems: 'center',
     backgroundColor: colors.card,
-    borderColor: colors.emptyBorder,
+    borderColor: colors.emptyBorde,
     borderRadius: 12,
     borderWidth: 1,
     flexDirection: 'row',
@@ -440,7 +441,7 @@ const styles = StyleSheet.create({
   },
 
   CalculatorPartsUnit: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
     marginLeft: 8,
@@ -454,10 +455,10 @@ const styles = StyleSheet.create({
   },
 
   CalculatorPartsSelectPlaceholder: {
-    color: colors.tabInactive,
+    color: colors.tabInactivo,
   },
   CalculatorPartsChevron: {
-    color: colors.tabInactive,
+    color: colors.tabInactivo,
     fontSize: 15,
   },
 
@@ -465,8 +466,8 @@ const styles = StyleSheet.create({
     color: colors.gold,
     transform: [{ rotate: '180deg' }],
   },
-  CalculatorPartsInputHullOpen: {
-    borderColor: colors.goldBorder,
+  CalculatorPartsInputCascoOpen: {
+    borderColor: colors.goldBorde,
   },
   CalculatorPartsDropdownBackdrop: {
     backgroundColor: 'rgba(8, 4, 24, 0.72)',
@@ -486,7 +487,7 @@ const styles = StyleSheet.create({
   },
 
   CalculatorPartsDropdownTitle: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansBold,
     fontSize: 12,
     fontWeight: '700',
@@ -502,11 +503,11 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
   },
   CalculatorPartsDropdownOptionBorder: {
-    borderBottomColor: colors.borderSoft,
+    borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
   },
   CalculatorPartsDropdownOptionActive: {
-    backgroundColor: colors.goldSoft,
+    backgroundColor: colors.goldSuave,
   },
 
   CalculatorPartsDropdownOptionCopy: {
@@ -524,7 +525,7 @@ const styles = StyleSheet.create({
     color: colors.gold,
   },
   CalculatorPartsDropdownOptionMeta: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
     marginTop: 3,
@@ -545,8 +546,8 @@ const styles = StyleSheet.create({
 
   CalculatorPartsResetBtn: {
     alignItems: 'center',
-    backgroundColor: colors.backButton,
-    borderColor: colors.backButtonBorder,
+    backgroundColor: colors.backBoton,
+    borderColor: colors.backButtonBorde,
     borderRadius: 14,
     borderWidth: 1,
     height: 50,
@@ -554,7 +555,7 @@ const styles = StyleSheet.create({
     width: 90,
   },
   CalculatorPartsResetLabel: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansBold,
     fontSize: 15,
     fontWeight: '700',
@@ -565,7 +566,7 @@ const styles = StyleSheet.create({
 
   CalculatorPartsResultCard: {
     backgroundColor: colors.card,
-    borderColor: colors.emptyBorder,
+    borderColor: colors.emptyBorde,
     borderRadius: radius.card,
     borderWidth: 1,
     marginBottom: 16,
@@ -595,11 +596,11 @@ const styles = StyleSheet.create({
   },
 
   CalculatorPartsResultRowBorder: {
-    borderBottomColor: colors.borderSoft,
+    borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
   },
   CalculatorPartsResultLabel: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     flex: 1,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
@@ -619,8 +620,8 @@ const styles = StyleSheet.create({
 
   CalculatorPartsSecondaryBtn: {
     alignItems: 'center',
-    backgroundColor: colors.backButton,
-    borderColor: colors.goldBorder,
+    backgroundColor: colors.backBoton,
+    borderColor: colors.goldBorde,
     borderRadius: 14,
     borderWidth: 1,
     flex: 1,
@@ -639,7 +640,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-  CalculatorPartsToastHull: {
+  CalculatorPartsToastCasco: {
     alignSelf: 'center',
     backgroundColor: colors.toastBg,
     borderColor: colors.border,
@@ -650,7 +651,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
 
-  CalculatorPartsToastFlourish: {
+  CalculatorPartsToastFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 13,

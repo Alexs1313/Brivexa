@@ -8,7 +8,7 @@ import React, {
 import {usePersistedState} from '../hooks/usePersistedState';
 import type {CalculatorId, ResultRow} from './calculators';
 import {CALCULATOR_CARDS} from './calculators';
-import {storageKeys} from './storage';
+import {storageClaves} from './storage';
 
 export type SavedCalculation = {
   id: string;
@@ -16,12 +16,12 @@ export type SavedCalculation = {
   title: string;
   summary: string;
   rows: ResultRow[];
-  savedAtLabel: string;
+  savedAtEtiqueta: string;
 };
 
 type SavedCalculationsContextValue = {
   saved: SavedCalculation[];
-  saveCalculation: (input: {
+  saveCalculo: (input: {
     calculatorId: CalculatorId;
     title: string;
     rows: ResultRow[];
@@ -40,7 +40,7 @@ function formatSavedAt(date: Date): string {
   return `Today · ${h12}:${minutes} ${ampm}`;
 }
 
-function pickSummary(rows: ResultRow[]): string {
+function pickResumen(rows: ResultRow[]): string {
   const highlight = rows.find(row => row.tone === 'gold') ?? rows[0];
   if (!highlight) {
     return 'Calculation saved';
@@ -58,11 +58,11 @@ export function SavedCalculationsProvider({
   children: React.ReactNode;
 }) {
   const [saved, setSaved] = usePersistedState<SavedCalculation[]>(
-    storageKeys.savedCalculations,
+    storageClaves.savedCalculos,
     [],
   );
 
-  const saveCalculation = useCallback(
+  const saveCalculo = useCallback(
     (input: {
       calculatorId: CalculatorId;
       title: string;
@@ -72,9 +72,9 @@ export function SavedCalculationsProvider({
         id: `calc-${Date.now()}`,
         calculatorId: input.calculatorId,
         title: input.title,
-        summary: pickSummary(input.rows),
+        summary: pickResumen(input.rows),
         rows: input.rows,
-        savedAtLabel: formatSavedAt(new Date()),
+        savedAtEtiqueta: formatSavedAt(new Date()),
       };
       setSaved(prev => [entry, ...prev].slice(0, 20));
     },
@@ -88,10 +88,10 @@ export function SavedCalculationsProvider({
   const value = useMemo(
     () => ({
       saved,
-      saveCalculation,
+      saveCalculo,
       clearSaved,
     }),
-    [saved, saveCalculation, clearSaved],
+    [saved, saveCalculo, clearSaved],
   );
 
   return (
@@ -101,11 +101,11 @@ export function SavedCalculationsProvider({
   );
 }
 
-export function useSavedCalculations() {
+export function useSavedCalculos() {
   const context = useContext(SavedCalculationsContext);
   if (!context) {
     throw new Error(
-      'useSavedCalculations must be used within SavedCalculationsProvider',
+      'useSavedCalculos must be used within SavedCalculationsProvider',
     );
   }
   return context;

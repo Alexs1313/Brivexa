@@ -17,10 +17,10 @@ import { colors, fonts } from '../constants/theme';
 const LOADER_DURATION = 3000;
 
 type LoaderScreenProps = {
-  onComplete: () => void;
+  onCompletar: () => void;
 };
 
-export function LoaderScreen({ onComplete }: LoaderScreenProps) {
+export function LoaderScreen({ onCompletar }: LoaderScreenProps) {
   const spin = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -34,13 +34,13 @@ export function LoaderScreen({ onComplete }: LoaderScreenProps) {
     );
     loop.start();
 
-    const timeout = setTimeout(onComplete, LOADER_DURATION);
+    const timeout = setTimeout(onCompletar, LOADER_DURATION);
 
     return () => {
       loop.stop();
       clearTimeout(timeout);
     };
-  }, [onComplete, spin]);
+  }, [onCompletar, spin]);
 
   const rotate = spin.interpolate({
     inputRange: [0, 1],
@@ -48,16 +48,16 @@ export function LoaderScreen({ onComplete }: LoaderScreenProps) {
   });
 
   return (
-    <View style={styles.LoaderScreenRootHull}>
+    <View style={styles.LoaderScreenRaizCasco}>
       <ImageBackground
         source={icons.loaderBg}
         style={styles.LoaderScreenBackground}
         resizeMode="cover"
       >
         <View style={styles.LoaderScreenContent}>
-          <Text style={styles.LoaderScreenCowEmblem}>🐂</Text>
-          <Text style={styles.LoaderScreenBrandFlourish}>{APP_BRAND_LINE}</Text>
-          <Text style={styles.LoaderScreenTaglineFlourish}>{APP_TAGLINE}</Text>
+          <Text style={styles.LoaderScreenCowEmblema}>🐂</Text>
+          <Text style={styles.LoaderScreenBrandFiligrana}>{APP_BRAND_LINE}</Text>
+          <Text style={styles.LoaderScreenTaglineFiligrana}>{APP_TAGLINE}</Text>
 
           <Animated.View
             style={[
@@ -72,7 +72,7 @@ export function LoaderScreen({ onComplete }: LoaderScreenProps) {
 }
 
 const styles = StyleSheet.create({
-  LoaderScreenRootHull: {
+  LoaderScreenRaizCasco: {
     backgroundColor: colors.black,
     flex: 1,
   },
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  LoaderScreenGlowDrape: {
+  LoaderScreenGlowVelo: {
     bottom: 0,
     height: '100%',
     left: 0,
@@ -96,11 +96,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  LoaderScreenCowEmblem: {
+  LoaderScreenCowEmblema: {
     fontSize: 34,
     marginBottom: 10,
   },
-  LoaderScreenBrandFlourish: {
+  LoaderScreenBrandFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 28,
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  LoaderScreenTaglineFlourish: {
+  LoaderScreenTaglineFiligrana: {
     color: colors.body,
     fontFamily: fonts.sansRegular,
     fontSize: 15,

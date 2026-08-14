@@ -10,71 +10,71 @@ import {
   UnitField,
 } from '../components/calculators/CalculatorParts';
 
-import { calcSeedRate, parseNumber, type ResultRow } from '../data/calculators';
+import { calcSeedTasa, parseNumber, type ResultRow } from '../data/calculators';
 import type { FarmField } from '../data/fields';
 
-import { useFields } from '../data/FieldsContext';
+import { useCampos } from '../data/FieldsContext';
 
 type SeedRateScreenProps = {
   onBack: () => void;
 };
 
 export function SeedRateScreen({ onBack }: SeedRateScreenProps) {
-  const { getField } = useFields();
+  const { getCampo } = useCampos();
   const [fieldId, setFieldId] = useState('');
-  const [area, setArea] = useState('');
-  const [seedRate, setSeedRate] = useState('');
-  const [packageWeight, setPackageWeight] = useState('');
+  const [area, setSuperficie] = useState('');
+  const [seedTasa, setSeedTasa] = useState('');
+  const [packagePeso, setPackagePeso] = useState('');
   const [reserve, setReserve] = useState('');
-  const [rows, setRows] = useState<ResultRow[]>([]);
+  const [rows, setFilas] = useState<ResultRow[]>([]);
 
-  const field = getField(fieldId);
-  const resultTitle = useMemo(
-    () => `Seed Rate · ${field?.name ?? 'Field'}`,
+  const field = getCampo(fieldId);
+  const resultTitulo = useMemo(
+    () => `Sowing Rate · ${field?.name ?? 'Field'}`,
     [field?.name],
   );
 
-  const onSelectField = (next: FarmField) => {
+  const onSelectCampo = (next: FarmField) => {
     setFieldId(next.id);
-    setArea(String(next.areaHa));
+    setSuperficie(String(next.areaHa));
   };
 
   const reset = () => {
     setFieldId('');
-    setArea('');
-    setSeedRate('');
-    setPackageWeight('');
+    setSuperficie('');
+    setSeedTasa('');
+    setPackagePeso('');
     setReserve('');
-    setRows([]);
+    setFilas([]);
   };
 
   const calculate = () => {
-    setRows(
-      calcSeedRate({
+    setFilas(
+      calcSeedTasa({
         areaHa: parseNumber(area),
-        seedRateKgHa: parseNumber(seedRate),
-        packageKg: parseNumber(packageWeight),
+        seedRateKgHa: parseNumber(seedTasa),
+        packageKg: parseNumber(packagePeso),
         reservePct: parseNumber(reserve),
       }),
     );
   };
 
   return (
-    <CalculatorShell title="Seed Rate" onBack={onBack}>
-      <FieldDropdown selectedId={fieldId} onSelect={onSelectField} />
+    <CalculatorShell title="Sowing Rate" onBack={onBack}>
+      <FieldDropdown selectedId={fieldId} onSelect={onSelectCampo} />
       <View style={styles.SeedRateScreenGrid}>
         <UnitField
           label="Field Area"
           value={area}
-          onChangeText={setArea}
+          onChangeText={setSuperficie}
           unit="ha"
           placeholder="e.g. 24.8"
           flex
         />
         <UnitField
-          label="Seed Rate"
-          value={seedRate}
-          onChangeText={setSeedRate}
+          label="Sowing Rate"
+          value={seedTasa}
+          onChangeText={setSeedTasa}
           unit="kg/ha"
           placeholder="e.g. 22"
           flex
@@ -83,8 +83,8 @@ export function SeedRateScreen({ onBack }: SeedRateScreenProps) {
       <View style={styles.SeedRateScreenGrid}>
         <UnitField
           label="Package Weight"
-          value={packageWeight}
-          onChangeText={setPackageWeight}
+          value={packagePeso}
+          onChangeText={setPackagePeso}
           unit="kg"
           placeholder="e.g. 25"
           flex
@@ -99,9 +99,9 @@ export function SeedRateScreen({ onBack }: SeedRateScreenProps) {
         />
       </View>
       <CalcActions onReset={reset} onCalculate={calculate} />
-      <ResultCard title={resultTitle} rows={rows} />
+      <ResultCard title={resultTitulo} rows={rows} />
       {rows.length > 0 ? (
-        <SaveShareRow calculatorId="seed" title={resultTitle} rows={rows} />
+        <SaveShareRow calculatorId="seed" title={resultTitulo} rows={rows} />
       ) : null}
     </CalculatorShell>
   );

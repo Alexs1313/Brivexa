@@ -1,6 +1,6 @@
 /** Shared select options for form dropdowns (demo season). */
 
-export const START_TIME_OPTIONS = [
+export const START_TIME_OPCIONES = [
   '06:00 AM',
   '06:30 AM',
   '07:00 AM',
@@ -18,7 +18,7 @@ export const START_TIME_OPTIONS = [
   '04:00 PM',
 ] as const;
 
-export const WORK_TYPE_OPTIONS = [
+export const WORK_TYPE_OPCIONES = [
   'Planting',
   'Spraying',
   'Fertilizing',
@@ -29,7 +29,7 @@ export const WORK_TYPE_OPTIONS = [
   'Maintenance',
 ] as const;
 
-export const WORKER_OPTIONS = [
+export const WORKER_OPCIONES = [
   'Daniel Reed',
   'Chris Miller',
   'Mark Lewis',
@@ -37,9 +37,9 @@ export const WORKER_OPTIONS = [
   'Unassigned',
 ] as const;
 
-export const PRIORITY_OPTIONS = ['Normal', 'High'] as const;
+export const PRIORITY_OPCIONES = ['Normal', 'High'] as const;
 
-export const FIELD_STATUS_OPTIONS = [
+export const FIELD_STATUS_OPCIONES = [
   'Planned',
   'Prepared',
   'Planted',

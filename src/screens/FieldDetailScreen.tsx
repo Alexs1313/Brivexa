@@ -13,15 +13,15 @@ import { PrimaryButton } from '../components/buttons/PrimaryButton';
 
 import { colors, fonts, radius } from '../constants/theme';
 
-import { appBackground, fieldAssets } from '../data/assets';
+import { appFondo, fieldRecursos } from '../data/assets';
 import {
-  TIMELINE_STEPS,
+  TIMELINE_PASOS,
   type ActivityStatus,
   type FarmField,
   type FieldHarvest,
 } from '../data/fields';
-import { useFields } from '../data/FieldsContext';
-import { useAdaptive } from '../hooks/useAdaptive';
+import { useCampos } from '../data/FieldsContext';
+import { useAdaptativo } from '../hooks/useAdaptativo';
 import { StatusPill } from './FieldsScreen';
 
 type FieldTab = 'Overview' | 'Activities' | 'Expenses' | 'Harvest';
@@ -38,90 +38,90 @@ export function FieldDetailScreen({
   onEdit,
 }: FieldDetailScreenProps) {
   const insets = useSafeAreaInsets();
-  const adaptive = useAdaptive();
+  const adaptive = useAdaptativo();
   const {
-    getField,
-    removeField,
-    cycleFieldStatus,
-    addFieldActivity,
-    addFieldExpense,
-    recordHarvest,
-    clearHarvest,
-  } = useFields();
-  const field = getField(fieldId);
+    getCampo,
+    removeCampo,
+    cycleFieldEstado,
+    addFieldActividad,
+    addFieldGasto,
+    recordCosecha,
+    clearCosecha,
+  } = useCampos();
+  const field = getCampo(fieldId);
   const [tab, setTab] = useState<FieldTab>('Overview');
-  const [toast, setToast] = useState<string | null>(null);
+  const [toast, setAviso] = useState<string | null>(null);
 
-  const showToast = (message: string) => {
-    setToast(message);
-    setTimeout(() => setToast(null), 2000);
+  const showAviso = (message: string) => {
+    setAviso(message);
+    setTimeout(() => setAviso(null), 2000);
   };
 
   if (!field) {
     return (
-      <View style={styles.FieldDetailScreenMissingHull}>
-        <Text style={styles.FieldDetailScreenMissingFlourish}>
+      <View style={styles.FieldDetailScreenMissingCasco}>
+        <Text style={styles.FieldDetailScreenMissingFiligrana}>
           Field not found
         </Text>
         <Pressable onPress={onBack}>
-          <Text style={styles.FieldDetailScreenNavLinkFlourish}>‹ Fields</Text>
+          <Text style={styles.FieldDetailScreenNavLinkFiligrana}>‹ Fields</Text>
         </Pressable>
       </View>
     );
   }
 
-  const showCover = tab === 'Overview';
+  const showCubierta = tab === 'Overview';
 
   return (
     <ImageBackground
-      source={appBackground}
-      style={styles.FieldDetailScreenRootHull}
+      source={appFondo}
+      style={styles.FieldDetailScreenRaizCasco}
       resizeMode="cover"
     >
       <ScrollView
         contentContainerStyle={[
           styles.FieldDetailScreenScrollContent,
           {
-            paddingTop: insets.top + adaptive.verticalScale(6),
-            paddingBottom: insets.bottom + adaptive.verticalScale(28),
+            paddingTop: insets.top + adaptive.verticalEscala(6),
+            paddingBottom: insets.bottom + adaptive.verticalEscala(28),
           },
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.FieldDetailScreenHeaderRowCapstone}>
+        <View style={styles.FieldDetailScreenHeaderRowDintel}>
           <Pressable
             onPress={onBack}
             hitSlop={12}
             style={styles.FieldDetailScreenNavSide}
           >
-            <Text style={styles.FieldDetailScreenNavLinkFlourish}>
+            <Text style={styles.FieldDetailScreenNavLinkFiligrana}>
               ‹ Fields
             </Text>
           </Pressable>
-          <Text style={styles.FieldDetailScreenNavTitleFlourish}>Field</Text>
+          <Text style={styles.FieldDetailScreenNavTitleFiligrana}>Field</Text>
           <Pressable
             onPress={onEdit}
             hitSlop={12}
             style={styles.FieldDetailScreenNavSideRight}
           >
-            <Text style={styles.FieldDetailScreenNavLinkBoldFlourish}>
+            <Text style={styles.FieldDetailScreenNavLinkBoldFiligrana}>
               Edit
             </Text>
           </Pressable>
         </View>
 
-        <View style={{ paddingHorizontal: adaptive.horizontalPadding }}>
-          {showCover ? <FieldCover field={field} /> : null}
+        <View style={{ paddingHorizontal: adaptive.horizontalRelleno }}>
+          {showCubierta ? <FieldCover field={field} /> : null}
 
           <View style={styles.FieldDetailScreenTitleRow}>
-            <Text style={styles.FieldDetailScreenFieldNameFlourish}>
+            <Text style={styles.FieldDetailScreenFieldNameFiligrana}>
               {field.name}
             </Text>
-            <Text style={styles.FieldDetailScreenFieldAreaFlourish}>
-              {field.areaLabel}
+            <Text style={styles.FieldDetailScreenFieldAreaFiligrana}>
+              {field.areaEtiqueta}
             </Text>
           </View>
-          {showCover ? (
+          {showCubierta ? (
             <Text style={styles.FieldDetailScreenCropLine}>
               {field.crop} — {field.variety}
             </Text>
@@ -132,12 +132,12 @@ export function FieldDetailScreen({
           {tab === 'Overview' ? (
             <OverviewTab
               field={field}
-              onChangeStatus={() => {
-                const next = cycleFieldStatus(fieldId);
-                showToast(`Status → ${next}`);
+              onChangeEstado={() => {
+                const next = cycleFieldEstado(fieldId);
+                showAviso(`Status → ${next}`);
               }}
               onDelete={() => {
-                removeField(fieldId);
+                removeCampo(fieldId);
                 onBack();
               }}
             />
@@ -145,18 +145,18 @@ export function FieldDetailScreen({
           {tab === 'Activities' ? (
             <ActivitiesTab
               field={field}
-              onAddActivity={() => {
-                addFieldActivity(fieldId);
-                showToast('Activity added');
+              onAddActividad={() => {
+                addFieldActividad(fieldId);
+                showAviso('Activity added');
               }}
             />
           ) : null}
           {tab === 'Expenses' ? (
             <ExpensesTab
               field={field}
-              onAddExpense={() => {
-                addFieldExpense(fieldId);
-                showToast('Expense added');
+              onAddGasto={() => {
+                addFieldGasto(fieldId);
+                showAviso('Expense added');
               }}
             />
           ) : null}
@@ -164,16 +164,16 @@ export function FieldDetailScreen({
             <HarvestTab
               harvest={field.harvest}
               onRecord={() => {
-                recordHarvest(fieldId);
-                showToast('Harvest recorded');
+                recordCosecha(fieldId);
+                showAviso('Harvest recorded');
               }}
               onEdit={() => {
-                recordHarvest(fieldId);
-                showToast('Harvest updated');
+                recordCosecha(fieldId);
+                showAviso('Harvest updated');
               }}
               onDelete={() => {
-                clearHarvest(fieldId);
-                showToast('Harvest deleted');
+                clearCosecha(fieldId);
+                showAviso('Harvest deleted');
               }}
             />
           ) : null}
@@ -183,11 +183,11 @@ export function FieldDetailScreen({
       {toast ? (
         <View
           style={[
-            styles.FieldDetailScreenToastHull,
-            { bottom: insets.bottom + adaptive.verticalScale(24) },
+            styles.FieldDetailScreenToastCasco,
+            { bottom: insets.bottom + adaptive.verticalEscala(24) },
           ]}
         >
-          <Text style={styles.FieldDetailScreenToastFlourish}>{toast}</Text>
+          <Text style={styles.FieldDetailScreenToastFiligrana}>{toast}</Text>
         </View>
       ) : null}
     </ImageBackground>
@@ -196,9 +196,9 @@ export function FieldDetailScreen({
 
 function FieldCover({ field }: { field: FarmField }) {
   const cover =
-    field.coverTone === 'ready'
-      ? fieldAssets.coverReady
-      : fieldAssets.coverGrowing;
+    field.coverTono === 'ready'
+      ? fieldRecursos.coverListo
+      : fieldRecursos.coverCrecimiento;
 
   return (
     <ImageBackground
@@ -223,7 +223,7 @@ function SegmentedTabs({
 }) {
   const tabs: FieldTab[] = ['Overview', 'Activities', 'Expenses', 'Harvest'];
   return (
-    <View style={styles.FieldDetailScreenSegHull}>
+    <View style={styles.FieldDetailScreenSegCasco}>
       {tabs.map(tab => {
         const on = tab === active;
         return (
@@ -255,28 +255,28 @@ function SegmentedTabs({
 
 function OverviewTab({
   field,
-  onChangeStatus,
+  onChangeEstado,
   onDelete,
 }: {
   field: FarmField;
-  onChangeStatus: () => void;
+  onChangeEstado: () => void;
   onDelete: () => void;
 }) {
   const rows = [
     { label: 'Crop', value: field.crop },
     { label: 'Variety', value: field.variety },
-    { label: 'Area', value: field.areaLabel },
-    { label: 'Planting Date', value: field.plantingDate },
+    { label: 'Area', value: field.areaEtiqueta },
+    { label: 'Planting Date', value: field.plantingFecha },
     {
       label: field.status === 'Harvested' ? 'Harvest Date' : 'Expected Harvest',
-      value: field.expectedHarvest,
+      value: field.expectedCosecha,
     },
-    { label: 'Soil Type', value: field.soilType },
+    { label: 'Soil Type', value: field.soilTipo },
     {
       label: field.status === 'Harvested' ? 'Final Yield' : 'Est. Yield',
-      value: field.estYield,
+      value: field.estRendimiento,
     },
-    { label: 'Season Cost', value: field.seasonCost },
+    { label: 'Season Cost', value: field.seasonCosto },
   ];
 
   return (
@@ -296,12 +296,12 @@ function OverviewTab({
         ))}
       </View>
 
-      <Text style={styles.FieldDetailScreenSectionTitleFlourish}>
+      <Text style={styles.FieldDetailScreenSectionTitleFiligrana}>
         Status Timeline
       </Text>
       <View style={styles.FieldDetailScreenTimelineRow}>
-        {TIMELINE_STEPS.map((step, index) => {
-          const done = index <= field.timelineIndex;
+        {TIMELINE_PASOS.map((step, index) => {
+          const done = index <= field.timelineIndice;
           return (
             <View key={step} style={styles.FieldDetailScreenTimelineCol}>
               <View style={styles.FieldDetailScreenTimelineTrack}>
@@ -330,7 +330,7 @@ function OverviewTab({
       </View>
 
       <Pressable
-        onPress={onChangeStatus}
+        onPress={onChangeEstado}
         style={({ pressed }) => [
           styles.FieldDetailScreenGhostBtn,
           pressed && styles.FieldDetailScreenPressedDim,
@@ -355,10 +355,10 @@ function OverviewTab({
 
 function ActivitiesTab({
   field,
-  onAddActivity,
+  onAddActividad,
 }: {
   field: FarmField;
-  onAddActivity: () => void;
+  onAddActividad: () => void;
 }) {
   return (
     <View>
@@ -376,7 +376,7 @@ function ActivitiesTab({
                   { color: activityColor(item.status) },
                 ]}
               >
-                {activityLabel(item.status)}
+                {activityEtiqueta(item.status)}
               </Text>
             </View>
             <Text style={styles.FieldDetailScreenActivityMeta}>
@@ -386,7 +386,7 @@ function ActivitiesTab({
         </View>
       ))}
       <Pressable
-        onPress={onAddActivity}
+        onPress={onAddActividad}
         style={({ pressed }) => [
           styles.FieldDetailScreenGhostBtn,
           pressed && styles.FieldDetailScreenPressedDim,
@@ -402,10 +402,10 @@ function ActivitiesTab({
 
 function ExpensesTab({
   field,
-  onAddExpense,
+  onAddGasto,
 }: {
   field: FarmField;
-  onAddExpense: () => void;
+  onAddGasto: () => void;
 }) {
   return (
     <View>
@@ -443,7 +443,7 @@ function ExpensesTab({
         </View>
       ))}
       <Pressable
-        onPress={onAddExpense}
+        onPress={onAddGasto}
         style={({ pressed }) => [
           styles.FieldDetailScreenGhostBtn,
           pressed && styles.FieldDetailScreenPressedDim,
@@ -474,7 +474,7 @@ function HarvestTab({
           No Harvest Record Yet
         </Text>
         <Text style={styles.FieldDetailScreenHarvestEmptyHint}>
-          Expected: {harvest.expectedDate} · Est. yield {harvest.estimatedYield}
+          Expected: {harvest.expectedFecha} · Est. yield {harvest.estimatedRendimiento}
           {harvest.estimatedTotal ? ` · ${harvest.estimatedTotal}` : ''}
         </Text>
         <PrimaryButton
@@ -487,14 +487,14 @@ function HarvestTab({
   }
 
   const rows = [
-    { label: 'Harvest Date', value: harvest.harvestDate },
-    { label: 'Total Weight', value: harvest.totalWeight },
+    { label: 'Harvest Date', value: harvest.harvestFecha },
+    { label: 'Total Weight', value: harvest.totalPeso },
     { label: 'Yield per ha', value: harvest.yieldPerHa },
     { label: 'Moisture', value: harvest.moisture },
-    { label: 'Sale Price', value: harvest.salePrice },
+    { label: 'Sale Price', value: harvest.salePrecio },
     {
       label: 'Total Revenue',
-      value: harvest.totalRevenue,
+      value: harvest.totalIngresos,
       emphasize: true as const,
     },
   ];
@@ -558,7 +558,7 @@ function HarvestTab({
   );
 }
 
-function activityLabel(status: ActivityStatus) {
+function activityEtiqueta(status: ActivityStatus) {
   if (status === 'completed') {
     return 'Completed';
   }
@@ -575,11 +575,11 @@ function activityColor(status: ActivityStatus) {
   if (status === 'in_progress') {
     return colors.info;
   }
-  return colors.bodyMuted;
+  return colors.bodyApagado;
 }
 
 const styles = StyleSheet.create({
-  FieldDetailScreenRootHull: {
+  FieldDetailScreenRaizCasco: {
     backgroundColor: colors.background,
     flex: 1,
   },
@@ -587,7 +587,7 @@ const styles = StyleSheet.create({
     opacity: 0.88,
   },
 
-  FieldDetailScreenToastHull: {
+  FieldDetailScreenToastCasco: {
     alignSelf: 'center',
     backgroundColor: colors.toastBg,
     borderColor: colors.border,
@@ -598,13 +598,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 
-  FieldDetailScreenToastFlourish: {
+  FieldDetailScreenToastFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 13,
     fontWeight: '700',
   },
-  FieldDetailScreenMissingHull: {
+  FieldDetailScreenMissingCasco: {
     alignItems: 'center',
     backgroundColor: colors.background,
     flex: 1,
@@ -612,15 +612,15 @@ const styles = StyleSheet.create({
     gap: 12,
   },
 
-  FieldDetailScreenMissingFlourish: {
+  FieldDetailScreenMissingFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 18,
   },
 
-  FieldDetailScreenHeaderRowCapstone: {
+  FieldDetailScreenHeaderRowDintel: {
     alignItems: 'center',
-    borderBottomColor: colors.borderSoft,
+    borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -635,20 +635,20 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     minWidth: 72,
   },
-  FieldDetailScreenNavLinkFlourish: {
+  FieldDetailScreenNavLinkFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
 
-  FieldDetailScreenNavLinkBoldFlourish: {
+  FieldDetailScreenNavLinkBoldFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 14,
     fontWeight: '700',
   },
 
-  FieldDetailScreenNavTitleFlourish: {
+  FieldDetailScreenNavTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
@@ -679,7 +679,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  FieldDetailScreenFieldNameFlourish: {
+  FieldDetailScreenFieldNameFiligrana: {
     color: colors.cream,
     flexShrink: 1,
     fontFamily: fonts.sansBold,
@@ -688,21 +688,21 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
 
-  FieldDetailScreenFieldAreaFlourish: {
+  FieldDetailScreenFieldAreaFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
   FieldDetailScreenCropLine: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 14,
     marginBottom: 12,
     marginTop: 4,
   },
 
-  FieldDetailScreenSegHull: {
+  FieldDetailScreenSegCasco: {
     backgroundColor: colors.card,
     borderColor: colors.border,
     borderRadius: 12,
@@ -725,7 +725,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.gold,
   },
   FieldDetailScreenSegLabel: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansBold,
     fontSize: 12,
     fontWeight: '700',
@@ -752,12 +752,12 @@ const styles = StyleSheet.create({
     paddingVertical: 11,
   },
   FieldDetailScreenKvRowDivider: {
-    borderBottomColor: colors.borderSoft,
+    borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
   },
 
   FieldDetailScreenKvLabel: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
   },
@@ -774,7 +774,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.sansBold,
     fontWeight: '700',
   },
-  FieldDetailScreenSectionTitleFlourish: {
+  FieldDetailScreenSectionTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 14,
@@ -825,15 +825,15 @@ const styles = StyleSheet.create({
   },
 
   FieldDetailScreenTimelineLabelOn: {
-    color: colors.bodySoft,
+    color: colors.bodySuave,
   },
   FieldDetailScreenTimelineLabelOff: {
-    color: colors.tabInactive,
+    color: colors.tabInactivo,
   },
   FieldDetailScreenGhostBtn: {
     alignItems: 'center',
-    backgroundColor: colors.backButton,
-    borderColor: colors.backButtonBorder,
+    backgroundColor: colors.backBoton,
+    borderColor: colors.backButtonBorde,
     borderRadius: 14,
     borderWidth: 1,
     height: 50,
@@ -914,7 +914,7 @@ const styles = StyleSheet.create({
   },
 
   FieldDetailScreenActivityMeta: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
     marginTop: 6,
@@ -932,13 +932,13 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
   FieldDetailScreenExpenseSummaryLabel: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
   },
 
   FieldDetailScreenExpenseSummaryTotal: {
-    color: colors.expenseMoney,
+    color: colors.expenseDinero,
     fontFamily: fonts.sansBold,
     fontSize: 24,
     fontWeight: '700',
@@ -980,13 +980,13 @@ const styles = StyleSheet.create({
   },
 
   FieldDetailScreenExpenseMeta: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
     marginTop: 2,
   },
   FieldDetailScreenExpenseAmount: {
-    color: colors.expenseMoney,
+    color: colors.expenseDinero,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
@@ -994,8 +994,8 @@ const styles = StyleSheet.create({
 
   FieldDetailScreenHarvestEmpty: {
     alignItems: 'center',
-    backgroundColor: colors.emptyFill,
-    borderColor: colors.emptyBorder,
+    backgroundColor: colors.emptyRelleno,
+    borderColor: colors.emptyBorde,
     borderRadius: radius.card,
     borderStyle: 'dashed',
     borderWidth: 1,
@@ -1014,7 +1014,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   FieldDetailScreenHarvestEmptyHint: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginBottom: 16,
@@ -1043,7 +1043,7 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   FieldDetailScreenNotesBody: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     lineHeight: 18,

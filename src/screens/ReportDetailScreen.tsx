@@ -11,11 +11,11 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { colors, fonts, radius } from '../constants/theme';
-import { appBackground } from '../data/assets';
+import { appFondo } from '../data/assets';
 
 import { SEASON_REPORT } from '../data/farm';
 
-import { useAdaptive } from '../hooks/useAdaptive';
+import { useAdaptativo } from '../hooks/useAdaptativo';
 
 type ReportDetailScreenProps = {
   onBack: () => void;
@@ -23,16 +23,16 @@ type ReportDetailScreenProps = {
 
 export function ReportDetailScreen({ onBack }: ReportDetailScreenProps) {
   const insets = useSafeAreaInsets();
-  const adaptive = useAdaptive();
+  const adaptive = useAdaptativo();
   const report = SEASON_REPORT;
-  const [toast, setToast] = useState<string | null>(null);
+  const [toast, setAviso] = useState<string | null>(null);
 
-  const showToast = (message: string) => {
-    setToast(message);
-    setTimeout(() => setToast(null), 2000);
+  const showAviso = (message: string) => {
+    setAviso(message);
+    setTimeout(() => setAviso(null), 2000);
   };
 
-  const shareMessage = [
+  const shareMensaje = [
     report.title,
     report.subtitle,
     '',
@@ -41,36 +41,36 @@ export function ReportDetailScreen({ onBack }: ReportDetailScreenProps) {
 
   return (
     <ImageBackground
-      source={appBackground}
-      style={styles.ReportDetailScreenRootHull}
+      source={appFondo}
+      style={styles.ReportDetailScreenRaizCasco}
       resizeMode="cover"
     >
       <ScrollView
         contentContainerStyle={[
           styles.ReportDetailScreenScrollContent,
           {
-            paddingTop: insets.top + adaptive.verticalScale(6),
-            paddingBottom: insets.bottom + adaptive.verticalScale(28),
+            paddingTop: insets.top + adaptive.verticalEscala(6),
+            paddingBottom: insets.bottom + adaptive.verticalEscala(28),
           },
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.ReportDetailScreenHeaderRowCapstone}>
+        <View style={styles.ReportDetailScreenHeaderRowDintel}>
           <Pressable
             onPress={onBack}
             hitSlop={12}
             style={styles.ReportDetailScreenNavSide}
           >
-            <Text style={styles.ReportDetailScreenNavLinkFlourish}>
+            <Text style={styles.ReportDetailScreenNavLinkFiligrana}>
               ‹ Reports
             </Text>
           </Pressable>
-          <Text style={styles.ReportDetailScreenTitleFlourish}>Report</Text>
+          <Text style={styles.ReportDetailScreenTitleFiligrana}>Report</Text>
           <View style={styles.ReportDetailScreenNavSide} />
         </View>
 
-        <View style={{ paddingHorizontal: adaptive.horizontalPadding }}>
-          <Text style={styles.ReportDetailScreenSubtitleFlourish}>
+        <View style={{ paddingHorizontal: adaptive.horizontalRelleno }}>
+          <Text style={styles.ReportDetailScreenSubtitleFiligrana}>
             {report.subtitle}
           </Text>
 
@@ -87,7 +87,7 @@ export function ReportDetailScreen({ onBack }: ReportDetailScreenProps) {
                   style={[
                     styles.ReportDetailScreenMetricValue,
                     metric.tone === 'success' && { color: colors.success },
-                    metric.tone === 'danger' && { color: colors.expenseMoney },
+                    metric.tone === 'danger' && { color: colors.expenseDinero },
                     metric.tone === 'gold' && { color: colors.gold },
                   ]}
                 >
@@ -103,10 +103,10 @@ export function ReportDetailScreen({ onBack }: ReportDetailScreenProps) {
                 try {
                   await Share.share({
                     title: report.title,
-                    message: shareMessage,
+                    message: shareMensaje,
                   });
                 } catch {
-                  showToast('Unable to share');
+                  showAviso('Unable to share');
                 }
               }}
               style={({ pressed }) => [
@@ -123,11 +123,11 @@ export function ReportDetailScreen({ onBack }: ReportDetailScreenProps) {
       {toast ? (
         <View
           style={[
-            styles.ReportDetailScreenToastHull,
-            { bottom: insets.bottom + adaptive.verticalScale(24) },
+            styles.ReportDetailScreenToastCasco,
+            { bottom: insets.bottom + adaptive.verticalEscala(24) },
           ]}
         >
-          <Text style={styles.ReportDetailScreenToastFlourish}>{toast}</Text>
+          <Text style={styles.ReportDetailScreenToastFiligrana}>{toast}</Text>
         </View>
       ) : null}
     </ImageBackground>
@@ -135,7 +135,7 @@ export function ReportDetailScreen({ onBack }: ReportDetailScreenProps) {
 }
 
 const styles = StyleSheet.create({
-  ReportDetailScreenRootHull: {
+  ReportDetailScreenRaizCasco: {
     backgroundColor: colors.background,
     flex: 1,
   },
@@ -143,9 +143,9 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 
-  ReportDetailScreenHeaderRowCapstone: {
+  ReportDetailScreenHeaderRowDintel: {
     alignItems: 'center',
-    borderBottomColor: colors.borderSoft,
+    borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -157,19 +157,19 @@ const styles = StyleSheet.create({
   ReportDetailScreenNavSide: {
     minWidth: 90,
   },
-  ReportDetailScreenNavLinkFlourish: {
+  ReportDetailScreenNavLinkFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
-  ReportDetailScreenTitleFlourish: {
+  ReportDetailScreenTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
-  ReportDetailScreenSubtitleFlourish: {
+  ReportDetailScreenSubtitleFiligrana: {
     color: colors.body,
     fontFamily: fonts.sansRegular,
     fontSize: 14,
@@ -210,8 +210,8 @@ const styles = StyleSheet.create({
 
   ReportDetailScreenActionBtn: {
     alignItems: 'center',
-    backgroundColor: colors.backButton,
-    borderColor: colors.backButtonBorder,
+    backgroundColor: colors.backBoton,
+    borderColor: colors.backButtonBorde,
     borderRadius: 14,
     borderWidth: 1,
     flex: 1,
@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
   ReportDetailScreenPressedDim: {
     opacity: 0.88,
   },
-  ReportDetailScreenToastHull: {
+  ReportDetailScreenToastCasco: {
     alignSelf: 'center',
     backgroundColor: colors.toastBg,
     borderColor: colors.border,
@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 
-  ReportDetailScreenToastFlourish: {
+  ReportDetailScreenToastFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 13,

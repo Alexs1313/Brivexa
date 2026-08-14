@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { todayAssets } from '../../data/assets';
+import { todayRecursos } from '../../data/assets';
 import type { GuestTab } from '../../navigation/types';
 import { colors, fonts } from '../../constants/theme';
 
@@ -17,7 +17,7 @@ type TabItem = {
   key: GuestTab;
   label: string;
   icon: number;
-  iconActive?: number;
+  iconActivo?: number;
   center?: boolean;
 };
 
@@ -25,18 +25,18 @@ const TABS: TabItem[] = [
   {
     key: 'TodayTab',
     label: 'Today',
-    icon: todayAssets.tabTodayMuted,
-    iconActive: todayAssets.tabToday,
+    icon: todayRecursos.tabTodayApagado,
+    iconActivo: todayRecursos.tabHoy,
   },
   {
     key: 'FieldsTab',
     label: 'Fields',
-    icon: todayAssets.tabFields,
-    iconActive: todayAssets.tabFieldsActive,
+    icon: todayRecursos.tabCampos,
+    iconActivo: todayRecursos.tabFieldsActivo,
   },
-  { key: 'WorkTab', label: 'Work', icon: todayAssets.tabWork, center: true },
-  { key: 'CalcTab', label: 'Calc', icon: todayAssets.tabCalc },
-  { key: 'FarmTab', label: 'Farm', icon: todayAssets.tabFarm },
+  { key: 'WorkTab', label: 'Work', icon: todayRecursos.tabTrabajo, center: true },
+  { key: 'CalcTab', label: 'Calc', icon: todayRecursos.tabCalc },
+  { key: 'FarmTab', label: 'Farm', icon: todayRecursos.tabGranja },
 ];
 
 type TabBarProps = {
@@ -50,7 +50,7 @@ export function TabBar({ activeTab, onSelect }: TabBarProps) {
   return (
     <View
       style={[
-        styles.TabBarRootHull,
+        styles.TabBarRaizCasco,
         { paddingBottom: Math.max(insets.bottom, 8) },
       ]}
     >
@@ -61,25 +61,25 @@ export function TabBar({ activeTab, onSelect }: TabBarProps) {
             <Pressable
               key={tab.key}
               onPress={() => onSelect(tab.key)}
-              style={styles.TabBarCenterPocket}
+              style={styles.TabBarCenterBolsillo}
               hitSlop={8}
             >
               <ImageBackground
-                source={todayAssets.tabWorkBg}
-                style={styles.TabBarWorkBead}
-                imageStyle={styles.TabBarWorkBeadImage}
+                source={todayRecursos.tabWorkBg}
+                style={styles.TabBarWorkOrbe}
+                imageStyle={styles.TabBarWorkOrbeImage}
                 resizeMode="cover"
               >
                 <Image
-                  source={todayAssets.tabWork}
-                  style={styles.TabBarWorkMarkEmblem}
+                  source={todayRecursos.tabTrabajo}
+                  style={styles.TabBarWorkMarcaEmblema}
                   resizeMode="contain"
                 />
               </ImageBackground>
               <Text
                 style={[
-                  styles.TabBarLabelFlourish,
-                  active && styles.TabBarLabelActiveFlourish,
+                  styles.TabBarLabelFiligrana,
+                  active && styles.TabBarLabelActiveFiligrana,
                 ]}
               >
                 {tab.label}
@@ -92,23 +92,23 @@ export function TabBar({ activeTab, onSelect }: TabBarProps) {
           <Pressable
             key={tab.key}
             onPress={() => onSelect(tab.key)}
-            style={styles.TabBarPocket}
+            style={styles.TabBarBolsillo}
             hitSlop={8}
           >
             <Image
-              source={active && tab.iconActive ? tab.iconActive : tab.icon}
+              source={active && tab.iconActivo ? tab.iconActivo : tab.icon}
               style={[
-                styles.TabBarMarkEmblem,
-                !tab.iconActive && {
-                  tintColor: active ? colors.gold : colors.tabInactive,
+                styles.TabBarMarcaEmblema,
+                !tab.iconActivo && {
+                  tintColor: active ? colors.gold : colors.tabInactivo,
                 },
               ]}
               resizeMode="contain"
             />
             <Text
               style={[
-                styles.TabBarLabelFlourish,
-                active && styles.TabBarLabelActiveFlourish,
+                styles.TabBarLabelFiligrana,
+                active && styles.TabBarLabelActiveFiligrana,
               ]}
             >
               {tab.label}
@@ -121,33 +121,33 @@ export function TabBar({ activeTab, onSelect }: TabBarProps) {
 }
 
 const styles = StyleSheet.create({
-  TabBarRootHull: {
+  TabBarRaizCasco: {
     backgroundColor: colors.tabBar,
-    borderTopColor: colors.borderSoft,
+    borderTopColor: colors.borderSuave,
     borderTopWidth: 1,
     flexDirection: 'row',
     paddingHorizontal: 4,
     paddingTop: 10,
   },
 
-  TabBarPocket: {
+  TabBarBolsillo: {
     alignItems: 'center',
     flex: 1,
     gap: 4,
     paddingBottom: 2,
   },
-  TabBarCenterPocket: {
+  TabBarCenterBolsillo: {
     alignItems: 'center',
     flex: 1,
     gap: 4,
     marginTop: -20,
   },
 
-  TabBarMarkEmblem: {
+  TabBarMarcaEmblema: {
     height: 24,
     width: 24,
   },
-  TabBarWorkBead: {
+  TabBarWorkOrbe: {
     alignItems: 'center',
     borderRadius: 17,
     elevation: 8,
@@ -160,21 +160,21 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     width: 50,
   },
-  TabBarWorkBeadImage: {
+  TabBarWorkOrbeImage: {
     borderRadius: 17,
   },
-  TabBarWorkMarkEmblem: {
+  TabBarWorkMarcaEmblema: {
     height: 26,
     width: 26,
   },
 
-  TabBarLabelFlourish: {
-    color: colors.tabInactive,
+  TabBarLabelFiligrana: {
+    color: colors.tabInactivo,
     fontFamily: fonts.sansRegular,
     fontSize: 10,
   },
 
-  TabBarLabelActiveFlourish: {
+  TabBarLabelActiveFiligrana: {
     color: colors.gold,
   },
 });

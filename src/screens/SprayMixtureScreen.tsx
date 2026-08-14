@@ -10,53 +10,53 @@ import {
   UnitField,
 } from '../components/calculators/CalculatorParts';
 import {
-  calcSprayMixture,
+  calcSprayMezcla,
   parseNumber,
   type ResultRow,
 } from '../data/calculators';
 
 import type { FarmField } from '../data/fields';
-import { useFields } from '../data/FieldsContext';
+import { useCampos } from '../data/FieldsContext';
 
 type SprayMixtureScreenProps = {
   onBack: () => void;
 };
 
 export function SprayMixtureScreen({ onBack }: SprayMixtureScreenProps) {
-  const { getField } = useFields();
+  const { getCampo } = useCampos();
   const [fieldId, setFieldId] = useState('');
-  const [waterRate, setWaterRate] = useState('');
-  const [productRate, setProductRate] = useState('');
-  const [tankCapacity, setTankCapacity] = useState('');
+  const [waterTasa, setWaterTasa] = useState('');
+  const [productTasa, setProductTasa] = useState('');
+  const [tankCapacidad, setTankCapacidad] = useState('');
   const [packageVol, setPackageVol] = useState('');
-  const [rows, setRows] = useState<ResultRow[]>([]);
+  const [rows, setFilas] = useState<ResultRow[]>([]);
 
-  const field = getField(fieldId);
-  const resultTitle = useMemo(
+  const field = getCampo(fieldId);
+  const resultTitulo = useMemo(
     () => `Spray Mixture · ${field?.name ?? 'Field'}`,
     [field?.name],
   );
 
-  const onSelectField = (next: FarmField) => {
+  const onSelectCampo = (next: FarmField) => {
     setFieldId(next.id);
   };
 
   const reset = () => {
     setFieldId('');
-    setWaterRate('');
-    setProductRate('');
-    setTankCapacity('');
+    setWaterTasa('');
+    setProductTasa('');
+    setTankCapacidad('');
     setPackageVol('');
-    setRows([]);
+    setFilas([]);
   };
 
   const calculate = () => {
-    setRows(
-      calcSprayMixture({
+    setFilas(
+      calcSprayMezcla({
         areaHa: field?.areaHa ?? 0,
-        waterRateLHa: parseNumber(waterRate),
-        productRateLHa: parseNumber(productRate),
-        tankL: parseNumber(tankCapacity),
+        waterRateLHa: parseNumber(waterTasa),
+        productRateLHa: parseNumber(productTasa),
+        tankL: parseNumber(tankCapacidad),
         packageL: parseNumber(packageVol),
       }),
     );
@@ -64,20 +64,20 @@ export function SprayMixtureScreen({ onBack }: SprayMixtureScreenProps) {
 
   return (
     <CalculatorShell title="Spray Mixture" onBack={onBack}>
-      <FieldDropdown selectedId={fieldId} onSelect={onSelectField} />
+      <FieldDropdown selectedId={fieldId} onSelect={onSelectCampo} />
       <View style={styles.SprayMixtureScreenGrid}>
         <UnitField
           label="Water Rate"
-          value={waterRate}
-          onChangeText={setWaterRate}
+          value={waterTasa}
+          onChangeText={setWaterTasa}
           unit="L/ha"
           placeholder="e.g. 200"
           flex
         />
         <UnitField
           label="Product Rate"
-          value={productRate}
-          onChangeText={setProductRate}
+          value={productTasa}
+          onChangeText={setProductTasa}
           unit="L/ha"
           placeholder="e.g. 0.8"
           flex
@@ -86,8 +86,8 @@ export function SprayMixtureScreen({ onBack }: SprayMixtureScreenProps) {
       <View style={styles.SprayMixtureScreenGrid}>
         <UnitField
           label="Tank Capacity"
-          value={tankCapacity}
-          onChangeText={setTankCapacity}
+          value={tankCapacidad}
+          onChangeText={setTankCapacidad}
           unit="L"
           placeholder="e.g. 1200"
           flex
@@ -102,9 +102,9 @@ export function SprayMixtureScreen({ onBack }: SprayMixtureScreenProps) {
         />
       </View>
       <CalcActions onReset={reset} onCalculate={calculate} />
-      <ResultCard title={resultTitle} rows={rows} />
+      <ResultCard title={resultTitulo} rows={rows} />
       {rows.length > 0 ? (
-        <SaveShareRow calculatorId="spray" title={resultTitle} rows={rows} />
+        <SaveShareRow calculatorId="spray" title={resultTitulo} rows={rows} />
       ) : null}
     </CalculatorShell>
   );

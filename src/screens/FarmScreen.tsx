@@ -12,15 +12,15 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { PrimaryButton } from '../components/buttons/PrimaryButton';
 import { colors, fonts, radius } from '../constants/theme';
 
-import { appBackground } from '../data/assets';
+import { appFondo } from '../data/assets';
 import {
-  EXPENSE_CATEGORIES,
+  EXPENSE_CATEGORIAS,
   FINANCE_SUMMARY,
-  FARM_DEMO_BANNER,
+  FARM_DEMO_BANDA,
   FARM_SECTIONS,
   SEASON_REPORT,
-  equipmentTotals,
-  inventoryTotals,
+  equipmentTotales,
+  inventoryTotales,
   type EquipmentStatus,
   type FarmEquipment,
   type FarmSection,
@@ -28,56 +28,56 @@ import {
   type StockStatus,
 } from '../data/farm';
 
-import { useFarm } from '../data/FarmContext';
-import { useAdaptive } from '../hooks/useAdaptive';
+import { useGranja } from '../data/FarmContext';
+import { useAdaptativo } from '../hooks/useAdaptativo';
 
 type FarmScreenProps = {
-  onOpenItem: (itemId: string) => void;
-  onAddItem: () => void;
-  onOpenEquipment: (equipmentId: string) => void;
-  onAddIncome: () => void;
-  onOpenReport: () => void;
-  toastMessage?: string | null;
+  onOpenArticulo: (itemId: string) => void;
+  onAddArticulo: () => void;
+  onOpenEquipo: (equipmentId: string) => void;
+  onAddIngreso: () => void;
+  onOpenInforme: () => void;
+  toastMensaje?: string | null;
 };
 
 export function FarmScreen({
-  onOpenItem,
-  onAddItem,
-  onOpenEquipment,
-  onAddIncome,
-  onOpenReport,
-  toastMessage,
+  onOpenArticulo,
+  onAddArticulo,
+  onOpenEquipo,
+  onAddIngreso,
+  onOpenInforme,
+  toastMensaje,
 }: FarmScreenProps) {
   const insets = useSafeAreaInsets();
-  const adaptive = useAdaptive();
-  const [section, setSection] = useState<FarmSection>('Inventory');
+  const adaptive = useAdaptativo();
+  const [section, setSeccion] = useState<FarmSection>('Inventory');
 
   return (
     <ImageBackground
-      source={appBackground}
-      style={styles.FarmScreenRootHull}
+      source={appFondo}
+      style={styles.FarmScreenRaizCasco}
       resizeMode="cover"
     >
       <ScrollView
         contentContainerStyle={[
           styles.FarmScreenScrollContent,
           {
-            paddingTop: insets.top + adaptive.verticalScale(8),
-            paddingBottom: adaptive.verticalScale(110),
-            paddingHorizontal: adaptive.horizontalPadding,
+            paddingTop: insets.top + adaptive.verticalEscala(8),
+            paddingBottom: adaptive.verticalEscala(110),
+            paddingHorizontal: adaptive.horizontalRelleno,
           },
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <Text style={styles.FarmScreenTitleFlourish}>Farm</Text>
+        <Text style={styles.FarmScreenTitleFiligrana}>Farm</Text>
 
-        <View style={styles.FarmScreenSectionRowCapstone}>
+        <View style={styles.FarmScreenSectionRowDintel}>
           {FARM_SECTIONS.map(item => {
             const active = item === section;
             return (
               <Pressable
                 key={item}
-                onPress={() => setSection(item)}
+                onPress={() => setSeccion(item)}
                 style={[
                   styles.FarmScreenSectionChip,
                   active
@@ -99,28 +99,28 @@ export function FarmScreen({
         </View>
 
         {section === 'Inventory' ? (
-          <InventorySection onOpenItem={onOpenItem} onAddItem={onAddItem} />
+          <InventorySection onOpenArticulo={onOpenArticulo} onAddArticulo={onAddArticulo} />
         ) : null}
         {section === 'Equipment' ? (
-          <EquipmentSection onOpenEquipment={onOpenEquipment} />
+          <EquipmentSection onOpenEquipo={onOpenEquipo} />
         ) : null}
         {section === 'Finance' ? (
-          <FinanceSection onAddIncome={onAddIncome} />
+          <FinanceSection onAddIngreso={onAddIngreso} />
         ) : null}
         {section === 'Reports' ? (
-          <ReportsSection onOpenReport={onOpenReport} />
+          <ReportsSection onOpenInforme={onOpenInforme} />
         ) : null}
       </ScrollView>
 
-      {toastMessage ? (
+      {toastMensaje ? (
         <View
           style={[
-            styles.FarmScreenToastHull,
-            { bottom: insets.bottom + adaptive.verticalScale(92) },
+            styles.FarmScreenToastCasco,
+            { bottom: insets.bottom + adaptive.verticalEscala(92) },
           ]}
         >
           <Text style={styles.FarmScreenToastCheck}>✓</Text>
-          <Text style={styles.FarmScreenToastFlourish}>{toastMessage}</Text>
+          <Text style={styles.FarmScreenToastFiligrana}>{toastMensaje}</Text>
         </View>
       ) : null}
     </ImageBackground>
@@ -128,26 +128,26 @@ export function FarmScreen({
 }
 
 function InventorySection({
-  onOpenItem,
-  onAddItem,
+  onOpenArticulo,
+  onAddArticulo,
 }: {
-  onOpenItem: (itemId: string) => void;
-  onAddItem: () => void;
+  onOpenArticulo: (itemId: string) => void;
+  onAddArticulo: () => void;
 }) {
-  const { inventory: items, isInventoryDemo } = useFarm();
-  const totals = useMemo(() => inventoryTotals(items), [items]);
+  const { inventory: items, isInventoryMuestra } = useGranja();
+  const totals = useMemo(() => inventoryTotales(items), [items]);
 
   if (items.length === 0) {
     return (
-      <View style={styles.FarmScreenEmptyHull}>
+      <View style={styles.FarmScreenEmptyCasco}>
         <Text style={styles.FarmScreenEmptyEmoji}>📦</Text>
         <Text style={styles.FarmScreenEmptyTitle}>No inventory items yet</Text>
         <Text style={styles.FarmScreenEmptyBody}>
-          Add seeds, fertilizer, fuel and parts to track stock.
+          Add grain, fertilizer, fuel and parts to track stock.
         </Text>
         <PrimaryButton
           label="+ Add Item"
-          onPress={onAddItem}
+          onPress={onAddArticulo}
           style={styles.FarmScreenEmptyBtn}
         />
       </View>
@@ -156,11 +156,11 @@ function InventorySection({
 
   return (
     <View>
-      {isInventoryDemo ? (
-        <View style={styles.FarmScreenDemoBannerHull}>
-          <Text style={styles.FarmScreenDemoBannerEmblem}>ℹ️</Text>
-          <Text style={styles.FarmScreenDemoBannerFlourish}>
-            {FARM_DEMO_BANNER}
+      {isInventoryMuestra ? (
+        <View style={styles.FarmScreenDemoBannerCasco}>
+          <Text style={styles.FarmScreenDemoBannerEmblema}>ℹ️</Text>
+          <Text style={styles.FarmScreenDemoBannerFiligrana}>
+            {FARM_DEMO_BANDA}
           </Text>
         </View>
       ) : null}
@@ -169,21 +169,21 @@ function InventorySection({
         <View style={styles.FarmScreenStatCard}>
           <Text style={styles.FarmScreenStatLabel}>Total Value</Text>
           <Text style={styles.FarmScreenStatValueGold}>
-            {totals.totalValueLabel}
+            {totals.totalValueEtiqueta}
           </Text>
         </View>
         <View style={styles.FarmScreenStatCard}>
           <Text style={styles.FarmScreenStatLabel}>Needs Attention</Text>
           <Text style={styles.FarmScreenStatValueWarn}>
-            {totals.needsAttention}
+            {totals.needsAtencion}
           </Text>
         </View>
       </View>
 
-      <View style={styles.FarmScreenSectionHeaderCapstone}>
-        <Text style={styles.FarmScreenSectionTitleFlourish}>Items</Text>
-        <Pressable onPress={onAddItem} hitSlop={8}>
-          <Text style={styles.FarmScreenSectionActionFlourish}>+ Add Item</Text>
+      <View style={styles.FarmScreenSectionHeaderDintel}>
+        <Text style={styles.FarmScreenSectionTitleFiligrana}>Items</Text>
+        <Pressable onPress={onAddArticulo} hitSlop={8}>
+          <Text style={styles.FarmScreenSectionActionFiligrana}>+ Add Item</Text>
         </Pressable>
       </View>
 
@@ -192,7 +192,7 @@ function InventorySection({
           <InventoryCard
             key={item.id}
             item={item}
-            onPress={() => onOpenItem(item.id)}
+            onPress={() => onOpenArticulo(item.id)}
           />
         ))}
       </View>
@@ -223,7 +223,7 @@ function InventoryCard({
       ]}
     >
       <View style={styles.FarmScreenCardTopRow}>
-        <View style={styles.FarmScreenFlexPocket}>
+        <View style={styles.FarmScreenFlexBolsillo}>
           <Text style={styles.FarmScreenCardTitle}>{item.name}</Text>
           <Text style={styles.FarmScreenCardSubtitle}>{item.category}</Text>
         </View>
@@ -231,12 +231,12 @@ function InventoryCard({
       </View>
       <View style={styles.FarmScreenQtyRow}>
         <Text>
-          <Text style={styles.FarmScreenQtyPrimary}>{item.quantityLabel}</Text>
+          <Text style={styles.FarmScreenQtyPrimary}>{item.quantityEtiqueta}</Text>
           <Text
             style={styles.FarmScreenQtySecondary}
-          >{` / ${item.minLabel}`}</Text>
+          >{` / ${item.minEtiqueta}`}</Text>
         </Text>
-        <Text style={styles.FarmScreenPriceLabel}>{item.priceLabel}</Text>
+        <Text style={styles.FarmScreenPriceLabel}>{item.priceEtiqueta}</Text>
       </View>
       <View style={styles.FarmScreenProgressTrack}>
         <View
@@ -257,16 +257,16 @@ function InventoryCard({
 }
 
 function EquipmentSection({
-  onOpenEquipment,
+  onOpenEquipo,
 }: {
-  onOpenEquipment: (equipmentId: string) => void;
+  onOpenEquipo: (equipmentId: string) => void;
 }) {
-  const { equipment, addEquipment, isEquipmentDemo } = useFarm();
-  const totals = equipmentTotals(equipment);
+  const { equipment, addEquipo, isEquipmentMuestra } = useGranja();
+  const totals = equipmentTotales(equipment);
 
   if (equipment.length === 0) {
     return (
-      <View style={styles.FarmScreenEmptyHull}>
+      <View style={styles.FarmScreenEmptyCasco}>
         <Text style={styles.FarmScreenEmptyEmoji}>🚜</Text>
         <Text style={styles.FarmScreenEmptyTitle}>No equipment yet</Text>
         <Text style={styles.FarmScreenEmptyBody}>
@@ -275,8 +275,8 @@ function EquipmentSection({
         <PrimaryButton
           label="+ Add Equipment"
           onPress={() => {
-            const item = addEquipment();
-            onOpenEquipment(item.id);
+            const item = addEquipo();
+            onOpenEquipo(item.id);
           }}
           style={styles.FarmScreenEmptyBtn}
         />
@@ -286,11 +286,11 @@ function EquipmentSection({
 
   return (
     <View>
-      {isEquipmentDemo ? (
-        <View style={styles.FarmScreenDemoBannerHull}>
-          <Text style={styles.FarmScreenDemoBannerEmblem}>ℹ️</Text>
-          <Text style={styles.FarmScreenDemoBannerFlourish}>
-            {FARM_DEMO_BANNER}
+      {isEquipmentMuestra ? (
+        <View style={styles.FarmScreenDemoBannerCasco}>
+          <Text style={styles.FarmScreenDemoBannerEmblema}>ℹ️</Text>
+          <Text style={styles.FarmScreenDemoBannerFiligrana}>
+            {FARM_DEMO_BANDA}
           </Text>
         </View>
       ) : null}
@@ -316,16 +316,16 @@ function EquipmentSection({
         </View>
       </View>
 
-      <View style={styles.FarmScreenSectionHeaderCapstone}>
-        <Text style={styles.FarmScreenSectionTitleFlourish}>Machines</Text>
+      <View style={styles.FarmScreenSectionHeaderDintel}>
+        <Text style={styles.FarmScreenSectionTitleFiligrana}>Machines</Text>
         <Pressable
           onPress={() => {
-            const item = addEquipment();
-            onOpenEquipment(item.id);
+            const item = addEquipo();
+            onOpenEquipo(item.id);
           }}
           hitSlop={8}
         >
-          <Text style={styles.FarmScreenSectionActionFlourish}>+ Add</Text>
+          <Text style={styles.FarmScreenSectionActionFiligrana}>+ Add</Text>
         </Pressable>
       </View>
 
@@ -334,7 +334,7 @@ function EquipmentSection({
           <EquipmentCard
             key={item.id}
             item={item}
-            onPress={() => onOpenEquipment(item.id)}
+            onPress={() => onOpenEquipo(item.id)}
           />
         ))}
       </View>
@@ -358,7 +358,7 @@ function EquipmentCard({
       ]}
     >
       <View style={styles.FarmScreenEquipIcon}>
-        <Text style={styles.FarmScreenEquipIconMark}>{item.icon}</Text>
+        <Text style={styles.FarmScreenEquipIconMarca}>{item.icon}</Text>
       </View>
       <View style={styles.FarmScreenEquipBody}>
         <View style={styles.FarmScreenCardTopRow}>
@@ -366,14 +366,14 @@ function EquipmentCard({
           <EquipmentPill status={item.status} />
         </View>
         <Text style={styles.FarmScreenCardSubtitle}>
-          {item.type} · {item.hoursLabel}
+          {item.type} · {item.hoursEtiqueta}
         </Text>
-        {item.serviceAlert ? (
-          <Text style={styles.FarmScreenServiceAlert}>{item.serviceAlert}</Text>
+        {item.serviceAlerta ? (
+          <Text style={styles.FarmScreenServiceAlert}>{item.serviceAlerta}</Text>
         ) : null}
-        {item.assignedField ? (
+        {item.assignedCampo ? (
           <Text style={styles.FarmScreenAssignedLine}>
-            Assigned to {item.assignedField}
+            Assigned to {item.assignedCampo}
           </Text>
         ) : null}
       </View>
@@ -381,16 +381,16 @@ function EquipmentCard({
   );
 }
 
-function FinanceSection({ onAddIncome }: { onAddIncome: () => void }) {
-  const { transactions, isTransactionsDemo } = useFarm();
+function FinanceSection({ onAddIngreso }: { onAddIngreso: () => void }) {
+  const { transactions, isTransactionsMuestra } = useGranja();
 
   return (
     <View>
-      {isTransactionsDemo ? (
-        <View style={styles.FarmScreenDemoBannerHull}>
-          <Text style={styles.FarmScreenDemoBannerEmblem}>ℹ️</Text>
-          <Text style={styles.FarmScreenDemoBannerFlourish}>
-            {FARM_DEMO_BANNER}
+      {isTransactionsMuestra ? (
+        <View style={styles.FarmScreenDemoBannerCasco}>
+          <Text style={styles.FarmScreenDemoBannerEmblema}>ℹ️</Text>
+          <Text style={styles.FarmScreenDemoBannerFiligrana}>
+            {FARM_DEMO_BANDA}
           </Text>
         </View>
       ) : null}
@@ -398,25 +398,25 @@ function FinanceSection({ onAddIncome }: { onAddIncome: () => void }) {
       <View style={styles.FarmScreenProfitCard}>
         <Text style={styles.FarmScreenStatLabel}>Net Profit · This Season</Text>
         <Text style={styles.FarmScreenProfitValue}>
-          {FINANCE_SUMMARY.netProfitLabel}
+          {FINANCE_SUMMARY.netProfitEtiqueta}
         </Text>
         <View style={styles.FarmScreenProfitMetaRow}>
           <View>
             <Text style={styles.FarmScreenMetaLabel}>Income</Text>
             <Text style={styles.FarmScreenMetaValue}>
-              {FINANCE_SUMMARY.incomeLabel}
+              {FINANCE_SUMMARY.incomeEtiqueta}
             </Text>
           </View>
           <View>
             <Text style={styles.FarmScreenMetaLabel}>Expenses</Text>
             <Text style={styles.FarmScreenMetaValueDanger}>
-              {FINANCE_SUMMARY.expensesLabel}
+              {FINANCE_SUMMARY.expensesEtiqueta}
             </Text>
           </View>
           <View>
             <Text style={styles.FarmScreenMetaLabel}>Cost / ha</Text>
             <Text style={styles.FarmScreenMetaValue}>
-              {FINANCE_SUMMARY.costPerHaLabel}
+              {FINANCE_SUMMARY.costPerHaEtiqueta}
             </Text>
           </View>
         </View>
@@ -424,12 +424,12 @@ function FinanceSection({ onAddIncome }: { onAddIncome: () => void }) {
 
       <View style={styles.FarmScreenExpenseCard}>
         <Text style={styles.FarmScreenExpenseTitle}>Expenses by Category</Text>
-        {EXPENSE_CATEGORIES.map(cat => (
+        {EXPENSE_CATEGORIAS.map(cat => (
           <View key={cat.id} style={styles.FarmScreenExpenseRow}>
             <View style={styles.FarmScreenExpenseLabelRow}>
               <Text style={styles.FarmScreenExpenseLabel}>{cat.label}</Text>
               <Text style={styles.FarmScreenExpenseAmount}>
-                {cat.amountLabel}
+                {cat.amountEtiqueta}
               </Text>
             </View>
             <View style={styles.FarmScreenProgressTrackTall}>
@@ -447,15 +447,15 @@ function FinanceSection({ onAddIncome }: { onAddIncome: () => void }) {
         ))}
       </View>
 
-      <View style={styles.FarmScreenSectionHeaderCapstone}>
-        <Text style={styles.FarmScreenSectionTitleFlourish}>Transactions</Text>
-        <Pressable onPress={onAddIncome} hitSlop={8}>
-          <Text style={styles.FarmScreenSectionActionFlourish}>+ Add</Text>
+      <View style={styles.FarmScreenSectionHeaderDintel}>
+        <Text style={styles.FarmScreenSectionTitleFiligrana}>Transactions</Text>
+        <Pressable onPress={onAddIngreso} hitSlop={8}>
+          <Text style={styles.FarmScreenSectionActionFiligrana}>+ Add</Text>
         </Pressable>
       </View>
 
       {transactions.length === 0 ? (
-        <View style={styles.FarmScreenEmptyHull}>
+        <View style={styles.FarmScreenEmptyCasco}>
           <Text style={styles.FarmScreenEmptyEmoji}>💵</Text>
           <Text style={styles.FarmScreenEmptyTitle}>No transactions yet</Text>
           <Text style={styles.FarmScreenEmptyBody}>
@@ -463,7 +463,7 @@ function FinanceSection({ onAddIncome }: { onAddIncome: () => void }) {
           </Text>
           <PrimaryButton
             label="+ Add Income"
-            onPress={onAddIncome}
+            onPress={onAddIngreso}
             style={styles.FarmScreenEmptyBtn}
           />
         </View>
@@ -479,9 +479,9 @@ function FinanceSection({ onAddIncome }: { onAddIncome: () => void }) {
                     : styles.FarmScreenTxIconExpense,
                 ]}
               >
-                <Text style={styles.FarmScreenTxIconMark}>{tx.icon}</Text>
+                <Text style={styles.FarmScreenTxIconMarca}>{tx.icon}</Text>
               </View>
-              <View style={styles.FarmScreenFlexPocket}>
+              <View style={styles.FarmScreenFlexBolsillo}>
                 <Text style={styles.FarmScreenTxTitle}>{tx.title}</Text>
                 <Text style={styles.FarmScreenCardSubtitle}>{tx.subtitle}</Text>
               </View>
@@ -493,7 +493,7 @@ function FinanceSection({ onAddIncome }: { onAddIncome: () => void }) {
                     : styles.FarmScreenTxAmountExpense,
                 ]}
               >
-                {tx.amountLabel}
+                {tx.amountEtiqueta}
               </Text>
             </View>
           ))}
@@ -503,10 +503,10 @@ function FinanceSection({ onAddIncome }: { onAddIncome: () => void }) {
   );
 }
 
-function ReportsSection({ onOpenReport }: { onOpenReport: () => void }) {
+function ReportsSection({ onOpenInforme }: { onOpenInforme: () => void }) {
   return (
     <Pressable
-      onPress={onOpenReport}
+      onPress={onOpenInforme}
       style={({ pressed }) => [
         styles.FarmScreenReportCard,
         pressed && styles.FarmScreenPressedDim,
@@ -582,7 +582,7 @@ function EquipmentPill({ status }: { status: EquipmentStatus }) {
 }
 
 const styles = StyleSheet.create({
-  FarmScreenRootHull: {
+  FarmScreenRaizCasco: {
     backgroundColor: colors.background,
     flex: 1,
   },
@@ -590,7 +590,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 
-  FarmScreenTitleFlourish: {
+  FarmScreenTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 24,
@@ -598,7 +598,7 @@ const styles = StyleSheet.create({
     marginBottom: 14,
   },
 
-  FarmScreenSectionRowCapstone: {
+  FarmScreenSectionRowDintel: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 8,
@@ -611,13 +611,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   FarmScreenSectionChipActive: {
-    backgroundColor: colors.goldSoft,
+    backgroundColor: colors.goldSuave,
   },
   FarmScreenSectionChipIdle: {
-    backgroundColor: colors.plannedSoft,
+    backgroundColor: colors.plannedSuave,
   },
   FarmScreenSectionChipLabel: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansBold,
     fontSize: 13,
     fontWeight: '700',
@@ -625,9 +625,9 @@ const styles = StyleSheet.create({
   FarmScreenSectionChipLabelActive: {
     color: colors.gold,
   },
-  FarmScreenDemoBannerHull: {
-    backgroundColor: colors.infoBanner,
-    borderColor: colors.infoBannerBorder,
+  FarmScreenDemoBannerCasco: {
+    backgroundColor: colors.infoBanda,
+    borderColor: colors.infoBannerBorde,
     borderRadius: radius.card,
     borderWidth: 1,
     flexDirection: 'row',
@@ -637,11 +637,11 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
 
-  FarmScreenDemoBannerEmblem: {
+  FarmScreenDemoBannerEmblema: {
     fontSize: 16,
     marginTop: 2,
   },
-  FarmScreenDemoBannerFlourish: {
+  FarmScreenDemoBannerFiligrana: {
     color: colors.infoBannerText,
     flex: 1,
     fontFamily: fonts.sansRegular,
@@ -665,7 +665,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
   FarmScreenStatLabel: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
   },
@@ -685,20 +685,20 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginTop: 4,
   },
-  FarmScreenSectionHeaderCapstone: {
+  FarmScreenSectionHeaderDintel: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 12,
   },
-  FarmScreenSectionTitleFlourish: {
+  FarmScreenSectionTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
-  FarmScreenSectionActionFlourish: {
+  FarmScreenSectionActionFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 13,
@@ -726,7 +726,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     gap: 8,
   },
-  FarmScreenFlexPocket: {
+  FarmScreenFlexBolsillo: {
     flexShrink: 1,
   },
   FarmScreenCardTitle: {
@@ -736,7 +736,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   FarmScreenCardSubtitle: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
     marginTop: 2,
@@ -755,7 +755,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   FarmScreenQtySecondary: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
   },
@@ -791,17 +791,17 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
   },
   FarmScreenPillSuccess: {
-    backgroundColor: colors.successSoft,
+    backgroundColor: colors.successSuave,
   },
   FarmScreenPillWarn: {
-    backgroundColor: colors.prioritySoft,
+    backgroundColor: colors.prioritySuave,
   },
   FarmScreenPillDanger: {
-    backgroundColor: colors.dangerSoft,
+    backgroundColor: colors.dangerSuave,
   },
 
   FarmScreenPillInfo: {
-    backgroundColor: colors.infoSoft,
+    backgroundColor: colors.infoSuave,
   },
 
   FarmScreenPillLabel: {
@@ -809,10 +809,10 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: '700',
   },
-  FarmScreenEmptyHull: {
+  FarmScreenEmptyCasco: {
     alignItems: 'center',
-    backgroundColor: colors.emptyFill,
-    borderColor: colors.emptyBorder,
+    backgroundColor: colors.emptyRelleno,
+    borderColor: colors.emptyBorde,
     borderRadius: radius.card,
     borderStyle: 'dashed',
     borderWidth: 1,
@@ -835,7 +835,7 @@ const styles = StyleSheet.create({
   },
 
   FarmScreenEmptyBody: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginTop: 8,
@@ -881,7 +881,7 @@ const styles = StyleSheet.create({
   },
 
   FarmScreenEquipStatLabel: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 10,
     marginTop: 2,
@@ -900,13 +900,13 @@ const styles = StyleSheet.create({
 
   FarmScreenEquipIcon: {
     alignItems: 'center',
-    backgroundColor: colors.backButton,
+    backgroundColor: colors.backBoton,
     borderRadius: 12,
     height: 44,
     justifyContent: 'center',
     width: 44,
   },
-  FarmScreenEquipIconMark: {
+  FarmScreenEquipIconMarca: {
     fontSize: 22,
   },
 
@@ -921,7 +921,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   FarmScreenAssignedLine: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 11,
     marginTop: 4,
@@ -956,7 +956,7 @@ const styles = StyleSheet.create({
     marginTop: 14,
   },
   FarmScreenMetaLabel: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 11,
   },
@@ -969,7 +969,7 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   FarmScreenMetaValueDanger: {
-    color: colors.expenseMoney,
+    color: colors.expenseDinero,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
@@ -1001,7 +1001,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   FarmScreenExpenseLabel: {
-    color: colors.bodySoft,
+    color: colors.bodySuave,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
   },
@@ -1031,12 +1031,12 @@ const styles = StyleSheet.create({
   },
 
   FarmScreenTxIconIncome: {
-    backgroundColor: colors.successSoft,
+    backgroundColor: colors.successSuave,
   },
   FarmScreenTxIconExpense: {
-    backgroundColor: colors.dangerSoft,
+    backgroundColor: colors.dangerSuave,
   },
-  FarmScreenTxIconMark: {
+  FarmScreenTxIconMarca: {
     fontSize: 16,
   },
 
@@ -1058,7 +1058,7 @@ const styles = StyleSheet.create({
   },
 
   FarmScreenTxAmountExpense: {
-    color: colors.expenseMoney,
+    color: colors.expenseDinero,
   },
   FarmScreenReportCard: {
     backgroundColor: colors.card,
@@ -1085,11 +1085,11 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginTop: 16,
   },
-  FarmScreenToastHull: {
+  FarmScreenToastCasco: {
     alignItems: 'center',
     alignSelf: 'center',
     backgroundColor: colors.toastBg,
-    borderColor: colors.emptyBorder,
+    borderColor: colors.emptyBorde,
     borderRadius: 14,
     borderWidth: 1,
     flexDirection: 'row',
@@ -1105,7 +1105,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 
-  FarmScreenToastFlourish: {
+  FarmScreenToastFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansRegular,
     fontSize: 14,

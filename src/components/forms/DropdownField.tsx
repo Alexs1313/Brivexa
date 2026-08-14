@@ -30,36 +30,36 @@ export function DropdownField({
   onChange,
   title,
 }: DropdownFieldProps) {
-  const [open, setOpen] = useState(false);
-  const hasValue = value.trim().length > 0;
-  const menuOptions =
-    hasValue && !options.some(option => option === value)
+  const [open, setAbierto] = useState(false);
+  const hasValor = value.trim().length > 0;
+  const menuOpciones =
+    hasValor && !options.some(option => option === value)
       ? [value, ...options]
       : [...options];
 
   return (
     <View style={styles.DropdownFieldFieldGroup}>
-      <Text style={styles.DropdownFieldFieldLabelFlourish}>
+      <Text style={styles.DropdownFieldFieldLabelFiligrana}>
         {label}
         {required ? (
-          <Text style={styles.DropdownFieldRequiredEmblem}> *</Text>
+          <Text style={styles.DropdownFieldRequiredEmblema}> *</Text>
         ) : null}
       </Text>
       <View
         style={[
-          styles.DropdownFieldFieldInputHull,
-          open && styles.DropdownFieldInputHullOpen,
+          styles.DropdownFieldFieldInputCasco,
+          open && styles.DropdownFieldInputCascoOpen,
         ]}
       >
         <TextInput
           value={value}
           onChangeText={onChange}
           placeholder={placeholder}
-          placeholderTextColor={colors.tabInactive}
+          placeholderTextColor={colors.tabInactivo}
           style={styles.DropdownFieldSelectInput}
         />
         <Pressable
-          onPress={() => setOpen(true)}
+          onPress={() => setAbierto(true)}
           hitSlop={8}
           style={styles.DropdownFieldChevronHit}
           accessibilityRole="button"
@@ -80,14 +80,14 @@ export function DropdownField({
         visible={open}
         transparent
         animationType="fade"
-        onRequestClose={() => setOpen(false)}
+        onRequestClose={() => setAbierto(false)}
       >
         <Pressable
-          style={styles.DropdownFieldBackdropDrape}
-          onPress={() => setOpen(false)}
+          style={styles.DropdownFieldBackdropVelo}
+          onPress={() => setAbierto(false)}
         >
           <Pressable
-            style={styles.DropdownFieldSheetHull}
+            style={styles.DropdownFieldSheetCasco}
             onPress={e => e.stopPropagation()}
           >
             <Text style={styles.DropdownFieldSheetTitle}>
@@ -98,18 +98,18 @@ export function DropdownField({
               bounces={false}
               showsVerticalScrollIndicator={false}
             >
-              {menuOptions.map((option, index) => {
+              {menuOpciones.map((option, index) => {
                 const active = option === value;
                 return (
                   <Pressable
                     key={option}
                     onPress={() => {
                       onChange(option);
-                      setOpen(false);
+                      setAbierto(false);
                     }}
                     style={[
                       styles.DropdownFieldOption,
-                      index < menuOptions.length - 1 &&
+                      index < menuOpciones.length - 1 &&
                         styles.DropdownFieldOptionBorder,
                       active && styles.DropdownFieldOptionActive,
                     ]}
@@ -140,19 +140,19 @@ const styles = StyleSheet.create({
   DropdownFieldFieldGroup: {
     marginBottom: 14,
   },
-  DropdownFieldFieldLabelFlourish: {
-    color: colors.bodyMuted,
+  DropdownFieldFieldLabelFiligrana: {
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginBottom: 8,
   },
-  DropdownFieldRequiredEmblem: {
+  DropdownFieldRequiredEmblema: {
     color: colors.danger,
   },
-  DropdownFieldFieldInputHull: {
+  DropdownFieldFieldInputCasco: {
     alignItems: 'center',
     backgroundColor: colors.card,
-    borderColor: colors.emptyBorder,
+    borderColor: colors.emptyBorde,
     borderRadius: 12,
     borderWidth: 1,
     flexDirection: 'row',
@@ -160,8 +160,8 @@ const styles = StyleSheet.create({
     paddingLeft: 14,
     paddingRight: 4,
   },
-  DropdownFieldInputHullOpen: {
-    borderColor: colors.goldBorder,
+  DropdownFieldInputCascoOpen: {
+    borderColor: colors.goldBorde,
   },
   DropdownFieldSelectInput: {
     color: colors.cream,
@@ -177,20 +177,20 @@ const styles = StyleSheet.create({
     width: 40,
   },
   DropdownFieldChevron: {
-    color: colors.tabInactive,
+    color: colors.tabInactivo,
     fontSize: 15,
   },
   DropdownFieldChevronOpen: {
     color: colors.gold,
     transform: [{ rotate: '180deg' }],
   },
-  DropdownFieldBackdropDrape: {
+  DropdownFieldBackdropVelo: {
     backgroundColor: 'rgba(8, 4, 24, 0.72)',
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 24,
   },
-  DropdownFieldSheetHull: {
+  DropdownFieldSheetCasco: {
     backgroundColor: colors.card,
     borderColor: colors.border,
     borderRadius: radius.card,
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     paddingTop: 14,
   },
   DropdownFieldSheetTitle: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansBold,
     fontSize: 12,
     fontWeight: '700',
@@ -220,11 +220,11 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
   },
   DropdownFieldOptionBorder: {
-    borderBottomColor: colors.borderSoft,
+    borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
   },
   DropdownFieldOptionActive: {
-    backgroundColor: colors.goldSoft,
+    backgroundColor: colors.goldSuave,
   },
   DropdownFieldOptionTitle: {
     color: colors.cream,

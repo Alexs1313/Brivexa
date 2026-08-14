@@ -5,14 +5,14 @@ import type { QuickAction, TodayTask, UpcomingWork } from '../../data/today';
 import { colors, fonts, radius } from '../../constants/theme';
 
 const TINT: Record<QuickAction['tint'], string> = {
-  gold: colors.goldSoft,
-  success: colors.successSoft,
-  danger: colors.dangerSoft,
-  info: colors.infoIconSoft,
+  gold: colors.goldSuave,
+  success: colors.successSuave,
+  danger: colors.dangerSuave,
+  info: colors.infoIconSuave,
 };
 
 export function SectionTitle({ title }: { title: string }) {
-  return <Text style={styles.TodayBlocksSectionTitleFlourish}>{title}</Text>;
+  return <Text style={styles.TodayBlocksSectionTitleFiligrana}>{title}</Text>;
 }
 
 export function StatusChip({ status }: { status: TodayTask['status'] }) {
@@ -20,8 +20,8 @@ export function StatusChip({ status }: { status: TodayTask['status'] }) {
     return (
       <View
         style={[
-          styles.TodayBlocksChipPlinth,
-          { backgroundColor: colors.infoSoft },
+          styles.TodayBlocksChipPlinto,
+          { backgroundColor: colors.infoSuave },
         ]}
       >
         <Text style={[styles.TodayBlocksChipLabel, { color: colors.info }]}>
@@ -34,8 +34,8 @@ export function StatusChip({ status }: { status: TodayTask['status'] }) {
     return (
       <View
         style={[
-          styles.TodayBlocksChipPlinth,
-          { backgroundColor: colors.successSoft },
+          styles.TodayBlocksChipPlinto,
+          { backgroundColor: colors.successSuave },
         ]}
       >
         <Text style={[styles.TodayBlocksChipLabel, { color: colors.success }]}>
@@ -47,11 +47,11 @@ export function StatusChip({ status }: { status: TodayTask['status'] }) {
   return (
     <View
       style={[
-        styles.TodayBlocksChipPlinth,
-        { backgroundColor: colors.plannedSoft },
+        styles.TodayBlocksChipPlinto,
+        { backgroundColor: colors.plannedSuave },
       ]}
     >
-      <Text style={[styles.TodayBlocksChipLabel, { color: colors.bodyMuted }]}>
+      <Text style={[styles.TodayBlocksChipLabel, { color: colors.bodyApagado }]}>
         Planned
       </Text>
     </View>
@@ -64,14 +64,14 @@ export function TaskCard({ task }: { task: TodayTask }) {
   return (
     <View
       style={[
-        styles.TodayBlocksTaskCardHull,
+        styles.TodayBlocksTaskCardCasco,
         completed && styles.TodayBlocksTaskCardCompletedDim,
       ]}
     >
       <View style={styles.TodayBlocksTaskCardAccentRail} />
       <View style={styles.TodayBlocksTaskCardBody}>
         <View style={styles.TodayBlocksTaskCardHeaderRow}>
-          <Text style={styles.TodayBlocksTaskCardTitleFlourish}>
+          <Text style={styles.TodayBlocksTaskCardTitleFiligrana}>
             {task.title}
           </Text>
           <StatusChip status={task.status} />
@@ -82,21 +82,21 @@ export function TaskCard({ task }: { task: TodayTask }) {
         {!completed && (task.assignee || task.equipment || task.priority) ? (
           <View style={styles.TodayBlocksTaskCardPillRow}>
             {task.assignee ? (
-              <View style={styles.TodayBlocksPillPlinth}>
+              <View style={styles.TodayBlocksPillPlinto}>
                 <Text style={styles.TodayBlocksPillLabel}>
                   👤 {task.assignee}
                 </Text>
               </View>
             ) : null}
             {task.equipment ? (
-              <View style={styles.TodayBlocksPillPlinth}>
+              <View style={styles.TodayBlocksPillPlinto}>
                 <Text style={styles.TodayBlocksPillLabel}>
                   🚜 {task.equipment}
                 </Text>
               </View>
             ) : null}
             {task.priority ? (
-              <View style={styles.TodayBlocksPillPlinth}>
+              <View style={styles.TodayBlocksPillPlinto}>
                 <Text style={styles.TodayBlocksPillLabel}>
                   ⚑ {task.priority}
                 </Text>
@@ -111,7 +111,7 @@ export function TaskCard({ task }: { task: TodayTask }) {
 
 export function UpcomingList({ items }: { items: UpcomingWork[] }) {
   return (
-    <View style={styles.TodayBlocksUpcomingHull}>
+    <View style={styles.TodayBlocksUpcomingCasco}>
       {items.map((item, index) => (
         <View
           key={item.id}
@@ -121,13 +121,13 @@ export function UpcomingList({ items }: { items: UpcomingWork[] }) {
           ]}
         >
           <View style={styles.TodayBlocksUpcomingDateCol}>
-            <Text style={styles.TodayBlocksUpcomingDayFlourish}>
+            <Text style={styles.TodayBlocksUpcomingDayFiligrana}>
               {item.day}
             </Text>
             <Text style={styles.TodayBlocksUpcomingMonth}>{item.month}</Text>
           </View>
           <View style={styles.TodayBlocksUpcomingCopy}>
-            <Text style={styles.TodayBlocksUpcomingTitleFlourish}>
+            <Text style={styles.TodayBlocksUpcomingTitleFiligrana}>
               {item.title}
             </Text>
             <Text style={styles.TodayBlocksUpcomingSubtitle}>
@@ -166,7 +166,7 @@ export function QuickActionsGrid({
           >
             <Text style={styles.TodayBlocksQuickIcon}>{action.icon}</Text>
           </View>
-          <Text style={styles.TodayBlocksQuickLabelFlourish}>
+          <Text style={styles.TodayBlocksQuickLabelFiligrana}>
             {action.label}
           </Text>
         </Pressable>
@@ -176,14 +176,14 @@ export function QuickActionsGrid({
 }
 
 const styles = StyleSheet.create({
-  TodayBlocksSectionTitleFlourish: {
+  TodayBlocksSectionTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 18,
     fontWeight: '700',
     marginBottom: 12,
   },
-  TodayBlocksChipPlinth: {
+  TodayBlocksChipPlinto: {
     borderRadius: 20,
     paddingHorizontal: 9,
     paddingVertical: 3,
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-  TodayBlocksTaskCardHull: {
+  TodayBlocksTaskCardCasco: {
     backgroundColor: colors.card,
     borderColor: colors.border,
     borderRadius: radius.card,
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  TodayBlocksTaskCardTitleFlourish: {
+  TodayBlocksTaskCardTitleFiligrana: {
     color: colors.cream,
     flexShrink: 1,
     fontFamily: fonts.sansBold,
@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
   },
 
   TodayBlocksTaskCardMeta: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginTop: 6,
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
     gap: 8,
     marginTop: 10,
   },
-  TodayBlocksPillPlinth: {
+  TodayBlocksPillPlinto: {
     backgroundColor: colors.pill,
     borderRadius: 8,
     paddingHorizontal: 8,
@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
     fontSize: 11,
   },
 
-  TodayBlocksUpcomingHull: {
+  TodayBlocksUpcomingCasco: {
     backgroundColor: colors.card,
     borderColor: colors.border,
     borderRadius: 16,
@@ -270,7 +270,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   TodayBlocksUpcomingRowDivider: {
-    borderBottomColor: colors.borderSoft,
+    borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
   },
   TodayBlocksUpcomingDateCol: {
@@ -278,7 +278,7 @@ const styles = StyleSheet.create({
     width: 40,
   },
 
-  TodayBlocksUpcomingDayFlourish: {
+  TodayBlocksUpcomingDayFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
   },
 
   TodayBlocksUpcomingMonth: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 10,
     marginTop: 2,
@@ -295,14 +295,14 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 12,
   },
-  TodayBlocksUpcomingTitleFlourish: {
+  TodayBlocksUpcomingTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 14,
     fontWeight: '700',
   },
   TodayBlocksUpcomingSubtitle: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
     marginTop: 2,
@@ -343,7 +343,7 @@ const styles = StyleSheet.create({
   TodayBlocksQuickIcon: {
     fontSize: 16,
   },
-  TodayBlocksQuickLabelFlourish: {
+  TodayBlocksQuickLabelFiligrana: {
     color: colors.cream,
     flexShrink: 1,
     fontFamily: fonts.sansBold,

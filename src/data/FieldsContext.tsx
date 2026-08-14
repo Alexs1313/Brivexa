@@ -14,7 +14,7 @@ import {
   type FieldHarvest,
   type FieldStatus,
 } from './fields';
-import {storageKeys} from './storage';
+import {storageClaves} from './storage';
 
 export type FieldDraft = {
   name: string;
@@ -22,21 +22,21 @@ export type FieldDraft = {
   crop: string;
   variety: string;
   status: string;
-  plantingDate: string;
+  plantingFecha: string;
 };
 
 type FieldsContextValue = {
   fields: FarmField[];
-  isDemo: boolean;
-  addField: (draft: FieldDraft) => FarmField;
-  updateField: (id: string, draft: FieldDraft) => void;
-  getField: (id: string) => FarmField | undefined;
-  removeField: (id: string) => void;
-  cycleFieldStatus: (id: string) => FieldStatus;
-  addFieldActivity: (id: string) => void;
-  addFieldExpense: (id: string) => void;
-  recordHarvest: (id: string) => void;
-  clearHarvest: (id: string) => void;
+  isMuestra: boolean;
+  addCampo: (draft: FieldDraft) => FarmField;
+  updateCampo: (id: string, draft: FieldDraft) => void;
+  getCampo: (id: string) => FarmField | undefined;
+  removeCampo: (id: string) => void;
+  cycleFieldEstado: (id: string) => FieldStatus;
+  addFieldActividad: (id: string) => void;
+  addFieldGasto: (id: string) => void;
+  recordCosecha: (id: string) => void;
+  clearCosecha: (id: string) => void;
 };
 
 const FieldsContext = createContext<FieldsContextValue | null>(null);
@@ -50,16 +50,16 @@ const FIELD_STATUS_ORDER: FieldStatus[] = [
   'Harvested',
 ];
 
-function parseArea(value: string): {areaHa: number; areaLabel: string} {
+function parseSuperficie(value: string): {areaHa: number; areaEtiqueta: string} {
   const areaHa = Number.parseFloat(value.replace(',', '.')) || 0;
   const rounded = Math.round(areaHa * 10) / 10;
   return {
     areaHa: rounded,
-    areaLabel: `${rounded} ha`,
+    areaEtiqueta: `${rounded} ha`,
   };
 }
 
-function toStatus(value: string): FieldStatus {
+function toEstado(value: string): FieldStatus {
   const allowed: FieldStatus[] = [
     'Planned',
     'Prepared',
@@ -74,7 +74,7 @@ function toStatus(value: string): FieldStatus {
   return match ?? 'Planned';
 }
 
-function coverToneFor(status: FieldStatus): FarmField['coverTone'] {
+function coverToneFor(status: FieldStatus): FarmField['coverTono'] {
   if (status === 'Ready to Harvest') {
     return 'ready';
   }
@@ -106,7 +106,7 @@ function timelineIndexFor(status: FieldStatus): number {
   }
 }
 
-function shortDate(label: string): string {
+function shortFecha(label: string): string {
   const match = label.trim().match(/^([A-Za-z]+)\s+(\d{1,2})/);
   if (!match) {
     return label.trim() || '—';
@@ -114,66 +114,66 @@ function shortDate(label: string): string {
   return `${match[1].slice(0, 3)} ${Number(match[2])}`;
 }
 
-function buildField(draft: FieldDraft, id?: string): FarmField {
-  const {areaHa, areaLabel} = parseArea(draft.area);
-  const status = toStatus(draft.status);
-  const plantingDate = shortDate(draft.plantingDate);
+function buildCampo(draft: FieldDraft, id?: string): FarmField {
+  const {areaHa, areaEtiqueta} = parseSuperficie(draft.area);
+  const status = toEstado(draft.status);
+  const plantingFecha = shortFecha(draft.plantingFecha);
 
   return {
     id: id ?? `field-${Date.now()}`,
     name: draft.name.trim(),
     areaHa,
-    areaLabel,
+    areaEtiqueta,
     crop: draft.crop.trim(),
     variety: draft.variety.trim() || '—',
     status,
-    coverTone: coverToneFor(status),
-    nextLabel:
+    coverTono: coverToneFor(status),
+    nextEtiqueta:
       status === 'Harvested'
         ? 'Harvest completed'
         : 'Next: Plan first activity',
-    plantingDate,
-    expectedHarvest: '—',
-    soilType: '—',
-    estYield: '—',
-    seasonCost: '$0',
-    timelineIndex: timelineIndexFor(status),
+    plantingFecha,
+    expectedCosecha: '—',
+    soilTipo: '—',
+    estRendimiento: '—',
+    seasonCosto: '$0',
+    timelineIndice: timelineIndexFor(status),
     activities: [],
     expensesTotal: '$0',
     expensesPerHa: '$0',
     expenses: [],
     harvest: {
       kind: 'empty',
-      expectedDate: '—',
-      estimatedYield: '—',
-      statusLabel: 'Not Recorded',
+      expectedFecha: '—',
+      estimatedRendimiento: '—',
+      statusEtiqueta: 'Not Recorded',
     },
   };
 }
 
 export function FieldsProvider({children}: {children: React.ReactNode}) {
-  const [userFields, setUserFields] = usePersistedState<FarmField[] | null>(
-    storageKeys.fields,
+  const [userCampos, setUserCampos] = usePersistedState<FarmField[] | null>(
+    storageClaves.fields,
     null,
   );
 
-  const isDemo = userFields === null;
-  const fields = userFields ?? FIELDS;
+  const isMuestra = userCampos === null;
+  const fields = userCampos ?? FIELDS;
 
-  const addField = useCallback((draft: FieldDraft) => {
-    const field = buildField(draft);
-    setUserFields(prev => (prev ? [field, ...prev] : [field]));
+  const addCampo = useCallback((draft: FieldDraft) => {
+    const field = buildCampo(draft);
+    setUserCampos(prev => (prev ? [field, ...prev] : [field]));
     return field;
   }, []);
 
-  const updateField = useCallback((id: string, draft: FieldDraft) => {
-    setUserFields(prev => {
+  const updateCampo = useCallback((id: string, draft: FieldDraft) => {
+    setUserCampos(prev => {
       const base = prev ?? FIELDS;
       return base.map(field => {
         if (field.id !== id) {
           return field;
         }
-        const next = buildField(draft, id);
+        const next = buildCampo(draft, id);
         return {
           ...next,
           activities: field.activities,
@@ -181,31 +181,31 @@ export function FieldsProvider({children}: {children: React.ReactNode}) {
           harvest: field.harvest,
           expensesTotal: field.expensesTotal,
           expensesPerHa: field.expensesPerHa,
-          seasonCost: field.seasonCost,
-          soilType: field.soilType,
-          estYield: field.estYield,
-          expectedHarvest: field.expectedHarvest,
+          seasonCosto: field.seasonCosto,
+          soilTipo: field.soilTipo,
+          estRendimiento: field.estRendimiento,
+          expectedCosecha: field.expectedCosecha,
           warning: field.warning,
         };
       });
     });
   }, []);
 
-  const getField = useCallback(
+  const getCampo = useCallback(
     (id: string) => fields.find(field => field.id === id),
     [fields],
   );
 
-  const removeField = useCallback((id: string) => {
-    setUserFields(prev => {
+  const removeCampo = useCallback((id: string) => {
+    setUserCampos(prev => {
       const base = prev ?? FIELDS;
       return base.filter(field => field.id !== id);
     });
   }, []);
 
-  const mutateField = useCallback(
+  const mutateCampo = useCallback(
     (id: string, updater: (field: FarmField) => FarmField) => {
-      setUserFields(prev => {
+      setUserCampos(prev => {
         const base = prev ?? FIELDS;
         return base.map(field => (field.id === id ? updater(field) : field));
       });
@@ -213,35 +213,35 @@ export function FieldsProvider({children}: {children: React.ReactNode}) {
     [],
   );
 
-  const cycleFieldStatus = useCallback(
+  const cycleFieldEstado = useCallback(
     (id: string) => {
-      let nextStatus: FieldStatus = 'Planned';
-      mutateField(id, field => {
+      let nextEstado: FieldStatus = 'Planned';
+      mutateCampo(id, field => {
         const index = FIELD_STATUS_ORDER.indexOf(field.status);
-        nextStatus =
+        nextEstado =
           FIELD_STATUS_ORDER[(index + 1) % FIELD_STATUS_ORDER.length] ??
           'Planned';
         return {
           ...field,
-          status: nextStatus,
-          coverTone: coverToneFor(nextStatus),
-          timelineIndex: timelineIndexFor(nextStatus),
+          status: nextEstado,
+          coverTono: coverToneFor(nextEstado),
+          timelineIndice: timelineIndexFor(nextEstado),
           warning:
-            nextStatus === 'Ready to Harvest' ? 'Harvest due' : undefined,
-          nextLabel:
-            nextStatus === 'Harvested'
+            nextEstado === 'Ready to Harvest' ? 'Harvest due' : undefined,
+          nextEtiqueta:
+            nextEstado === 'Harvested'
               ? 'Harvest completed'
-              : `Status: ${nextStatus}`,
+              : `Status: ${nextEstado}`,
         };
       });
-      return nextStatus;
+      return nextEstado;
     },
-    [mutateField],
+    [mutateCampo],
   );
 
-  const addFieldActivity = useCallback(
+  const addFieldActividad = useCallback(
     (id: string) => {
-      mutateField(id, field => {
+      mutateCampo(id, field => {
         const activity: FieldActivity = {
           id: `act-${Date.now()}`,
           title: 'Field Inspection',
@@ -253,12 +253,12 @@ export function FieldsProvider({children}: {children: React.ReactNode}) {
         return {...field, activities: [activity, ...field.activities]};
       });
     },
-    [mutateField],
+    [mutateCampo],
   );
 
-  const addFieldExpense = useCallback(
+  const addFieldGasto = useCallback(
     (id: string) => {
-      mutateField(id, field => {
+      mutateCampo(id, field => {
         const expense: FieldExpense = {
           id: `exp-${Date.now()}`,
           title: 'Field Expense',
@@ -269,78 +269,78 @@ export function FieldsProvider({children}: {children: React.ReactNode}) {
         return {...field, expenses: [expense, ...field.expenses]};
       });
     },
-    [mutateField],
+    [mutateCampo],
   );
 
-  const recordHarvest = useCallback(
+  const recordCosecha = useCallback(
     (id: string) => {
-      mutateField(id, field => {
+      mutateCampo(id, field => {
         const harvest: FieldHarvest = {
           kind: 'recorded',
-          harvestDate: 'Jul 23',
-          totalWeight: `${Math.round(field.areaHa * 3.2)} t`,
+          harvestFecha: 'Jul 23',
+          totalPeso: `${Math.round(field.areaHa * 3.2)} t`,
           yieldPerHa: '3.2 t/ha',
           moisture: '13.0%',
-          salePrice: '$450/t',
-          totalRevenue: `$${Math.round(field.areaHa * 3.2 * 450).toLocaleString('en-US')}`,
-          seasonExpenses: field.seasonCost,
+          salePrecio: '$450/t',
+          totalIngresos: `$${Math.round(field.areaHa * 3.2 * 450).toLocaleString('en-US')}`,
+          seasonGastos: field.seasonCosto,
           notes: 'Harvest recorded from field detail.',
         };
         return {
           ...field,
           status: 'Harvested',
-          coverTone: 'harvested',
-          timelineIndex: 5,
+          coverTono: 'harvested',
+          timelineIndice: 5,
           warning: undefined,
-          nextLabel: 'Harvest completed',
+          nextEtiqueta: 'Harvest completed',
           harvest,
         };
       });
     },
-    [mutateField],
+    [mutateCampo],
   );
 
-  const clearHarvest = useCallback(
+  const clearCosecha = useCallback(
     (id: string) => {
-      mutateField(id, field => ({
+      mutateCampo(id, field => ({
         ...field,
         harvest: {
           kind: 'empty',
-          expectedDate: field.expectedHarvest,
-          estimatedYield: field.estYield,
-          statusLabel: 'Not Recorded',
+          expectedFecha: field.expectedCosecha,
+          estimatedRendimiento: field.estRendimiento,
+          statusEtiqueta: 'Not Recorded',
         },
       }));
     },
-    [mutateField],
+    [mutateCampo],
   );
 
   const value = useMemo(
     () => ({
       fields,
-      isDemo,
-      addField,
-      updateField,
-      getField,
-      removeField,
-      cycleFieldStatus,
-      addFieldActivity,
-      addFieldExpense,
-      recordHarvest,
-      clearHarvest,
+      isMuestra,
+      addCampo,
+      updateCampo,
+      getCampo,
+      removeCampo,
+      cycleFieldEstado,
+      addFieldActividad,
+      addFieldGasto,
+      recordCosecha,
+      clearCosecha,
     }),
     [
       fields,
-      isDemo,
-      addField,
-      updateField,
-      getField,
-      removeField,
-      cycleFieldStatus,
-      addFieldActivity,
-      addFieldExpense,
-      recordHarvest,
-      clearHarvest,
+      isMuestra,
+      addCampo,
+      updateCampo,
+      getCampo,
+      removeCampo,
+      cycleFieldEstado,
+      addFieldActividad,
+      addFieldGasto,
+      recordCosecha,
+      clearCosecha,
     ],
   );
 
@@ -349,10 +349,10 @@ export function FieldsProvider({children}: {children: React.ReactNode}) {
   );
 }
 
-export function useFields() {
+export function useCampos() {
   const context = useContext(FieldsContext);
   if (!context) {
-    throw new Error('useFields must be used within FieldsProvider');
+    throw new Error('useCampos must be used within FieldsProvider');
   }
   return context;
 }

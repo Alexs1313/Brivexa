@@ -28,21 +28,21 @@ export type FieldExpense = {
 export type FieldHarvest =
   | {
       kind: 'empty';
-      expectedDate: string;
-      estimatedYield: string;
+      expectedFecha: string;
+      estimatedRendimiento: string;
       estimatedTotal?: string;
-      statusLabel: string;
+      statusEtiqueta: string;
     }
   | {
       kind: 'recorded';
-      harvestDate: string;
-      totalWeight: string;
+      harvestFecha: string;
+      totalPeso: string;
       yieldPerHa: string;
       moisture: string;
-      salePrice: string;
-      totalRevenue: string;
-      seasonExpenses?: string;
-      estimatedProfit?: string;
+      salePrecio: string;
+      totalIngresos: string;
+      seasonGastos?: string;
+      estimatedGanancia?: string;
       notes?: string;
     };
 
@@ -50,19 +50,19 @@ export type FarmField = {
   id: string;
   name: string;
   areaHa: number;
-  areaLabel: string;
+  areaEtiqueta: string;
   crop: string;
   variety: string;
   status: FieldStatus;
-  coverTone: 'growing' | 'ready' | 'harvested' | 'planted';
+  coverTono: 'growing' | 'ready' | 'harvested' | 'planted';
   warning?: string;
-  nextLabel: string;
-  plantingDate: string;
-  expectedHarvest: string;
-  soilType: string;
-  estYield: string;
-  seasonCost: string;
-  timelineIndex: number; // 0..5 completed through this stage
+  nextEtiqueta: string;
+  plantingFecha: string;
+  expectedCosecha: string;
+  soilTipo: string;
+  estRendimiento: string;
+  seasonCosto: string;
+  timelineIndice: number; // 0..5 completed through this stage
   activities: FieldActivity[];
   expensesTotal: string;
   expensesPerHa: string;
@@ -70,7 +70,7 @@ export type FarmField = {
   harvest: FieldHarvest;
 };
 
-export const FIELD_STATUS_FILTERS = [
+export const FIELD_STATUS_FILTROS = [
   'All',
   'Prepared',
   'Planted',
@@ -78,7 +78,7 @@ export const FIELD_STATUS_FILTERS = [
   'Harvested',
 ] as const;
 
-export const TIMELINE_STEPS = [
+export const TIMELINE_PASOS = [
   'Planned',
   'Prepared',
   'Planted',
@@ -87,26 +87,26 @@ export const TIMELINE_STEPS = [
   'Harvested',
 ] as const;
 
-export const DEMO_BANNER =
-  'The current information is provided for demonstration purposes. Once you add your own data, the app will use it across all relevant sections';
+export const DEMO_BANDA =
+  'The current information is sample data. Once you add your own data, the app will use it across all relevant sections';
 
 export const FIELDS: FarmField[] = [
   {
     id: 'north',
     name: 'North Field',
     areaHa: 24.8,
-    areaLabel: '24.8 ha',
+    areaEtiqueta: '24.8 ha',
     crop: 'Corn',
     variety: 'Pioneer P9241',
     status: 'Growing',
-    coverTone: 'growing',
-    nextLabel: 'Next: Fertilizing, May 16',
-    plantingDate: 'Apr 18',
-    expectedHarvest: 'Oct 12',
-    soilType: 'Loam',
-    estYield: '11.2 t/ha',
-    seasonCost: '$4,090',
-    timelineIndex: 3,
+    coverTono: 'growing',
+    nextEtiqueta: 'Next: Fertilizing, May 16',
+    plantingFecha: 'Apr 18',
+    expectedCosecha: 'Oct 12',
+    soilTipo: 'Loam',
+    estRendimiento: '11.2 t/ha',
+    seasonCosto: '$4,090',
+    timelineIndice: 3,
     activities: [
       {
         id: 'n1',
@@ -153,28 +153,28 @@ export const FIELDS: FarmField[] = [
     ],
     harvest: {
       kind: 'empty',
-      expectedDate: 'Oct 12',
-      estimatedYield: '11.2 t/ha',
-      statusLabel: 'Not Recorded',
+      expectedFecha: 'Oct 12',
+      estimatedRendimiento: '11.2 t/ha',
+      statusEtiqueta: 'Not Recorded',
     },
   },
   {
     id: 'river',
     name: 'River Plot',
     areaHa: 16.2,
-    areaLabel: '16.2 ha',
+    areaEtiqueta: '16.2 ha',
     crop: 'Winter Wheat',
     variety: 'Skagen',
     status: 'Ready to Harvest',
-    coverTone: 'ready',
+    coverTono: 'ready',
     warning: 'Harvest due',
-    nextLabel: 'Next: Harvest, Jul 28',
-    plantingDate: 'Sep 24',
-    expectedHarvest: 'Jul 28',
-    soilType: 'Clay Loam',
-    estYield: '7.8 t/ha',
-    seasonCost: '$5,184',
-    timelineIndex: 4,
+    nextEtiqueta: 'Next: Harvest, Jul 28',
+    plantingFecha: 'Sep 24',
+    expectedCosecha: 'Jul 28',
+    soilTipo: 'Clay Loam',
+    estRendimiento: '7.8 t/ha',
+    seasonCosto: '$5,184',
+    timelineIndice: 4,
     activities: [
       {
         id: 'r1',
@@ -214,8 +214,8 @@ export const FIELDS: FarmField[] = [
     expenses: [
       {
         id: 're1',
-        title: 'Skagen Wheat Seed',
-        category: 'Seeds',
+        title: 'Skagen Wheat Grain',
+        category: 'Sowing',
         date: 'Sep 20',
         amount: '$1,134',
       },
@@ -250,28 +250,28 @@ export const FIELDS: FarmField[] = [
     ],
     harvest: {
       kind: 'empty',
-      expectedDate: 'Jul 28',
-      estimatedYield: '7.8 t/ha',
+      expectedFecha: 'Jul 28',
+      estimatedRendimiento: '7.8 t/ha',
       estimatedTotal: '126.4 t',
-      statusLabel: 'Not Recorded',
+      statusEtiqueta: 'Not Recorded',
     },
   },
   {
     id: 'east',
     name: 'East Field',
     areaHa: 12.7,
-    areaLabel: '12.7 ha',
+    areaEtiqueta: '12.7 ha',
     crop: 'Sunflower',
     variety: 'SY Bacardi',
     status: 'Growing',
-    coverTone: 'growing',
-    nextLabel: 'Next: Irrigation Inspection, Jul 30',
-    plantingDate: 'Apr 26',
-    expectedHarvest: 'Sep 18',
-    soilType: 'Sandy Loam',
-    estYield: '3.4 t/ha',
-    seasonCost: '$3,556',
-    timelineIndex: 3,
+    coverTono: 'growing',
+    nextEtiqueta: 'Next: Irrigation Inspection, Jul 30',
+    plantingFecha: 'Apr 26',
+    expectedCosecha: 'Sep 18',
+    soilTipo: 'Sandy Loam',
+    estRendimiento: '3.4 t/ha',
+    seasonCosto: '$3,556',
+    timelineIndice: 3,
     activities: [
       {
         id: 'e1',
@@ -311,8 +311,8 @@ export const FIELDS: FarmField[] = [
     expenses: [
       {
         id: 'ee1',
-        title: 'SY Bacardi Sunflower Seed',
-        category: 'Seeds',
+        title: 'SY Bacardi Sunflower Grain',
+        category: 'Sowing',
         date: 'Apr 24',
         amount: '$1,016',
       },
@@ -347,28 +347,28 @@ export const FIELDS: FarmField[] = [
     ],
     harvest: {
       kind: 'empty',
-      expectedDate: 'Sep 18',
-      estimatedYield: '3.4 t/ha',
+      expectedFecha: 'Sep 18',
+      estimatedRendimiento: '3.4 t/ha',
       estimatedTotal: '43.2 t',
-      statusLabel: 'Not Recorded',
+      statusEtiqueta: 'Not Recorded',
     },
   },
   {
     id: 'south',
     name: 'South Field',
     areaHa: 18.4,
-    areaLabel: '18.4 ha',
+    areaEtiqueta: '18.4 ha',
     crop: 'Soybean',
     variety: 'ES Mentor',
     status: 'Harvested',
-    coverTone: 'harvested',
-    nextLabel: 'Harvest completed Oct 2',
-    plantingDate: 'May 3',
-    expectedHarvest: 'Oct 2',
-    soilType: 'Silty Clay Loam',
-    estYield: '3.3 t/ha',
-    seasonCost: '$5,152',
-    timelineIndex: 5,
+    coverTono: 'harvested',
+    nextEtiqueta: 'Harvest completed Oct 2',
+    plantingFecha: 'May 3',
+    expectedCosecha: 'Oct 2',
+    soilTipo: 'Silty Clay Loam',
+    estRendimiento: '3.3 t/ha',
+    seasonCosto: '$5,152',
+    timelineIndice: 5,
     activities: [
       {
         id: 's1',
@@ -408,14 +408,14 @@ export const FIELDS: FarmField[] = [
     expenses: [
       {
         id: 'se1',
-        title: 'ES Mentor Soybean Seed',
-        category: 'Seeds',
+        title: 'ES Mentor Soybean Grain',
+        category: 'Sowing',
         date: 'Apr 29',
         amount: '$1,656',
       },
       {
         id: 'se2',
-        title: 'Seed Inoculant',
+        title: 'Planting Inoculant',
         category: 'Crop Treatment',
         date: 'May 2',
         amount: '$368',
@@ -444,14 +444,14 @@ export const FIELDS: FarmField[] = [
     ],
     harvest: {
       kind: 'recorded',
-      harvestDate: 'Oct 2',
-      totalWeight: '60.7 t',
+      harvestFecha: 'Oct 2',
+      totalPeso: '60.7 t',
       yieldPerHa: '3.3 t/ha',
       moisture: '13.1%',
-      salePrice: '$465/t',
-      totalRevenue: '$28,226',
-      seasonExpenses: '$5,152',
-      estimatedProfit: '$23,074',
+      salePrecio: '$465/t',
+      totalIngresos: '$28,226',
+      seasonGastos: '$5,152',
+      estimatedGanancia: '$23,074',
       notes:
         'Harvest completed in dry conditions. Grain quality met the buyer’s delivery requirements.',
     },

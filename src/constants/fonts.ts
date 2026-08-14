@@ -14,11 +14,11 @@ const android = {
   sansBold: 'sans-serif',
 };
 
-const platformFonts = Platform.OS === 'ios' ? ios : android;
+const platformFuentes = Platform.OS === 'ios' ? ios : android;
 
 export const fonts = {
-  sansRegular: platformFonts.sansRegular,
-  sansMedium: platformFonts.sansMedium,
-  sansSemiBold: platformFonts.sansSemiBold,
-  sansBold: platformFonts.sansBold,
+  sansRegular: platformFuentes.sansRegular,
+  sansMedium: platformFuentes.sansMedium,
+  sansSemiBold: platformFuentes.sansSemiBold,
+  sansBold: platformFuentes.sansBold,
 };

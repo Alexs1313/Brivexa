@@ -11,52 +11,52 @@ import {
 } from '../components/calculators/CalculatorParts';
 
 import {
-  calcFertilizer,
+  calcAbono,
   parseNumber,
   type ResultRow,
 } from '../data/calculators';
 
 import type { FarmField } from '../data/fields';
-import { useFields } from '../data/FieldsContext';
+import { useCampos } from '../data/FieldsContext';
 
 type FertilizerScreenProps = {
   onBack: () => void;
 };
 
 export function FertilizerScreen({ onBack }: FertilizerScreenProps) {
-  const { getField } = useFields();
+  const { getCampo } = useCampos();
   const [fieldId, setFieldId] = useState('');
-  const [rate, setRate] = useState('');
-  const [bagWeight, setBagWeight] = useState('');
-  const [price, setPrice] = useState('');
+  const [rate, setTasa] = useState('');
+  const [bagPeso, setBagPeso] = useState('');
+  const [price, setPrecio] = useState('');
   const [reserve, setReserve] = useState('');
-  const [rows, setRows] = useState<ResultRow[]>([]);
+  const [rows, setFilas] = useState<ResultRow[]>([]);
 
-  const field = getField(fieldId);
-  const resultTitle = useMemo(
+  const field = getCampo(fieldId);
+  const resultTitulo = useMemo(
     () => `Fertilizer · ${field?.name ?? 'Field'}`,
     [field?.name],
   );
 
-  const onSelectField = (next: FarmField) => {
+  const onSelectCampo = (next: FarmField) => {
     setFieldId(next.id);
   };
 
   const reset = () => {
     setFieldId('');
-    setRate('');
-    setBagWeight('');
-    setPrice('');
+    setTasa('');
+    setBagPeso('');
+    setPrecio('');
     setReserve('');
-    setRows([]);
+    setFilas([]);
   };
 
   const calculate = () => {
-    setRows(
-      calcFertilizer({
+    setFilas(
+      calcAbono({
         areaHa: field?.areaHa ?? 0,
         rateKgHa: parseNumber(rate),
-        bagKg: parseNumber(bagWeight),
+        bagKg: parseNumber(bagPeso),
         pricePerBag: parseNumber(price),
         reservePct: parseNumber(reserve),
       }),
@@ -65,20 +65,20 @@ export function FertilizerScreen({ onBack }: FertilizerScreenProps) {
 
   return (
     <CalculatorShell title="Fertilizer" onBack={onBack}>
-      <FieldDropdown selectedId={fieldId} onSelect={onSelectField} />
+      <FieldDropdown selectedId={fieldId} onSelect={onSelectCampo} />
       <View style={styles.FertilizerScreenGrid}>
         <UnitField
           label="Application Rate"
           value={rate}
-          onChangeText={setRate}
+          onChangeText={setTasa}
           unit="kg/ha"
           placeholder="e.g. 180"
           flex
         />
         <UnitField
           label="Bag Weight"
-          value={bagWeight}
-          onChangeText={setBagWeight}
+          value={bagPeso}
+          onChangeText={setBagPeso}
           unit="kg"
           placeholder="e.g. 50"
           flex
@@ -88,7 +88,7 @@ export function FertilizerScreen({ onBack }: FertilizerScreenProps) {
         <UnitField
           label="Price per Bag"
           value={price}
-          onChangeText={setPrice}
+          onChangeText={setPrecio}
           unit="$"
           placeholder="e.g. 32"
           flex
@@ -103,11 +103,11 @@ export function FertilizerScreen({ onBack }: FertilizerScreenProps) {
         />
       </View>
       <CalcActions onReset={reset} onCalculate={calculate} />
-      <ResultCard title={resultTitle} rows={rows} />
+      <ResultCard title={resultTitulo} rows={rows} />
       {rows.length > 0 ? (
         <SaveShareRow
           calculatorId="fertilizer"
-          title={resultTitle}
+          title={resultTitulo}
           rows={rows}
         />
       ) : null}

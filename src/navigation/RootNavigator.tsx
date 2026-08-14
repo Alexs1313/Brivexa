@@ -11,7 +11,7 @@ import type {RootStackParamList} from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-const navTheme = {
+const navTema = {
   ...DarkTheme,
   colors: {
     ...DarkTheme.colors,
@@ -27,11 +27,11 @@ const navTheme = {
 function LoaderRoute({
   navigation,
 }: NativeStackScreenProps<RootStackParamList, 'Loader'>) {
-  const onComplete = useCallback(() => {
+  const onCompletar = useCallback(() => {
     navigation.replace('Onboarding');
   }, [navigation]);
 
-  return <LoaderScreen onComplete={onComplete} />;
+  return <LoaderScreen onCompletar={onCompletar} />;
 }
 
 function OnboardingRoute({
@@ -39,7 +39,7 @@ function OnboardingRoute({
 }: NativeStackScreenProps<RootStackParamList, 'Onboarding'>) {
   return (
     <OnboardingScreen
-      onComplete={() => {
+      onCompletar={() => {
         navigation.replace('Main');
       }}
     />
@@ -48,7 +48,7 @@ function OnboardingRoute({
 
 export function RootNavigator() {
   return (
-    <NavigationContainer theme={navTheme}>
+    <NavigationContainer theme={navTema}>
       <Stack.Navigator
         initialRouteName="Loader"
         screenOptions={{

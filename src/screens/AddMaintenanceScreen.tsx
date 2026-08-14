@@ -13,71 +13,71 @@ import { PrimaryButton } from '../components/buttons/PrimaryButton';
 import { DropdownField } from '../components/forms/DropdownField';
 
 import { colors, fonts, radius } from '../constants/theme';
-import { appBackground } from '../data/assets';
+import { appFondo } from '../data/assets';
 
 import { MAINTENANCE_TYPES } from '../data/farm';
 import type { MaintenanceDraft } from '../data/FarmContext';
-import { useAdaptive } from '../hooks/useAdaptive';
+import { useAdaptativo } from '../hooks/useAdaptativo';
 
 import { FormField } from './NewItemScreen';
 
 type AddMaintenanceScreenProps = {
   onCancel: () => void;
-  onSave: (draft: MaintenanceDraft) => void;
+  onGuardar: (draft: MaintenanceDraft) => void;
 };
 
 export function AddMaintenanceScreen({
   onCancel,
-  onSave,
+  onGuardar,
 }: AddMaintenanceScreenProps) {
   const insets = useSafeAreaInsets();
-  const adaptive = useAdaptive();
-  const [type, setType] = useState('');
+  const adaptive = useAdaptativo();
+  const [type, setTipo] = useState('');
   const [date, setDate] = useState('');
-  const [hours, setHours] = useState('');
-  const [cost, setCost] = useState('');
-  const [provider, setProvider] = useState('');
-  const [nextHours, setNextHours] = useState('');
+  const [hours, setHoras] = useState('');
+  const [cost, setCosto] = useState('');
+  const [provider, setProveedor] = useState('');
+  const [nextHoras, setNextHoras] = useState('');
 
   return (
     <ImageBackground
-      source={appBackground}
-      style={styles.AddMaintenanceScreenRootHull}
+      source={appFondo}
+      style={styles.AddMaintenanceScreenRaizCasco}
       resizeMode="cover"
     >
       <ScrollView
         contentContainerStyle={[
           styles.AddMaintenanceScreenScrollContent,
           {
-            paddingTop: insets.top + adaptive.verticalScale(6),
-            paddingBottom: insets.bottom + adaptive.verticalScale(28),
+            paddingTop: insets.top + adaptive.verticalEscala(6),
+            paddingBottom: insets.bottom + adaptive.verticalEscala(28),
           },
         ]}
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.AddMaintenanceScreenHeaderRowCapstone}>
+        <View style={styles.AddMaintenanceScreenHeaderRowDintel}>
           <Pressable
             onPress={onCancel}
             hitSlop={12}
             style={styles.AddMaintenanceScreenNavSide}
           >
-            <Text style={styles.AddMaintenanceScreenNavLinkFlourish}>
+            <Text style={styles.AddMaintenanceScreenNavLinkFiligrana}>
               ‹ Cancel
             </Text>
           </Pressable>
-          <Text style={styles.AddMaintenanceScreenTitleFlourish}>
+          <Text style={styles.AddMaintenanceScreenTitleFiligrana}>
             Add Maintenance
           </Text>
           <View style={styles.AddMaintenanceScreenNavSide} />
         </View>
 
-        <View style={{ paddingHorizontal: adaptive.horizontalPadding }}>
+        <View style={{ paddingHorizontal: adaptive.horizontalRelleno }}>
           <DropdownField
             label="Maintenance Type"
             required
             value={type}
-            onChange={setType}
+            onChange={setTipo}
             placeholder={`e.g. ${MAINTENANCE_TYPES[0]}`}
             options={MAINTENANCE_TYPES}
           />
@@ -90,33 +90,33 @@ export function AddMaintenanceScreen({
           <FormField
             label="Operating Hours"
             value={hours}
-            onChangeText={setHours}
+            onChangeText={setHoras}
             placeholder="e.g. 1842"
             keyboardType="decimal-pad"
           />
           <FormField
             label="Cost ($)"
             value={cost}
-            onChangeText={setCost}
+            onChangeText={setCosto}
             placeholder="e.g. 480"
             keyboardType="decimal-pad"
           />
           <FormField
             label="Service Provider"
             value={provider}
-            onChangeText={setProvider}
+            onChangeText={setProveedor}
             placeholder="e.g. FarmTech Service"
           />
           <FormField
             label="Next Service Hours"
-            value={nextHours}
-            onChangeText={setNextHours}
+            value={nextHoras}
+            onChangeText={setNextHoras}
             placeholder="e.g. 2092"
             keyboardType="decimal-pad"
           />
 
-          <View style={styles.AddMaintenanceScreenInfoBannerHull}>
-            <Text style={styles.AddMaintenanceScreenInfoBannerFlourish}>
+          <View style={styles.AddMaintenanceScreenInfoBannerCasco}>
+            <Text style={styles.AddMaintenanceScreenInfoBannerFiligrana}>
               On save: ${cost || '0'} added to finance · maintenance history
               updated · next-service status reset.
             </Text>
@@ -125,17 +125,17 @@ export function AddMaintenanceScreen({
           <PrimaryButton
             label="Save Maintenance"
             onPress={() =>
-              onSave({
+              onGuardar({
                 type,
                 date,
                 hours,
                 cost,
                 provider,
-                nextHours,
+                nextHoras,
               })
             }
             fullWidth
-            style={styles.AddMaintenanceScreenSavePlinth}
+            style={styles.AddMaintenanceScreenSavePlinto}
           />
         </View>
       </ScrollView>
@@ -144,7 +144,7 @@ export function AddMaintenanceScreen({
 }
 
 const styles = StyleSheet.create({
-  AddMaintenanceScreenRootHull: {
+  AddMaintenanceScreenRaizCasco: {
     backgroundColor: colors.background,
     flex: 1,
   },
@@ -152,9 +152,9 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 
-  AddMaintenanceScreenHeaderRowCapstone: {
+  AddMaintenanceScreenHeaderRowDintel: {
     alignItems: 'center',
-    borderBottomColor: colors.borderSoft,
+    borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -166,21 +166,21 @@ const styles = StyleSheet.create({
     minWidth: 72,
   },
 
-  AddMaintenanceScreenNavLinkFlourish: {
+  AddMaintenanceScreenNavLinkFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
 
-  AddMaintenanceScreenTitleFlourish: {
+  AddMaintenanceScreenTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
-  AddMaintenanceScreenInfoBannerHull: {
-    backgroundColor: colors.infoBanner,
-    borderColor: colors.infoBannerBorder,
+  AddMaintenanceScreenInfoBannerCasco: {
+    backgroundColor: colors.infoBanda,
+    borderColor: colors.infoBannerBorde,
     borderRadius: radius.card,
     borderWidth: 1,
     marginBottom: 16,
@@ -188,14 +188,14 @@ const styles = StyleSheet.create({
     padding: 15,
   },
 
-  AddMaintenanceScreenInfoBannerFlourish: {
+  AddMaintenanceScreenInfoBannerFiligrana: {
     color: colors.infoBannerText,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
     lineHeight: 18,
   },
 
-  AddMaintenanceScreenSavePlinth: {
+  AddMaintenanceScreenSavePlinto: {
     marginTop: 4,
   },
 });

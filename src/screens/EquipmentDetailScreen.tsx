@@ -13,16 +13,16 @@ import { AmountModal } from '../components/AmountModal';
 import { PrimaryButton } from '../components/buttons/PrimaryButton';
 import { colors, fonts } from '../constants/theme';
 
-import { appBackground } from '../data/assets';
+import { appFondo } from '../data/assets';
 
-import { useFarm } from '../data/FarmContext';
-import { useAdaptive } from '../hooks/useAdaptive';
+import { useGranja } from '../data/FarmContext';
+import { useAdaptativo } from '../hooks/useAdaptativo';
 
 type EquipmentDetailScreenProps = {
   equipmentId: string;
   onBack: () => void;
   onEdit: () => void;
-  onAddMaintenance: () => void;
+  onAddMantenimiento: () => void;
   onDelete: () => void;
 };
 
@@ -30,25 +30,25 @@ export function EquipmentDetailScreen({
   equipmentId,
   onBack,
   onEdit,
-  onAddMaintenance,
+  onAddMantenimiento,
   onDelete,
 }: EquipmentDetailScreenProps) {
   const insets = useSafeAreaInsets();
-  const adaptive = useAdaptive();
-  const { getEquipment, addOpHours, removeEquipment, cycleEquipmentStatus } =
-    useFarm();
-  const item = getEquipment(equipmentId);
-  const [hoursOpen, setHoursOpen] = useState(false);
-  const [toast, setToast] = useState<string | null>(null);
+  const adaptive = useAdaptativo();
+  const { getEquipo, addOpHoras, removeEquipo, cycleEquipmentEstado } =
+    useGranja();
+  const item = getEquipo(equipmentId);
+  const [hoursAbierto, setHoursAbierto] = useState(false);
+  const [toast, setAviso] = useState<string | null>(null);
 
   if (!item) {
     return (
-      <View style={styles.EquipmentDetailScreenMissingPocket}>
-        <Text style={styles.EquipmentDetailScreenMissingFlourish}>
+      <View style={styles.EquipmentDetailScreenMissingBolsillo}>
+        <Text style={styles.EquipmentDetailScreenMissingFiligrana}>
           Equipment not found
         </Text>
         <Pressable onPress={onBack}>
-          <Text style={styles.EquipmentDetailScreenNavLinkFlourish}>
+          <Text style={styles.EquipmentDetailScreenNavLinkFiligrana}>
             ‹ Farm
           </Text>
         </Pressable>
@@ -56,11 +56,11 @@ export function EquipmentDetailScreen({
     );
   }
 
-  const nextServiceLabel =
-    item.hoursToService != null ? `in ${item.hoursToService} hrs` : '—';
-  const serviceProgressLabel =
-    item.hoursToService != null
-      ? `${item.hoursToService} hrs to service`
+  const nextServiceEtiqueta =
+    item.hoursToServicio != null ? `in ${item.hoursToServicio} hrs` : '—';
+  const serviceProgressEtiqueta =
+    item.hoursToServicio != null
+      ? `${item.hoursToServicio} hrs to service`
       : 'On schedule';
 
   const rows: {
@@ -69,47 +69,47 @@ export function EquipmentDetailScreen({
     tone?: 'success' | 'danger' | 'money';
   }[] = [
     { label: 'Status', value: item.status, tone: 'success' },
-    { label: 'Operating Hours', value: item.hoursLabel },
+    { label: 'Operating Hours', value: item.hoursEtiqueta },
     { label: 'Service Interval', value: `${item.serviceIntervalHrs} hrs` },
     {
       label: 'Next Service',
-      value: nextServiceLabel,
+      value: nextServiceEtiqueta,
       tone:
-        item.hoursToService != null && item.hoursToService <= 10
+        item.hoursToServicio != null && item.hoursToServicio <= 10
           ? 'danger'
           : undefined,
     },
-    { label: 'Fuel Type', value: item.fuelType },
-    { label: 'Total Maint. Cost', value: item.maintCostLabel, tone: 'money' },
+    { label: 'Fuel Type', value: item.fuelTipo },
+    { label: 'Total Maint. Cost', value: item.maintCostEtiqueta, tone: 'money' },
   ];
 
   return (
     <ImageBackground
-      source={appBackground}
-      style={styles.EquipmentDetailScreenRootHull}
+      source={appFondo}
+      style={styles.EquipmentDetailScreenRaizCasco}
       resizeMode="cover"
     >
       <ScrollView
         contentContainerStyle={[
           styles.EquipmentDetailScreenScrollContent,
           {
-            paddingTop: insets.top + adaptive.verticalScale(6),
-            paddingBottom: insets.bottom + adaptive.verticalScale(28),
+            paddingTop: insets.top + adaptive.verticalEscala(6),
+            paddingBottom: insets.bottom + adaptive.verticalEscala(28),
           },
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.EquipmentDetailScreenHeaderRowCapstone}>
+        <View style={styles.EquipmentDetailScreenHeaderRowDintel}>
           <Pressable
             onPress={onBack}
             hitSlop={12}
             style={styles.EquipmentDetailScreenNavSide}
           >
-            <Text style={styles.EquipmentDetailScreenNavLinkFlourish}>
+            <Text style={styles.EquipmentDetailScreenNavLinkFiligrana}>
               ‹ Farm
             </Text>
           </Pressable>
-          <Text style={styles.EquipmentDetailScreenTitleFlourish}>
+          <Text style={styles.EquipmentDetailScreenTitleFiligrana}>
             Equipment
           </Text>
           <Pressable
@@ -117,23 +117,23 @@ export function EquipmentDetailScreen({
             hitSlop={12}
             style={styles.EquipmentDetailScreenNavSideRight}
           >
-            <Text style={styles.EquipmentDetailScreenNavLinkBoldFlourish}>
+            <Text style={styles.EquipmentDetailScreenNavLinkBoldFiligrana}>
               Edit
             </Text>
           </Pressable>
         </View>
 
-        <View style={{ paddingHorizontal: adaptive.horizontalPadding }}>
+        <View style={{ paddingHorizontal: adaptive.horizontalRelleno }}>
           <View style={styles.EquipmentDetailScreenIdentityRow}>
             <View style={styles.EquipmentDetailScreenIconBox}>
-              <Text style={styles.EquipmentDetailScreenIconMark}>
+              <Text style={styles.EquipmentDetailScreenIconMarca}>
                 {item.icon}
               </Text>
             </View>
             <View>
               <Text style={styles.EquipmentDetailScreenName}>{item.name}</Text>
               <Text style={styles.EquipmentDetailScreenMeta}>
-                {item.type} · {item.modelYear}
+                {item.type} · {item.modelAnio}
               </Text>
             </View>
           </View>
@@ -156,7 +156,7 @@ export function EquipmentDetailScreen({
                     styles.EquipmentDetailScreenKvValue,
                     row.tone === 'success' && { color: colors.success },
                     row.tone === 'danger' && { color: colors.danger },
-                    row.tone === 'money' && { color: colors.expenseMoney },
+                    row.tone === 'money' && { color: colors.expenseDinero },
                   ]}
                 >
                   {row.value}
@@ -171,14 +171,14 @@ export function EquipmentDetailScreen({
                 Service Progress
               </Text>
               <Text style={styles.EquipmentDetailScreenProgressWarn}>
-                {serviceProgressLabel}
+                {serviceProgressEtiqueta}
               </Text>
             </View>
             <View style={styles.EquipmentDetailScreenProgressTrack}>
               <View
                 style={[
                   styles.EquipmentDetailScreenProgressFill,
-                  { width: `${item.serviceProgress * 100}%` },
+                  { width: `${item.serviceProgreso * 100}%` },
                 ]}
               />
             </View>
@@ -188,12 +188,12 @@ export function EquipmentDetailScreen({
             <View style={styles.EquipmentDetailScreenHalfBtn}>
               <PrimaryButton
                 label="+ Maintenance"
-                onPress={onAddMaintenance}
+                onPress={onAddMantenimiento}
                 fullWidth
               />
             </View>
             <Pressable
-              onPress={() => setHoursOpen(true)}
+              onPress={() => setHoursAbierto(true)}
               style={({ pressed }) => [
                 styles.EquipmentDetailScreenSecondaryHalf,
                 pressed && styles.EquipmentDetailScreenPressedDim,
@@ -207,9 +207,9 @@ export function EquipmentDetailScreen({
 
           <Pressable
             onPress={() => {
-              const next = cycleEquipmentStatus(equipmentId);
-              setToast(`Status → ${next}`);
-              setTimeout(() => setToast(null), 2000);
+              const next = cycleEquipmentEstado(equipmentId);
+              setAviso(`Status → ${next}`);
+              setTimeout(() => setAviso(null), 2000);
             }}
             style={({ pressed }) => [
               styles.EquipmentDetailScreenChangeStatusBtn,
@@ -223,7 +223,7 @@ export function EquipmentDetailScreen({
 
           <Pressable
             onPress={() => {
-              removeEquipment(equipmentId);
+              removeEquipo(equipmentId);
               onDelete();
             }}
             style={styles.EquipmentDetailScreenDeleteBtn}
@@ -238,27 +238,27 @@ export function EquipmentDetailScreen({
       {toast ? (
         <View
           style={[
-            styles.EquipmentDetailScreenToastHull,
-            { bottom: insets.bottom + adaptive.verticalScale(24) },
+            styles.EquipmentDetailScreenToastCasco,
+            { bottom: insets.bottom + adaptive.verticalEscala(24) },
           ]}
         >
-          <Text style={styles.EquipmentDetailScreenToastFlourish}>{toast}</Text>
+          <Text style={styles.EquipmentDetailScreenToastFiligrana}>{toast}</Text>
         </View>
       ) : null}
 
       <AmountModal
-        visible={hoursOpen}
+        visible={hoursAbierto}
         title="Add Operating Hours"
         subtitle={item.name}
-        unitLabel="hrs"
+        unitEtiqueta="hrs"
         placeholder="e.g. 5"
-        confirmLabel="Add Hours"
-        onCancel={() => setHoursOpen(false)}
-        onConfirm={hours => {
-          addOpHours(equipmentId, hours);
-          setHoursOpen(false);
-          setToast(`Added ${hours} hrs`);
-          setTimeout(() => setToast(null), 2000);
+        confirmEtiqueta="Add Hours"
+        onCancel={() => setHoursAbierto(false)}
+        onConfirmar={hours => {
+          addOpHoras(equipmentId, hours);
+          setHoursAbierto(false);
+          setAviso(`Added ${hours} hrs`);
+          setTimeout(() => setAviso(null), 2000);
         }}
       />
     </ImageBackground>
@@ -266,18 +266,18 @@ export function EquipmentDetailScreen({
 }
 
 const styles = StyleSheet.create({
-  EquipmentDetailScreenRootHull: {
+  EquipmentDetailScreenRaizCasco: {
     backgroundColor: colors.background,
     flex: 1,
   },
-  EquipmentDetailScreenMissingPocket: {
+  EquipmentDetailScreenMissingBolsillo: {
     alignItems: 'center',
     backgroundColor: colors.background,
     flex: 1,
     justifyContent: 'center',
   },
 
-  EquipmentDetailScreenMissingFlourish: {
+  EquipmentDetailScreenMissingFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 18,
@@ -286,9 +286,9 @@ const styles = StyleSheet.create({
   EquipmentDetailScreenScrollContent: {
     flexGrow: 1,
   },
-  EquipmentDetailScreenHeaderRowCapstone: {
+  EquipmentDetailScreenHeaderRowDintel: {
     alignItems: 'center',
-    borderBottomColor: colors.borderSoft,
+    borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -306,19 +306,19 @@ const styles = StyleSheet.create({
     minWidth: 72,
   },
 
-  EquipmentDetailScreenNavLinkFlourish: {
+  EquipmentDetailScreenNavLinkFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
 
-  EquipmentDetailScreenNavLinkBoldFlourish: {
+  EquipmentDetailScreenNavLinkBoldFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 14,
     fontWeight: '700',
   },
-  EquipmentDetailScreenTitleFlourish: {
+  EquipmentDetailScreenTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
@@ -332,14 +332,14 @@ const styles = StyleSheet.create({
   },
   EquipmentDetailScreenIconBox: {
     alignItems: 'center',
-    backgroundColor: colors.backButton,
+    backgroundColor: colors.backBoton,
     borderRadius: 16,
     height: 54,
     justifyContent: 'center',
     width: 54,
   },
 
-  EquipmentDetailScreenIconMark: {
+  EquipmentDetailScreenIconMarca: {
     fontSize: 28,
   },
 
@@ -350,7 +350,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   EquipmentDetailScreenMeta: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginTop: 4,
@@ -374,12 +374,12 @@ const styles = StyleSheet.create({
   },
 
   EquipmentDetailScreenKvBorder: {
-    borderBottomColor: colors.borderSoft,
+    borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
   },
 
   EquipmentDetailScreenKvLabel: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
   },
@@ -404,7 +404,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   EquipmentDetailScreenProgressLabel: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
   },
@@ -437,8 +437,8 @@ const styles = StyleSheet.create({
   },
   EquipmentDetailScreenSecondaryHalf: {
     alignItems: 'center',
-    backgroundColor: colors.backButton,
-    borderColor: colors.backButtonBorder,
+    backgroundColor: colors.backBoton,
+    borderColor: colors.backButtonBorde,
     borderRadius: 14,
     borderWidth: 1,
     flex: 1,
@@ -457,8 +457,8 @@ const styles = StyleSheet.create({
   },
   EquipmentDetailScreenChangeStatusBtn: {
     alignItems: 'center',
-    backgroundColor: colors.backButton,
-    borderColor: colors.backButtonBorder,
+    backgroundColor: colors.backBoton,
+    borderColor: colors.backButtonBorde,
     borderRadius: 14,
     borderWidth: 1,
     height: 50,
@@ -474,7 +474,7 @@ const styles = StyleSheet.create({
   EquipmentDetailScreenDeleteBtn: {
     alignItems: 'center',
     backgroundColor: colors.dangerSoftStrong,
-    borderColor: colors.dangerBorder,
+    borderColor: colors.dangerBorde,
     borderRadius: 14,
     borderWidth: 1,
     height: 50,
@@ -487,7 +487,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '700',
   },
-  EquipmentDetailScreenToastHull: {
+  EquipmentDetailScreenToastCasco: {
     alignSelf: 'center',
     backgroundColor: colors.toastBg,
     borderColor: colors.border,
@@ -498,7 +498,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 
-  EquipmentDetailScreenToastFlourish: {
+  EquipmentDetailScreenToastFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 13,

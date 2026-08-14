@@ -14,52 +14,52 @@ import LinearGradient from 'react-native-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { colors, fonts, radius } from '../constants/theme';
-import { appBackground, fieldAssets } from '../data/assets';
+import { appFondo, fieldRecursos } from '../data/assets';
 import {
-  DEMO_BANNER,
-  FIELD_STATUS_FILTERS,
+  DEMO_BANDA,
+  FIELD_STATUS_FILTROS,
   type FarmField,
   type FieldStatus,
 } from '../data/fields';
-import { useFields } from '../data/FieldsContext';
+import { useCampos } from '../data/FieldsContext';
 
-import { useAdaptive } from '../hooks/useAdaptive';
+import { useAdaptativo } from '../hooks/useAdaptativo';
 
 type FieldsScreenProps = {
-  onOpenField: (fieldId: string) => void;
-  onAddField: () => void;
+  onOpenCampo: (fieldId: string) => void;
+  onAddCampo: () => void;
 };
 
-export function FieldsScreen({ onOpenField, onAddField }: FieldsScreenProps) {
+export function FieldsScreen({ onOpenCampo, onAddCampo }: FieldsScreenProps) {
   const insets = useSafeAreaInsets();
-  const adaptive = useAdaptive();
-  const { fields, isDemo } = useFields();
-  const [query, setQuery] = useState('');
-  const [filter, setFilter] =
-    useState<(typeof FIELD_STATUS_FILTERS)[number]>('All');
+  const adaptive = useAdaptativo();
+  const { fields, isMuestra } = useCampos();
+  const [query, setConsulta] = useState('');
+  const [filter, setFiltro] =
+    useState<(typeof FIELD_STATUS_FILTROS)[number]>('All');
 
   const visible = useMemo(() => {
     const q = query.trim().toLowerCase();
     return fields.filter(field => {
-      const matchesFilter =
+      const matchesFiltro =
         filter === 'All' ||
         field.status === filter ||
         (filter === 'Growing' && field.status === 'Growing') ||
         (filter === 'Harvested' && field.status === 'Harvested') ||
         (filter === 'Prepared' && field.status === 'Prepared') ||
         (filter === 'Planted' && field.status === 'Planted');
-      const matchesQuery =
+      const matchesConsulta =
         !q ||
         field.name.toLowerCase().includes(q) ||
         field.crop.toLowerCase().includes(q) ||
         field.variety.toLowerCase().includes(q);
-      return matchesFilter && matchesQuery;
+      return matchesFiltro && matchesConsulta;
     });
   }, [fields, filter, query]);
 
   return (
     <ImageBackground
-      source={appBackground}
+      source={appFondo}
       style={styles.FieldsScreenBackground}
       resizeMode="cover"
     >
@@ -67,45 +67,45 @@ export function FieldsScreen({ onOpenField, onAddField }: FieldsScreenProps) {
         contentContainerStyle={[
           styles.FieldsScreenScroll,
           {
-            paddingTop: insets.top + adaptive.verticalScale(8),
-            paddingBottom: adaptive.verticalScale(110),
-            paddingHorizontal: adaptive.horizontalPadding,
+            paddingTop: insets.top + adaptive.verticalEscala(8),
+            paddingBottom: adaptive.verticalEscala(110),
+            paddingHorizontal: adaptive.horizontalRelleno,
           },
         ]}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.FieldsScreenHeader}>
-          <Text style={styles.FieldsScreenTitleFlourish}>Fields</Text>
-          <Pressable onPress={onAddField} hitSlop={8}>
+          <Text style={styles.FieldsScreenTitleFiligrana}>Fields</Text>
+          <Pressable onPress={onAddCampo} hitSlop={8}>
             <LinearGradient
               colors={[colors.buttonGradientStart, colors.buttonGradientEnd]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
-              style={styles.FieldsScreenAddBead}
+              style={styles.FieldsScreenAddOrbe}
             >
-              <Text style={styles.FieldsScreenAddMark}>+</Text>
+              <Text style={styles.FieldsScreenAddMarca}>+</Text>
             </LinearGradient>
           </Pressable>
         </View>
 
-        <View style={styles.FieldsScreenSearchHull}>
+        <View style={styles.FieldsScreenSearchCasco}>
           <TextInput
             value={query}
-            onChangeText={setQuery}
+            onChangeText={setConsulta}
             placeholder="🔍  Search fields"
-            placeholderTextColor={colors.tabInactive}
+            placeholderTextColor={colors.tabInactivo}
             style={styles.FieldsScreenSearchInput}
           />
         </View>
 
         <View style={styles.FieldsScreenFilterRow}>
-          {FIELD_STATUS_FILTERS.map(item => {
+          {FIELD_STATUS_FILTROS.map(item => {
             const active = item === filter;
             return (
               <Pressable
                 key={item}
-                onPress={() => setFilter(item)}
+                onPress={() => setFiltro(item)}
                 style={[
                   styles.FieldsScreenFilterChip,
                   active
@@ -126,11 +126,11 @@ export function FieldsScreen({ onOpenField, onAddField }: FieldsScreenProps) {
           })}
         </View>
 
-        {isDemo ? (
-          <View style={styles.FieldsScreenDemoBannerHull}>
-            <Text style={styles.FieldsScreenDemoBannerEmblem}>ℹ️</Text>
-            <Text style={styles.FieldsScreenDemoBannerFlourish}>
-              {DEMO_BANNER}
+        {isMuestra ? (
+          <View style={styles.FieldsScreenDemoBannerCasco}>
+            <Text style={styles.FieldsScreenDemoBannerEmblema}>ℹ️</Text>
+            <Text style={styles.FieldsScreenDemoBannerFiligrana}>
+              {DEMO_BANDA}
             </Text>
           </View>
         ) : null}
@@ -140,7 +140,7 @@ export function FieldsScreen({ onOpenField, onAddField }: FieldsScreenProps) {
             <FieldCard
               key={field.id}
               field={field}
-              onPress={() => onOpenField(field.id)}
+              onPress={() => onOpenCampo(field.id)}
             />
           ))}
         </View>
@@ -157,15 +157,15 @@ function FieldCard({
   onPress: () => void;
 }) {
   const cover =
-    field.coverTone === 'ready'
-      ? fieldAssets.coverReady
-      : fieldAssets.coverGrowing;
+    field.coverTono === 'ready'
+      ? fieldRecursos.coverListo
+      : fieldRecursos.coverCrecimiento;
 
   return (
     <Pressable
       onPress={onPress}
       style={({ pressed }) => [
-        styles.FieldsScreenFieldCardHull,
+        styles.FieldsScreenFieldCardCasco,
         pressed && styles.FieldsScreenPressedDim,
       ]}
     >
@@ -173,7 +173,7 @@ function FieldCard({
         source={cover}
         style={[
           styles.FieldsScreenFieldCardCover,
-          field.coverTone === 'harvested' &&
+          field.coverTono === 'harvested' &&
             styles.FieldsScreenFieldCardCoverHarvested,
         ]}
         imageStyle={styles.FieldsScreenFieldCardCoverImage}
@@ -192,11 +192,11 @@ function FieldCard({
       </ImageBackground>
       <View style={styles.FieldsScreenFieldCardBody}>
         <View style={styles.FieldsScreenFieldCardTitleRow}>
-          <Text style={styles.FieldsScreenFieldCardNameFlourish}>
+          <Text style={styles.FieldsScreenFieldCardNameFiligrana}>
             {field.name}
           </Text>
-          <Text style={styles.FieldsScreenFieldCardAreaFlourish}>
-            {field.areaLabel}
+          <Text style={styles.FieldsScreenFieldCardAreaFiligrana}>
+            {field.areaEtiqueta}
           </Text>
         </View>
         <Text style={styles.FieldsScreenFieldCardCrop}>
@@ -204,7 +204,7 @@ function FieldCard({
         </Text>
         <View style={styles.FieldsScreenFieldCardFooter}>
           <Text style={styles.FieldsScreenFieldCardNext}>
-            {field.nextLabel}
+            {field.nextEtiqueta}
           </Text>
         </View>
       </View>
@@ -236,7 +236,7 @@ export function StatusPill({ status }: { status: FieldStatus }) {
           styles.FieldsScreenStatusPillLabel,
           tone === 'success' && { color: colors.success },
           tone === 'gold' && { color: colors.gold },
-          tone === 'muted' && { color: colors.bodyMuted },
+          tone === 'muted' && { color: colors.bodyApagado },
         ]}
       >
         ● {status}
@@ -260,13 +260,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 14,
   },
-  FieldsScreenTitleFlourish: {
+  FieldsScreenTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 24,
     fontWeight: '700',
   },
-  FieldsScreenAddBead: {
+  FieldsScreenAddOrbe: {
     alignItems: 'center',
     borderRadius: 12,
     height: 40,
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
     width: 40,
   },
 
-  FieldsScreenAddMark: {
+  FieldsScreenAddMarca: {
     color: colors.buttonText,
     fontFamily: fonts.sansBold,
     fontSize: 22,
@@ -282,9 +282,9 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
 
-  FieldsScreenSearchHull: {
+  FieldsScreenSearchCasco: {
     backgroundColor: colors.card,
-    borderColor: colors.emptyBorder,
+    borderColor: colors.emptyBorde,
     borderRadius: 12,
     borderWidth: 1,
     height: 48,
@@ -321,7 +321,7 @@ const styles = StyleSheet.create({
   },
 
   FieldsScreenFilterChipLabel: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansBold,
     fontSize: 10,
     fontWeight: '700',
@@ -330,9 +330,9 @@ const styles = StyleSheet.create({
     color: colors.gold,
   },
 
-  FieldsScreenDemoBannerHull: {
-    backgroundColor: colors.infoBanner,
-    borderColor: colors.infoBannerBorder,
+  FieldsScreenDemoBannerCasco: {
+    backgroundColor: colors.infoBanda,
+    borderColor: colors.infoBannerBorde,
     borderRadius: radius.card,
     borderWidth: 1,
     flexDirection: 'row',
@@ -342,11 +342,11 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
 
-  FieldsScreenDemoBannerEmblem: {
+  FieldsScreenDemoBannerEmblema: {
     fontSize: 16,
     marginTop: 2,
   },
-  FieldsScreenDemoBannerFlourish: {
+  FieldsScreenDemoBannerFiligrana: {
     color: colors.infoBannerText,
     flex: 1,
     fontFamily: fonts.sansRegular,
@@ -357,7 +357,7 @@ const styles = StyleSheet.create({
     gap: 12,
   },
 
-  FieldsScreenFieldCardHull: {
+  FieldsScreenFieldCardCasco: {
     backgroundColor: colors.card,
     borderColor: colors.border,
     borderRadius: radius.card,
@@ -398,13 +398,13 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
   },
   FieldsScreenStatusPillSuccess: {
-    backgroundColor: colors.successSoft,
+    backgroundColor: colors.successSuave,
   },
   FieldsScreenStatusPillGold: {
     backgroundColor: 'rgba(245, 182, 66, 0.16)',
   },
   FieldsScreenStatusPillMuted: {
-    backgroundColor: colors.plannedSoft,
+    backgroundColor: colors.plannedSuave,
   },
   FieldsScreenStatusPillLabel: {
     fontFamily: fonts.sansBold,
@@ -435,7 +435,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  FieldsScreenFieldCardNameFlourish: {
+  FieldsScreenFieldCardNameFiligrana: {
     color: colors.cream,
     flexShrink: 1,
     fontFamily: fonts.sansBold,
@@ -444,21 +444,21 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
 
-  FieldsScreenFieldCardAreaFlourish: {
+  FieldsScreenFieldCardAreaFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
   FieldsScreenFieldCardCrop: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginTop: 4,
   },
 
   FieldsScreenFieldCardFooter: {
-    borderTopColor: colors.borderSoft,
+    borderTopColor: colors.borderSuave,
     borderTopWidth: 1,
     marginTop: 10,
     paddingBottom: 12,
@@ -466,7 +466,7 @@ const styles = StyleSheet.create({
   },
 
   FieldsScreenFieldCardNext: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
   },

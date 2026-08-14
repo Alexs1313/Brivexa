@@ -1,15 +1,15 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const storageKeys = {
-  tasks: '@brivexa/userTasks',
-  fields: '@brivexa/userFields',
-  inventory: '@brivexa/userInventory',
-  equipment: '@brivexa/userEquipment',
-  transactions: '@brivexa/userTransactions',
-  savedCalculations: '@brivexa/savedCalculations',
+export const storageClaves = {
+  tasks: '@brivexa/userTareas',
+  fields: '@brivexa/userCampos',
+  inventory: '@brivexa/userInventario',
+  equipment: '@brivexa/userEquipo',
+  transactions: '@brivexa/userTransacciones',
+  savedCalculos: '@brivexa/savedCalculos',
 } as const;
 
-export type StorageKey = (typeof storageKeys)[keyof typeof storageKeys];
+export type StorageKey = (typeof storageClaves)[keyof typeof storageClaves];
 
 export async function loadJson<T>(key: StorageKey): Promise<T | undefined> {
   try {
@@ -31,7 +31,7 @@ export async function saveJson<T>(key: StorageKey, value: T): Promise<void> {
   }
 }
 
-export async function removeKey(key: StorageKey): Promise<void> {
+export async function removeClave(key: StorageKey): Promise<void> {
   try {
     await AsyncStorage.removeItem(key);
   } catch {

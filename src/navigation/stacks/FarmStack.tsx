@@ -1,51 +1,54 @@
-import React, {useEffect} from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import type {NativeStackScreenProps} from '@react-navigation/native-stack';
+import React, { useEffect } from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-import {useFarm} from '../../data/FarmContext';
-import {AddIncomeScreen} from '../../screens/AddIncomeScreen';
-import {AddMaintenanceScreen} from '../../screens/AddMaintenanceScreen';
-import {EquipmentDetailScreen} from '../../screens/EquipmentDetailScreen';
-import {FarmScreen} from '../../screens/FarmScreen';
-import {InventoryItemDetailScreen} from '../../screens/InventoryItemDetailScreen';
-import {NewItemScreen} from '../../screens/NewItemScreen';
-import {ReportDetailScreen} from '../../screens/ReportDetailScreen';
-import {useFarmToast} from '../FarmToastContext';
-import type {FarmStackParamList} from '../types';
+import { useGranja } from '../../data/FarmContext';
+
+import { AddIncomeScreen } from '../../screens/AddIncomeScreen';
+import { AddMaintenanceScreen } from '../../screens/AddMaintenanceScreen';
+import { EquipmentDetailScreen } from '../../screens/EquipmentDetailScreen';
+import { FarmScreen } from '../../screens/FarmScreen';
+
+import { InventoryItemDetailScreen } from '../../screens/InventoryItemDetailScreen';
+import { NewItemScreen } from '../../screens/NewItemScreen';
+import { ReportDetailScreen } from '../../screens/ReportDetailScreen';
+import { useFarmAviso } from '../FarmToastContext';
+//
+import type { FarmStackParamList } from '../types';
 
 const Stack = createNativeStackNavigator<FarmStackParamList>();
 
 const screenOptions = {
   headerShown: false,
   animation: 'slide_from_right' as const,
-  contentStyle: {backgroundColor: '#1a1140'},
+  contentStyle: { backgroundColor: '#1a1140' },
 };
 
 function FarmHomeScreen({
   navigation,
 }: NativeStackScreenProps<FarmStackParamList, 'FarmHome'>) {
-  const {farmToast, clearFarmToast} = useFarmToast();
+  const { farmAviso, clearFarmAviso } = useFarmAviso();
 
   useEffect(() => {
-    if (!farmToast) {
+    if (!farmAviso) {
       return;
     }
-    const timer = setTimeout(() => clearFarmToast(), 2200);
+    const timer = setTimeout(() => clearFarmAviso(), 2200);
     return () => clearTimeout(timer);
-  }, [clearFarmToast, farmToast]);
+  }, [clearFarmAviso, farmAviso]);
 
   return (
     <FarmScreen
-      onOpenItem={itemId =>
-        navigation.navigate('InventoryItemDetail', {itemId})
+      onOpenArticulo={itemId =>
+        navigation.navigate('InventoryItemDetail', { itemId })
       }
-      onAddItem={() => navigation.navigate('NewInventoryItem')}
-      onOpenEquipment={equipmentId =>
-        navigation.navigate('EquipmentDetail', {equipmentId})
+      onAddArticulo={() => navigation.navigate('NewInventoryItem')}
+      onOpenEquipo={equipmentId =>
+        navigation.navigate('EquipmentDetail', { equipmentId })
       }
-      onAddIncome={() => navigation.navigate('AddIncome')}
-      onOpenReport={() => navigation.navigate('ReportDetail')}
-      toastMessage={farmToast}
+      onAddIngreso={() => navigation.navigate('AddIncome')}
+      onOpenInforme={() => navigation.navigate('ReportDetail')}
+      toastMensaje={farmAviso}
     />
   );
 }
@@ -54,7 +57,7 @@ function InventoryItemDetailRoute({
   navigation,
   route,
 }: NativeStackScreenProps<FarmStackParamList, 'InventoryItemDetail'>) {
-  const {itemId} = route.params;
+  const { itemId } = route.params;
   return (
     <InventoryItemDetailScreen
       itemId={itemId}
@@ -68,14 +71,14 @@ function InventoryItemDetailRoute({
 function NewInventoryItemRoute({
   navigation,
 }: NativeStackScreenProps<FarmStackParamList, 'NewInventoryItem'>) {
-  const {addInventoryItem} = useFarm();
-  const {showFarmToast} = useFarmToast();
+  const { addInventoryArticulo } = useGranja();
+  const { showFarmAviso } = useFarmAviso();
   return (
     <NewItemScreen
       onCancel={() => navigation.goBack()}
-      onSave={draft => {
-        addInventoryItem(draft);
-        showFarmToast('Item saved');
+      onGuardar={draft => {
+        addInventoryArticulo(draft);
+        showFarmAviso('Item saved');
         navigation.goBack();
       }}
     />
@@ -86,14 +89,14 @@ function EquipmentDetailRoute({
   navigation,
   route,
 }: NativeStackScreenProps<FarmStackParamList, 'EquipmentDetail'>) {
-  const {equipmentId} = route.params;
+  const { equipmentId } = route.params;
   return (
     <EquipmentDetailScreen
       equipmentId={equipmentId}
       onBack={() => navigation.goBack()}
       onEdit={() => navigation.goBack()}
-      onAddMaintenance={() =>
-        navigation.navigate('AddMaintenance', {equipmentId})
+      onAddMantenimiento={() =>
+        navigation.navigate('AddMaintenance', { equipmentId })
       }
       onDelete={() => navigation.goBack()}
     />
@@ -104,14 +107,14 @@ function AddMaintenanceRoute({
   navigation,
   route,
 }: NativeStackScreenProps<FarmStackParamList, 'AddMaintenance'>) {
-  const {addMaintenance} = useFarm();
+  const { addMantenimiento } = useGranja();
   const equipmentId = route.params.equipmentId;
   return (
     <AddMaintenanceScreen
       onCancel={() => navigation.goBack()}
-      onSave={draft => {
+      onGuardar={draft => {
         if (equipmentId) {
-          addMaintenance(equipmentId, draft);
+          addMantenimiento(equipmentId, draft);
         }
         navigation.goBack();
       }}
@@ -122,12 +125,12 @@ function AddMaintenanceRoute({
 function AddIncomeRoute({
   navigation,
 }: NativeStackScreenProps<FarmStackParamList, 'AddIncome'>) {
-  const {addIncome} = useFarm();
+  const { addIngreso } = useGranja();
   return (
     <AddIncomeScreen
       onCancel={() => navigation.goBack()}
-      onSave={draft => {
-        addIncome(draft);
+      onGuardar={draft => {
+        addIngreso(draft);
         navigation.goBack();
       }}
     />

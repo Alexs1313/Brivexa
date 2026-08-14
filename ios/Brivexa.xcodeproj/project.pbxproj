@@ -281,7 +281,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dsdfjkwrenfew.djsdfmd;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eeacdfvnk.zxcjkdsncjk;
 				PRODUCT_NAME = Brivexa;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -313,7 +313,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dsdfjkwrenfew.djsdfmd;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eeacdfvnk.zxcjkdsncjk;
 				PRODUCT_NAME = Brivexa;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

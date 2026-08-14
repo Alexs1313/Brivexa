@@ -13,40 +13,40 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BackButton, PrimaryButton } from '../components/buttons/PrimaryButton';
 import { PaginationDots } from '../components/nav/PaginationDots';
 
-import { onboardingBackground } from '../data/assets';
-import { ONBOARDING_STEPS } from '../data/onboarding';
+import { onboardingFondo } from '../data/assets';
+import { ONBOARDING_PASOS } from '../data/onboarding';
 
-import { useAdaptive } from '../hooks/useAdaptive';
+import { useAdaptativo } from '../hooks/useAdaptativo';
 import { colors, fonts } from '../constants/theme';
 
 type OnboardingScreenProps = {
-  onComplete: () => void;
+  onCompletar: () => void;
 };
 
-export function OnboardingScreen({ onComplete }: OnboardingScreenProps) {
-  const adaptive = useAdaptive();
+export function OnboardingScreen({ onCompletar }: OnboardingScreenProps) {
+  const adaptive = useAdaptativo();
   const insets = useSafeAreaInsets();
-  const [stepIndex, setStepIndex] = useState(0);
+  const [stepIndice, setStepIndice] = useState(0);
 
-  const step = ONBOARDING_STEPS[stepIndex];
-  const isFirstStep = stepIndex === 0;
-  const isLastStep = stepIndex === ONBOARDING_STEPS.length - 1;
+  const step = ONBOARDING_PASOS[stepIndice];
+  const isFirstPaso = stepIndice === 0;
+  const isLastPaso = stepIndice === ONBOARDING_PASOS.length - 1;
 
   const handleNext = () => {
-    if (isLastStep) {
-      onComplete();
+    if (isLastPaso) {
+      onCompletar();
       return;
     }
-    setStepIndex(prev => prev + 1);
+    setStepIndice(prev => prev + 1);
   };
 
   const handleBack = () => {
-    setStepIndex(prev => Math.max(0, prev - 1));
+    setStepIndice(prev => Math.max(0, prev - 1));
   };
 
   return (
     <ImageBackground
-      source={onboardingBackground}
+      source={onboardingFondo}
       style={styles.OnboardingScreenBackground}
       resizeMode="cover"
     >
@@ -55,38 +55,38 @@ export function OnboardingScreen({ onComplete }: OnboardingScreenProps) {
         showsVerticalScrollIndicator={false}
       >
         <Pressable
-          onPress={onComplete}
+          onPress={onCompletar}
           style={[
             styles.OnboardingScreenTopSkip,
-            { top: insets.top + adaptive.verticalScale(12) },
+            { top: insets.top + adaptive.verticalEscala(12) },
           ]}
           hitSlop={12}
         >
-          <Text style={styles.OnboardingScreenTopSkipFlourish}>Skip</Text>
+          <Text style={styles.OnboardingScreenTopSkipFiligrana}>Skip</Text>
         </Pressable>
 
         <View
           style={[
             styles.OnboardingScreenContent,
             {
-              paddingTop: insets.top + adaptive.verticalScale(70),
-              paddingBottom: insets.bottom + adaptive.verticalScale(20),
+              paddingTop: insets.top + adaptive.verticalEscala(70),
+              paddingBottom: insets.bottom + adaptive.verticalEscala(20),
             },
           ]}
         >
-          <View style={styles.OnboardingScreenHeroPocket}>
+          <View style={styles.OnboardingScreenHeroBolsillo}>
             <Image
               source={step.art}
               style={[
-                styles.OnboardingScreenArtEmblem,
-                { width: adaptive.artSize, height: adaptive.artSize },
+                styles.OnboardingScreenArtEmblema,
+                { width: adaptive.artTamano, height: adaptive.artTamano },
               ]}
               resizeMode="contain"
             />
           </View>
 
-          <View style={styles.OnboardingScreenCaptionPocket}>
-            <Text style={styles.OnboardingScreenTitleFlourish}>
+          <View style={styles.OnboardingScreenCaptionBolsillo}>
+            <Text style={styles.OnboardingScreenTitleFiligrana}>
               {step.title}
             </Text>
             <Text style={styles.OnboardingScreenDescription}>
@@ -96,16 +96,16 @@ export function OnboardingScreen({ onComplete }: OnboardingScreenProps) {
 
           <View style={styles.OnboardingScreenFooter}>
             <PaginationDots
-              total={ONBOARDING_STEPS.length}
-              activeIndex={stepIndex}
+              total={ONBOARDING_PASOS.length}
+              activeIndice={stepIndice}
             />
 
             <View style={styles.OnboardingScreenActionRow}>
-              {!isFirstStep ? (
+              {!isFirstPaso ? (
                 <BackButton label="Back" onPress={handleBack} />
               ) : null}
               <PrimaryButton
-                label={step.buttonLabel}
+                label={step.buttonEtiqueta}
                 onPress={handleNext}
                 fullWidth
                 style={styles.OnboardingScreenPrimaryAction}
@@ -119,7 +119,7 @@ export function OnboardingScreen({ onComplete }: OnboardingScreenProps) {
 }
 
 const styles = StyleSheet.create({
-  OnboardingScreenRootHull: {
+  OnboardingScreenRaizCasco: {
     backgroundColor: colors.background,
     flex: 1,
   },
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
 
-  OnboardingScreenTopSkipFlourish: {
+  OnboardingScreenTopSkipFiligrana: {
     color: colors.skip,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
@@ -144,19 +144,19 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 18,
   },
-  OnboardingScreenHeroPocket: {
+  OnboardingScreenHeroBolsillo: {
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
   },
-  OnboardingScreenArtEmblem: {
+  OnboardingScreenArtEmblema: {
     maxHeight: 393,
   },
-  OnboardingScreenCaptionPocket: {
+  OnboardingScreenCaptionBolsillo: {
     alignItems: 'center',
     paddingHorizontal: 12,
   },
-  OnboardingScreenTitleFlourish: {
+  OnboardingScreenTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 26,

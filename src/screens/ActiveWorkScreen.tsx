@@ -14,60 +14,60 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AmountModal } from '../components/AmountModal';
 
 import { colors, fonts, layout, radius } from '../constants/theme';
-import { appBackground } from '../data/assets';
+import { appFondo } from '../data/assets';
 
-import { useTasks } from '../data/TasksContext';
+import { useTareas } from '../data/TasksContext';
 
-import { useAdaptive } from '../hooks/useAdaptive';
-import { pickWorkPhoto } from '../utils/pickWorkPhoto';
+import { useAdaptativo } from '../hooks/useAdaptativo';
+import { pickWorkFoto } from '../utils/pickWorkFoto';
 
 type ActiveWorkScreenProps = {
   taskId: string;
   onBack: () => void;
-  onComplete: () => void;
+  onCompletar: () => void;
 };
 
-function formatElapsed(totalSeconds: number) {
-  const h = Math.floor(totalSeconds / 3600);
-  const m = Math.floor((totalSeconds % 3600) / 60);
-  const s = totalSeconds % 60;
+function formatElapsed(totalSegundos: number) {
+  const h = Math.floor(totalSegundos / 3600);
+  const m = Math.floor((totalSegundos % 3600) / 60);
+  const s = totalSegundos % 60;
   return [h, m, s].map(n => String(n).padStart(2, '0')).join(':');
 }
 
 export function ActiveWorkScreen({
   taskId,
   onBack,
-  onComplete,
+  onCompletar,
 }: ActiveWorkScreenProps) {
   const insets = useSafeAreaInsets();
-  const adaptive = useAdaptive();
-  const { getTask } = useTasks();
-  const task = getTask(taskId);
-  const [seconds, setSeconds] = useState(1 * 3600 + 25 * 60 + 45);
-  const [paused, setPaused] = useState(false);
-  const [materialsNote, setMaterialsNote] = useState<string | null>(null);
-  const [photos, setPhotos] = useState<string[]>([]);
-  const [materialOpen, setMaterialOpen] = useState(false);
-  const [toast, setToast] = useState<string | null>(null);
+  const adaptive = useAdaptativo();
+  const { getTarea } = useTareas();
+  const task = getTarea(taskId);
+  const [seconds, setSegundos] = useState(1 * 3600 + 25 * 60 + 45);
+  const [paused, setPausado] = useState(false);
+  const [materialsNota, setMaterialsNota] = useState<string | null>(null);
+  const [photos, setFotos] = useState<string[]>([]);
+  const [materialAbierto, setMaterialAbierto] = useState(false);
+  const [toast, setAviso] = useState<string | null>(null);
 
   useEffect(() => {
     if (paused) {
       return;
     }
     const id = setInterval(() => {
-      setSeconds(prev => prev + 1);
+      setSegundos(prev => prev + 1);
     }, 1000);
     return () => clearInterval(id);
   }, [paused]);
 
   if (!task) {
     return (
-      <View style={styles.ActiveWorkScreenMissingHull}>
-        <Text style={styles.ActiveWorkScreenMissingFlourish}>
+      <View style={styles.ActiveWorkScreenMissingCasco}>
+        <Text style={styles.ActiveWorkScreenMissingFiligrana}>
           Task not found
         </Text>
         <Pressable onPress={onBack}>
-          <Text style={styles.ActiveWorkScreenNavLinkFlourish}>‹ Task</Text>
+          <Text style={styles.ActiveWorkScreenNavLinkFiligrana}>‹ Task</Text>
         </Pressable>
       </View>
     );
@@ -78,7 +78,7 @@ export function ActiveWorkScreen({
     { label: 'Equipment', value: task.equipment ?? '—' },
     {
       label: 'Materials Used',
-      value: materialsNote ?? task.materials ?? '—',
+      value: materialsNota ?? task.materials ?? '—',
     },
     {
       label: 'Photos',
@@ -87,19 +87,19 @@ export function ActiveWorkScreen({
     { label: 'Started', value: '07:32 AM' },
   ];
 
-  const showToast = (message: string) => {
-    setToast(message);
-    setTimeout(() => setToast(null), 2000);
+  const showAviso = (message: string) => {
+    setAviso(message);
+    setTimeout(() => setAviso(null), 2000);
   };
 
-  const onAddPhoto = async () => {
+  const onAddFoto = async () => {
     try {
-      const result = await pickWorkPhoto();
+      const result = await pickWorkFoto();
       if (result.didCancel) {
         return;
       }
       if (result.errorCode) {
-        showToast(
+        showAviso(
           result.errorMessage ??
             (result.errorCode === 'permission'
               ? 'Photo permission denied'
@@ -111,43 +111,43 @@ export function ActiveWorkScreen({
       if (!uri) {
         return;
       }
-      setPhotos(prev => [...prev, uri]);
-      showToast('Photo attached');
+      setFotos(prev => [...prev, uri]);
+      showAviso('Photo attached');
     } catch {
-      showToast('Could not open photo library');
+      showAviso('Could not open photo library');
     }
   };
 
   return (
     <ImageBackground
-      source={appBackground}
-      style={styles.ActiveWorkScreenRootHull}
+      source={appFondo}
+      style={styles.ActiveWorkScreenRaizCasco}
       resizeMode="cover"
     >
       <ScrollView
         contentContainerStyle={[
           styles.ActiveWorkScreenScrollContent,
           {
-            paddingTop: insets.top + adaptive.verticalScale(6),
-            paddingBottom: insets.bottom + adaptive.verticalScale(28),
-            paddingHorizontal: adaptive.horizontalPadding,
+            paddingTop: insets.top + adaptive.verticalEscala(6),
+            paddingBottom: insets.bottom + adaptive.verticalEscala(28),
+            paddingHorizontal: adaptive.horizontalRelleno,
           },
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.ActiveWorkScreenHeaderRowCapstone}>
+        <View style={styles.ActiveWorkScreenHeaderRowDintel}>
           <Pressable
             onPress={onBack}
             hitSlop={12}
             style={styles.ActiveWorkScreenNavSide}
           >
-            <Text style={styles.ActiveWorkScreenNavLinkFlourish}>‹ Task</Text>
+            <Text style={styles.ActiveWorkScreenNavLinkFiligrana}>‹ Task</Text>
           </Pressable>
-          <Text style={styles.ActiveWorkScreenTitleFlourish}>Active Work</Text>
+          <Text style={styles.ActiveWorkScreenTitleFiligrana}>Active Work</Text>
           <View style={styles.ActiveWorkScreenNavSide} />
         </View>
 
-        <Text style={styles.ActiveWorkScreenFieldLabelFlourish}>
+        <Text style={styles.ActiveWorkScreenFieldLabelFiligrana}>
           {task.field}
         </Text>
         <Text style={styles.ActiveWorkScreenTaskTitle}>{task.title}</Text>
@@ -179,7 +179,7 @@ export function ActiveWorkScreen({
 
         <View style={styles.ActiveWorkScreenActionRow}>
           <Pressable
-            onPress={() => setMaterialOpen(true)}
+            onPress={() => setMaterialAbierto(true)}
             style={({ pressed }) => [
               styles.ActiveWorkScreenGhostBtn,
               pressed && styles.ActiveWorkScreenPressedDim,
@@ -188,7 +188,7 @@ export function ActiveWorkScreen({
             <Text style={styles.ActiveWorkScreenGhostBtnLabel}>+ Material</Text>
           </Pressable>
           <Pressable
-            onPress={() => void onAddPhoto()}
+            onPress={() => void onAddFoto()}
             style={({ pressed }) => [
               styles.ActiveWorkScreenGhostBtn,
               pressed && styles.ActiveWorkScreenPressedDim,
@@ -216,7 +216,7 @@ export function ActiveWorkScreen({
 
         <View style={styles.ActiveWorkScreenFooterRow}>
           <Pressable
-            onPress={() => setPaused(p => !p)}
+            onPress={() => setPausado(p => !p)}
             style={({ pressed }) => [
               styles.ActiveWorkScreenPauseBtn,
               pressed && styles.ActiveWorkScreenPressedDim,
@@ -227,7 +227,7 @@ export function ActiveWorkScreen({
             </Text>
           </Pressable>
           <Pressable
-            onPress={onComplete}
+            onPress={onCompletar}
             style={({ pressed }) => [
               styles.ActiveWorkScreenCompleteBtn,
               pressed && styles.ActiveWorkScreenPressedDim,
@@ -243,26 +243,26 @@ export function ActiveWorkScreen({
       {toast ? (
         <View
           style={[
-            styles.ActiveWorkScreenToastHull,
-            { bottom: insets.bottom + adaptive.verticalScale(24) },
+            styles.ActiveWorkScreenToastCasco,
+            { bottom: insets.bottom + adaptive.verticalEscala(24) },
           ]}
         >
-          <Text style={styles.ActiveWorkScreenToastFlourish}>{toast}</Text>
+          <Text style={styles.ActiveWorkScreenToastFiligrana}>{toast}</Text>
         </View>
       ) : null}
 
       <AmountModal
-        visible={materialOpen}
+        visible={materialAbierto}
         title="Add Material"
         subtitle={task.title}
-        unitLabel="units"
+        unitEtiqueta="units"
         placeholder="e.g. 5"
-        confirmLabel="Add Material"
-        onCancel={() => setMaterialOpen(false)}
-        onConfirm={amount => {
-          setMaterialsNote(`${amount} units used`);
-          setMaterialOpen(false);
-          showToast('Material added');
+        confirmEtiqueta="Add Material"
+        onCancel={() => setMaterialAbierto(false)}
+        onConfirmar={amount => {
+          setMaterialsNota(`${amount} units used`);
+          setMaterialAbierto(false);
+          showAviso('Material added');
         }}
       />
     </ImageBackground>
@@ -270,23 +270,23 @@ export function ActiveWorkScreen({
 }
 
 const styles = StyleSheet.create({
-  ActiveWorkScreenRootHull: { backgroundColor: colors.background, flex: 1 },
+  ActiveWorkScreenRaizCasco: { backgroundColor: colors.background, flex: 1 },
   ActiveWorkScreenScrollContent: { flexGrow: 1 },
 
-  ActiveWorkScreenMissingHull: {
+  ActiveWorkScreenMissingCasco: {
     alignItems: 'center',
     backgroundColor: colors.background,
     flex: 1,
     justifyContent: 'center',
   },
-  ActiveWorkScreenMissingFlourish: {
+  ActiveWorkScreenMissingFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     marginBottom: 12,
   },
 
-  ActiveWorkScreenHeaderRowCapstone: {
+  ActiveWorkScreenHeaderRowDintel: {
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: 18,
@@ -294,14 +294,14 @@ const styles = StyleSheet.create({
 
   ActiveWorkScreenNavSide: { minWidth: 72 },
 
-  ActiveWorkScreenNavLinkFlourish: {
+  ActiveWorkScreenNavLinkFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
-  ActiveWorkScreenTitleFlourish: {
+  ActiveWorkScreenTitleFiligrana: {
     color: colors.cream,
     flex: 1,
     fontFamily: fonts.sansBold,
@@ -310,8 +310,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  ActiveWorkScreenFieldLabelFlourish: {
-    color: colors.bodyMuted,
+  ActiveWorkScreenFieldLabelFiligrana: {
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
   },
@@ -351,7 +351,7 @@ const styles = StyleSheet.create({
   },
 
   ActiveWorkScreenTimerHint: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginTop: 6,
@@ -373,11 +373,11 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
   },
   ActiveWorkScreenKvRowBorder: {
-    borderBottomColor: colors.borderSoft,
+    borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
   },
   ActiveWorkScreenKvLabel: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
   },
@@ -444,7 +444,7 @@ const styles = StyleSheet.create({
   },
   ActiveWorkScreenCompleteBtn: {
     alignItems: 'center',
-    backgroundColor: colors.successButton,
+    backgroundColor: colors.successBoton,
     borderRadius: radius.button,
     flex: 1,
     height: layout.buttonHeightDefault,
@@ -459,7 +459,7 @@ const styles = StyleSheet.create({
   },
 
   ActiveWorkScreenPressedDim: { opacity: 0.85 },
-  ActiveWorkScreenToastHull: {
+  ActiveWorkScreenToastCasco: {
     alignSelf: 'center',
     backgroundColor: colors.toastBg,
     borderColor: colors.border,
@@ -470,7 +470,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 
-  ActiveWorkScreenToastFlourish: {
+  ActiveWorkScreenToastFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 13,

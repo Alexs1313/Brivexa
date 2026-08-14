@@ -5,21 +5,21 @@ import { colors } from '../../constants/theme';
 
 type PaginationDotsProps = {
   total: number;
-  activeIndex: number;
+  activeIndice: number;
 };
 
-export function PaginationDots({ total, activeIndex }: PaginationDotsProps) {
+export function PaginationDots({ total, activeIndice }: PaginationDotsProps) {
   return (
-    <View style={styles.PaginationDotsRootHull}>
+    <View style={styles.PaginationDotsRaizCasco}>
       {Array.from({ length: total }).map((_, index) => {
-        const isActive = index === activeIndex;
+        const isActivo = index === activeIndice;
 
         return (
           <View
             key={index}
             style={[
               styles.PaginationDotsDot,
-              isActive && styles.PaginationDotsDotActive,
+              isActivo && styles.PaginationDotsDotActive,
             ]}
           />
         );
@@ -29,14 +29,14 @@ export function PaginationDots({ total, activeIndex }: PaginationDotsProps) {
 }
 
 const styles = StyleSheet.create({
-  PaginationDotsRootHull: {
+  PaginationDotsRaizCasco: {
     alignItems: 'center',
     flexDirection: 'row',
     gap: 8,
     justifyContent: 'center',
   },
   PaginationDotsDot: {
-    backgroundColor: colors.dotInactive,
+    backgroundColor: colors.dotInactivo,
     borderRadius: 4,
     height: 7,
     width: 7,

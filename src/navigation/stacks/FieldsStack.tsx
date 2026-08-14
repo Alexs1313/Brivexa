@@ -2,7 +2,7 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-import {useFields} from '../../data/FieldsContext';
+import {useCampos} from '../../data/FieldsContext';
 import {EditFieldScreen} from '../../screens/EditFieldScreen';
 import {FieldDetailScreen} from '../../screens/FieldDetailScreen';
 import {FieldsScreen} from '../../screens/FieldsScreen';
@@ -21,8 +21,8 @@ function FieldsHomeScreen({
 }: NativeStackScreenProps<FieldsStackParamList, 'FieldsHome'>) {
   return (
     <FieldsScreen
-      onOpenField={fieldId => navigation.navigate('FieldDetail', {fieldId})}
-      onAddField={() => navigation.navigate('NewField')}
+      onOpenCampo={fieldId => navigation.navigate('FieldDetail', {fieldId})}
+      onAddCampo={() => navigation.navigate('NewField')}
     />
   );
 }
@@ -44,13 +44,13 @@ function FieldDetailRoute({
 function NewFieldRoute({
   navigation,
 }: NativeStackScreenProps<FieldsStackParamList, 'NewField'>) {
-  const {addField} = useFields();
+  const {addCampo} = useCampos();
   return (
     <EditFieldScreen
       mode="new"
       onCancel={() => navigation.goBack()}
-      onSave={draft => {
-        addField(draft);
+      onGuardar={draft => {
+        addCampo(draft);
         navigation.goBack();
       }}
     />
@@ -61,15 +61,15 @@ function EditFieldRoute({
   navigation,
   route,
 }: NativeStackScreenProps<FieldsStackParamList, 'EditField'>) {
-  const {updateField} = useFields();
+  const {updateCampo} = useCampos();
   const {fieldId} = route.params;
   return (
     <EditFieldScreen
       mode="edit"
       fieldId={fieldId}
       onCancel={() => navigation.goBack()}
-      onSave={draft => {
-        updateField(fieldId, draft);
+      onGuardar={draft => {
+        updateCampo(fieldId, draft);
         navigation.goBack();
       }}
     />

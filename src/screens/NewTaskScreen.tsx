@@ -8,6 +8,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
+
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { PrimaryButton } from '../components/buttons/PrimaryButton';
@@ -15,81 +16,87 @@ import { PrimaryButton } from '../components/buttons/PrimaryButton';
 import { DropdownField } from '../components/forms/DropdownField';
 import { colors, fonts } from '../constants/theme';
 
-import { appBackground } from '../data/assets';
-import { useFarm } from '../data/FarmContext';
-import { useFields } from '../data/FieldsContext';
+import { appFondo } from '../data/assets';
+import { useGranja } from '../data/FarmContext';
+
+import { useCampos } from '../data/FieldsContext';
 import {
-  PRIORITY_OPTIONS,
-  START_TIME_OPTIONS,
-  WORKER_OPTIONS,
-  WORK_TYPE_OPTIONS,
-} from '../data/formOptions';
+  PRIORITY_OPCIONES,
+  START_TIME_OPCIONES,
+  WORKER_OPCIONES,
+  WORK_TYPE_OPCIONES,
+} from '../data/formOpciones';
+
 import type { NewTaskDraft } from '../data/TasksContext';
-import { useAdaptive } from '../hooks/useAdaptive';
+import { useAdaptativo } from '../hooks/useAdaptativo';
 
 type NewTaskScreenProps = {
   onCancel: () => void;
-  onSave: (draft: NewTaskDraft) => void;
+  onGuardar: (draft: NewTaskDraft) => void;
 };
 
-export function NewTaskScreen({ onCancel, onSave }: NewTaskScreenProps) {
+export function NewTaskScreen({ onCancel, onGuardar }: NewTaskScreenProps) {
   const insets = useSafeAreaInsets();
-  const adaptive = useAdaptive();
-  const { fields } = useFields();
-  const { equipment } = useFarm();
+  const adaptive = useAdaptativo();
+  const { fields } = useCampos();
+  const { equipment } = useGranja();
 
-  const fieldOptions = useMemo(() => fields.map(f => f.name), [fields]);
-  const equipmentOptions = useMemo(
+  const fieldOpciones = useMemo(() => fields.map(f => f.name), [fields]);
+  const equipmentOpciones = useMemo(
     () => equipment.map(item => item.name),
     [equipment],
   );
 
-  const [title, setTitle] = useState('');
-  const [workType, setWorkType] = useState('');
-  const [field, setField] = useState('');
-  const [date, setDate] = useState('');
-  const [startTime, setStartTime] = useState('');
-  const [worker, setWorker] = useState('');
-  const [priority, setPriority] = useState('');
-  const [materials, setMaterials] = useState('');
-  const [equipmentName, setEquipmentName] = useState('');
+  const [title, setTitulo] = useState('');
 
-  const canSave = useMemo(
+  const [workTipo, setWorkTipo] = useState('');
+  const [field, setCampo] = useState('');
+
+  const [date, setDate] = useState('');
+  const [startTiempo, setStartTiempo] = useState('');
+
+  const [worker, setTrabajador] = useState('');
+  const [priority, setPrioridad] = useState('');
+
+  const [materials, setMateriales] = useState('');
+  const [equipmentNombre, setEquipmentNombre] = useState('');
+
+  const canGuardar = useMemo(
     () =>
       title.trim().length > 0 &&
-      workType.trim().length > 0 &&
+      workTipo.trim().length > 0 &&
       field.trim().length > 0 &&
       date.trim().length > 0,
-    [date, field, title, workType],
+    [date, field, title, workTipo],
   );
 
   return (
     <ImageBackground
-      source={appBackground}
-      style={styles.NewTaskScreenRootHull}
+      source={appFondo}
+      style={styles.NewTaskScreenRaizCasco}
       resizeMode="cover"
     >
       <ScrollView
         contentContainerStyle={[
           styles.NewTaskScreenScrollContent,
           {
-            paddingTop: insets.top + adaptive.verticalScale(6),
-            paddingBottom: insets.bottom + adaptive.verticalScale(28),
-            paddingHorizontal: adaptive.horizontalPadding,
+            paddingTop: insets.top + adaptive.verticalEscala(6),
+            paddingBottom: insets.bottom + adaptive.verticalEscala(28),
+            paddingHorizontal: adaptive.horizontalRelleno,
           },
         ]}
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.NewTaskScreenHeaderRowCapstone}>
+        <View style={styles.NewTaskScreenHeaderRowDintel}>
           <Pressable
             onPress={onCancel}
             hitSlop={12}
             style={styles.NewTaskScreenNavSide}
           >
-            <Text style={styles.NewTaskScreenNavLinkFlourish}>‹ Cancel</Text>
+            <Text style={styles.NewTaskScreenNavLinkFiligrana}>‹ Cancel</Text>
           </Pressable>
-          <Text style={styles.NewTaskScreenTitleFlourish}>New Task</Text>
+          <Text style={styles.NewTaskScreenTitleFiligrana}>New Task</Text>
           <View style={styles.NewTaskScreenNavSide} />
         </View>
 
@@ -97,26 +104,26 @@ export function NewTaskScreen({ onCancel, onSave }: NewTaskScreenProps) {
           label="Task Title"
           required
           value={title}
-          onChangeText={setTitle}
+          onChangeText={setTitulo}
           placeholder="e.g. Plant Corn"
         />
         <DropdownField
           label="Work Type"
           required
-          value={workType}
-          onChange={setWorkType}
+          value={workTipo}
+          onChange={setWorkTipo}
           placeholder="e.g. Planting"
-          options={WORK_TYPE_OPTIONS}
+          options={WORK_TYPE_OPCIONES}
         />
         <DropdownField
           label="Field"
           required
           value={field}
-          onChange={setField}
+          onChange={setCampo}
           placeholder="e.g. North Field"
           options={
-            fieldOptions.length > 0
-              ? fieldOptions
+            fieldOpciones.length > 0
+              ? fieldOpciones
               : ['North Field', 'River Plot']
           }
         />
@@ -129,39 +136,39 @@ export function NewTaskScreen({ onCancel, onSave }: NewTaskScreenProps) {
         />
         <DropdownField
           label="Start Time"
-          value={startTime}
-          onChange={setStartTime}
+          value={startTiempo}
+          onChange={setStartTiempo}
           placeholder="e.g. 07:30 AM"
-          options={START_TIME_OPTIONS}
+          options={START_TIME_OPCIONES}
         />
         <DropdownField
           label="Assigned Worker"
           value={worker}
-          onChange={setWorker}
+          onChange={setTrabajador}
           placeholder="e.g. Daniel Reed"
-          options={WORKER_OPTIONS}
+          options={WORKER_OPCIONES}
         />
         <DropdownField
           label="Priority"
           value={priority}
-          onChange={setPriority}
+          onChange={setPrioridad}
           placeholder="e.g. Normal"
-          options={PRIORITY_OPTIONS}
+          options={PRIORITY_OPCIONES}
         />
         <FormField
           label="Required Materials"
           value={materials}
-          onChangeText={setMaterials}
+          onChangeText={setMateriales}
           placeholder="e.g. Glyphosate 360 · 30 L"
         />
         <DropdownField
           label="Equipment"
-          value={equipmentName}
-          onChange={setEquipmentName}
+          value={equipmentNombre}
+          onChange={setEquipmentNombre}
           placeholder="e.g. Amazone UX 4200"
           options={
-            equipmentOptions.length > 0
-              ? equipmentOptions
+            equipmentOpciones.length > 0
+              ? equipmentOpciones
               : ['Tractor T-150', 'Amazone UX 4200']
           }
         />
@@ -169,25 +176,25 @@ export function NewTaskScreen({ onCancel, onSave }: NewTaskScreenProps) {
         <PrimaryButton
           label="Save Task"
           onPress={() => {
-            if (!canSave) {
+            if (!canGuardar) {
               return;
             }
-            onSave({
+            onGuardar({
               title,
-              workType,
+              workTipo,
               field,
               date,
-              startTime,
+              startTiempo,
               worker,
               priority,
               materials,
-              equipment: equipmentName,
+              equipment: equipmentNombre,
             });
           }}
           fullWidth
           style={[
-            styles.NewTaskScreenSavePlinth,
-            !canSave && styles.NewTaskScreenSavePlinthDisabled,
+            styles.NewTaskScreenSavePlinto,
+            !canGuardar && styles.NewTaskScreenSavePlintoDisabled,
           ]}
         />
       </ScrollView>
@@ -210,13 +217,13 @@ function FormField({
 }) {
   return (
     <View style={styles.NewTaskScreenFieldBlock}>
-      <Text style={styles.NewTaskScreenFieldLabelFlourish}>
+      <Text style={styles.NewTaskScreenFieldLabelFiligrana}>
         {label}
         {required ? (
-          <Text style={styles.NewTaskScreenRequiredEmblem}> *</Text>
+          <Text style={styles.NewTaskScreenRequiredEmblema}> *</Text>
         ) : null}
       </Text>
-      <View style={styles.NewTaskScreenFieldInputHull}>
+      <View style={styles.NewTaskScreenFieldInputCasco}>
         <TextInput
           value={value}
           onChangeText={onChangeText}
@@ -230,23 +237,24 @@ function FormField({
 }
 
 const styles = StyleSheet.create({
-  NewTaskScreenRootHull: { backgroundColor: colors.background, flex: 1 },
+  NewTaskScreenRaizCasco: { backgroundColor: colors.background, flex: 1 },
   NewTaskScreenScrollContent: { flexGrow: 1 },
 
-  NewTaskScreenHeaderRowCapstone: {
+  NewTaskScreenHeaderRowDintel: {
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: 16,
   },
   NewTaskScreenNavSide: { minWidth: 80 },
-  NewTaskScreenNavLinkFlourish: {
+
+  NewTaskScreenNavLinkFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
-  NewTaskScreenTitleFlourish: {
+  NewTaskScreenTitleFiligrana: {
     color: colors.cream,
     flex: 1,
     fontFamily: fonts.sansBold,
@@ -257,15 +265,15 @@ const styles = StyleSheet.create({
 
   NewTaskScreenFieldBlock: { marginBottom: 14 },
 
-  NewTaskScreenFieldLabelFlourish: {
-    color: colors.bodyMuted,
+  NewTaskScreenFieldLabelFiligrana: {
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginBottom: 8,
   },
-  NewTaskScreenRequiredEmblem: { color: colors.danger },
+  NewTaskScreenRequiredEmblema: { color: colors.danger },
 
-  NewTaskScreenFieldInputHull: {
+  NewTaskScreenFieldInputCasco: {
     alignItems: 'center',
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -283,6 +291,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     padding: 0,
   },
-  NewTaskScreenSavePlinth: { marginTop: 8 },
-  NewTaskScreenSavePlinthDisabled: { opacity: 0.45 },
+  NewTaskScreenSavePlinto: { marginTop: 8 },
+  NewTaskScreenSavePlintoDisabled: { opacity: 0.45 },
 });

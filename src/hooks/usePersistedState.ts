@@ -9,11 +9,11 @@ import {loadJson, saveJson, type StorageKey} from '../data/storage';
  */
 export function usePersistedState<T>(
   key: StorageKey,
-  initialValue: T,
+  initialValor: T,
 ): [T, Dispatch<SetStateAction<T>>, boolean] {
-  const [state, setState] = useState<T>(initialValue);
+  const [state, setState] = useState<T>(initialValor);
   const [hydrated, setHydrated] = useState(false);
-  const skipNextSave = useRef(true);
+  const skipNextGuardar = useRef(true);
 
   useEffect(() => {
     let cancelled = false;
@@ -25,7 +25,7 @@ export function usePersistedState<T>(
       if (stored !== undefined) {
         setState(stored);
       }
-      skipNextSave.current = true;
+      skipNextGuardar.current = true;
       setHydrated(true);
     });
 
@@ -38,8 +38,8 @@ export function usePersistedState<T>(
     if (!hydrated) {
       return;
     }
-    if (skipNextSave.current) {
-      skipNextSave.current = false;
+    if (skipNextGuardar.current) {
+      skipNextGuardar.current = false;
       return;
     }
     void saveJson(key, state);

@@ -14,41 +14,41 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { PrimaryButton } from '../components/buttons/PrimaryButton';
 
 import { colors, fonts, radius } from '../constants/theme';
-import { appBackground } from '../data/assets';
+import { appFondo } from '../data/assets';
 import {
   APP_TODAY_KEY,
   dateKeyFor,
-  daysInMonth,
-  formatMonthDay,
-  formatMonthYear,
-  monthStartOffset,
+  daysInMes,
+  formatMonthDia,
+  formatMonthAnio,
+  monthStartDesfase,
 } from '../data/dates';
 import {
-  calendarDotsForMonth,
-  WORK_FILTERS,
-  statusLabel,
-  workStats,
+  calendarDotsForMes,
+  WORK_FILTROS,
+  statusEtiqueta,
+  workEstadisticas,
   type WorkTask,
   type WorkTaskStatus,
 } from '../data/work';
-import { useTasks } from '../data/TasksContext';
+import { useTareas } from '../data/TasksContext';
 
-import { useAdaptive } from '../hooks/useAdaptive';
+import { useAdaptativo } from '../hooks/useAdaptativo';
 
 type WorkScreenProps = {
-  onOpenTask: (taskId: string) => void;
-  onAddTask: () => void;
+  onOpenTarea: (taskId: string) => void;
+  onAddTarea: () => void;
 };
 
 type WorkMode = 'tasks' | 'calendar';
 
-export function WorkScreen({ onOpenTask, onAddTask }: WorkScreenProps) {
+export function WorkScreen({ onOpenTarea, onAddTarea }: WorkScreenProps) {
   const insets = useSafeAreaInsets();
-  const adaptive = useAdaptive();
-  const { tasks: storedTasks } = useTasks();
-  const [mode, setMode] = useState<WorkMode>('tasks');
-  const [demoEmpty, setDemoEmpty] = useState(false);
-  const [filter, setFilter] = useState<(typeof WORK_FILTERS)[number]>('All');
+  const adaptive = useAdaptativo();
+  const { tasks: storedTareas } = useTareas();
+  const [mode, setModo] = useState<WorkMode>('tasks');
+  const [demoVacio, setDemoVacio] = useState(false);
+  const [filter, setFiltro] = useState<(typeof WORK_FILTROS)[number]>('All');
 
   const today = useMemo(() => {
     const now = new Date();
@@ -59,20 +59,20 @@ export function WorkScreen({ onOpenTask, onAddTask }: WorkScreenProps) {
     };
   }, []);
 
-  const [viewYear, setViewYear] = useState(today.year);
-  const [viewMonth, setViewMonth] = useState(today.month);
-  const [selectedDay, setSelectedDay] = useState(today.day);
+  const [viewAnio, setViewAnio] = useState(today.year);
+  const [viewMes, setViewMes] = useState(today.month);
+  const [selectedDia, setSelectedDia] = useState(today.day);
 
-  const tasks = demoEmpty ? [] : storedTasks;
-  const stats = workStats(tasks);
+  const tasks = demoVacio ? [] : storedTareas;
+  const stats = workEstadisticas(tasks);
 
   const filtered = useMemo(() => {
     if (filter === 'Today') {
-      return tasks.filter(t => t.dateKey === APP_TODAY_KEY);
+      return tasks.filter(t => t.dateClave === APP_TODAY_KEY);
     }
     if (filter === 'Upcoming') {
       return tasks.filter(
-        t => t.dateKey > APP_TODAY_KEY && t.status !== 'done',
+        t => t.dateClave > APP_TODAY_KEY && t.status !== 'done',
       );
     }
     if (filter === 'Overdue') {
@@ -81,66 +81,66 @@ export function WorkScreen({ onOpenTask, onAddTask }: WorkScreenProps) {
     return tasks;
   }, [filter, tasks]);
 
-  const selectedDateKey = dateKeyFor(viewYear, viewMonth, selectedDay);
+  const selectedDateClave = dateKeyFor(viewAnio, viewMes, selectedDia);
 
-  const dayTasks = useMemo(
-    () => tasks.filter(t => t.dateKey === selectedDateKey),
-    [selectedDateKey, tasks],
+  const dayTareas = useMemo(
+    () => tasks.filter(t => t.dateClave === selectedDateClave),
+    [selectedDateClave, tasks],
   );
 
-  const calendarDots = useMemo(
-    () => calendarDotsForMonth(tasks, viewYear, viewMonth),
-    [tasks, viewMonth, viewYear],
+  const calendarPuntos = useMemo(
+    () => calendarDotsForMes(tasks, viewAnio, viewMes),
+    [tasks, viewMes, viewAnio],
   );
 
-  const shiftMonth = (delta: number) => {
-    const next = new Date(viewYear, viewMonth + delta, 1);
-    const nextYear = next.getFullYear();
-    const nextMonth = next.getMonth();
-    const maxDay = daysInMonth(nextYear, nextMonth);
-    setViewYear(nextYear);
-    setViewMonth(nextMonth);
-    setSelectedDay(day => Math.min(day, maxDay));
+  const shiftMes = (delta: number) => {
+    const next = new Date(viewAnio, viewMes + delta, 1);
+    const nextAnio = next.getFullYear();
+    const nextMes = next.getMonth();
+    const maxDia = daysInMes(nextAnio, nextMes);
+    setViewAnio(nextAnio);
+    setViewMes(nextMes);
+    setSelectedDia(day => Math.min(day, maxDia));
   };
 
-  const emptyTasks = filtered.length === 0;
+  const emptyTareas = filtered.length === 0;
 
   return (
     <ImageBackground
-      source={appBackground}
-      style={styles.WorkScreenRootHull}
+      source={appFondo}
+      style={styles.WorkScreenRaizCasco}
       resizeMode="cover"
     >
       <ScrollView
         contentContainerStyle={[
           styles.WorkScreenScrollContent,
           {
-            paddingTop: insets.top + adaptive.verticalScale(8),
-            paddingBottom: adaptive.verticalScale(110),
-            paddingHorizontal: adaptive.horizontalPadding,
+            paddingTop: insets.top + adaptive.verticalEscala(8),
+            paddingBottom: adaptive.verticalEscala(110),
+            paddingHorizontal: adaptive.horizontalRelleno,
           },
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.WorkScreenHeaderRowCapstone}>
-          <Pressable onPress={() => setDemoEmpty(v => !v)} hitSlop={8}>
-            <Text style={styles.WorkScreenTitleFlourish}>Work</Text>
+        <View style={styles.WorkScreenHeaderRowDintel}>
+          <Pressable onPress={() => setDemoVacio(v => !v)} hitSlop={8}>
+            <Text style={styles.WorkScreenTitleFiligrana}>Work</Text>
           </Pressable>
-          <Pressable onPress={onAddTask} hitSlop={8}>
+          <Pressable onPress={onAddTarea} hitSlop={8}>
             <LinearGradient
               colors={[colors.buttonGradientStart, colors.buttonGradientEnd]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
-              style={styles.WorkScreenAddBead}
+              style={styles.WorkScreenAddOrbe}
             >
-              <Text style={styles.WorkScreenAddMark}>+</Text>
+              <Text style={styles.WorkScreenAddMarca}>+</Text>
             </LinearGradient>
           </Pressable>
         </View>
 
-        <View style={styles.WorkScreenSegHull}>
+        <View style={styles.WorkScreenSegCasco}>
           <Pressable
-            onPress={() => setMode('tasks')}
+            onPress={() => setModo('tasks')}
             style={[
               styles.WorkScreenSegItem,
               mode === 'tasks' && styles.WorkScreenSegItemOn,
@@ -160,7 +160,7 @@ export function WorkScreen({ onOpenTask, onAddTask }: WorkScreenProps) {
             )}
           </Pressable>
           <Pressable
-            onPress={() => setMode('calendar')}
+            onPress={() => setModo('calendar')}
             style={[
               styles.WorkScreenSegItem,
               mode === 'calendar' && styles.WorkScreenSegItemOn,
@@ -191,12 +191,12 @@ export function WorkScreen({ onOpenTask, onAddTask }: WorkScreenProps) {
             </View>
 
             <View style={styles.WorkScreenFilterRow}>
-              {WORK_FILTERS.map(item => {
+              {WORK_FILTROS.map(item => {
                 const active = item === filter;
                 return (
                   <Pressable
                     key={item}
-                    onPress={() => setFilter(item)}
+                    onPress={() => setFiltro(item)}
                     style={[
                       styles.WorkScreenFilterChip,
                       active
@@ -217,16 +217,16 @@ export function WorkScreen({ onOpenTask, onAddTask }: WorkScreenProps) {
               })}
             </View>
 
-            {emptyTasks ? (
+            {emptyTareas ? (
               <View style={styles.WorkScreenEmptyCard}>
-                <Text style={styles.WorkScreenEmptyEmblem}>✅</Text>
+                <Text style={styles.WorkScreenEmptyEmblema}>✅</Text>
                 <Text style={styles.WorkScreenEmptyTitle}>No tasks yet</Text>
-                <Text style={styles.WorkScreenEmptyHintFlourish}>
+                <Text style={styles.WorkScreenEmptyHintFiligrana}>
                   Plan your first job to get started.
                 </Text>
                 <PrimaryButton
                   label="+ Add Task"
-                  onPress={onAddTask}
+                  onPress={onAddTarea}
                   style={styles.WorkScreenEmptyBtn}
                 />
               </View>
@@ -235,23 +235,23 @@ export function WorkScreen({ onOpenTask, onAddTask }: WorkScreenProps) {
                 <TaskCard
                   key={task.id}
                   task={task}
-                  onPress={() => onOpenTask(task.id)}
+                  onPress={() => onOpenTarea(task.id)}
                 />
               ))
             )}
           </>
         ) : (
           <CalendarPanel
-            year={viewYear}
-            monthIndex={viewMonth}
-            selectedDay={selectedDay}
-            onSelectDay={setSelectedDay}
-            onPrevMonth={() => shiftMonth(-1)}
-            onNextMonth={() => shiftMonth(1)}
-            dots={calendarDots}
-            dayTasks={dayTasks}
-            onOpenTask={onOpenTask}
-            onAddTask={onAddTask}
+            year={viewAnio}
+            monthIndice={viewMes}
+            selectedDia={selectedDia}
+            onSelectDia={setSelectedDia}
+            onPrevMes={() => shiftMes(-1)}
+            onNextMes={() => shiftMes(1)}
+            dots={calendarPuntos}
+            dayTareas={dayTareas}
+            onOpenTarea={onOpenTarea}
+            onAddTarea={onAddTarea}
           />
         )}
       </ScrollView>
@@ -275,7 +275,7 @@ function StatCard({
       ? colors.success
       : tone === 'danger'
       ? colors.danger
-      : colors.bodyMuted;
+      : colors.bodyApagado;
 
   return (
     <View style={styles.WorkScreenStatCard}>
@@ -299,7 +299,7 @@ function TaskCard({ task, onPress }: { task: WorkTask; onPress: () => void }) {
         <View style={styles.WorkScreenTaskHeader}>
           <View style={styles.WorkScreenTaskTitleCol}>
             <Text style={styles.WorkScreenTaskTitle}>{task.title}</Text>
-            <Text style={styles.WorkScreenTaskType}>{task.workType}</Text>
+            <Text style={styles.WorkScreenTaskType}>{task.workTipo}</Text>
           </View>
           <StatusChip status={task.status} />
         </View>
@@ -330,7 +330,7 @@ function TaskCard({ task, onPress }: { task: WorkTask; onPress: () => void }) {
 }
 
 export function StatusChip({ status }: { status: WorkTaskStatus }) {
-  const label = statusLabel(status);
+  const label = statusEtiqueta(status);
   const tone =
     status === 'in_progress'
       ? 'info'
@@ -344,10 +344,10 @@ export function StatusChip({ status }: { status: WorkTaskStatus }) {
     <View
       style={[
         styles.WorkScreenStatusChip,
-        tone === 'info' && { backgroundColor: colors.infoSoft },
-        tone === 'danger' && { backgroundColor: colors.dangerSoft },
-        tone === 'success' && { backgroundColor: colors.successSoft },
-        tone === 'muted' && { backgroundColor: colors.plannedSoft },
+        tone === 'info' && { backgroundColor: colors.infoSuave },
+        tone === 'danger' && { backgroundColor: colors.dangerSuave },
+        tone === 'success' && { backgroundColor: colors.successSuave },
+        tone === 'muted' && { backgroundColor: colors.plannedSuave },
       ]}
     >
       <Text
@@ -356,7 +356,7 @@ export function StatusChip({ status }: { status: WorkTaskStatus }) {
           tone === 'info' && { color: colors.info },
           tone === 'danger' && { color: colors.danger },
           tone === 'success' && { color: colors.success },
-          tone === 'muted' && { color: colors.bodyMuted },
+          tone === 'muted' && { color: colors.bodyApagado },
         ]}
       >
         {label}
@@ -367,36 +367,36 @@ export function StatusChip({ status }: { status: WorkTaskStatus }) {
 
 function CalendarPanel({
   year,
-  monthIndex,
-  selectedDay,
-  onSelectDay,
-  onPrevMonth,
-  onNextMonth,
+  monthIndice,
+  selectedDia,
+  onSelectDia,
+  onPrevMes,
+  onNextMes,
   dots,
-  dayTasks,
-  onOpenTask,
-  onAddTask,
+  dayTareas,
+  onOpenTarea,
+  onAddTarea,
 }: {
   year: number;
-  monthIndex: number;
-  selectedDay: number;
-  onSelectDay: (day: number) => void;
-  onPrevMonth: () => void;
-  onNextMonth: () => void;
+  monthIndice: number;
+  selectedDia: number;
+  onSelectDia: (day: number) => void;
+  onPrevMes: () => void;
+  onNextMes: () => void;
   dots: Record<number, 'overdue' | 'gold' | 'info'>;
-  dayTasks: WorkTask[];
-  onOpenTask: (id: string) => void;
-  onAddTask: () => void;
+  dayTareas: WorkTask[];
+  onOpenTarea: (id: string) => void;
+  onAddTarea: () => void;
 }) {
-  const startOffset = monthStartOffset(year, monthIndex);
-  const totalDays = daysInMonth(year, monthIndex);
-  const monthLabel = formatMonthYear(year, monthIndex);
-  const dayLabel = formatMonthDay(monthIndex, selectedDay);
+  const startDesfase = monthStartDesfase(year, monthIndice);
+  const totalDias = daysInMes(year, monthIndice);
+  const monthEtiqueta = formatMonthAnio(year, monthIndice);
+  const dayEtiqueta = formatMonthDia(monthIndice, selectedDia);
   const cells: Array<number | null> = [];
-  for (let i = 0; i < startOffset; i += 1) {
+  for (let i = 0; i < startDesfase; i += 1) {
     cells.push(null);
   }
-  for (let d = 1; d <= totalDays; d += 1) {
+  for (let d = 1; d <= totalDias; d += 1) {
     cells.push(d);
   }
 
@@ -404,11 +404,11 @@ function CalendarPanel({
     <View>
       <View style={styles.WorkScreenCalendarCard}>
         <View style={styles.WorkScreenCalendarHeader}>
-          <Pressable onPress={onPrevMonth} hitSlop={10}>
+          <Pressable onPress={onPrevMes} hitSlop={10}>
             <Text style={styles.WorkScreenCalendarArrow}>‹</Text>
           </Pressable>
-          <Text style={styles.WorkScreenCalendarMonth}>{monthLabel}</Text>
-          <Pressable onPress={onNextMonth} hitSlop={10}>
+          <Text style={styles.WorkScreenCalendarMonth}>{monthEtiqueta}</Text>
+          <Pressable onPress={onNextMes} hitSlop={10}>
             <Text style={styles.WorkScreenCalendarArrow}>›</Text>
           </Pressable>
         </View>
@@ -426,12 +426,12 @@ function CalendarPanel({
                 <View key={`e-${index}`} style={styles.WorkScreenDayCell} />
               );
             }
-            const selected = day === selectedDay;
+            const selected = day === selectedDia;
             const dot = dots[day];
             return (
               <Pressable
                 key={day}
-                onPress={() => onSelectDay(day)}
+                onPress={() => onSelectDia(day)}
                 style={styles.WorkScreenDayCell}
               >
                 <View
@@ -470,30 +470,30 @@ function CalendarPanel({
       </View>
 
       <View style={styles.WorkScreenDayHeader}>
-        <Text style={styles.WorkScreenDayTitle}>{dayLabel}</Text>
+        <Text style={styles.WorkScreenDayTitle}>{dayEtiqueta}</Text>
         <Text style={styles.WorkScreenDayCount}>
-          {dayTasks.length} task{dayTasks.length === 1 ? '' : 's'}
+          {dayTareas.length} task{dayTareas.length === 1 ? '' : 's'}
         </Text>
       </View>
 
-      {dayTasks.length === 0 ? (
+      {dayTareas.length === 0 ? (
         <View style={styles.WorkScreenEmptyCard}>
-          <Text style={styles.WorkScreenEmptyEmblem}>🗓️</Text>
+          <Text style={styles.WorkScreenEmptyEmblema}>🗓️</Text>
           <Text style={styles.WorkScreenEmptyTitle}>No tasks on this day</Text>
-          <Text style={styles.WorkScreenEmptyHintFlourish}>
-            Tap + to schedule work for {dayLabel}.
+          <Text style={styles.WorkScreenEmptyHintFiligrana}>
+            Tap + to schedule work for {dayEtiqueta}.
           </Text>
           <PrimaryButton
             label="+ Add Task"
-            onPress={onAddTask}
+            onPress={onAddTarea}
             style={styles.WorkScreenEmptyBtn}
           />
         </View>
       ) : (
-        dayTasks.map(task => (
+        dayTareas.map(task => (
           <Pressable
             key={task.id}
-            onPress={() => onOpenTask(task.id)}
+            onPress={() => onOpenTarea(task.id)}
             style={styles.WorkScreenAgendaCard}
           >
             <View>
@@ -510,24 +510,24 @@ function CalendarPanel({
 }
 
 const styles = StyleSheet.create({
-  WorkScreenRootHull: { backgroundColor: colors.background, flex: 1 },
+  WorkScreenRaizCasco: { backgroundColor: colors.background, flex: 1 },
   WorkScreenScrollContent: { flexGrow: 1 },
 
-  WorkScreenHeaderRowCapstone: {
+  WorkScreenHeaderRowDintel: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 14,
   },
 
-  WorkScreenTitleFlourish: {
+  WorkScreenTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 24,
     fontWeight: '700',
   },
 
-  WorkScreenAddBead: {
+  WorkScreenAddOrbe: {
     alignItems: 'center',
     borderRadius: 12,
     height: 40,
@@ -535,14 +535,14 @@ const styles = StyleSheet.create({
     width: 40,
   },
 
-  WorkScreenAddMark: {
+  WorkScreenAddMarca: {
     color: colors.buttonText,
     fontFamily: fonts.sansBold,
     fontSize: 22,
     fontWeight: '700',
     lineHeight: 24,
   },
-  WorkScreenSegHull: {
+  WorkScreenSegCasco: {
     backgroundColor: colors.card,
     borderColor: colors.border,
     borderRadius: 13,
@@ -566,7 +566,7 @@ const styles = StyleSheet.create({
   },
 
   WorkScreenSegLabel: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansBold,
     fontSize: 13,
     fontWeight: '700',
@@ -598,7 +598,7 @@ const styles = StyleSheet.create({
   },
 
   WorkScreenStatLabel: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 10,
     marginTop: 2,
@@ -623,7 +623,7 @@ const styles = StyleSheet.create({
   WorkScreenFilterChipActive: { backgroundColor: 'rgba(245, 182, 66, 0.16)' },
   WorkScreenFilterChipIdle: { backgroundColor: 'rgba(139, 148, 173, 0.16)' },
   WorkScreenFilterChipLabel: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansBold,
     fontSize: 10,
     fontWeight: '700',
@@ -658,13 +658,13 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   WorkScreenTaskType: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 11,
     marginTop: 2,
   },
   WorkScreenTaskMeta: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginTop: 8,
@@ -703,8 +703,8 @@ const styles = StyleSheet.create({
 
   WorkScreenEmptyCard: {
     alignItems: 'center',
-    backgroundColor: colors.emptyFill,
-    borderColor: colors.emptyBorder,
+    backgroundColor: colors.emptyRelleno,
+    borderColor: colors.emptyBorde,
     borderRadius: radius.card,
     borderStyle: 'dashed',
     borderWidth: 1,
@@ -712,7 +712,7 @@ const styles = StyleSheet.create({
     paddingVertical: 28,
   },
 
-  WorkScreenEmptyEmblem: { fontSize: 34 },
+  WorkScreenEmptyEmblema: { fontSize: 34 },
   WorkScreenEmptyTitle: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -721,8 +721,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 
-  WorkScreenEmptyHintFlourish: {
-    color: colors.bodyMuted,
+  WorkScreenEmptyHintFiligrana: {
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginBottom: 14,
@@ -760,7 +760,7 @@ const styles = StyleSheet.create({
   },
   WorkScreenWeekRow: { flexDirection: 'row', marginBottom: 6 },
   WorkScreenWeekday: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     flex: 1,
     fontFamily: fonts.sansRegular,
     fontSize: 11,
@@ -812,7 +812,7 @@ const styles = StyleSheet.create({
   },
 
   WorkScreenDayCount: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
   },
@@ -845,7 +845,7 @@ const styles = StyleSheet.create({
   },
 
   WorkScreenAgendaField: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
     marginTop: 2,

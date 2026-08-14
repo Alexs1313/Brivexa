@@ -14,83 +14,83 @@ import { PrimaryButton } from '../components/buttons/PrimaryButton';
 import { DropdownField } from '../components/forms/DropdownField';
 
 import { colors, fonts } from '../constants/theme';
-import { appBackground } from '../data/assets';
+import { appFondo } from '../data/assets';
 
-import { INVENTORY_CATEGORIES, INVENTORY_UNITS } from '../data/farm';
+import { INVENTORY_CATEGORIAS, INVENTORY_UNITS } from '../data/farm';
 import type { InventoryItemDraft } from '../data/FarmContext';
-import { useAdaptive } from '../hooks/useAdaptive';
+import { useAdaptativo } from '../hooks/useAdaptativo';
 
 type NewItemScreenProps = {
   onCancel: () => void;
-  onSave: (draft: InventoryItemDraft) => void;
+  onGuardar: (draft: InventoryItemDraft) => void;
 };
 
-export function NewItemScreen({ onCancel, onSave }: NewItemScreenProps) {
+export function NewItemScreen({ onCancel, onGuardar }: NewItemScreenProps) {
   const insets = useSafeAreaInsets();
-  const adaptive = useAdaptive();
-  const [name, setName] = useState('');
-  const [category, setCategory] = useState('');
-  const [quantity, setQuantity] = useState('');
-  const [unit, setUnit] = useState('');
+  const adaptive = useAdaptativo();
+  const [name, setNombre] = useState('');
+  const [category, setCategoria] = useState('');
+  const [quantity, setCantidad] = useState('');
+  const [unit, setUnidad] = useState('');
   const [minQty, setMinQty] = useState('');
-  const [unitCost, setUnitCost] = useState('');
-  const [supplier, setSupplier] = useState('');
+  const [unitCosto, setUnitCosto] = useState('');
+  const [supplier, setProveedor] = useState('');
 
-  const canSave = useMemo(
+  const canGuardar = useMemo(
     () => name.trim().length > 0 && quantity.trim().length > 0,
     [name, quantity],
   );
 
   return (
     <ImageBackground
-      source={appBackground}
-      style={styles.NewItemScreenRootHull}
+      source={appFondo}
+      style={styles.NewItemScreenRaizCasco}
       resizeMode="cover"
     >
       <ScrollView
         contentContainerStyle={[
           styles.NewItemScreenScrollContent,
           {
-            paddingTop: insets.top + adaptive.verticalScale(6),
-            paddingBottom: insets.bottom + adaptive.verticalScale(28),
+            paddingTop: insets.top + adaptive.verticalEscala(6),
+            paddingBottom: insets.bottom + adaptive.verticalEscala(28),
           },
         ]}
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.NewItemScreenHeaderRowCapstone}>
+        <View style={styles.NewItemScreenHeaderRowDintel}>
           <Pressable
             onPress={onCancel}
             hitSlop={12}
             style={styles.NewItemScreenNavSide}
           >
-            <Text style={styles.NewItemScreenNavLinkFlourish}>‹ Cancel</Text>
+            <Text style={styles.NewItemScreenNavLinkFiligrana}>‹ Cancel</Text>
           </Pressable>
-          <Text style={styles.NewItemScreenTitleFlourish}>New Item</Text>
+          <Text style={styles.NewItemScreenTitleFiligrana}>New Item</Text>
           <View style={styles.NewItemScreenNavSide} />
         </View>
 
-        <View style={{ paddingHorizontal: adaptive.horizontalPadding }}>
+        <View style={{ paddingHorizontal: adaptive.horizontalRelleno }}>
           <FormField
             label="Item Name"
             required
             value={name}
-            onChangeText={setName}
+            onChangeText={setNombre}
             placeholder="e.g. Urea 46%"
           />
           <DropdownField
             label="Category"
             required
             value={category}
-            onChange={setCategory}
-            placeholder={`e.g. ${INVENTORY_CATEGORIES[0]}`}
-            options={INVENTORY_CATEGORIES}
+            onChange={setCategoria}
+            placeholder={`e.g. ${INVENTORY_CATEGORIAS[0]}`}
+            options={INVENTORY_CATEGORIAS}
           />
           <FormField
             label="Current Quantity"
             required
             value={quantity}
-            onChangeText={setQuantity}
+            onChangeText={setCantidad}
             placeholder="e.g. 20"
             keyboardType="decimal-pad"
           />
@@ -98,7 +98,7 @@ export function NewItemScreen({ onCancel, onSave }: NewItemScreenProps) {
             label="Unit"
             required
             value={unit}
-            onChange={setUnit}
+            onChange={setUnidad}
             placeholder={`e.g. ${INVENTORY_UNITS[0]}`}
             options={INVENTORY_UNITS}
           />
@@ -111,38 +111,38 @@ export function NewItemScreen({ onCancel, onSave }: NewItemScreenProps) {
           />
           <FormField
             label="Unit Cost ($)"
-            value={unitCost}
-            onChangeText={setUnitCost}
+            value={unitCosto}
+            onChangeText={setUnitCosto}
             placeholder="e.g. 32"
             keyboardType="decimal-pad"
           />
           <FormField
             label="Supplier"
             value={supplier}
-            onChangeText={setSupplier}
+            onChangeText={setProveedor}
             placeholder="e.g. AgriSupply Co."
           />
 
           <PrimaryButton
             label="Save Item"
             onPress={() => {
-              if (!canSave) {
+              if (!canGuardar) {
                 return;
               }
-              onSave({
+              onGuardar({
                 name,
-                category: category || INVENTORY_CATEGORIES[0],
+                category: category || INVENTORY_CATEGORIAS[0],
                 quantity,
                 unit: unit || INVENTORY_UNITS[0],
                 minQty,
-                unitCost,
+                unitCosto,
                 supplier,
               });
             }}
             fullWidth
             style={[
-              styles.NewItemScreenSavePlinth,
-              !canSave && styles.NewItemScreenSavePlinthDisabled,
+              styles.NewItemScreenSavePlinto,
+              !canGuardar && styles.NewItemScreenSavePlintoDisabled,
             ]}
           />
         </View>
@@ -168,18 +168,18 @@ export function FormField({
 }) {
   return (
     <View style={styles.NewItemScreenFieldGroup}>
-      <Text style={styles.NewItemScreenFieldLabelFlourish}>
+      <Text style={styles.NewItemScreenFieldLabelFiligrana}>
         {label}
         {required ? (
-          <Text style={styles.NewItemScreenRequiredEmblem}> *</Text>
+          <Text style={styles.NewItemScreenRequiredEmblema}> *</Text>
         ) : null}
       </Text>
-      <View style={styles.NewItemScreenFieldInputHull}>
+      <View style={styles.NewItemScreenFieldInputCasco}>
         <TextInput
           value={value}
           onChangeText={onChangeText}
           placeholder={placeholder}
-          placeholderTextColor={colors.tabInactive}
+          placeholderTextColor={colors.tabInactivo}
           keyboardType={keyboardType}
           style={styles.NewItemScreenFieldInput}
         />
@@ -189,16 +189,16 @@ export function FormField({
 }
 
 const styles = StyleSheet.create({
-  NewItemScreenRootHull: {
+  NewItemScreenRaizCasco: {
     backgroundColor: colors.background,
     flex: 1,
   },
   NewItemScreenScrollContent: {
     flexGrow: 1,
   },
-  NewItemScreenHeaderRowCapstone: {
+  NewItemScreenHeaderRowDintel: {
     alignItems: 'center',
-    borderBottomColor: colors.borderSoft,
+    borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -211,12 +211,12 @@ const styles = StyleSheet.create({
     minWidth: 72,
   },
 
-  NewItemScreenNavLinkFlourish: {
+  NewItemScreenNavLinkFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
-  NewItemScreenTitleFlourish: {
+  NewItemScreenTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
@@ -227,20 +227,20 @@ const styles = StyleSheet.create({
     marginBottom: 14,
   },
 
-  NewItemScreenFieldLabelFlourish: {
-    color: colors.bodyMuted,
+  NewItemScreenFieldLabelFiligrana: {
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginBottom: 8,
   },
-  NewItemScreenRequiredEmblem: {
+  NewItemScreenRequiredEmblema: {
     color: colors.danger,
   },
 
-  NewItemScreenFieldInputHull: {
+  NewItemScreenFieldInputCasco: {
     alignItems: 'center',
     backgroundColor: colors.card,
-    borderColor: colors.emptyBorder,
+    borderColor: colors.emptyBorde,
     borderRadius: 12,
     borderWidth: 1,
     flexDirection: 'row',
@@ -255,11 +255,11 @@ const styles = StyleSheet.create({
     padding: 0,
   },
 
-  NewItemScreenSavePlinth: {
+  NewItemScreenSavePlinto: {
     marginTop: 10,
   },
 
-  NewItemScreenSavePlinthDisabled: {
+  NewItemScreenSavePlintoDisabled: {
     opacity: 0.55,
   },
 });

@@ -10,46 +10,46 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { colors, fonts, radius } from '../constants/theme';
-import { appBackground } from '../data/assets';
+import { appFondo } from '../data/assets';
 
 import { CALCULATOR_CARDS, type CalculatorId } from '../data/calculators';
 import {
   calculatorMeta,
-  useSavedCalculations,
+  useSavedCalculos,
 } from '../data/SavedCalculationsContext';
-import { useAdaptive } from '../hooks/useAdaptive';
+import { useAdaptativo } from '../hooks/useAdaptativo';
 
 type CalculatorsScreenProps = {
-  onOpenCalculator: (id: CalculatorId) => void;
+  onOpenCalculadora: (id: CalculatorId) => void;
 };
 
 export function CalculatorsScreen({
-  onOpenCalculator,
+  onOpenCalculadora,
 }: CalculatorsScreenProps) {
   const insets = useSafeAreaInsets();
-  const adaptive = useAdaptive();
-  const { saved } = useSavedCalculations();
+  const adaptive = useAdaptativo();
+  const { saved } = useSavedCalculos();
 
   return (
     <ImageBackground
-      source={appBackground}
-      style={styles.CalculatorsScreenRootHull}
+      source={appFondo}
+      style={styles.CalculatorsScreenRaizCasco}
       resizeMode="cover"
     >
       <ScrollView
         contentContainerStyle={[
           styles.CalculatorsScreenScrollContent,
           {
-            paddingTop: insets.top + adaptive.verticalScale(8),
-            paddingBottom: adaptive.verticalScale(110),
-            paddingHorizontal: adaptive.horizontalPadding,
+            paddingTop: insets.top + adaptive.verticalEscala(8),
+            paddingBottom: adaptive.verticalEscala(110),
+            paddingHorizontal: adaptive.horizontalRelleno,
           },
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <Text style={styles.CalculatorsScreenTitleFlourish}>Calculators</Text>
-        <Text style={styles.CalculatorsScreenSubtitleFlourish}>
-          Plan seed, fertilizer & spray needs
+        <Text style={styles.CalculatorsScreenTitleFiligrana}>Calculators</Text>
+        <Text style={styles.CalculatorsScreenSubtitleFiligrana}>
+          Plan sowing, fertilizer & spray needs
         </Text>
 
         <View style={styles.CalculatorsScreenCardStack}>
@@ -59,15 +59,15 @@ export function CalculatorsScreen({
                 <View
                   style={[
                     styles.CalculatorsScreenIconBox,
-                    card.iconTone === 'success' &&
+                    card.iconTono === 'success' &&
                       styles.CalculatorsScreenIconSuccess,
-                    card.iconTone === 'info' &&
+                    card.iconTono === 'info' &&
                       styles.CalculatorsScreenIconInfo,
-                    card.iconTone === 'purple' &&
+                    card.iconTono === 'purple' &&
                       styles.CalculatorsScreenIconPurple,
                   ]}
                 >
-                  <Text style={styles.CalculatorsScreenIconMark}>
+                  <Text style={styles.CalculatorsScreenIconMarca}>
                     {card.icon}
                   </Text>
                 </View>
@@ -81,7 +81,7 @@ export function CalculatorsScreen({
                 </View>
               </View>
               <Pressable
-                onPress={() => onOpenCalculator(card.id)}
+                onPress={() => onOpenCalculadora(card.id)}
                 style={({ pressed }) => [
                   styles.CalculatorsScreenOpenBtn,
                   pressed && styles.CalculatorsScreenPressedDim,
@@ -111,7 +111,7 @@ export function CalculatorsScreen({
               return (
                 <Pressable
                   key={item.id}
-                  onPress={() => onOpenCalculator(item.calculatorId)}
+                  onPress={() => onOpenCalculadora(item.calculatorId)}
                   style={({ pressed }) => [
                     styles.CalculatorsScreenRecentCard,
                     pressed && styles.CalculatorsScreenPressedDim,
@@ -120,15 +120,15 @@ export function CalculatorsScreen({
                   <View
                     style={[
                       styles.CalculatorsScreenRecentIconBox,
-                      meta.iconTone === 'success' &&
+                      meta.iconTono === 'success' &&
                         styles.CalculatorsScreenIconSuccess,
-                      meta.iconTone === 'info' &&
+                      meta.iconTono === 'info' &&
                         styles.CalculatorsScreenIconInfo,
-                      meta.iconTone === 'purple' &&
+                      meta.iconTono === 'purple' &&
                         styles.CalculatorsScreenIconPurple,
                     ]}
                   >
-                    <Text style={styles.CalculatorsScreenRecentIconMark}>
+                    <Text style={styles.CalculatorsScreenRecentIconMarca}>
                       {meta.icon}
                     </Text>
                   </View>
@@ -140,7 +140,7 @@ export function CalculatorsScreen({
                       {item.summary}
                     </Text>
                     <Text style={styles.CalculatorsScreenRecentTime}>
-                      {item.savedAtLabel}
+                      {item.savedAtEtiqueta}
                     </Text>
                   </View>
                 </Pressable>
@@ -154,7 +154,7 @@ export function CalculatorsScreen({
 }
 
 const styles = StyleSheet.create({
-  CalculatorsScreenRootHull: {
+  CalculatorsScreenRaizCasco: {
     backgroundColor: colors.background,
     flex: 1,
   },
@@ -162,15 +162,15 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 
-  CalculatorsScreenTitleFlourish: {
+  CalculatorsScreenTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 24,
     fontWeight: '700',
   },
 
-  CalculatorsScreenSubtitleFlourish: {
-    color: colors.bodyMuted,
+  CalculatorsScreenSubtitleFiligrana: {
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 14,
     marginBottom: 18,
@@ -202,17 +202,17 @@ const styles = StyleSheet.create({
   },
 
   CalculatorsScreenIconSuccess: {
-    backgroundColor: colors.successSoft,
+    backgroundColor: colors.successSuave,
   },
 
   CalculatorsScreenIconInfo: {
-    backgroundColor: colors.infoIconSoft,
+    backgroundColor: colors.infoIconSuave,
   },
 
   CalculatorsScreenIconPurple: {
     backgroundColor: 'rgba(124, 92, 255, 0.15)',
   },
-  CalculatorsScreenIconMark: {
+  CalculatorsScreenIconMarca: {
     fontSize: 22,
   },
   CalculatorsScreenCardCopy: {
@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   CalculatorsScreenCardBody: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     lineHeight: 18,
@@ -234,8 +234,8 @@ const styles = StyleSheet.create({
   },
   CalculatorsScreenOpenBtn: {
     alignItems: 'center',
-    backgroundColor: colors.backButton,
-    borderColor: colors.backButtonBorder,
+    backgroundColor: colors.backBoton,
+    borderColor: colors.backButtonBorde,
     borderRadius: 14,
     borderWidth: 1,
     height: 42,
@@ -271,7 +271,7 @@ const styles = StyleSheet.create({
   },
 
   CalculatorsScreenEmptyRecentLabel: {
-    color: colors.tabInactive,
+    color: colors.tabInactivo,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     textAlign: 'center',
@@ -299,7 +299,7 @@ const styles = StyleSheet.create({
     width: 40,
   },
 
-  CalculatorsScreenRecentIconMark: {
+  CalculatorsScreenRecentIconMarca: {
     fontSize: 18,
   },
   CalculatorsScreenRecentCopy: {
@@ -320,7 +320,7 @@ const styles = StyleSheet.create({
   },
 
   CalculatorsScreenRecentTime: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 11,
     marginTop: 4,

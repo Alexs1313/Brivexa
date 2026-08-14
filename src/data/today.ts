@@ -1,4 +1,4 @@
-import {appToday, formatLongDate} from './dates';
+import {appHoy, formatLongFecha} from './dates';
 
 export type TaskStatus = 'in_progress' | 'planned' | 'completed';
 
@@ -31,7 +31,7 @@ export type WeatherSnapshot = {
   wind: string;
   rain: string;
   humidity: string;
-  feelsLike: number;
+  feelsComo: number;
 };
 
 export type HourlyForecast = {
@@ -59,8 +59,8 @@ export type QuickAction = {
 
 export const TODAY_HEADER = {
   greeting: 'Good morning',
-  get dateLabel() {
-    return formatLongDate(appToday());
+  get dateEtiqueta() {
+    return formatLongFecha(appHoy());
   },
 };
 
@@ -74,7 +74,7 @@ export const TODAY_WEATHER: WeatherSnapshot = {
   wind: '12 km/h',
   rain: '20%',
   humidity: '64%',
-  feelsLike: 17,
+  feelsComo: 17,
 };
 
 export const TODAY_PROGRESS = {
@@ -91,7 +91,7 @@ export const TODAY_PROGRESS_DONE = {
   overdue: 0,
 };
 
-export const TODAY_TASKS: TodayTask[] = [
+export const TODAY_TAREAS: TodayTask[] = [
   {
     id: '1',
     title: 'Plant Corn',
@@ -161,14 +161,14 @@ export const QUICK_ACTIONS: QuickAction[] = [
   {id: 'work', label: 'Start Work', icon: '▶️', tint: 'info'},
 ];
 
-export const HOURLY_FORECAST: HourlyForecast[] = [
+export const HOURLY_PRONOSTICO: HourlyForecast[] = [
   {id: '1', label: 'Now', icon: '⛅', temp: 18},
   {id: '2', label: '1PM', icon: '☀️', temp: 20},
   {id: '3', label: '2PM', icon: '☀️', temp: 21},
   {id: '4', label: '3PM', icon: '⛅', temp: 20},
 ];
 
-export const WEEK_FORECAST: DayForecast[] = [
+export const WEEK_PRONOSTICO: DayForecast[] = [
   {id: '1', day: 'Today', icon: '⛅', rain: '20%', high: 23, low: 11},
   {id: '2', day: 'Thu', icon: '🌧️', rain: '80%', high: 19, low: 12},
   {id: '3', day: 'Fri', icon: '⛅', rain: '30%', high: 22, low: 13},

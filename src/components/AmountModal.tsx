@@ -15,28 +15,28 @@ type AmountModalProps = {
   visible: boolean;
   title: string;
   subtitle?: string;
-  unitLabel?: string;
+  unitEtiqueta?: string;
   placeholder?: string;
-  confirmLabel: string;
+  confirmEtiqueta: string;
   onCancel: () => void;
-  onConfirm: (amount: number) => void;
+  onConfirmar: (amount: number) => void;
 };
 
 export function AmountModal({
   visible,
   title,
   subtitle,
-  unitLabel,
+  unitEtiqueta,
   placeholder = 'e.g. 10',
-  confirmLabel,
+  confirmEtiqueta,
   onCancel,
-  onConfirm,
+  onConfirmar,
 }: AmountModalProps) {
-  const [value, setValue] = useState('');
+  const [value, setValor] = useState('');
 
   useEffect(() => {
     if (visible) {
-      setValue('');
+      setValor('');
     }
   }, [visible]);
 
@@ -45,7 +45,7 @@ export function AmountModal({
     return Number.isFinite(n) ? n : 0;
   }, [value]);
 
-  const canConfirm = amount > 0;
+  const canConfirmar = amount > 0;
 
   return (
     <Modal
@@ -54,47 +54,47 @@ export function AmountModal({
       animationType="fade"
       onRequestClose={onCancel}
     >
-      <Pressable style={styles.AmountModalBackdropDrape} onPress={onCancel}>
+      <Pressable style={styles.AmountModalBackdropVelo} onPress={onCancel}>
         <Pressable
-          style={styles.AmountModalSheetHull}
+          style={styles.AmountModalSheetCasco}
           onPress={e => e.stopPropagation()}
         >
-          <Text style={styles.AmountModalTitleFlourish}>{title}</Text>
+          <Text style={styles.AmountModalTitleFiligrana}>{title}</Text>
           {subtitle ? (
-            <Text style={styles.AmountModalSubtitleFlourish}>{subtitle}</Text>
+            <Text style={styles.AmountModalSubtitleFiligrana}>{subtitle}</Text>
           ) : null}
 
-          <View style={styles.AmountModalFieldInputHull}>
+          <View style={styles.AmountModalFieldInputCasco}>
             <TextInput
               value={value}
-              onChangeText={setValue}
+              onChangeText={setValor}
               keyboardType="decimal-pad"
               placeholder={placeholder}
-              placeholderTextColor={colors.tabInactive}
+              placeholderTextColor={colors.tabInactivo}
               style={styles.AmountModalFieldInput}
               autoFocus
             />
-            {unitLabel ? (
-              <Text style={styles.AmountModalUnit}>{unitLabel}</Text>
+            {unitEtiqueta ? (
+              <Text style={styles.AmountModalUnit}>{unitEtiqueta}</Text>
             ) : null}
           </View>
 
           <PrimaryButton
-            label={confirmLabel}
+            label={confirmEtiqueta}
             onPress={() => {
-              if (!canConfirm) {
+              if (!canConfirmar) {
                 return;
               }
-              onConfirm(amount);
+              onConfirmar(amount);
             }}
             fullWidth
             style={[
-              styles.AmountModalConfirmPlinth,
-              !canConfirm && styles.AmountModalPlinthDisabled,
+              styles.AmountModalConfirmPlinto,
+              !canConfirmar && styles.AmountModalPlintoDisabled,
             ]}
           />
-          <Pressable onPress={onCancel} style={styles.AmountModalCancelPlinth}>
-            <Text style={styles.AmountModalCancelFlourish}>Cancel</Text>
+          <Pressable onPress={onCancel} style={styles.AmountModalCancelPlinto}>
+            <Text style={styles.AmountModalCancelFiligrana}>Cancel</Text>
           </Pressable>
         </Pressable>
       </Pressable>
@@ -103,7 +103,7 @@ export function AmountModal({
 }
 
 const styles = StyleSheet.create({
-  AmountModalBackdropDrape: {
+  AmountModalBackdropVelo: {
     alignItems: 'center',
     backgroundColor: 'rgba(8, 5, 24, 0.72)',
     flex: 1,
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
 
-  AmountModalSheetHull: {
+  AmountModalSheetCasco: {
     backgroundColor: colors.card,
     borderColor: colors.border,
     borderRadius: radius.card,
@@ -120,19 +120,19 @@ const styles = StyleSheet.create({
     paddingVertical: 18,
     width: '100%',
   },
-  AmountModalTitleFlourish: {
+  AmountModalTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 17,
     fontWeight: '700',
   },
-  AmountModalSubtitleFlourish: {
-    color: colors.bodyMuted,
+  AmountModalSubtitleFiligrana: {
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginTop: 6,
   },
-  AmountModalFieldInputHull: {
+  AmountModalFieldInputCasco: {
     alignItems: 'center',
     backgroundColor: colors.surface,
     borderColor: colors.border,
@@ -151,28 +151,28 @@ const styles = StyleSheet.create({
     padding: 0,
   },
   AmountModalUnit: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 14,
     marginLeft: 8,
   },
-  AmountModalConfirmPlinth: {
+  AmountModalConfirmPlinto: {
     marginTop: 14,
   },
 
-  AmountModalPlinthDisabled: {
+  AmountModalPlintoDisabled: {
     opacity: 0.45,
   },
 
-  AmountModalCancelPlinth: {
+  AmountModalCancelPlinto: {
     alignItems: 'center',
     height: 44,
     justifyContent: 'center',
     marginTop: 4,
   },
 
-  AmountModalCancelFlourish: {
-    color: colors.bodyMuted,
+  AmountModalCancelFiligrana: {
+    color: colors.bodyApagado,
     fontFamily: fonts.sansBold,
     fontSize: 15,
     fontWeight: '700',

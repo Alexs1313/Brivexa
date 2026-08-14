@@ -10,17 +10,17 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { colors, fonts, layout, radius } from '../constants/theme';
-import { appBackground } from '../data/assets';
-import { useTasks } from '../data/TasksContext';
+import { appFondo } from '../data/assets';
+import { useTareas } from '../data/TasksContext';
 
-import { useAdaptive } from '../hooks/useAdaptive';
+import { useAdaptativo } from '../hooks/useAdaptativo';
 
 import { StatusChip } from './WorkScreen';
 
 type TaskDetailScreenProps = {
   taskId: string;
   onBack: () => void;
-  onStartWork: () => void;
+  onStartTrabajo: () => void;
   onEdit: () => void;
   onDelete: () => void;
 };
@@ -28,23 +28,23 @@ type TaskDetailScreenProps = {
 export function TaskDetailScreen({
   taskId,
   onBack,
-  onStartWork,
+  onStartTrabajo,
   onEdit,
   onDelete,
 }: TaskDetailScreenProps) {
   const insets = useSafeAreaInsets();
-  const adaptive = useAdaptive();
-  const { getTask } = useTasks();
-  const task = getTask(taskId);
+  const adaptive = useAdaptativo();
+  const { getTarea } = useTareas();
+  const task = getTarea(taskId);
 
   if (!task) {
     return (
-      <View style={styles.TaskDetailScreenMissingHull}>
-        <Text style={styles.TaskDetailScreenMissingFlourish}>
+      <View style={styles.TaskDetailScreenMissingCasco}>
+        <Text style={styles.TaskDetailScreenMissingFiligrana}>
           Task not found
         </Text>
         <Pressable onPress={onBack}>
-          <Text style={styles.TaskDetailScreenNavLinkFlourish}>‹ Work</Text>
+          <Text style={styles.TaskDetailScreenNavLinkFiligrana}>‹ Work</Text>
         </Pressable>
       </View>
     );
@@ -61,30 +61,30 @@ export function TaskDetailScreen({
 
   return (
     <ImageBackground
-      source={appBackground}
-      style={styles.TaskDetailScreenRootHull}
+      source={appFondo}
+      style={styles.TaskDetailScreenRaizCasco}
       resizeMode="cover"
     >
       <ScrollView
         contentContainerStyle={[
           styles.TaskDetailScreenScrollContent,
           {
-            paddingTop: insets.top + adaptive.verticalScale(6),
-            paddingBottom: insets.bottom + adaptive.verticalScale(28),
-            paddingHorizontal: adaptive.horizontalPadding,
+            paddingTop: insets.top + adaptive.verticalEscala(6),
+            paddingBottom: insets.bottom + adaptive.verticalEscala(28),
+            paddingHorizontal: adaptive.horizontalRelleno,
           },
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.TaskDetailScreenHeaderRowCapstone}>
+        <View style={styles.TaskDetailScreenHeaderRowDintel}>
           <Pressable
             onPress={onBack}
             hitSlop={12}
             style={styles.TaskDetailScreenNavSide}
           >
-            <Text style={styles.TaskDetailScreenNavLinkFlourish}>‹ Work</Text>
+            <Text style={styles.TaskDetailScreenNavLinkFiligrana}>‹ Work</Text>
           </Pressable>
-          <Text style={styles.TaskDetailScreenTitleFlourish}>Task</Text>
+          <Text style={styles.TaskDetailScreenTitleFiligrana}>Task</Text>
           <View style={styles.TaskDetailScreenNavSide} />
         </View>
 
@@ -97,11 +97,11 @@ export function TaskDetailScreen({
           </View>
         </View>
 
-        <Text style={styles.TaskDetailScreenHeadlineFlourish}>
+        <Text style={styles.TaskDetailScreenHeadlineFiligrana}>
           {task.title}
         </Text>
-        <Text style={styles.TaskDetailScreenSubtitleFlourish}>
-          {task.workType} · {task.field}
+        <Text style={styles.TaskDetailScreenSubtitleFiligrana}>
+          {task.workTipo} · {task.field}
         </Text>
 
         <View style={styles.TaskDetailScreenCard}>
@@ -127,7 +127,7 @@ export function TaskDetailScreen({
         ) : null}
 
         <Pressable
-          onPress={onStartWork}
+          onPress={onStartTrabajo}
           style={({ pressed }) => [
             styles.TaskDetailScreenSuccessBtn,
             pressed && styles.TaskDetailScreenPressedDim,
@@ -163,36 +163,36 @@ export function TaskDetailScreen({
 }
 
 const styles = StyleSheet.create({
-  TaskDetailScreenRootHull: { backgroundColor: colors.background, flex: 1 },
+  TaskDetailScreenRaizCasco: { backgroundColor: colors.background, flex: 1 },
   TaskDetailScreenScrollContent: { flexGrow: 1 },
-  TaskDetailScreenMissingHull: {
+  TaskDetailScreenMissingCasco: {
     alignItems: 'center',
     backgroundColor: colors.background,
     flex: 1,
     justifyContent: 'center',
   },
 
-  TaskDetailScreenMissingFlourish: {
+  TaskDetailScreenMissingFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     marginBottom: 12,
   },
 
-  TaskDetailScreenHeaderRowCapstone: {
+  TaskDetailScreenHeaderRowDintel: {
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: 16,
   },
 
   TaskDetailScreenNavSide: { minWidth: 72 },
-  TaskDetailScreenNavLinkFlourish: {
+  TaskDetailScreenNavLinkFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
-  TaskDetailScreenTitleFlourish: {
+  TaskDetailScreenTitleFiligrana: {
     color: colors.cream,
     flex: 1,
     fontFamily: fonts.sansBold,
@@ -209,27 +209,27 @@ const styles = StyleSheet.create({
   },
 
   TaskDetailScreenPriorityPill: {
-    backgroundColor: colors.plannedSoft,
+    backgroundColor: colors.plannedSuave,
     borderRadius: 20,
     paddingHorizontal: 9,
     paddingVertical: 3,
   },
   TaskDetailScreenPriorityLabel: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansBold,
     fontSize: 10,
     fontWeight: '700',
   },
 
-  TaskDetailScreenHeadlineFlourish: {
+  TaskDetailScreenHeadlineFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 28,
     fontWeight: '700',
   },
 
-  TaskDetailScreenSubtitleFlourish: {
-    color: colors.bodyMuted,
+  TaskDetailScreenSubtitleFiligrana: {
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 14,
     marginBottom: 18,
@@ -251,12 +251,12 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
   },
   TaskDetailScreenKvRowBorder: {
-    borderBottomColor: colors.borderSoft,
+    borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
   },
 
   TaskDetailScreenKvLabel: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     flex: 1,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
   },
 
   TaskDetailScreenNotesLabel: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginBottom: 8,
@@ -295,7 +295,7 @@ const styles = StyleSheet.create({
 
   TaskDetailScreenSuccessBtn: {
     alignItems: 'center',
-    backgroundColor: colors.successButton,
+    backgroundColor: colors.successBoton,
     borderRadius: radius.button,
     height: layout.buttonHeightDefault,
     justifyContent: 'center',

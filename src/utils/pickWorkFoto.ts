@@ -21,7 +21,7 @@ function unwrap(result: ImagePickerResponse | ImagePickerResponse[]) {
   return Array.isArray(result) ? result[0] : result;
 }
 
-export function pickWorkPhoto(): Promise<ImagePickerResponse> {
+export function pickWorkFoto(): Promise<ImagePickerResponse> {
   const native = NativeModules.ImagePicker as NativeImagePicker | undefined;
 
   if (native?.launchImageLibrary) {

@@ -11,25 +11,25 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { PrimaryButton } from '../components/buttons/PrimaryButton';
 import { colors, fonts, layout, radius } from '../constants/theme';
-import { appBackground } from '../data/assets';
-import { useTasks } from '../data/TasksContext';
-import { useAdaptive } from '../hooks/useAdaptive';
+import { appFondo } from '../data/assets';
+import { useTareas } from '../data/TasksContext';
+import { useAdaptativo } from '../hooks/useAdaptativo';
 
 type WorkCompletedScreenProps = {
   taskId: string;
-  onBackToWork: () => void;
-  onViewSummary: () => void;
+  onBackToTrabajo: () => void;
+  onViewResumen: () => void;
 };
 
 export function WorkCompletedScreen({
   taskId,
-  onBackToWork,
-  onViewSummary,
+  onBackToTrabajo,
+  onViewResumen,
 }: WorkCompletedScreenProps) {
   const insets = useSafeAreaInsets();
-  const adaptive = useAdaptive();
-  const { getTask } = useTasks();
-  const task = getTask(taskId);
+  const adaptive = useAdaptativo();
+  const { getTarea } = useTareas();
+  const task = getTarea(taskId);
 
   const rows = [
     {
@@ -40,7 +40,7 @@ export function WorkCompletedScreen({
     {
       label: 'Cost added to finance',
       value: '+$320',
-      color: colors.expenseMoney,
+      color: colors.expenseDinero,
     },
     {
       label: 'Equipment hours',
@@ -51,48 +51,48 @@ export function WorkCompletedScreen({
 
   return (
     <ImageBackground
-      source={appBackground}
-      style={styles.WorkCompletedScreenRootHull}
+      source={appFondo}
+      style={styles.WorkCompletedScreenRaizCasco}
       resizeMode="cover"
     >
       <ScrollView
         contentContainerStyle={[
           styles.WorkCompletedScreenScrollContent,
           {
-            paddingTop: insets.top + adaptive.verticalScale(6),
-            paddingBottom: insets.bottom + adaptive.verticalScale(28),
-            paddingHorizontal: adaptive.horizontalPadding,
+            paddingTop: insets.top + adaptive.verticalEscala(6),
+            paddingBottom: insets.bottom + adaptive.verticalEscala(28),
+            paddingHorizontal: adaptive.horizontalRelleno,
           },
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.WorkCompletedScreenHeaderRowCapstone}>
+        <View style={styles.WorkCompletedScreenHeaderRowDintel}>
           <Pressable
-            onPress={onBackToWork}
+            onPress={onBackToTrabajo}
             hitSlop={12}
             style={styles.WorkCompletedScreenNavSide}
           >
-            <Text style={styles.WorkCompletedScreenNavLinkFlourish}>
+            <Text style={styles.WorkCompletedScreenNavLinkFiligrana}>
               ‹ Work
             </Text>
           </Pressable>
-          <Text style={styles.WorkCompletedScreenTitleFlourish}>Completed</Text>
+          <Text style={styles.WorkCompletedScreenTitleFiligrana}>Completed</Text>
           <View style={styles.WorkCompletedScreenNavSide} />
         </View>
 
-        <View style={styles.WorkCompletedScreenHeroPocket}>
-          <View style={styles.WorkCompletedScreenCheckBead}>
-            <Text style={styles.WorkCompletedScreenCheckEmblem}>✓</Text>
+        <View style={styles.WorkCompletedScreenHeroBolsillo}>
+          <View style={styles.WorkCompletedScreenCheckOrbe}>
+            <Text style={styles.WorkCompletedScreenCheckEmblema}>✓</Text>
           </View>
-          <Text style={styles.WorkCompletedScreenHeroTitleFlourish}>
+          <Text style={styles.WorkCompletedScreenHeroTitleFiligrana}>
             Work Completed
           </Text>
-          <Text style={styles.WorkCompletedScreenHeroHintFlourish}>
+          <Text style={styles.WorkCompletedScreenHeroHintFiligrana}>
             The activity has been saved and farm records have been updated.
           </Text>
         </View>
 
-        <View style={styles.WorkCompletedScreenSummaryHull}>
+        <View style={styles.WorkCompletedScreenSummaryCasco}>
           {rows.map((row, index) => (
             <View
               key={row.label}
@@ -117,7 +117,7 @@ export function WorkCompletedScreen({
 
         <View style={styles.WorkCompletedScreenFooterRow}>
           <Pressable
-            onPress={onBackToWork}
+            onPress={onBackToTrabajo}
             style={({ pressed }) => [
               styles.WorkCompletedScreenSecondaryBtn,
               pressed && styles.WorkCompletedScreenPressedDim,
@@ -129,7 +129,7 @@ export function WorkCompletedScreen({
           </Pressable>
           <PrimaryButton
             label="View Summary"
-            onPress={onViewSummary}
+            onPress={onViewResumen}
             style={styles.WorkCompletedScreenPrimaryBtn}
           />
         </View>
@@ -139,27 +139,27 @@ export function WorkCompletedScreen({
 }
 
 const styles = StyleSheet.create({
-  WorkCompletedScreenRootHull: {
+  WorkCompletedScreenRaizCasco: {
     backgroundColor: colors.background,
     flex: 1,
   },
 
   WorkCompletedScreenScrollContent: { flexGrow: 1 },
 
-  WorkCompletedScreenHeaderRowCapstone: {
+  WorkCompletedScreenHeaderRowDintel: {
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: 28,
   },
 
   WorkCompletedScreenNavSide: { minWidth: 72 },
-  WorkCompletedScreenNavLinkFlourish: {
+  WorkCompletedScreenNavLinkFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
-  WorkCompletedScreenTitleFlourish: {
+  WorkCompletedScreenTitleFiligrana: {
     color: colors.cream,
     flex: 1,
     fontFamily: fonts.sansBold,
@@ -168,10 +168,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  WorkCompletedScreenHeroPocket: { alignItems: 'center', marginBottom: 28 },
-  WorkCompletedScreenCheckBead: {
+  WorkCompletedScreenHeroBolsillo: { alignItems: 'center', marginBottom: 28 },
+  WorkCompletedScreenCheckOrbe: {
     alignItems: 'center',
-    backgroundColor: colors.successButton,
+    backgroundColor: colors.successBoton,
     borderColor: colors.white,
     borderRadius: 40,
     borderWidth: 2,
@@ -181,22 +181,22 @@ const styles = StyleSheet.create({
     width: 72,
   },
 
-  WorkCompletedScreenCheckEmblem: {
+  WorkCompletedScreenCheckEmblema: {
     color: colors.white,
     fontFamily: fonts.sansBold,
     fontSize: 34,
     fontWeight: '700',
     lineHeight: 38,
   },
-  WorkCompletedScreenHeroTitleFlourish: {
+  WorkCompletedScreenHeroTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 26,
     fontWeight: '700',
   },
 
-  WorkCompletedScreenHeroHintFlourish: {
-    color: colors.bodyMuted,
+  WorkCompletedScreenHeroHintFiligrana: {
+    color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 14,
     lineHeight: 20,
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  WorkCompletedScreenSummaryHull: {
+  WorkCompletedScreenSummaryCasco: {
     backgroundColor: colors.card,
     borderColor: colors.border,
     borderRadius: radius.card,
@@ -222,11 +222,11 @@ const styles = StyleSheet.create({
   },
 
   WorkCompletedScreenKvRowBorder: {
-    borderBottomColor: colors.borderSoft,
+    borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
   },
   WorkCompletedScreenKvLabel: {
-    color: colors.bodyMuted,
+    color: colors.bodyApagado,
     flex: 1,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
