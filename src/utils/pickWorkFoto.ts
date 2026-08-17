@@ -1,4 +1,4 @@
-import {NativeModules} from 'react-native';
+import { NativeModules } from 'react-native';
 import {
   launchImageLibrary,
   type ImagePickerResponse,
@@ -27,13 +27,13 @@ export function pickWorkFoto(): Promise<ImagePickerResponse> {
   if (native?.launchImageLibrary) {
     return new Promise(resolve => {
       native.launchImageLibrary(OPTIONS, result => {
-        resolve(unwrap(result) ?? {didCancel: true});
+        resolve(unwrap(result) ?? { didCancel: true });
       });
     });
   }
 
   return launchImageLibrary(OPTIONS).then(
-    result => unwrap(result) ?? {didCancel: true},
+    result => unwrap(result) ?? { didCancel: true },
     () => ({
       errorCode: 'others' as const,
       errorMessage: 'Rebuild the app to enable the photo library.',

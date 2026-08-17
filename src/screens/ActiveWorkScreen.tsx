@@ -29,6 +29,7 @@ type ActiveWorkScreenProps = {
 
 function formatElapsed(totalSegundos: number) {
   const h = Math.floor(totalSegundos / 3600);
+
   const m = Math.floor((totalSegundos % 3600) / 60);
   const s = totalSegundos % 60;
   return [h, m, s].map(n => String(n).padStart(2, '0')).join(':');
@@ -42,11 +43,14 @@ export function ActiveWorkScreen({
   const insets = useSafeAreaInsets();
   const adaptive = useAdaptativo();
   const { getTarea } = useTareas();
+
   const task = getTarea(taskId);
   const [seconds, setSegundos] = useState(1 * 3600 + 25 * 60 + 45);
   const [paused, setPausado] = useState(false);
+
   const [materialsNota, setMaterialsNota] = useState<string | null>(null);
   const [photos, setFotos] = useState<string[]>([]);
+
   const [materialAbierto, setMaterialAbierto] = useState(false);
   const [toast, setAviso] = useState<string | null>(null);
 

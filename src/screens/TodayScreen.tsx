@@ -50,7 +50,8 @@ export function TodayScreen({
 }: TodayScreenProps) {
   const insets = useSafeAreaInsets();
   const adaptive = useAdaptativo();
-  const { isMuestra, todayTareas, upcomingTrabajo, todayProgreso } = useTareas();
+  const { isMuestra, todayTareas, upcomingTrabajo, todayProgreso } =
+    useTareas();
 
   const tasks = todayTareas;
   const upcoming = isMuestra ? UPCOMING_WORK : upcomingTrabajo;
@@ -86,7 +87,7 @@ export function TodayScreen({
               <View style={styles.TodayScreenBrandRow}>
                 <Text style={styles.TodayScreenCowEmblema}>🐂</Text>
                 <Text style={styles.TodayScreenBrandFiligrana}>
-                  {APP_BRAND_LINE}
+                  Terra Bull Farm
                 </Text>
               </View>
               <Text style={styles.TodayScreenGreetingFiligrana}>
