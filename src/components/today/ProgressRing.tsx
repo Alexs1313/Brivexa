@@ -85,11 +85,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
   ProgressRingCenter: {
     alignItems: 'center',
     justifyContent: 'center',
   },
-
   ProgressRingCenterLabel: {
     fontFamily: fonts.sansBold,
     fontSize: 15,
@@ -99,6 +99,8 @@ const styles = StyleSheet.create({
   ProgressRingCenterLabelDone: {
     fontSize: 22,
   },
+
+
   ProgressRingCenterMeta: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,

@@ -124,9 +124,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
+
+
   OnboardingScreenBackground: {
     flex: 1,
   },
+
+
+
   OnboardingScreenTopSkip: {
     position: 'absolute',
     right: 18,
@@ -139,16 +144,20 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
 
+
   OnboardingScreenContent: {
     flex: 1,
     justifyContent: 'space-between',
     paddingHorizontal: 18,
   },
+
   OnboardingScreenHeroBolsillo: {
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
   },
+
+
   OnboardingScreenArtEmblema: {
     maxHeight: 393,
   },
@@ -156,6 +165,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 12,
   },
+
+
   OnboardingScreenTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -174,15 +185,21 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
+
   OnboardingScreenFooter: {
     gap: 24,
     paddingTop: 28,
   },
+
+
+
   OnboardingScreenActionRow: {
     alignItems: 'center',
     flexDirection: 'row',
     gap: 12,
   },
+
+
 
   OnboardingScreenPrimaryAction: {
     flex: 1,

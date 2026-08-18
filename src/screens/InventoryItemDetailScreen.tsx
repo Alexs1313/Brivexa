@@ -329,6 +329,9 @@ const styles = StyleSheet.create({
   },
 
   InventoryItemDetailScreenScrollContent: { flexGrow: 1 },
+
+
+
   InventoryItemDetailScreenHeaderRowDintel: {
     alignItems: 'center',
     borderBottomColor: colors.borderSuave,
@@ -339,11 +342,19 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingHorizontal: 16,
   },
+
+
   InventoryItemDetailScreenNavSide: { minWidth: 90 },
+
+
+
   InventoryItemDetailScreenNavSideRight: {
     alignItems: 'flex-end',
     minWidth: 90,
   },
+
+
+
   InventoryItemDetailScreenNavLinkFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
@@ -357,19 +368,21 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
+
+
   InventoryItemDetailScreenTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
-
   InventoryItemDetailScreenIdentityRowDintel: {
     alignItems: 'flex-start',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 14,
   },
+
   InventoryItemDetailScreenFlexBolsillo: { flex: 1 },
   InventoryItemDetailScreenItemName: {
     color: colors.cream,
@@ -377,6 +390,8 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: '700',
   },
+
+
 
   InventoryItemDetailScreenItemCategory: {
     color: colors.bodyApagado,
@@ -390,11 +405,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 9,
     paddingVertical: 3,
   },
+
+
   InventoryItemDetailScreenStatusChipLabel: {
     fontFamily: fonts.sansBold,
     fontSize: 10,
     fontWeight: '700',
   },
+
+
+
   InventoryItemDetailScreenKvList: {
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -403,6 +423,9 @@ const styles = StyleSheet.create({
     marginBottom: 14,
     overflow: 'hidden',
   },
+
+
+
   InventoryItemDetailScreenKvRow: {
     alignItems: 'center',
     flexDirection: 'row',
@@ -416,11 +439,15 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
   },
+
   InventoryItemDetailScreenKvLabel: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
   },
+
+
+
   InventoryItemDetailScreenKvValue: {
     color: colors.cream,
     fontFamily: fonts.sansRegular,
@@ -433,6 +460,8 @@ const styles = StyleSheet.create({
     gap: 10,
     marginBottom: 20,
   },
+
+
 
   InventoryItemDetailScreenAddStockBtn: {
     alignItems: 'center',
@@ -448,6 +477,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '700',
   },
+
   InventoryItemDetailScreenUseStockBtn: {
     alignItems: 'center',
     backgroundColor: colors.backBoton,
@@ -467,6 +497,9 @@ const styles = StyleSheet.create({
   },
 
   InventoryItemDetailScreenPressedDim: { opacity: 0.88 },
+
+
+
   InventoryItemDetailScreenSectionTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -474,6 +507,8 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginBottom: 10,
   },
+
+
 
   InventoryItemDetailScreenMovementList: {
     backgroundColor: colors.card,
@@ -483,6 +518,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     overflow: 'hidden',
   },
+
   InventoryItemDetailScreenMovementRow: {
     alignItems: 'center',
     flexDirection: 'row',
@@ -492,6 +528,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
 
+
   InventoryItemDetailScreenMovementTitle: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -499,22 +536,33 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
+
+
   InventoryItemDetailScreenMovementDate: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 11,
     marginTop: 2,
   },
+
+
   InventoryItemDetailScreenMovementAmount: {
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
+
   InventoryItemDetailScreenAmountIn: { color: colors.success },
+
+
+
   InventoryItemDetailScreenAmountOut: { color: colors.expenseDinero },
 
+
   InventoryItemDetailScreenAmountBalance: { color: colors.cream },
+
+
 
   InventoryItemDetailScreenAlertCard: {
     backgroundColor: colors.dangerSoftStrong,
@@ -525,6 +573,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 12,
   },
+
   InventoryItemDetailScreenAlertLabel: {
     color: colors.danger,
     fontFamily: fonts.sansBold,
@@ -532,12 +581,17 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginBottom: 4,
   },
+
+
+
   InventoryItemDetailScreenAlertText: {
     color: colors.bodySuave,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     lineHeight: 18,
   },
+
+
 
   InventoryItemDetailScreenDeleteBtn: {
     alignItems: 'center',
@@ -549,12 +603,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
+
   InventoryItemDetailScreenDeleteLabel: {
     color: colors.danger,
     fontFamily: fonts.sansBold,
     fontSize: 15,
     fontWeight: '700',
   },
+
+
+
   InventoryItemDetailScreenToastCasco: {
     alignSelf: 'center',
     backgroundColor: colors.toastBg,
@@ -565,6 +623,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     position: 'absolute',
   },
+
 
   InventoryItemDetailScreenToastFiligrana: {
     color: colors.cream,

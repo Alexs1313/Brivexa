@@ -152,6 +152,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     flex: 1,
   },
+
+
+
   WeatherDetailsScreenWeatherScreenNav: {
     alignItems: 'center',
     borderBottomColor: colors.borderSuave,
@@ -166,11 +169,14 @@ const styles = StyleSheet.create({
   WeatherDetailsScreenWeatherScreenBack: {
     minWidth: 72,
   },
+
+
   WeatherDetailsScreenWeatherScreenBackFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
+
 
   WeatherDetailsScreenWeatherScreenTitleFiligrana: {
     color: colors.cream,
@@ -178,12 +184,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
   },
+
+
   WeatherDetailsScreenWeatherScreenNavSpacer: {
     minWidth: 72,
   },
   WeatherDetailsScreenWeatherScreenScroll: {
     flexGrow: 1,
   },
+
   WeatherDetailsScreenHeroCardCasco: {
     alignItems: 'center',
     backgroundColor: 'rgba(27, 21, 80, 0.72)',
@@ -194,10 +203,10 @@ const styles = StyleSheet.create({
     paddingVertical: 18,
   },
 
+
   WeatherDetailsScreenHeroIcon: {
     fontSize: 50,
   },
-
   WeatherDetailsScreenHeroTempFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -205,7 +214,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginTop: 4,
   },
-
   WeatherDetailsScreenHeroCondition: {
     color: colors.bodySuave,
     fontFamily: fonts.sansRegular,
@@ -213,12 +221,15 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
 
+
+
   WeatherDetailsScreenMetricsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 10,
     marginBottom: 22,
   },
+
   WeatherDetailsScreenMetricCard: {
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -236,6 +247,8 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 
+
+
   WeatherDetailsScreenMetricValueFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -243,6 +256,9 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginTop: 4,
   },
+
+
+
   WeatherDetailsScreenSectionTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -250,6 +266,9 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginBottom: 10,
   },
+
+
+
   WeatherDetailsScreenHourlyRow: {
     gap: 8,
     marginBottom: 22,
@@ -266,6 +285,7 @@ const styles = StyleSheet.create({
     width: 56,
   },
 
+
   WeatherDetailsScreenHourlyLabel: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
@@ -276,13 +296,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginVertical: 4,
   },
-
   WeatherDetailsScreenHourlyTempFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 13,
     fontWeight: '700',
   },
+
+
   WeatherDetailsScreenWeekCardCasco: {
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -290,6 +311,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     overflow: 'hidden',
   },
+
   WeatherDetailsScreenWeekRow: {
     alignItems: 'center',
     flexDirection: 'row',
@@ -300,18 +322,23 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
   },
+
+
+
   WeatherDetailsScreenWeekDay: {
     color: colors.bodySuave,
     flex: 1,
     fontFamily: fonts.sansRegular,
     fontSize: 14,
   },
+
+
+
   WeatherDetailsScreenWeekIcon: {
     fontSize: 16,
     marginRight: 10,
     width: 24,
   },
-
   WeatherDetailsScreenWeekRain: {
     color: colors.info,
     fontFamily: fonts.sansRegular,
@@ -319,6 +346,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
     width: 52,
   },
+
 
   WeatherDetailsScreenWeekTempFiligrana: {
     color: colors.cream,

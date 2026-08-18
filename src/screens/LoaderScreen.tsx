@@ -76,6 +76,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.black,
     flex: 1,
   },
+
+
   LoaderScreenBackground: {
     alignItems: 'center',
     flex: 1,
@@ -91,11 +93,12 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 
+
+
   LoaderScreenContent: {
     alignItems: 'center',
     justifyContent: 'center',
   },
-
   LoaderScreenCowEmblema: {
     fontSize: 34,
     marginBottom: 10,
@@ -110,6 +113,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
+
+
   LoaderScreenTaglineFiligrana: {
     color: colors.body,
     fontFamily: fonts.sansRegular,
@@ -117,6 +122,7 @@ const styles = StyleSheet.create({
     letterSpacing: 2,
     marginTop: 6,
   },
+
 
   LoaderScreenSpinnerRing: {
     borderColor: colors.gold,

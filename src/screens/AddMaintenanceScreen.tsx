@@ -148,6 +148,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     flex: 1,
   },
+
+
   AddMaintenanceScreenScrollContent: {
     flexGrow: 1,
   },
@@ -166,11 +168,13 @@ const styles = StyleSheet.create({
     minWidth: 72,
   },
 
+
   AddMaintenanceScreenNavLinkFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
+
 
   AddMaintenanceScreenTitleFiligrana: {
     color: colors.cream,
@@ -194,6 +198,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 18,
   },
+
 
   AddMaintenanceScreenSavePlinto: {
     marginTop: 4,

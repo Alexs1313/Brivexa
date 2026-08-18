@@ -146,9 +146,14 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginBottom: 8,
   },
+
+
   DropdownFieldRequiredEmblema: {
     color: colors.danger,
   },
+
+
+
   DropdownFieldFieldInputCasco: {
     alignItems: 'center',
     backgroundColor: colors.card,
@@ -160,9 +165,13 @@ const styles = StyleSheet.create({
     paddingLeft: 14,
     paddingRight: 4,
   },
+
+
+
   DropdownFieldInputCascoOpen: {
     borderColor: colors.goldBorde,
   },
+
   DropdownFieldSelectInput: {
     color: colors.cream,
     flex: 1,
@@ -170,20 +179,27 @@ const styles = StyleSheet.create({
     fontSize: 15,
     paddingVertical: 0,
   },
+
   DropdownFieldChevronHit: {
     alignItems: 'center',
     height: 40,
     justifyContent: 'center',
     width: 40,
   },
+
+
   DropdownFieldChevron: {
     color: colors.tabInactivo,
     fontSize: 15,
   },
+
+
+
   DropdownFieldChevronOpen: {
     color: colors.gold,
     transform: [{ rotate: '180deg' }],
   },
+
   DropdownFieldBackdropVelo: {
     backgroundColor: 'rgba(8, 4, 24, 0.72)',
     flex: 1,
@@ -200,6 +216,8 @@ const styles = StyleSheet.create({
     paddingBottom: 6,
     paddingTop: 14,
   },
+
+
   DropdownFieldSheetTitle: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansBold,
@@ -219,6 +237,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 14,
   },
+
   DropdownFieldOptionBorder: {
     borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
@@ -226,6 +245,9 @@ const styles = StyleSheet.create({
   DropdownFieldOptionActive: {
     backgroundColor: colors.goldSuave,
   },
+
+
+
   DropdownFieldOptionTitle: {
     color: colors.cream,
     flex: 1,
@@ -237,6 +259,7 @@ const styles = StyleSheet.create({
   DropdownFieldOptionTitleActive: {
     color: colors.gold,
   },
+
   DropdownFieldCheck: {
     color: colors.gold,
     fontFamily: fonts.sansBold,

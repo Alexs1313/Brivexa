@@ -143,6 +143,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 
+
   ReportDetailScreenHeaderRowDintel: {
     alignItems: 'center',
     borderBottomColor: colors.borderSuave,
@@ -154,6 +155,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 
+
+
   ReportDetailScreenNavSide: {
     minWidth: 90,
   },
@@ -162,6 +165,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
+
   ReportDetailScreenTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -169,17 +173,20 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
+
   ReportDetailScreenSubtitleFiligrana: {
     color: colors.body,
     fontFamily: fonts.sansRegular,
     fontSize: 14,
     marginBottom: 14,
   },
-
   ReportDetailScreenMetricsStack: {
     gap: 11,
     marginBottom: 16,
   },
+
+
+
   ReportDetailScreenMetricCard: {
     alignItems: 'center',
     backgroundColor: colors.card,
@@ -192,6 +199,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 
+
   ReportDetailScreenMetricLabel: {
     color: colors.body,
     fontFamily: fonts.sansRegular,
@@ -203,10 +211,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
   },
+
   ReportDetailScreenActionRow: {
     flexDirection: 'row',
     gap: 10,
   },
+
 
   ReportDetailScreenActionBtn: {
     alignItems: 'center',
@@ -218,6 +228,7 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
   },
+
 
   ReportDetailScreenActionLabel: {
     color: colors.backButtonText,
@@ -238,6 +249,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     position: 'absolute',
   },
+
 
   ReportDetailScreenToastFiligrana: {
     color: colors.cream,

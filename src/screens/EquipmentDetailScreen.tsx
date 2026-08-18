@@ -270,12 +270,16 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     flex: 1,
   },
+
+
   EquipmentDetailScreenMissingBolsillo: {
     alignItems: 'center',
     backgroundColor: colors.background,
     flex: 1,
     justifyContent: 'center',
   },
+
+
 
   EquipmentDetailScreenMissingFiligrana: {
     color: colors.cream,
@@ -286,6 +290,7 @@ const styles = StyleSheet.create({
   EquipmentDetailScreenScrollContent: {
     flexGrow: 1,
   },
+
   EquipmentDetailScreenHeaderRowDintel: {
     alignItems: 'center',
     borderBottomColor: colors.borderSuave,
@@ -296,11 +301,9 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingHorizontal: 16,
   },
-
   EquipmentDetailScreenNavSide: {
     minWidth: 72,
   },
-
   EquipmentDetailScreenNavSideRight: {
     alignItems: 'flex-end',
     minWidth: 72,
@@ -324,12 +327,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
   },
+
+
+
   EquipmentDetailScreenIdentityRow: {
     alignItems: 'center',
     flexDirection: 'row',
     gap: 14,
     marginBottom: 14,
   },
+
   EquipmentDetailScreenIconBox: {
     alignItems: 'center',
     backgroundColor: colors.backBoton,
@@ -338,6 +345,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 54,
   },
+
+
 
   EquipmentDetailScreenIconMarca: {
     fontSize: 28,
@@ -349,12 +358,15 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: '700',
   },
+
+
   EquipmentDetailScreenMeta: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginTop: 4,
   },
+
   EquipmentDetailScreenKvList: {
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -363,6 +375,8 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     overflow: 'hidden',
   },
+
+
 
   EquipmentDetailScreenKvRow: {
     alignItems: 'center',
@@ -378,17 +392,21 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
 
+
   EquipmentDetailScreenKvLabel: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
   },
 
+
+
   EquipmentDetailScreenKvValue: {
     color: colors.cream,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
   },
+
 
   EquipmentDetailScreenProgressCard: {
     backgroundColor: colors.card,
@@ -398,11 +416,14 @@ const styles = StyleSheet.create({
     marginBottom: 14,
     padding: 15,
   },
+
+
   EquipmentDetailScreenProgressHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 8,
   },
+
   EquipmentDetailScreenProgressLabel: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
@@ -414,12 +435,14 @@ const styles = StyleSheet.create({
     fontFamily: fonts.sansRegular,
     fontSize: 12,
   },
+
   EquipmentDetailScreenProgressTrack: {
     backgroundColor: colors.progressTrackDeep,
     borderRadius: 4,
     height: 8,
     overflow: 'hidden',
   },
+
   EquipmentDetailScreenProgressFill: {
     backgroundColor: colors.danger,
     borderRadius: 4,
@@ -435,6 +458,9 @@ const styles = StyleSheet.create({
   EquipmentDetailScreenHalfBtn: {
     flex: 1,
   },
+
+
+
   EquipmentDetailScreenSecondaryHalf: {
     alignItems: 'center',
     backgroundColor: colors.backBoton,
@@ -445,6 +471,8 @@ const styles = StyleSheet.create({
     height: 48,
     justifyContent: 'center',
   },
+
+
   EquipmentDetailScreenSecondaryHalfLabel: {
     color: colors.backButtonText,
     fontFamily: fonts.sansBold,
@@ -455,6 +483,9 @@ const styles = StyleSheet.create({
   EquipmentDetailScreenPressedDim: {
     opacity: 0.88,
   },
+
+
+
   EquipmentDetailScreenChangeStatusBtn: {
     alignItems: 'center',
     backgroundColor: colors.backBoton,
@@ -465,12 +496,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 12,
   },
+
   EquipmentDetailScreenChangeStatusLabel: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 15,
     fontWeight: '700',
   },
+
+
   EquipmentDetailScreenDeleteBtn: {
     alignItems: 'center',
     backgroundColor: colors.dangerSoftStrong,
@@ -487,6 +521,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '700',
   },
+
+
   EquipmentDetailScreenToastCasco: {
     alignSelf: 'center',
     backgroundColor: colors.toastBg,
@@ -497,6 +533,8 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     position: 'absolute',
   },
+
+
 
   EquipmentDetailScreenToastFiligrana: {
     color: colors.cream,

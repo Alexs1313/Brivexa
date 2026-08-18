@@ -583,10 +583,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     flex: 1,
   },
+
+
   FieldDetailScreenPressedDim: {
     opacity: 0.88,
   },
-
   FieldDetailScreenToastCasco: {
     alignSelf: 'center',
     backgroundColor: colors.toastBg,
@@ -598,12 +599,16 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 
+
   FieldDetailScreenToastFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 13,
     fontWeight: '700',
   },
+
+
+
   FieldDetailScreenMissingCasco: {
     alignItems: 'center',
     backgroundColor: colors.background,
@@ -612,11 +617,13 @@ const styles = StyleSheet.create({
     gap: 12,
   },
 
+
   FieldDetailScreenMissingFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 18,
   },
+
 
   FieldDetailScreenHeaderRowDintel: {
     alignItems: 'center',
@@ -631,6 +638,7 @@ const styles = StyleSheet.create({
   FieldDetailScreenNavSide: {
     minWidth: 72,
   },
+
   FieldDetailScreenNavSideRight: {
     alignItems: 'flex-end',
     minWidth: 72,
@@ -640,13 +648,14 @@ const styles = StyleSheet.create({
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
-
   FieldDetailScreenNavLinkBoldFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 14,
     fontWeight: '700',
   },
+
+
 
   FieldDetailScreenNavTitleFiligrana: {
     color: colors.cream,
@@ -657,6 +666,7 @@ const styles = StyleSheet.create({
   FieldDetailScreenScrollContent: {
     flexGrow: 1,
   },
+
   FieldDetailScreenCover: {
     alignItems: 'flex-start',
     height: 70,
@@ -665,9 +675,12 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingHorizontal: 12,
   },
+
   FieldDetailScreenCoverImage: {
     borderRadius: 14,
   },
+
+
 
   FieldDetailScreenCoverChipRow: {
     alignItems: 'center',
@@ -694,6 +707,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
   },
+
+
+
   FieldDetailScreenCropLine: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
@@ -701,6 +717,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     marginTop: 4,
   },
+
 
   FieldDetailScreenSegCasco: {
     backgroundColor: colors.card,
@@ -712,6 +729,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
     padding: 4,
   },
+
   FieldDetailScreenSegItem: {
     alignItems: 'center',
     borderRadius: 9,
@@ -721,6 +739,8 @@ const styles = StyleSheet.create({
     minWidth: 0,
     paddingHorizontal: 2,
   },
+
+
   FieldDetailScreenSegItemOn: {
     backgroundColor: colors.gold,
   },
@@ -732,9 +752,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
+
+
   FieldDetailScreenSegLabelOn: {
     color: colors.buttonText,
   },
+
+
 
   FieldDetailScreenKvCard: {
     backgroundColor: colors.card,
@@ -751,16 +775,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 11,
   },
+
   FieldDetailScreenKvRowDivider: {
     borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
   },
+
+
 
   FieldDetailScreenKvLabel: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
   },
+
+
 
   FieldDetailScreenKvValue: {
     color: colors.cream,
@@ -769,11 +798,13 @@ const styles = StyleSheet.create({
     marginLeft: 12,
     textAlign: 'right',
   },
+
   FieldDetailScreenRevenueValue: {
     color: colors.success,
     fontFamily: fonts.sansBold,
     fontWeight: '700',
   },
+
   FieldDetailScreenSectionTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -781,7 +812,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginBottom: 10,
   },
-
   FieldDetailScreenTimelineRow: {
     alignItems: 'flex-start',
     flexDirection: 'row',
@@ -789,11 +819,15 @@ const styles = StyleSheet.create({
     marginBottom: 18,
   },
 
+
+
   FieldDetailScreenTimelineCol: {
     alignItems: 'center',
     flex: 1,
     minWidth: 0,
   },
+
+
 
   FieldDetailScreenTimelineTrack: {
     backgroundColor: '#160c3c',
@@ -802,18 +836,25 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     width: '100%',
   },
+
   FieldDetailScreenTimelineFill: {
     borderRadius: 4,
     height: 6,
   },
+
+
+
   FieldDetailScreenTimelineFillOn: {
     backgroundColor: colors.success,
     width: '100%',
   },
+
   FieldDetailScreenTimelineFillOff: {
     backgroundColor: colors.border,
     width: 0,
   },
+
+
 
   FieldDetailScreenTimelineLabel: {
     fontFamily: fonts.sansRegular,
@@ -827,9 +868,11 @@ const styles = StyleSheet.create({
   FieldDetailScreenTimelineLabelOn: {
     color: colors.bodySuave,
   },
+
   FieldDetailScreenTimelineLabelOff: {
     color: colors.tabInactivo,
   },
+
   FieldDetailScreenGhostBtn: {
     alignItems: 'center',
     backgroundColor: colors.backBoton,
@@ -841,13 +884,14 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
 
+
+
   FieldDetailScreenGhostBtnLabel: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 15,
     fontWeight: '700',
   },
-
   FieldDetailScreenDangerBtn: {
     alignItems: 'center',
     backgroundColor: 'rgba(236, 91, 91, 0.1)',
@@ -857,6 +901,8 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
   },
+
+
   FieldDetailScreenDangerOutlineBtn: {
     alignItems: 'center',
     backgroundColor: 'rgba(236, 91, 91, 0.1)',
@@ -866,12 +912,15 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
   },
+
   FieldDetailScreenDangerBtnLabel: {
     color: colors.danger,
     fontFamily: fonts.sansBold,
     fontSize: 15,
     fontWeight: '700',
   },
+
+
 
   FieldDetailScreenActivityCard: {
     backgroundColor: colors.card,
@@ -893,6 +942,8 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
 
+
+
   FieldDetailScreenActivityHeader: {
     alignItems: 'center',
     flexDirection: 'row',
@@ -913,12 +964,15 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
+
   FieldDetailScreenActivityMeta: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
     marginTop: 6,
   },
+
+
 
   FieldDetailScreenExpenseSummary: {
     backgroundColor: colors.card,
@@ -931,6 +985,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 15,
   },
+
   FieldDetailScreenExpenseSummaryLabel: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
@@ -944,10 +999,12 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginTop: 2,
   },
-
   FieldDetailScreenExpenseSummaryRight: {
     alignItems: 'flex-end',
   },
+
+
+
   FieldDetailScreenExpenseSummaryPerHa: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -955,6 +1012,8 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginTop: 2,
   },
+
+
   FieldDetailScreenExpenseCard: {
     alignItems: 'center',
     backgroundColor: colors.card,
@@ -967,10 +1026,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 12,
   },
+
+
+
   FieldDetailScreenExpenseCopy: {
     flex: 1,
     marginRight: 12,
   },
+
+
 
   FieldDetailScreenExpenseTitle: {
     color: colors.cream,
@@ -985,6 +1049,8 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginTop: 2,
   },
+
+
   FieldDetailScreenExpenseAmount: {
     color: colors.expenseDinero,
     fontFamily: fonts.sansBold,
@@ -1003,9 +1069,11 @@ const styles = StyleSheet.create({
     paddingVertical: 28,
   },
 
+
   FieldDetailScreenHarvestEmptyIcon: {
     fontSize: 36,
   },
+
   FieldDetailScreenHarvestEmptyTitle: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -1013,6 +1081,9 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginTop: 10,
   },
+
+
+
   FieldDetailScreenHarvestEmptyHint: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
@@ -1022,9 +1093,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
+
   FieldDetailScreenHarvestEmptyBtn: {
     minWidth: 180,
   },
+
 
   FieldDetailScreenNotesCard: {
     backgroundColor: colors.card,
@@ -1034,7 +1107,6 @@ const styles = StyleSheet.create({
     marginBottom: 14,
     padding: 14,
   },
-
   FieldDetailScreenNotesTitle: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -1042,6 +1114,8 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginBottom: 6,
   },
+
+
   FieldDetailScreenNotesBody: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
@@ -1053,6 +1127,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 10,
   },
+
+
 
   FieldDetailScreenHarvestActionHalf: {
     flex: 1,

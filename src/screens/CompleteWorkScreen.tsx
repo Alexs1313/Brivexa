@@ -192,11 +192,16 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   CompleteWorkScreenScrollContent: { flexGrow: 1 },
+
+
+
   CompleteWorkScreenHeaderRowDintel: {
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: 16,
   },
+
+
 
   CompleteWorkScreenNavSide: { minWidth: 80 },
   CompleteWorkScreenNavLinkFiligrana: {
@@ -215,6 +220,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
+
+
   CompleteWorkScreenIntroFiligrana: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
@@ -222,18 +229,27 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     marginBottom: 18,
   },
+
+
+
   CompleteWorkScreenIntroBoldFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontWeight: '700',
   },
+
+
   CompleteWorkScreenFieldBlock: { marginBottom: 14 },
+
+
   CompleteWorkScreenFieldLabelFiligrana: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginBottom: 8,
   },
+
+
 
   CompleteWorkScreenFieldInput: {
     backgroundColor: colors.card,
@@ -247,11 +263,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
   },
 
+
+
   CompleteWorkScreenFieldInputMultiline: {
     height: 88,
     paddingTop: 12,
     textAlignVertical: 'top',
   },
+
   CompleteWorkScreenImpactCard: {
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -261,13 +280,15 @@ const styles = StyleSheet.create({
     marginTop: 4,
     padding: 14,
   },
+
+
+
   CompleteWorkScreenImpactText: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
     lineHeight: 18,
   },
-
   CompleteWorkScreenSavePlinto: {
     alignItems: 'center',
     backgroundColor: colors.successBoton,

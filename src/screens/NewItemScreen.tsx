@@ -196,6 +196,7 @@ const styles = StyleSheet.create({
   NewItemScreenScrollContent: {
     flexGrow: 1,
   },
+
   NewItemScreenHeaderRowDintel: {
     alignItems: 'center',
     borderBottomColor: colors.borderSuave,
@@ -207,15 +208,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 
+
+
   NewItemScreenNavSide: {
     minWidth: 72,
   },
+
 
   NewItemScreenNavLinkFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
+
+
   NewItemScreenTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -223,9 +229,13 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
+
+
   NewItemScreenFieldGroup: {
     marginBottom: 14,
   },
+
+
 
   NewItemScreenFieldLabelFiligrana: {
     color: colors.bodyApagado,
@@ -233,10 +243,10 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginBottom: 8,
   },
+
   NewItemScreenRequiredEmblema: {
     color: colors.danger,
   },
-
   NewItemScreenFieldInputCasco: {
     alignItems: 'center',
     backgroundColor: colors.card,
@@ -255,9 +265,11 @@ const styles = StyleSheet.create({
     padding: 0,
   },
 
+
   NewItemScreenSavePlinto: {
     marginTop: 10,
   },
+
 
   NewItemScreenSavePlintoDisabled: {
     opacity: 0.55,

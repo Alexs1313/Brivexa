@@ -110,7 +110,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 24,
   },
-
   AmountModalSheetCasco: {
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -120,18 +119,23 @@ const styles = StyleSheet.create({
     paddingVertical: 18,
     width: '100%',
   },
+
   AmountModalTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 17,
     fontWeight: '700',
   },
+
+
   AmountModalSubtitleFiligrana: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginTop: 6,
   },
+
+
   AmountModalFieldInputCasco: {
     alignItems: 'center',
     backgroundColor: colors.surface,
@@ -150,20 +154,26 @@ const styles = StyleSheet.create({
     fontSize: 16,
     padding: 0,
   },
+
+
+
   AmountModalUnit: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 14,
     marginLeft: 8,
   },
+
+
+
   AmountModalConfirmPlinto: {
     marginTop: 14,
   },
 
+
   AmountModalPlintoDisabled: {
     opacity: 0.45,
   },
-
   AmountModalCancelPlinto: {
     alignItems: 'center',
     height: 44,

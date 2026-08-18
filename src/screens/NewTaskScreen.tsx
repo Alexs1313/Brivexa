@@ -238,8 +238,8 @@ function FormField({
 
 const styles = StyleSheet.create({
   NewTaskScreenRaizCasco: { backgroundColor: colors.background, flex: 1 },
-  NewTaskScreenScrollContent: { flexGrow: 1 },
 
+  NewTaskScreenScrollContent: { flexGrow: 1 },
   NewTaskScreenHeaderRowDintel: {
     alignItems: 'center',
     flexDirection: 'row',
@@ -247,12 +247,16 @@ const styles = StyleSheet.create({
   },
   NewTaskScreenNavSide: { minWidth: 80 },
 
+
+
   NewTaskScreenNavLinkFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
+
+
 
   NewTaskScreenTitleFiligrana: {
     color: colors.cream,
@@ -263,7 +267,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
+
   NewTaskScreenFieldBlock: { marginBottom: 14 },
+
 
   NewTaskScreenFieldLabelFiligrana: {
     color: colors.bodyApagado,
@@ -271,7 +277,9 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginBottom: 8,
   },
+
   NewTaskScreenRequiredEmblema: { color: colors.danger },
+
 
   NewTaskScreenFieldInputCasco: {
     alignItems: 'center',
@@ -284,6 +292,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
   },
 
+
   NewTaskScreenFieldInput: {
     color: colors.cream,
     flex: 1,
@@ -291,6 +300,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     padding: 0,
   },
+
   NewTaskScreenSavePlinto: { marginTop: 8 },
   NewTaskScreenSavePlintoDisabled: { opacity: 0.45 },
 });

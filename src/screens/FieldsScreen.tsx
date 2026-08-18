@@ -250,9 +250,13 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     flex: 1,
   },
+
+
+
   FieldsScreenScroll: {
     flexGrow: 1,
   },
+
 
   FieldsScreenHeader: {
     alignItems: 'center',
@@ -260,12 +264,17 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 14,
   },
+
+
   FieldsScreenTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 24,
     fontWeight: '700',
   },
+
+
+
   FieldsScreenAddOrbe: {
     alignItems: 'center',
     borderRadius: 12,
@@ -282,6 +291,8 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
 
+
+
   FieldsScreenSearchCasco: {
     backgroundColor: colors.card,
     borderColor: colors.emptyBorde,
@@ -292,12 +303,18 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     paddingHorizontal: 14,
   },
+
+
+
   FieldsScreenSearchInput: {
     color: colors.cream,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
     padding: 0,
   },
+
+
+
   FieldsScreenFilterRow: {
     alignItems: 'center',
     flexDirection: 'row',
@@ -305,6 +322,9 @@ const styles = StyleSheet.create({
     gap: 8,
     marginBottom: 14,
   },
+
+
+
   FieldsScreenFilterChip: {
     alignSelf: 'flex-start',
     borderRadius: 20,
@@ -313,12 +333,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 9,
   },
 
+
   FieldsScreenFilterChipActive: {
     backgroundColor: 'rgba(245, 182, 66, 0.16)',
   },
+
+
+
   FieldsScreenFilterChipIdle: {
     backgroundColor: 'rgba(139, 148, 173, 0.16)',
   },
+
 
   FieldsScreenFilterChipLabel: {
     color: colors.bodyApagado,
@@ -326,9 +351,13 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: '700',
   },
+
+
   FieldsScreenFilterChipLabelActive: {
     color: colors.gold,
   },
+
+
 
   FieldsScreenDemoBannerCasco: {
     backgroundColor: colors.infoBanda,
@@ -341,7 +370,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 12,
   },
-
   FieldsScreenDemoBannerEmblema: {
     fontSize: 16,
     marginTop: 2,
@@ -353,6 +381,9 @@ const styles = StyleSheet.create({
     fontSize: 13,
     lineHeight: 18,
   },
+
+
+
   FieldsScreenListStack: {
     gap: 12,
   },
@@ -364,9 +395,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     overflow: 'hidden',
   },
+
   FieldsScreenPressedDim: {
     opacity: 0.9,
   },
+
+
   FieldsScreenFieldCardCover: {
     alignItems: 'flex-start',
     height: 70,
@@ -374,15 +408,18 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingHorizontal: 12,
   },
-
   FieldsScreenFieldCardCoverHarvested: {
     opacity: 0.85,
   },
+
+
 
   FieldsScreenFieldCardCoverImage: {
     borderTopLeftRadius: 14,
     borderTopRightRadius: 14,
   },
+
+
   FieldsScreenFieldCardChipRow: {
     alignItems: 'center',
     alignSelf: 'flex-start',
@@ -390,27 +427,34 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     gap: 8,
   },
-
   FieldsScreenStatusPill: {
     alignSelf: 'flex-start',
     borderRadius: 20,
     paddingHorizontal: 9,
     paddingVertical: 3,
   },
+
   FieldsScreenStatusPillSuccess: {
     backgroundColor: colors.successSuave,
   },
   FieldsScreenStatusPillGold: {
     backgroundColor: 'rgba(245, 182, 66, 0.16)',
   },
+
+
+
   FieldsScreenStatusPillMuted: {
     backgroundColor: colors.plannedSuave,
   },
+
   FieldsScreenStatusPillLabel: {
     fontFamily: fonts.sansBold,
     fontSize: 10,
     fontWeight: '700',
   },
+
+
+
   FieldsScreenWarningPill: {
     alignSelf: 'flex-start',
     backgroundColor: 'rgba(236, 91, 91, 0.16)',
@@ -430,11 +474,14 @@ const styles = StyleSheet.create({
     paddingTop: 12,
   },
 
+
+
   FieldsScreenFieldCardTitleRow: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+
   FieldsScreenFieldCardNameFiligrana: {
     color: colors.cream,
     flexShrink: 1,
@@ -450,13 +497,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
   },
+
+
+
   FieldsScreenFieldCardCrop: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginTop: 4,
   },
-
   FieldsScreenFieldCardFooter: {
     borderTopColor: colors.borderSuave,
     borderTopWidth: 1,
@@ -464,6 +513,8 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
     paddingTop: 8,
   },
+
+
 
   FieldsScreenFieldCardNext: {
     color: colors.bodyApagado,

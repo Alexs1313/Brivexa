@@ -235,12 +235,19 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
+
+
   TodayScreenScroll: {
     flexGrow: 1,
   },
+
+
+
   TodayScreenContent: {
     gap: 0,
   },
+
+
   TodayScreenHeader: {
     alignItems: 'flex-start',
     flexDirection: 'row',
@@ -248,14 +255,21 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
 
+
+
   TodayScreenBrandRow: {
     alignItems: 'center',
     flexDirection: 'row',
     gap: 4,
   },
+
+
+
   TodayScreenCowEmblema: {
     fontSize: 14,
   },
+
+
 
   TodayScreenBrandFiligrana: {
     color: colors.gold,
@@ -278,6 +292,8 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginTop: 4,
   },
+
+
   TodayScreenAddOrbe: {
     alignItems: 'center',
     borderRadius: 12,
@@ -293,7 +309,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     lineHeight: 24,
   },
-
   TodayScreenDemoBannerCasco: {
     backgroundColor: colors.infoBanda,
     borderColor: colors.infoBannerBorde,
@@ -310,6 +325,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 2,
   },
+
   TodayScreenDemoBannerFiligrana: {
     color: colors.infoBannerText,
     flex: 1,
@@ -328,11 +344,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 15,
   },
-
   TodayScreenPressedDim: {
     opacity: 0.88,
   },
-
   TodayScreenWeatherCardMain: {
     flex: 1,
     marginRight: 12,
@@ -342,6 +356,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 6,
   },
+
+
   TodayScreenWeatherCardIcon: {
     fontSize: 34,
   },
@@ -359,17 +375,21 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
 
+
+
   TodayScreenWeatherCardStats: {
     alignItems: 'flex-end',
     gap: 4,
   },
+
+
+
   TodayScreenWeatherCardStat: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
     textAlign: 'right',
   },
-
   TodayScreenProgressCardCasco: {
     alignItems: 'center',
     backgroundColor: colors.card,
@@ -382,10 +402,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 15,
   },
-
   TodayScreenProgressCopyBolsillo: {
     flex: 1,
   },
+
   TodayScreenProgressTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -397,14 +417,17 @@ const styles = StyleSheet.create({
   TodayScreenProgressTitleDone: {
     color: colors.success,
   },
-
   TodayScreenProgressStatsRow: {
     flexDirection: 'row',
     gap: 20,
   },
+
   TodayScreenProgressOverdueCol: {
     minWidth: 48,
   },
+
+
+
   TodayScreenProgressStatValue: {
     color: colors.bodySuave,
     fontFamily: fonts.sansBold,
@@ -412,12 +435,15 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
+
   TodayScreenProgressOverdueValue: {
     color: colors.danger,
     fontFamily: fonts.sansBold,
     fontSize: 17,
     fontWeight: '700',
   },
+
+
 
   TodayScreenProgressStatLabel: {
     color: colors.bodyApagado,
@@ -438,9 +464,12 @@ const styles = StyleSheet.create({
     paddingTop: 18,
   },
 
+
+
   TodayScreenEmptyEmblema: {
     fontSize: 38,
   },
+
 
   TodayScreenEmptyTitleFiligrana: {
     color: colors.cream,
@@ -449,6 +478,8 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginTop: 10,
   },
+
+
   TodayScreenEmptyHintFiligrana: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
@@ -458,9 +489,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
+
+
   TodayScreenEmptyPlinto: {
     minWidth: 122,
   },
+
+
 
   TodayScreenSectionSpacer: {
     height: 22,

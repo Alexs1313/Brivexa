@@ -129,7 +129,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
     paddingTop: 10,
   },
-
   TabBarBolsillo: {
     alignItems: 'center',
     flex: 1,
@@ -142,6 +141,7 @@ const styles = StyleSheet.create({
     gap: 4,
     marginTop: -20,
   },
+
 
   TabBarMarcaEmblema: {
     height: 24,
@@ -163,6 +163,9 @@ const styles = StyleSheet.create({
   TabBarWorkOrbeImage: {
     borderRadius: 17,
   },
+
+
+
   TabBarWorkMarcaEmblema: {
     height: 26,
     width: 26,
@@ -173,6 +176,8 @@ const styles = StyleSheet.create({
     fontFamily: fonts.sansRegular,
     fontSize: 10,
   },
+
+
 
   TabBarLabelActiveFiligrana: {
     color: colors.gold,

@@ -277,18 +277,22 @@ const styles = StyleSheet.create({
   ActiveWorkScreenRaizCasco: { backgroundColor: colors.background, flex: 1 },
   ActiveWorkScreenScrollContent: { flexGrow: 1 },
 
+
   ActiveWorkScreenMissingCasco: {
     alignItems: 'center',
     backgroundColor: colors.background,
     flex: 1,
     justifyContent: 'center',
   },
+
+
   ActiveWorkScreenMissingFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     marginBottom: 12,
   },
+
 
   ActiveWorkScreenHeaderRowDintel: {
     alignItems: 'center',
@@ -297,13 +301,14 @@ const styles = StyleSheet.create({
   },
 
   ActiveWorkScreenNavSide: { minWidth: 72 },
-
   ActiveWorkScreenNavLinkFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
+
+
 
   ActiveWorkScreenTitleFiligrana: {
     color: colors.cream,
@@ -314,12 +319,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
+
   ActiveWorkScreenFieldLabelFiligrana: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
   },
-
   ActiveWorkScreenTaskTitle: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -328,6 +333,8 @@ const styles = StyleSheet.create({
     marginBottom: 18,
     marginTop: 4,
   },
+
+
 
   ActiveWorkScreenTimerCard: {
     alignItems: 'center',
@@ -339,6 +346,7 @@ const styles = StyleSheet.create({
     paddingVertical: 28,
   },
 
+
   ActiveWorkScreenTimerStatus: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
@@ -346,6 +354,9 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     letterSpacing: 1,
   },
+
+
+
   ActiveWorkScreenTimerValue: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -354,13 +365,13 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
 
+
   ActiveWorkScreenTimerHint: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginTop: 6,
   },
-
   ActiveWorkScreenDetailsCard: {
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -370,16 +381,20 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     paddingHorizontal: 16,
   },
+
+
   ActiveWorkScreenKvRow: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingVertical: 14,
   },
+
   ActiveWorkScreenKvRowBorder: {
     borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
   },
+
   ActiveWorkScreenKvLabel: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
@@ -392,12 +407,12 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '700',
   },
-
   ActiveWorkScreenActionRow: {
     flexDirection: 'row',
     gap: 10,
     marginBottom: 18,
   },
+
   ActiveWorkScreenGhostBtn: {
     alignItems: 'center',
     backgroundColor: colors.card,
@@ -408,17 +423,19 @@ const styles = StyleSheet.create({
     height: layout.buttonHeightCompact,
     justifyContent: 'center',
   },
-
   ActiveWorkScreenGhostBtnLabel: {
     color: colors.infoBannerText,
     fontFamily: fonts.sansBold,
     fontSize: 14,
     fontWeight: '700',
   },
+
   ActiveWorkScreenPhotoStrip: {
     gap: 10,
     marginBottom: 18,
   },
+
+
   ActiveWorkScreenPhotoThumb: {
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -427,8 +444,8 @@ const styles = StyleSheet.create({
     height: 72,
     width: 72,
   },
-
   ActiveWorkScreenFooterRow: { flexDirection: 'row', gap: 10 },
+
   ActiveWorkScreenPauseBtn: {
     alignItems: 'center',
     backgroundColor: 'rgba(245, 182, 66, 0.12)',
@@ -439,13 +456,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 22,
   },
-
   ActiveWorkScreenPauseBtnLabel: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 15,
     fontWeight: '700',
   },
+
+
   ActiveWorkScreenCompleteBtn: {
     alignItems: 'center',
     backgroundColor: colors.successBoton,
@@ -455,6 +473,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
+
+
   ActiveWorkScreenCompleteBtnLabel: {
     color: colors.successButtonText,
     fontFamily: fonts.sansBold,
@@ -462,7 +482,9 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
+
   ActiveWorkScreenPressedDim: { opacity: 0.85 },
+
   ActiveWorkScreenToastCasco: {
     alignSelf: 'center',
     backgroundColor: colors.toastBg,
@@ -473,7 +495,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     position: 'absolute',
   },
-
   ActiveWorkScreenToastFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,

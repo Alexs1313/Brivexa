@@ -513,12 +513,14 @@ const styles = StyleSheet.create({
   WorkScreenRaizCasco: { backgroundColor: colors.background, flex: 1 },
   WorkScreenScrollContent: { flexGrow: 1 },
 
+
   WorkScreenHeaderRowDintel: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 14,
   },
+
 
   WorkScreenTitleFiligrana: {
     color: colors.cream,
@@ -527,6 +529,8 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
+
+
   WorkScreenAddOrbe: {
     alignItems: 'center',
     borderRadius: 12,
@@ -534,7 +538,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 40,
   },
-
   WorkScreenAddMarca: {
     color: colors.buttonText,
     fontFamily: fonts.sansBold,
@@ -551,19 +554,25 @@ const styles = StyleSheet.create({
     marginBottom: 14,
     padding: 4,
   },
+
   WorkScreenSegItem: {
     borderRadius: 9,
     flex: 1,
     height: 36,
     overflow: 'hidden',
   },
+
+
   WorkScreenSegItemOn: {},
+
   WorkScreenSegGradient: {
     alignItems: 'center',
     borderRadius: 9,
     flex: 1,
     justifyContent: 'center',
   },
+
+
 
   WorkScreenSegLabel: {
     color: colors.bodyApagado,
@@ -573,6 +582,7 @@ const styles = StyleSheet.create({
     lineHeight: 36,
     textAlign: 'center',
   },
+
 
   WorkScreenSegLabelOn: {
     color: colors.buttonText,
@@ -591,11 +601,15 @@ const styles = StyleSheet.create({
     height: 62,
     justifyContent: 'center',
   },
+
+
+
   WorkScreenStatValue: {
     fontFamily: fonts.sansBold,
     fontSize: 21,
     fontWeight: '700',
   },
+
 
   WorkScreenStatLabel: {
     color: colors.bodyApagado,
@@ -603,6 +617,8 @@ const styles = StyleSheet.create({
     fontSize: 10,
     marginTop: 2,
   },
+
+
 
   WorkScreenFilterRow: {
     alignItems: 'center',
@@ -620,15 +636,24 @@ const styles = StyleSheet.create({
     paddingHorizontal: 9,
   },
 
+
   WorkScreenFilterChipActive: { backgroundColor: 'rgba(245, 182, 66, 0.16)' },
+
+
+
   WorkScreenFilterChipIdle: { backgroundColor: 'rgba(139, 148, 173, 0.16)' },
+
   WorkScreenFilterChipLabel: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansBold,
     fontSize: 10,
     fontWeight: '700',
   },
+
+
   WorkScreenFilterChipLabelActive: { color: colors.gold },
+
+
   WorkScreenTaskCard: {
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -639,9 +664,14 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
 
+
+
   WorkScreenPressedDim: { opacity: 0.9 },
 
   WorkScreenTaskAccent: { backgroundColor: colors.border, width: 3 },
+
+
+
   WorkScreenTaskBody: { flex: 1, paddingHorizontal: 15, paddingVertical: 15 },
   WorkScreenTaskHeader: {
     alignItems: 'flex-start',
@@ -649,7 +679,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
 
+
   WorkScreenTaskTitleCol: { flex: 1, marginRight: 8 },
+
+
 
   WorkScreenTaskTitle: {
     color: colors.cream,
@@ -657,19 +690,22 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '700',
   },
+
   WorkScreenTaskType: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 11,
     marginTop: 2,
   },
+
+
+
   WorkScreenTaskMeta: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginTop: 8,
   },
-
   WorkScreenPillRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -683,11 +719,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 4,
   },
+
   WorkScreenMetaPillText: {
     color: colors.body,
     fontFamily: fonts.sansRegular,
     fontSize: 11,
   },
+
+
 
   WorkScreenStatusChip: {
     alignSelf: 'flex-start',
@@ -695,11 +734,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 9,
     paddingVertical: 3,
   },
+
+
   WorkScreenStatusChipLabel: {
     fontFamily: fonts.sansBold,
     fontSize: 10,
     fontWeight: '700',
   },
+
+
 
   WorkScreenEmptyCard: {
     alignItems: 'center',
@@ -712,6 +755,7 @@ const styles = StyleSheet.create({
     paddingVertical: 28,
   },
 
+
   WorkScreenEmptyEmblema: { fontSize: 34 },
   WorkScreenEmptyTitle: {
     color: colors.cream,
@@ -720,6 +764,8 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginTop: 10,
   },
+
+
 
   WorkScreenEmptyHintFiligrana: {
     color: colors.bodyApagado,
@@ -731,6 +777,7 @@ const styles = StyleSheet.create({
   },
 
   WorkScreenEmptyBtn: { minWidth: 140 },
+
   WorkScreenCalendarCard: {
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -739,6 +786,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     padding: 14,
   },
+
 
   WorkScreenCalendarHeader: {
     alignItems: 'center',
@@ -758,6 +806,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '700',
   },
+
+
   WorkScreenWeekRow: { flexDirection: 'row', marginBottom: 6 },
   WorkScreenWeekday: {
     color: colors.bodyApagado,
@@ -767,12 +817,17 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
+
+
   WorkScreenDaysGrid: { flexDirection: 'row', flexWrap: 'wrap' },
+
+
   WorkScreenDayCell: {
     alignItems: 'center',
     height: 44,
     width: '14.2857%',
   },
+
 
   WorkScreenDayBubble: {
     alignItems: 'center',
@@ -781,15 +836,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 30,
   },
+
   WorkScreenDayBubbleOn: { backgroundColor: colors.gold },
+
   WorkScreenDayNum: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 13,
     fontWeight: '700',
   },
-
   WorkScreenDayNumOn: { color: colors.buttonText },
+
+
+
   WorkScreenDayDot: {
     borderRadius: 3,
     height: 5,
@@ -797,13 +856,17 @@ const styles = StyleSheet.create({
     width: 5,
   },
 
+
+
   WorkScreenDayDotSpacer: { height: 7 },
+
   WorkScreenDayHeader: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 10,
   },
+
   WorkScreenDayTitle: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -828,7 +891,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     padding: 14,
   },
-
   WorkScreenAgendaTime: {
     color: colors.gold,
     fontFamily: fonts.sansBold,

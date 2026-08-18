@@ -161,13 +161,14 @@ const styles = StyleSheet.create({
   CalculatorsScreenScrollContent: {
     flexGrow: 1,
   },
-
   CalculatorsScreenTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 24,
     fontWeight: '700',
   },
+
+
 
   CalculatorsScreenSubtitleFiligrana: {
     color: colors.bodyApagado,
@@ -177,10 +178,14 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
 
+
   CalculatorsScreenCardStack: {
     gap: 12,
     marginBottom: 22,
   },
+
+
+
   CalculatorsScreenCard: {
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -188,11 +193,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 15,
   },
+
+
+
   CalculatorsScreenCardTop: {
     flexDirection: 'row',
     gap: 14,
     marginBottom: 14,
   },
+
   CalculatorsScreenIconBox: {
     alignItems: 'center',
     borderRadius: 14,
@@ -205,10 +214,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.successSuave,
   },
 
+
   CalculatorsScreenIconInfo: {
     backgroundColor: colors.infoIconSuave,
   },
-
   CalculatorsScreenIconPurple: {
     backgroundColor: 'rgba(124, 92, 255, 0.15)',
   },
@@ -219,12 +228,16 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
+
   CalculatorsScreenCardTitle: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
+
+
+
   CalculatorsScreenCardBody: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
@@ -232,6 +245,9 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     marginTop: 4,
   },
+
+
+
   CalculatorsScreenOpenBtn: {
     alignItems: 'center',
     backgroundColor: colors.backBoton,
@@ -241,10 +257,11 @@ const styles = StyleSheet.create({
     height: 42,
     justifyContent: 'center',
   },
-
   CalculatorsScreenPressedDim: {
     opacity: 0.88,
   },
+
+
   CalculatorsScreenOpenLabel: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
@@ -276,9 +293,12 @@ const styles = StyleSheet.create({
     fontSize: 13,
     textAlign: 'center',
   },
+
+
   CalculatorsScreenRecentStack: {
     gap: 10,
   },
+
   CalculatorsScreenRecentCard: {
     alignItems: 'center',
     backgroundColor: colors.card,
@@ -290,7 +310,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 12,
   },
-
   CalculatorsScreenRecentIconBox: {
     alignItems: 'center',
     borderRadius: 12,
@@ -298,13 +317,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 40,
   },
-
   CalculatorsScreenRecentIconMarca: {
     fontSize: 18,
   },
+
+
+
   CalculatorsScreenRecentCopy: {
     flex: 1,
   },
+
+
+
   CalculatorsScreenRecentCardTitle: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -312,13 +336,13 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
+
   CalculatorsScreenRecentSummary: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginTop: 3,
   },
-
   CalculatorsScreenRecentTime: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,

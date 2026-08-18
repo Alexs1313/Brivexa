@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     width: 7,
   },
 
+
   PaginationDotsDotActive: {
     backgroundColor: colors.gold,
     borderRadius: 4,

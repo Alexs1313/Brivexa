@@ -378,10 +378,12 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     flex: 1,
   },
+
+
+
   CalculatorPartsScrollContent: {
     flexGrow: 1,
   },
-
   CalculatorPartsHeaderRowDintel: {
     alignItems: 'center',
     borderBottomColor: colors.borderSuave,
@@ -396,6 +398,7 @@ const styles = StyleSheet.create({
   CalculatorPartsNavSide: {
     minWidth: 110,
   },
+
   CalculatorPartsNavLinkFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
@@ -408,12 +411,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
   },
+
+
   CalculatorPartsFieldGroup: {
     marginBottom: 14,
   },
+
+
   CalculatorPartsFieldFlex: {
     flex: 1,
   },
+
 
   CalculatorPartsFieldLabelFiligrana: {
     color: colors.bodyApagado,
@@ -421,6 +429,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginBottom: 8,
   },
+
 
   CalculatorPartsFieldInputCasco: {
     alignItems: 'center',
@@ -447,6 +456,8 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
 
+
+
   CalculatorPartsSelectValue: {
     color: colors.cream,
     flex: 1,
@@ -462,6 +473,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
 
+
   CalculatorPartsChevronOpen: {
     color: colors.gold,
     transform: [{ rotate: '180deg' }],
@@ -476,6 +488,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
 
+
   CalculatorPartsDropdownSheet: {
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -486,6 +499,7 @@ const styles = StyleSheet.create({
     paddingTop: 14,
   },
 
+
   CalculatorPartsDropdownTitle: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansBold,
@@ -495,6 +509,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     textTransform: 'uppercase',
   },
+
   CalculatorPartsDropdownOption: {
     alignItems: 'center',
     flexDirection: 'row',
@@ -506,6 +521,9 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
   },
+
+
+
   CalculatorPartsDropdownOptionActive: {
     backgroundColor: colors.goldSuave,
   },
@@ -515,22 +533,28 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
 
+
+
   CalculatorPartsDropdownOptionTitle: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 15,
     fontWeight: '700',
   },
+
+
   CalculatorPartsDropdownOptionTitleActive: {
     color: colors.gold,
   },
+
+
+
   CalculatorPartsDropdownOptionMeta: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
     marginTop: 3,
   },
-
   CalculatorPartsDropdownCheck: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
@@ -543,6 +567,7 @@ const styles = StyleSheet.create({
     marginBottom: 14,
     marginTop: 2,
   },
+
 
   CalculatorPartsResetBtn: {
     alignItems: 'center',
@@ -560,9 +585,14 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '700',
   },
+
+
+
   CalculatorPartsCalcBtnWrap: {
     flex: 1,
   },
+
+
 
   CalculatorPartsResultCard: {
     backgroundColor: colors.card,
@@ -572,7 +602,6 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     overflow: 'hidden',
   },
-
   CalculatorPartsResultHeader: {
     borderBottomColor: colors.border,
     borderBottomWidth: 1,
@@ -580,12 +609,14 @@ const styles = StyleSheet.create({
     paddingVertical: 13,
   },
 
+
   CalculatorPartsResultTitle: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 14,
     fontWeight: '700',
   },
+
   CalculatorPartsResultRow: {
     alignItems: 'center',
     flexDirection: 'row',
@@ -594,6 +625,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 10,
   },
+
 
   CalculatorPartsResultRowBorder: {
     borderBottomColor: colors.borderSuave,
@@ -607,12 +639,16 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
 
+
   CalculatorPartsResultValue: {
     color: colors.cream,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     textAlign: 'right',
   },
+
+
+
   CalculatorPartsSaveShareRow: {
     flexDirection: 'row',
     gap: 10,
@@ -629,6 +665,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
+
+
   CalculatorPartsSecondaryBtnPressed: {
     opacity: 0.85,
   },
@@ -640,6 +678,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
+
   CalculatorPartsToastCasco: {
     alignSelf: 'center',
     backgroundColor: colors.toastBg,
@@ -650,6 +689,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 10,
   },
+
 
   CalculatorPartsToastFiligrana: {
     color: colors.cream,

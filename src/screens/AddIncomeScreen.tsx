@@ -152,6 +152,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     flex: 1,
   },
+
   AddIncomeScreenScrollContent: {
     flexGrow: 1,
   },
@@ -167,21 +168,24 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 
+
   AddIncomeScreenNavSide: {
     minWidth: 72,
   },
+
+
   AddIncomeScreenNavLinkFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
-
   AddIncomeScreenTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
+
 
   AddIncomeScreenSavePlinto: {
     marginTop: 10,

@@ -171,7 +171,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-
   TaskDetailScreenMissingFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -179,12 +178,12 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
 
+
   TaskDetailScreenHeaderRowDintel: {
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: 16,
   },
-
   TaskDetailScreenNavSide: { minWidth: 72 },
   TaskDetailScreenNavLinkFiligrana: {
     color: colors.gold,
@@ -192,6 +191,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
   },
+
+
   TaskDetailScreenTitleFiligrana: {
     color: colors.cream,
     flex: 1,
@@ -207,13 +208,13 @@ const styles = StyleSheet.create({
     gap: 8,
     marginBottom: 12,
   },
-
   TaskDetailScreenPriorityPill: {
     backgroundColor: colors.plannedSuave,
     borderRadius: 20,
     paddingHorizontal: 9,
     paddingVertical: 3,
   },
+
   TaskDetailScreenPriorityLabel: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansBold,
@@ -221,13 +222,13 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
+
   TaskDetailScreenHeadlineFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 28,
     fontWeight: '700',
   },
-
   TaskDetailScreenSubtitleFiligrana: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
@@ -235,6 +236,7 @@ const styles = StyleSheet.create({
     marginBottom: 18,
     marginTop: 4,
   },
+
   TaskDetailScreenCard: {
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -244,12 +246,15 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     paddingHorizontal: 16,
   },
+
+
   TaskDetailScreenKvRow: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingVertical: 14,
   },
+
   TaskDetailScreenKvRowBorder: {
     borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
@@ -262,6 +267,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginRight: 12,
   },
+
 
   TaskDetailScreenKvValue: {
     color: colors.cream,
@@ -280,18 +286,23 @@ const styles = StyleSheet.create({
     padding: 16,
   },
 
+
+
   TaskDetailScreenNotesLabel: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginBottom: 8,
   },
+
+
   TaskDetailScreenNotesBody: {
     color: colors.cream,
     fontFamily: fonts.sansRegular,
     fontSize: 14,
     lineHeight: 20,
   },
+
 
   TaskDetailScreenSuccessBtn: {
     alignItems: 'center',
@@ -301,12 +312,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 10,
   },
+
   TaskDetailScreenSuccessBtnLabel: {
     color: colors.successButtonText,
     fontFamily: fonts.sansBold,
     fontSize: 15,
     fontWeight: '700',
   },
+
+
+
   TaskDetailScreenSecondaryBtn: {
     alignItems: 'center',
     backgroundColor: colors.card,
@@ -334,12 +349,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
+
+
   TaskDetailScreenDangerBtnLabel: {
     color: colors.danger,
     fontFamily: fonts.sansBold,
     fontSize: 15,
     fontWeight: '700',
   },
+
+
 
   TaskDetailScreenPressedDim: { opacity: 0.85 },
 });

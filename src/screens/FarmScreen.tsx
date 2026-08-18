@@ -586,10 +586,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     flex: 1,
   },
+
   FarmScreenScrollContent: {
     flexGrow: 1,
   },
-
   FarmScreenTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -597,31 +597,39 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginBottom: 14,
   },
-
   FarmScreenSectionRowDintel: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 8,
     marginBottom: 16,
   },
+
+
   FarmScreenSectionChip: {
     borderRadius: 20,
     height: 31,
     justifyContent: 'center',
     paddingHorizontal: 15,
   },
+
   FarmScreenSectionChipActive: {
     backgroundColor: colors.goldSuave,
   },
+
+
   FarmScreenSectionChipIdle: {
     backgroundColor: colors.plannedSuave,
   },
+
+
   FarmScreenSectionChipLabel: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansBold,
     fontSize: 13,
     fontWeight: '700',
   },
+
+
   FarmScreenSectionChipLabelActive: {
     color: colors.gold,
   },
@@ -637,10 +645,13 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
 
+
   FarmScreenDemoBannerEmblema: {
     fontSize: 16,
     marginTop: 2,
   },
+
+
   FarmScreenDemoBannerFiligrana: {
     color: colors.infoBannerText,
     flex: 1,
@@ -648,6 +659,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     lineHeight: 18,
   },
+
 
   FarmScreenStatRow: {
     flexDirection: 'row',
@@ -677,7 +689,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginTop: 4,
   },
-
   FarmScreenStatValueWarn: {
     color: colors.priorityHigh,
     fontFamily: fonts.sansBold,
@@ -685,12 +696,16 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginTop: 4,
   },
+
+
   FarmScreenSectionHeaderDintel: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 12,
   },
+
+
   FarmScreenSectionTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -698,16 +713,19 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
+
   FarmScreenSectionActionFiligrana: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 13,
     fontWeight: '700',
   },
+
+
+
   FarmScreenListStack: {
     gap: 12,
   },
-
   FarmScreenCard: {
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -717,18 +735,26 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     paddingBottom: 14,
   },
+
+
   FarmScreenPressedDim: {
     opacity: 0.9,
   },
+
+
+
   FarmScreenCardTopRow: {
     alignItems: 'flex-start',
     flexDirection: 'row',
     justifyContent: 'space-between',
     gap: 8,
   },
+
   FarmScreenFlexBolsillo: {
     flexShrink: 1,
   },
+
+
   FarmScreenCardTitle: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -741,6 +767,8 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginTop: 2,
   },
+
+
   FarmScreenQtyRow: {
     alignItems: 'flex-end',
     flexDirection: 'row',
@@ -748,12 +776,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 
+
   FarmScreenQtyPrimary: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 18,
     fontWeight: '700',
   },
+
   FarmScreenQtySecondary: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
@@ -773,6 +803,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
     overflow: 'hidden',
   },
+
+
   FarmScreenProgressTrackTall: {
     backgroundColor: colors.progressTrackDeep,
     borderRadius: 4,
@@ -780,6 +812,9 @@ const styles = StyleSheet.create({
     marginTop: 5,
     overflow: 'hidden',
   },
+
+
+
   FarmScreenProgressFill: {
     borderRadius: 4,
     height: '100%',
@@ -790,15 +825,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: 9,
     paddingVertical: 3,
   },
+
+
+
   FarmScreenPillSuccess: {
     backgroundColor: colors.successSuave,
   },
+
   FarmScreenPillWarn: {
     backgroundColor: colors.prioritySuave,
   },
   FarmScreenPillDanger: {
     backgroundColor: colors.dangerSuave,
   },
+
+
 
   FarmScreenPillInfo: {
     backgroundColor: colors.infoSuave,
@@ -826,6 +867,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
 
+
   FarmScreenEmptyTitle: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -833,6 +875,8 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     textAlign: 'center',
   },
+
+
 
   FarmScreenEmptyBody: {
     color: colors.bodyApagado,
@@ -845,11 +889,15 @@ const styles = StyleSheet.create({
     marginTop: 18,
     minWidth: 130,
   },
+
+
   FarmScreenEquipStatRow: {
     flexDirection: 'row',
     gap: 8,
     marginBottom: 16,
   },
+
+
   FarmScreenEquipStatCard: {
     alignItems: 'center',
     backgroundColor: colors.card,
@@ -873,6 +921,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
+
   FarmScreenEquipStatValueWarn: {
     color: colors.priorityHigh,
     fontFamily: fonts.sansBold,
@@ -880,12 +929,15 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
+
   FarmScreenEquipStatLabel: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 10,
     marginTop: 2,
   },
+
+
   FarmScreenEquipCard: {
     alignItems: 'flex-start',
     backgroundColor: colors.card,
@@ -898,6 +950,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
 
+
   FarmScreenEquipIcon: {
     alignItems: 'center',
     backgroundColor: colors.backBoton,
@@ -906,26 +959,27 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 44,
   },
+
   FarmScreenEquipIconMarca: {
     fontSize: 22,
   },
-
   FarmScreenEquipBody: {
     flex: 1,
   },
-
   FarmScreenServiceAlert: {
     color: colors.priorityHigh,
     fontFamily: fonts.sansRegular,
     fontSize: 11,
     marginTop: 4,
   },
+
   FarmScreenAssignedLine: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 11,
     marginTop: 4,
   },
+
 
   FarmScreenProfitCard: {
     backgroundColor: colors.card,
@@ -943,6 +997,8 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
 
+
+
   FarmScreenProfitValueCompact: {
     color: colors.success,
     fontFamily: fonts.sansBold,
@@ -950,6 +1006,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginTop: 4,
   },
+
   FarmScreenProfitMetaRow: {
     flexDirection: 'row',
     gap: 22,
@@ -960,6 +1017,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.sansRegular,
     fontSize: 11,
   },
+
 
   FarmScreenMetaValue: {
     color: colors.cream,
@@ -976,6 +1034,7 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
 
+
   FarmScreenExpenseCard: {
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -984,6 +1043,8 @@ const styles = StyleSheet.create({
     marginBottom: 18,
     padding: 15,
   },
+
+
   FarmScreenExpenseTitle: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -992,24 +1053,32 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
 
+
   FarmScreenExpenseRow: {
     marginBottom: 12,
   },
+
+
 
   FarmScreenExpenseLabelRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+
   FarmScreenExpenseLabel: {
     color: colors.bodySuave,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
   },
+
+
+
   FarmScreenExpenseAmount: {
     color: colors.body,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
   },
+
   FarmScreenTxCard: {
     alignItems: 'center',
     backgroundColor: colors.card,
@@ -1029,16 +1098,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 38,
   },
-
   FarmScreenTxIconIncome: {
     backgroundColor: colors.successSuave,
   },
   FarmScreenTxIconExpense: {
     backgroundColor: colors.dangerSuave,
   },
+
+
+
   FarmScreenTxIconMarca: {
     fontSize: 16,
   },
+
 
   FarmScreenTxTitle: {
     color: colors.cream,
@@ -1046,6 +1118,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '700',
   },
+
+
   FarmScreenTxAmount: {
     fontFamily: fonts.sansBold,
     fontSize: 16,
@@ -1053,9 +1127,11 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
 
+
   FarmScreenTxAmountIncome: {
     color: colors.success,
   },
+
 
   FarmScreenTxAmountExpense: {
     color: colors.expenseDinero,
@@ -1067,6 +1143,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 18,
   },
+
   FarmScreenReportTitle: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -1078,6 +1155,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
 
+
   FarmScreenReportCta: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
@@ -1085,6 +1163,9 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginTop: 16,
   },
+
+
+
   FarmScreenToastCasco: {
     alignItems: 'center',
     alignSelf: 'center',
@@ -1104,6 +1185,8 @@ const styles = StyleSheet.create({
     fontFamily: fonts.sansRegular,
     fontSize: 14,
   },
+
+
 
   FarmScreenToastFiligrana: {
     color: colors.cream,

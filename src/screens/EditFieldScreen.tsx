@@ -211,6 +211,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     flex: 1,
   },
+
   EditFieldScreenHeaderRowDintel: {
     alignItems: 'center',
     borderBottomColor: colors.borderSuave,
@@ -221,6 +222,8 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingHorizontal: 16,
   },
+
+
 
   EditFieldScreenNavSide: {
     minWidth: 72,
@@ -237,6 +240,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
   },
+
   EditFieldScreenScrollContent: {
     flexGrow: 1,
   },
@@ -244,12 +248,15 @@ const styles = StyleSheet.create({
     marginBottom: 14,
   },
 
+
   EditFieldScreenFieldLabelFiligrana: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginBottom: 8,
   },
+
+
 
   EditFieldScreenRequiredEmblema: {
     color: colors.danger,
@@ -265,6 +272,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
   },
 
+
   EditFieldScreenFieldInput: {
     color: colors.cream,
     flex: 1,
@@ -272,14 +280,16 @@ const styles = StyleSheet.create({
     fontSize: 15,
     padding: 0,
   },
+
   EditFieldScreenSavePlinto: {
     marginTop: 10,
   },
 
+
+
   EditFieldScreenSavePlintoDisabled: {
     opacity: 0.55,
   },
-
   EditFieldScreenCancelPlinto: {
     alignItems: 'center',
     borderColor: colors.border,
@@ -289,6 +299,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 12,
   },
+
+
 
   EditFieldScreenCancelFiligrana: {
     color: colors.bodyApagado,

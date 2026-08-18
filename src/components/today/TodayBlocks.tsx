@@ -188,12 +188,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 9,
     paddingVertical: 3,
   },
-
   TodayBlocksChipLabel: {
     fontFamily: fonts.sansBold,
     fontSize: 10,
     fontWeight: '700',
   },
+
 
   TodayBlocksTaskCardCasco: {
     backgroundColor: colors.card,
@@ -204,23 +204,35 @@ const styles = StyleSheet.create({
     marginBottom: 14,
     overflow: 'hidden',
   },
+
+
+
   TodayBlocksTaskCardCompletedDim: {
     opacity: 0.75,
   },
+
   TodayBlocksTaskCardAccentRail: {
     backgroundColor: colors.border,
     width: 3,
   },
+
+
+
   TodayBlocksTaskCardBody: {
     flex: 1,
     paddingHorizontal: 15,
     paddingVertical: 15,
   },
+
+
+
   TodayBlocksTaskCardHeaderRow: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+
+
   TodayBlocksTaskCardTitleFiligrana: {
     color: colors.cream,
     flexShrink: 1,
@@ -229,26 +241,27 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginRight: 8,
   },
-
   TodayBlocksTaskCardMeta: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginTop: 6,
   },
-
   TodayBlocksTaskCardPillRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 8,
     marginTop: 10,
   },
+
+
   TodayBlocksPillPlinto: {
     backgroundColor: colors.pill,
     borderRadius: 8,
     paddingHorizontal: 8,
     paddingVertical: 4,
   },
+
 
   TodayBlocksPillLabel: {
     color: colors.body,
@@ -263,16 +276,24 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     overflow: 'hidden',
   },
+
+
+
   TodayBlocksUpcomingRow: {
     alignItems: 'center',
     flexDirection: 'row',
     paddingHorizontal: 14,
     paddingVertical: 12,
   },
+
+
+
   TodayBlocksUpcomingRowDivider: {
     borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
   },
+
+
   TodayBlocksUpcomingDateCol: {
     alignItems: 'center',
     width: 40,
@@ -291,23 +312,26 @@ const styles = StyleSheet.create({
     fontSize: 10,
     marginTop: 2,
   },
+
   TodayBlocksUpcomingCopy: {
     flex: 1,
     marginLeft: 12,
   },
+
+
   TodayBlocksUpcomingTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 14,
     fontWeight: '700',
   },
+
   TodayBlocksUpcomingSubtitle: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
     marginTop: 2,
   },
-
   TodayBlocksQuickGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -329,9 +353,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
   },
 
+
   TodayBlocksQuickCardPressed: {
     opacity: 0.85,
   },
+
 
   TodayBlocksQuickIconWell: {
     alignItems: 'center',
@@ -340,9 +366,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 36,
   },
+
   TodayBlocksQuickIcon: {
     fontSize: 16,
   },
+
+
+
   TodayBlocksQuickLabelFiligrana: {
     color: colors.cream,
     flexShrink: 1,

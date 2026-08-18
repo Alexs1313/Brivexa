@@ -146,12 +146,13 @@ const styles = StyleSheet.create({
 
   WorkCompletedScreenScrollContent: { flexGrow: 1 },
 
+
+
   WorkCompletedScreenHeaderRowDintel: {
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: 28,
   },
-
   WorkCompletedScreenNavSide: { minWidth: 72 },
   WorkCompletedScreenNavLinkFiligrana: {
     color: colors.gold,
@@ -159,6 +160,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
   },
+
   WorkCompletedScreenTitleFiligrana: {
     color: colors.cream,
     flex: 1,
@@ -167,8 +169,10 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     textAlign: 'center',
   },
-
   WorkCompletedScreenHeroBolsillo: { alignItems: 'center', marginBottom: 28 },
+
+
+
   WorkCompletedScreenCheckOrbe: {
     alignItems: 'center',
     backgroundColor: colors.successBoton,
@@ -188,12 +192,15 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     lineHeight: 38,
   },
+
+
   WorkCompletedScreenHeroTitleFiligrana: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 26,
     fontWeight: '700',
   },
+
 
   WorkCompletedScreenHeroHintFiligrana: {
     color: colors.bodyApagado,
@@ -205,6 +212,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
+
   WorkCompletedScreenSummaryCasco: {
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -214,17 +222,21 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     paddingHorizontal: 16,
   },
+
+
+
   WorkCompletedScreenKvRow: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingVertical: 14,
   },
-
   WorkCompletedScreenKvRowBorder: {
     borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
   },
+
+
   WorkCompletedScreenKvLabel: {
     color: colors.bodyApagado,
     flex: 1,
@@ -232,6 +244,9 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginRight: 10,
   },
+
+
+
   WorkCompletedScreenKvValue: {
     flexShrink: 1,
     fontFamily: fonts.sansBold,
@@ -251,6 +266,7 @@ const styles = StyleSheet.create({
     height: layout.buttonHeightDefault,
     justifyContent: 'center',
   },
+
   WorkCompletedScreenSecondaryBtnLabel: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -258,7 +274,11 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
+
+
   WorkCompletedScreenPrimaryBtn: { flex: 1 },
+
+
 
   WorkCompletedScreenPressedDim: { opacity: 0.85 },
 });

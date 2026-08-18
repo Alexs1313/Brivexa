@@ -88,13 +88,14 @@ const styles = StyleSheet.create({
     opacity: 0.85,
   },
 
+
+
   PrimaryButtonLabelFiligrana: {
     color: colors.buttonText,
     fontFamily: fonts.sansBold,
     fontSize: 15,
     fontWeight: '700',
   },
-
   PrimaryButtonBackButtonPlinto: {
     alignItems: 'center',
     backgroundColor: colors.backBoton,
