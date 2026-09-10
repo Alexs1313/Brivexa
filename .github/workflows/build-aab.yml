@@ -29,18 +29,18 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x android/gradlew
 
-      - name: Build AAB
+      - name: Build APK
         run: |
           cd android
-          ./gradlew bundleRelease \
+          ./gradlew assembleRelease \
             -PMYAPP_UPLOAD_STORE_FILE=brivexa-farm-assistant-andr-2-key.keystore \
             -PMYAPP_UPLOAD_KEY_ALIAS=my-key-alias \
             -PMYAPP_UPLOAD_STORE_PASSWORD=111111 \
             -PMYAPP_UPLOAD_KEY_PASSWORD=111111
 
-      - name: Upload AAB
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: app-release-10037
-          path: android/app/build/outputs/bundle/release/app-release.aab
+          path: android/app/build/outputs/apk/release/app-release.apk
           retention-days: 7
