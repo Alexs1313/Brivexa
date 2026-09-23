@@ -67,7 +67,7 @@ export function EditFieldScreen({
   return (
     <ImageBackground
       source={appFondo}
-      style={styles.EditFieldScreenRaizCasco}
+      style={styles.EditFieldScreenNucleoAndamio}
       resizeMode="cover"
     >
       <ScrollView
@@ -81,15 +81,15 @@ export function EditFieldScreen({
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.EditFieldScreenHeaderRowDintel}>
+        <View style={styles.EditFieldScreenHeaderRowFriso}>
           <Pressable
             onPress={onCancel}
             hitSlop={12}
             style={styles.EditFieldScreenNavSide}
           >
-            <Text style={styles.EditFieldScreenNavLinkFiligrana}>‹ Cancel</Text>
+            <Text style={styles.EditFieldScreenNavLinkLamina}>‹ Cancel</Text>
           </Pressable>
-          <Text style={styles.EditFieldScreenNavTitleFiligrana}>{title}</Text>
+          <Text style={styles.EditFieldScreenNavTitleLamina}>{title}</Text>
           <View style={styles.EditFieldScreenNavSide} />
         </View>
 
@@ -153,15 +153,15 @@ export function EditFieldScreen({
             }}
             fullWidth
             style={[
-              styles.EditFieldScreenSavePlinto,
-              !canGuardar && styles.EditFieldScreenSavePlintoDisabled,
+              styles.EditFieldScreenSavePedestal,
+              !canGuardar && styles.EditFieldScreenSavePedestalDisabled,
             ]}
           />
           <Pressable
             onPress={onCancel}
-            style={styles.EditFieldScreenCancelPlinto}
+            style={styles.EditFieldScreenCancelPedestal}
           >
-            <Text style={styles.EditFieldScreenCancelFiligrana}>Cancel</Text>
+            <Text style={styles.EditFieldScreenCancelLamina}>Cancel</Text>
           </Pressable>
         </View>
       </ScrollView>
@@ -186,13 +186,13 @@ function FieldInput({
 }) {
   return (
     <View style={styles.EditFieldScreenFieldGroup}>
-      <Text style={styles.EditFieldScreenFieldLabelFiligrana}>
+      <Text style={styles.EditFieldScreenFieldLabelLamina}>
         {label}
         {required ? (
-          <Text style={styles.EditFieldScreenRequiredEmblema}> *</Text>
+          <Text style={styles.EditFieldScreenRequiredEscudo}> *</Text>
         ) : null}
       </Text>
-      <View style={styles.EditFieldScreenFieldInputCasco}>
+      <View style={styles.EditFieldScreenFieldInputAndamio}>
         <TextInput
           value={value}
           onChangeText={onChangeText}
@@ -207,12 +207,12 @@ function FieldInput({
 }
 
 const styles = StyleSheet.create({
-  EditFieldScreenRaizCasco: {
+  EditFieldScreenNucleoAndamio: {
     backgroundColor: colors.background,
     flex: 1,
   },
 
-  EditFieldScreenHeaderRowDintel: {
+  EditFieldScreenHeaderRowFriso: {
     alignItems: 'center',
     borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
@@ -223,18 +223,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 
-
-
   EditFieldScreenNavSide: {
     minWidth: 72,
   },
 
-  EditFieldScreenNavLinkFiligrana: {
+  EditFieldScreenNavLinkLamina: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
-  EditFieldScreenNavTitleFiligrana: {
+
+  EditFieldScreenNavTitleLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
@@ -244,24 +243,23 @@ const styles = StyleSheet.create({
   EditFieldScreenScrollContent: {
     flexGrow: 1,
   },
+
   EditFieldScreenFieldGroup: {
     marginBottom: 14,
   },
 
-
-  EditFieldScreenFieldLabelFiligrana: {
+  EditFieldScreenFieldLabelLamina: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginBottom: 8,
   },
 
-
-
-  EditFieldScreenRequiredEmblema: {
+  EditFieldScreenRequiredEscudo: {
     color: colors.danger,
   },
-  EditFieldScreenFieldInputCasco: {
+
+  EditFieldScreenFieldInputAndamio: {
     alignItems: 'center',
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -272,7 +270,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
   },
 
-
   EditFieldScreenFieldInput: {
     color: colors.cream,
     flex: 1,
@@ -281,16 +278,15 @@ const styles = StyleSheet.create({
     padding: 0,
   },
 
-  EditFieldScreenSavePlinto: {
+  EditFieldScreenSavePedestal: {
     marginTop: 10,
   },
 
-
-
-  EditFieldScreenSavePlintoDisabled: {
+  EditFieldScreenSavePedestalDisabled: {
     opacity: 0.55,
   },
-  EditFieldScreenCancelPlinto: {
+
+  EditFieldScreenCancelPedestal: {
     alignItems: 'center',
     borderColor: colors.border,
     borderRadius: 14,
@@ -300,9 +296,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
 
-
-
-  EditFieldScreenCancelFiligrana: {
+  EditFieldScreenCancelLamina: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansBold,
     fontSize: 15,

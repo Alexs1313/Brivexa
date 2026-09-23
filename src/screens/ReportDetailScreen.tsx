@@ -42,7 +42,7 @@ export function ReportDetailScreen({ onBack }: ReportDetailScreenProps) {
   return (
     <ImageBackground
       source={appFondo}
-      style={styles.ReportDetailScreenRaizCasco}
+      style={styles.ReportDetailScreenNucleoAndamio}
       resizeMode="cover"
     >
       <ScrollView
@@ -55,22 +55,22 @@ export function ReportDetailScreen({ onBack }: ReportDetailScreenProps) {
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.ReportDetailScreenHeaderRowDintel}>
+        <View style={styles.ReportDetailScreenHeaderRowFriso}>
           <Pressable
             onPress={onBack}
             hitSlop={12}
             style={styles.ReportDetailScreenNavSide}
           >
-            <Text style={styles.ReportDetailScreenNavLinkFiligrana}>
+            <Text style={styles.ReportDetailScreenNavLinkLamina}>
               ‹ Reports
             </Text>
           </Pressable>
-          <Text style={styles.ReportDetailScreenTitleFiligrana}>Report</Text>
+          <Text style={styles.ReportDetailScreenTitleLamina}>Report</Text>
           <View style={styles.ReportDetailScreenNavSide} />
         </View>
 
         <View style={{ paddingHorizontal: adaptive.horizontalRelleno }}>
-          <Text style={styles.ReportDetailScreenSubtitleFiligrana}>
+          <Text style={styles.ReportDetailScreenSubtitleLamina}>
             {report.subtitle}
           </Text>
 
@@ -111,7 +111,7 @@ export function ReportDetailScreen({ onBack }: ReportDetailScreenProps) {
               }}
               style={({ pressed }) => [
                 styles.ReportDetailScreenActionBtn,
-                pressed && styles.ReportDetailScreenPressedDim,
+                pressed && styles.ReportDetailScreenPressedOpaco,
               ]}
             >
               <Text style={styles.ReportDetailScreenActionLabel}>Share</Text>
@@ -123,11 +123,11 @@ export function ReportDetailScreen({ onBack }: ReportDetailScreenProps) {
       {toast ? (
         <View
           style={[
-            styles.ReportDetailScreenToastCasco,
+            styles.ReportDetailScreenToastAndamio,
             { bottom: insets.bottom + adaptive.verticalEscala(24) },
           ]}
         >
-          <Text style={styles.ReportDetailScreenToastFiligrana}>{toast}</Text>
+          <Text style={styles.ReportDetailScreenToastLamina}>{toast}</Text>
         </View>
       ) : null}
     </ImageBackground>
@@ -135,16 +135,16 @@ export function ReportDetailScreen({ onBack }: ReportDetailScreenProps) {
 }
 
 const styles = StyleSheet.create({
-  ReportDetailScreenRaizCasco: {
+  ReportDetailScreenNucleoAndamio: {
     backgroundColor: colors.background,
     flex: 1,
   },
+
   ReportDetailScreenScrollContent: {
     flexGrow: 1,
   },
 
-
-  ReportDetailScreenHeaderRowDintel: {
+  ReportDetailScreenHeaderRowFriso: {
     alignItems: 'center',
     borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
@@ -155,37 +155,34 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 
-
-
   ReportDetailScreenNavSide: {
     minWidth: 90,
   },
-  ReportDetailScreenNavLinkFiligrana: {
+
+  ReportDetailScreenNavLinkLamina: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
 
-  ReportDetailScreenTitleFiligrana: {
+  ReportDetailScreenTitleLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
-
-  ReportDetailScreenSubtitleFiligrana: {
+  ReportDetailScreenSubtitleLamina: {
     color: colors.body,
     fontFamily: fonts.sansRegular,
     fontSize: 14,
     marginBottom: 14,
   },
+
   ReportDetailScreenMetricsStack: {
     gap: 11,
     marginBottom: 16,
   },
-
-
 
   ReportDetailScreenMetricCard: {
     alignItems: 'center',
@@ -199,12 +196,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 
-
   ReportDetailScreenMetricLabel: {
     color: colors.body,
     fontFamily: fonts.sansRegular,
     fontSize: 14,
   },
+
   ReportDetailScreenMetricValue: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -217,7 +214,6 @@ const styles = StyleSheet.create({
     gap: 10,
   },
 
-
   ReportDetailScreenActionBtn: {
     alignItems: 'center',
     backgroundColor: colors.backBoton,
@@ -229,17 +225,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-
   ReportDetailScreenActionLabel: {
     color: colors.backButtonText,
     fontFamily: fonts.sansBold,
     fontSize: 15,
     fontWeight: '700',
   },
-  ReportDetailScreenPressedDim: {
+
+  ReportDetailScreenPressedOpaco: {
     opacity: 0.88,
   },
-  ReportDetailScreenToastCasco: {
+
+  ReportDetailScreenToastAndamio: {
     alignSelf: 'center',
     backgroundColor: colors.toastBg,
     borderColor: colors.border,
@@ -250,8 +247,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 
-
-  ReportDetailScreenToastFiligrana: {
+  ReportDetailScreenToastLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 13,

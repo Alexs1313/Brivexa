@@ -1,5 +1,5 @@
 /**
- * Terra Bull Farm — Daily Farming Assistant
+ * Bull Farm Terra — Daily Farming Assistant
  *
  * @format
  */

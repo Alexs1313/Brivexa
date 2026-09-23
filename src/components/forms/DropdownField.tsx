@@ -39,16 +39,16 @@ export function DropdownField({
 
   return (
     <View style={styles.DropdownFieldFieldGroup}>
-      <Text style={styles.DropdownFieldFieldLabelFiligrana}>
+      <Text style={styles.DropdownFieldFieldLabelLamina}>
         {label}
         {required ? (
-          <Text style={styles.DropdownFieldRequiredEmblema}> *</Text>
+          <Text style={styles.DropdownFieldRequiredEscudo}> *</Text>
         ) : null}
       </Text>
       <View
         style={[
-          styles.DropdownFieldFieldInputCasco,
-          open && styles.DropdownFieldInputCascoOpen,
+          styles.DropdownFieldFieldInputAndamio,
+          open && styles.DropdownFieldInputAndamioOpen,
         ]}
       >
         <TextInput
@@ -83,11 +83,11 @@ export function DropdownField({
         onRequestClose={() => setAbierto(false)}
       >
         <Pressable
-          style={styles.DropdownFieldBackdropVelo}
+          style={styles.DropdownFieldBackdropManto}
           onPress={() => setAbierto(false)}
         >
           <Pressable
-            style={styles.DropdownFieldSheetCasco}
+            style={styles.DropdownFieldSheetAndamio}
             onPress={e => e.stopPropagation()}
           >
             <Text style={styles.DropdownFieldSheetTitle}>
@@ -140,21 +140,19 @@ const styles = StyleSheet.create({
   DropdownFieldFieldGroup: {
     marginBottom: 14,
   },
-  DropdownFieldFieldLabelFiligrana: {
+
+  DropdownFieldFieldLabelLamina: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginBottom: 8,
   },
 
-
-  DropdownFieldRequiredEmblema: {
+  DropdownFieldRequiredEscudo: {
     color: colors.danger,
   },
 
-
-
-  DropdownFieldFieldInputCasco: {
+  DropdownFieldFieldInputAndamio: {
     alignItems: 'center',
     backgroundColor: colors.card,
     borderColor: colors.emptyBorde,
@@ -166,9 +164,7 @@ const styles = StyleSheet.create({
     paddingRight: 4,
   },
 
-
-
-  DropdownFieldInputCascoOpen: {
+  DropdownFieldInputAndamioOpen: {
     borderColor: colors.goldBorde,
   },
 
@@ -187,26 +183,24 @@ const styles = StyleSheet.create({
     width: 40,
   },
 
-
   DropdownFieldChevron: {
     color: colors.tabInactivo,
     fontSize: 15,
   },
-
-
 
   DropdownFieldChevronOpen: {
     color: colors.gold,
     transform: [{ rotate: '180deg' }],
   },
 
-  DropdownFieldBackdropVelo: {
+  DropdownFieldBackdropManto: {
     backgroundColor: 'rgba(8, 4, 24, 0.72)',
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 24,
   },
-  DropdownFieldSheetCasco: {
+
+  DropdownFieldSheetAndamio: {
     backgroundColor: colors.card,
     borderColor: colors.border,
     borderRadius: radius.card,
@@ -217,7 +211,6 @@ const styles = StyleSheet.create({
     paddingTop: 14,
   },
 
-
   DropdownFieldSheetTitle: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansBold,
@@ -227,9 +220,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     textTransform: 'uppercase',
   },
+
   DropdownFieldOptionsScroll: {
     flexGrow: 0,
   },
+
   DropdownFieldOption: {
     alignItems: 'center',
     flexDirection: 'row',
@@ -242,11 +237,10 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
   },
+
   DropdownFieldOptionActive: {
     backgroundColor: colors.goldSuave,
   },
-
-
 
   DropdownFieldOptionTitle: {
     color: colors.cream,
@@ -256,6 +250,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginRight: 12,
   },
+
   DropdownFieldOptionTitleActive: {
     color: colors.gold,
   },

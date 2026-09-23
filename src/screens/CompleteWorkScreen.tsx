@@ -51,7 +51,7 @@ export function CompleteWorkScreen({
   return (
     <ImageBackground
       source={appFondo}
-      style={styles.CompleteWorkScreenRaizCasco}
+      style={styles.CompleteWorkScreenNucleoAndamio}
       resizeMode="cover"
     >
       <ScrollView
@@ -66,25 +66,25 @@ export function CompleteWorkScreen({
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.CompleteWorkScreenHeaderRowDintel}>
+        <View style={styles.CompleteWorkScreenHeaderRowFriso}>
           <Pressable
             onPress={onCancel}
             hitSlop={12}
             style={styles.CompleteWorkScreenNavSide}
           >
-            <Text style={styles.CompleteWorkScreenNavLinkFiligrana}>
+            <Text style={styles.CompleteWorkScreenNavLinkLamina}>
               ‹ Cancel
             </Text>
           </Pressable>
-          <Text style={styles.CompleteWorkScreenTitleFiligrana}>
+          <Text style={styles.CompleteWorkScreenTitleLamina}>
             Complete Work
           </Text>
           <View style={styles.CompleteWorkScreenNavSide} />
         </View>
 
-        <Text style={styles.CompleteWorkScreenIntroFiligrana}>
+        <Text style={styles.CompleteWorkScreenIntroLamina}>
           Record the actuals for{' '}
-          <Text style={styles.CompleteWorkScreenIntroBoldFiligrana}>
+          <Text style={styles.CompleteWorkScreenIntroBoldLamina}>
             {title}
           </Text>{' '}
           and update farm records.
@@ -139,8 +139,8 @@ export function CompleteWorkScreen({
             })
           }
           style={({ pressed }) => [
-            styles.CompleteWorkScreenSavePlinto,
-            pressed && styles.CompleteWorkScreenPressedDim,
+            styles.CompleteWorkScreenSavePedestal,
+            pressed && styles.CompleteWorkScreenPressedOpaco,
           ]}
         >
           <Text style={styles.CompleteWorkScreenSaveBtnLabel}>
@@ -169,7 +169,7 @@ function FormField({
 }) {
   return (
     <View style={styles.CompleteWorkScreenFieldBlock}>
-      <Text style={styles.CompleteWorkScreenFieldLabelFiligrana}>{label}</Text>
+      <Text style={styles.CompleteWorkScreenFieldLabelLamina}>{label}</Text>
       <TextInput
         value={value}
         onChangeText={onChangeText}
@@ -187,31 +187,29 @@ function FormField({
 }
 
 const styles = StyleSheet.create({
-  CompleteWorkScreenRaizCasco: {
+  CompleteWorkScreenNucleoAndamio: {
     backgroundColor: colors.background,
     flex: 1,
   },
+
   CompleteWorkScreenScrollContent: { flexGrow: 1 },
 
-
-
-  CompleteWorkScreenHeaderRowDintel: {
+  CompleteWorkScreenHeaderRowFriso: {
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: 16,
   },
 
-
-
   CompleteWorkScreenNavSide: { minWidth: 80 },
-  CompleteWorkScreenNavLinkFiligrana: {
+
+  CompleteWorkScreenNavLinkLamina: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
-  CompleteWorkScreenTitleFiligrana: {
+  CompleteWorkScreenTitleLamina: {
     color: colors.cream,
     flex: 1,
     fontFamily: fonts.sansBold,
@@ -220,9 +218,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-
-
-  CompleteWorkScreenIntroFiligrana: {
+  CompleteWorkScreenIntroLamina: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 14,
@@ -230,26 +226,20 @@ const styles = StyleSheet.create({
     marginBottom: 18,
   },
 
-
-
-  CompleteWorkScreenIntroBoldFiligrana: {
+  CompleteWorkScreenIntroBoldLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontWeight: '700',
   },
 
-
   CompleteWorkScreenFieldBlock: { marginBottom: 14 },
 
-
-  CompleteWorkScreenFieldLabelFiligrana: {
+  CompleteWorkScreenFieldLabelLamina: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginBottom: 8,
   },
-
-
 
   CompleteWorkScreenFieldInput: {
     backgroundColor: colors.card,
@@ -262,8 +252,6 @@ const styles = StyleSheet.create({
     height: 48,
     paddingHorizontal: 14,
   },
-
-
 
   CompleteWorkScreenFieldInputMultiline: {
     height: 88,
@@ -281,15 +269,14 @@ const styles = StyleSheet.create({
     padding: 14,
   },
 
-
-
   CompleteWorkScreenImpactText: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
     lineHeight: 18,
   },
-  CompleteWorkScreenSavePlinto: {
+
+  CompleteWorkScreenSavePedestal: {
     alignItems: 'center',
     backgroundColor: colors.successBoton,
     borderRadius: radius.button,
@@ -303,5 +290,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '700',
   },
-  CompleteWorkScreenPressedDim: { opacity: 0.85 },
+
+  CompleteWorkScreenPressedOpaco: { opacity: 0.85 },
 });

@@ -1,5 +1,6 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Svg, { Circle } from 'react-native-svg';
 
 import { colors, fonts } from '../../constants/theme';
 
@@ -10,8 +11,6 @@ type ProgressRingProps = {
   strokeWidth?: number;
 };
 
-const SEGMENTS = 36;
-
 export function ProgressRing({
   done,
   total,
@@ -20,47 +19,42 @@ export function ProgressRing({
 }: ProgressRingProps) {
   const progress = total <= 0 ? 0 : Math.min(1, Math.max(0, done / total));
   const complete = total > 0 && done >= total;
-  const filled = Math.round(progress * SEGMENTS);
   const ringColor = complete ? colors.success : colors.gold;
   const label =
     total <= 0 ? '0%' : complete ? '✓' : `${Math.round(progress * 100)}%`;
 
-  const segments = useMemo(() => {
-    const radius = (size - strokeWidth) / 2;
-    const center = size / 2;
-    const length = strokeWidth * 0.95;
-    const thickness = (2 * Math.PI * radius) / SEGMENTS - 1.2;
-
-    return Array.from({ length: SEGMENTS }, (_, index) => {
-      const angle = (index / SEGMENTS) * Math.PI * 2 - Math.PI / 2;
-      const x = center + radius * Math.cos(angle) - thickness / 2;
-      const y = center + radius * Math.sin(angle) - length / 2;
-      const deg = (angle * 180) / Math.PI + 90;
-      return {
-        key: index,
-        active: index < filled,
-        style: {
-          position: 'absolute' as const,
-          left: x,
-          top: y,
-          width: thickness,
-          height: length,
-          borderRadius: thickness / 2,
-          backgroundColor: index < filled ? ringColor : colors.progressPista,
-          transform: [{ rotate: `${deg}deg` }],
-        },
-      };
-    });
-  }, [filled, ringColor, size, strokeWidth]);
+  const radius = (size - strokeWidth) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset = circumference * (1 - progress);
+  const center = size / 2;
 
   return (
     <View
-      style={[styles.ProgressRingRaizCasco, { width: size, height: size }]}
+      style={[styles.ProgressRingNucleoAndamio, { width: size, height: size }]}
     >
-      {segments.map(segment => (
-        <View key={segment.key} style={segment.style} />
-      ))}
-      <View style={styles.ProgressRingCenter}>
+      <Svg width={size} height={size}>
+        <Circle
+          cx={center}
+          cy={center}
+          r={radius}
+          stroke={colors.progressPista}
+          strokeWidth={strokeWidth}
+          fill="none"
+        />
+        <Circle
+          cx={center}
+          cy={center}
+          r={radius}
+          stroke={ringColor}
+          strokeWidth={strokeWidth}
+          fill="none"
+          strokeLinecap="round"
+          strokeDasharray={`${circumference} ${circumference}`}
+          strokeDashoffset={strokeDashoffset}
+          transform={`rotate(-90 ${center} ${center})`}
+        />
+      </Svg>
+      <View style={styles.ProgressRingCenter} pointerEvents="none">
         <Text
           style={[
             styles.ProgressRingCenterLabel,
@@ -81,15 +75,17 @@ export function ProgressRing({
 }
 
 const styles = StyleSheet.create({
-  ProgressRingRaizCasco: {
+  ProgressRingNucleoAndamio: {
     alignItems: 'center',
     justifyContent: 'center',
   },
 
   ProgressRingCenter: {
+    ...StyleSheet.absoluteFill,
     alignItems: 'center',
     justifyContent: 'center',
   },
+
   ProgressRingCenterLabel: {
     fontFamily: fonts.sansBold,
     fontSize: 15,
@@ -99,7 +95,6 @@ const styles = StyleSheet.create({
   ProgressRingCenterLabelDone: {
     fontSize: 22,
   },
-
 
   ProgressRingCenterMeta: {
     color: colors.bodyApagado,

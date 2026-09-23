@@ -10,7 +10,7 @@ type PaginationDotsProps = {
 
 export function PaginationDots({ total, activeIndice }: PaginationDotsProps) {
   return (
-    <View style={styles.PaginationDotsRaizCasco}>
+    <View style={styles.PaginationDotsNucleoAndamio}>
       {Array.from({ length: total }).map((_, index) => {
         const isActivo = index === activeIndice;
 
@@ -29,19 +29,19 @@ export function PaginationDots({ total, activeIndice }: PaginationDotsProps) {
 }
 
 const styles = StyleSheet.create({
-  PaginationDotsRaizCasco: {
+  PaginationDotsNucleoAndamio: {
     alignItems: 'center',
     flexDirection: 'row',
     gap: 8,
     justifyContent: 'center',
   },
+
   PaginationDotsDot: {
     backgroundColor: colors.dotInactivo,
     borderRadius: 4,
     height: 7,
     width: 7,
   },
-
 
   PaginationDotsDotActive: {
     backgroundColor: colors.gold,

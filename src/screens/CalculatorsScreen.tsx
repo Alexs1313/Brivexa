@@ -33,7 +33,7 @@ export function CalculatorsScreen({
   return (
     <ImageBackground
       source={appFondo}
-      style={styles.CalculatorsScreenRaizCasco}
+      style={styles.CalculatorsScreenNucleoAndamio}
       resizeMode="cover"
     >
       <ScrollView
@@ -47,8 +47,8 @@ export function CalculatorsScreen({
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <Text style={styles.CalculatorsScreenTitleFiligrana}>Calculators</Text>
-        <Text style={styles.CalculatorsScreenSubtitleFiligrana}>
+        <Text style={styles.CalculatorsScreenTitleLamina}>Calculators</Text>
+        <Text style={styles.CalculatorsScreenSubtitleLamina}>
           Plan sowing, fertilizer & spray needs
         </Text>
 
@@ -67,7 +67,7 @@ export function CalculatorsScreen({
                       styles.CalculatorsScreenIconPurple,
                   ]}
                 >
-                  <Text style={styles.CalculatorsScreenIconMarca}>
+                  <Text style={styles.CalculatorsScreenIconSello}>
                     {card.icon}
                   </Text>
                 </View>
@@ -84,7 +84,7 @@ export function CalculatorsScreen({
                 onPress={() => onOpenCalculadora(card.id)}
                 style={({ pressed }) => [
                   styles.CalculatorsScreenOpenBtn,
-                  pressed && styles.CalculatorsScreenPressedDim,
+                  pressed && styles.CalculatorsScreenPressedOpaco,
                 ]}
               >
                 <Text style={styles.CalculatorsScreenOpenLabel}>
@@ -100,8 +100,11 @@ export function CalculatorsScreen({
         </Text>
         {saved.length === 0 ? (
           <View style={styles.CalculatorsScreenEmptyRecent}>
-            <Text style={styles.CalculatorsScreenEmptyRecentLabel}>
+            <Text style={styles.CalculatorsScreenEmptyRecentTitle}>
               No saved calculations yet
+            </Text>
+            <Text style={styles.CalculatorsScreenEmptyRecentLabel}>
+              Run a calculator and save the result to see it here.
             </Text>
           </View>
         ) : (
@@ -114,7 +117,7 @@ export function CalculatorsScreen({
                   onPress={() => onOpenCalculadora(item.calculatorId)}
                   style={({ pressed }) => [
                     styles.CalculatorsScreenRecentCard,
-                    pressed && styles.CalculatorsScreenPressedDim,
+                    pressed && styles.CalculatorsScreenPressedOpaco,
                   ]}
                 >
                   <View
@@ -128,7 +131,7 @@ export function CalculatorsScreen({
                         styles.CalculatorsScreenIconPurple,
                     ]}
                   >
-                    <Text style={styles.CalculatorsScreenRecentIconMarca}>
+                    <Text style={styles.CalculatorsScreenRecentIconSello}>
                       {meta.icon}
                     </Text>
                   </View>
@@ -154,23 +157,23 @@ export function CalculatorsScreen({
 }
 
 const styles = StyleSheet.create({
-  CalculatorsScreenRaizCasco: {
+  CalculatorsScreenNucleoAndamio: {
     backgroundColor: colors.background,
     flex: 1,
   },
+
   CalculatorsScreenScrollContent: {
     flexGrow: 1,
   },
-  CalculatorsScreenTitleFiligrana: {
+
+  CalculatorsScreenTitleLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 24,
     fontWeight: '700',
   },
 
-
-
-  CalculatorsScreenSubtitleFiligrana: {
+  CalculatorsScreenSubtitleLamina: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 14,
@@ -178,13 +181,10 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
 
-
   CalculatorsScreenCardStack: {
     gap: 12,
     marginBottom: 22,
   },
-
-
 
   CalculatorsScreenCard: {
     backgroundColor: colors.card,
@@ -193,8 +193,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 15,
   },
-
-
 
   CalculatorsScreenCardTop: {
     flexDirection: 'row',
@@ -214,20 +212,21 @@ const styles = StyleSheet.create({
     backgroundColor: colors.successSuave,
   },
 
-
   CalculatorsScreenIconInfo: {
     backgroundColor: colors.infoIconSuave,
   },
+
   CalculatorsScreenIconPurple: {
     backgroundColor: 'rgba(124, 92, 255, 0.15)',
   },
-  CalculatorsScreenIconMarca: {
+
+  CalculatorsScreenIconSello: {
     fontSize: 22,
   },
+
   CalculatorsScreenCardCopy: {
     flex: 1,
   },
-
 
   CalculatorsScreenCardTitle: {
     color: colors.cream,
@@ -236,8 +235,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-
-
   CalculatorsScreenCardBody: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
@@ -245,8 +242,6 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     marginTop: 4,
   },
-
-
 
   CalculatorsScreenOpenBtn: {
     alignItems: 'center',
@@ -257,10 +252,10 @@ const styles = StyleSheet.create({
     height: 42,
     justifyContent: 'center',
   },
-  CalculatorsScreenPressedDim: {
+
+  CalculatorsScreenPressedOpaco: {
     opacity: 0.88,
   },
-
 
   CalculatorsScreenOpenLabel: {
     color: colors.gold,
@@ -276,6 +271,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginBottom: 12,
   },
+
   CalculatorsScreenEmptyRecent: {
     alignItems: 'center',
     backgroundColor: colors.card,
@@ -283,17 +279,27 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     borderWidth: 1,
     justifyContent: 'center',
-    minHeight: 65,
+    minHeight: 88,
     paddingHorizontal: 16,
+    paddingVertical: 18,
+  },
+
+  CalculatorsScreenEmptyRecentTitle: {
+    color: colors.cream,
+    fontFamily: fonts.sansBold,
+    fontSize: 14,
+    fontWeight: '700',
+    marginBottom: 6,
+    textAlign: 'center',
   },
 
   CalculatorsScreenEmptyRecentLabel: {
     color: colors.tabInactivo,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
+    lineHeight: 18,
     textAlign: 'center',
   },
-
 
   CalculatorsScreenRecentStack: {
     gap: 10,
@@ -310,6 +316,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 12,
   },
+
   CalculatorsScreenRecentIconBox: {
     alignItems: 'center',
     borderRadius: 12,
@@ -317,17 +324,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 40,
   },
-  CalculatorsScreenRecentIconMarca: {
+
+  CalculatorsScreenRecentIconSello: {
     fontSize: 18,
   },
-
-
 
   CalculatorsScreenRecentCopy: {
     flex: 1,
   },
-
-
 
   CalculatorsScreenRecentCardTitle: {
     color: colors.cream,
@@ -336,13 +340,13 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-
   CalculatorsScreenRecentSummary: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginTop: 3,
   },
+
   CalculatorsScreenRecentTime: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,

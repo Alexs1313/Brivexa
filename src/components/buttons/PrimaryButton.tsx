@@ -36,11 +36,11 @@ export function PrimaryButton({
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           style={[
-            styles.PrimaryButtonBtnPlinto,
-            pressed && styles.PrimaryButtonButtonPressedDim,
+            styles.PrimaryButtonBtnPedestal,
+            pressed && styles.PrimaryButtonButtonPressedOpaco,
           ]}
         >
-          <Text style={styles.PrimaryButtonLabelFiligrana}>{label}</Text>
+          <Text style={styles.PrimaryButtonLabelLamina}>{label}</Text>
         </LinearGradient>
       )}
     </Pressable>
@@ -58,20 +58,20 @@ export function BackButton({ label, onPress, style }: BackButtonProps) {
     <Pressable
       onPress={onPress}
       style={({ pressed }) => [
-        styles.PrimaryButtonBackButtonPlinto,
-        pressed && styles.PrimaryButtonButtonPressedDim,
+        styles.PrimaryButtonBackButtonPedestal,
+        pressed && styles.PrimaryButtonButtonPressedOpaco,
         style,
       ]}
     >
       <View>
-        <Text style={styles.PrimaryButtonBackButtonLabelFiligrana}>{label}</Text>
+        <Text style={styles.PrimaryButtonBackButtonLabelLamina}>{label}</Text>
       </View>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  PrimaryButtonBtnPlinto: {
+  PrimaryButtonBtnPedestal: {
     alignItems: 'center',
     borderRadius: radius.button,
     flexDirection: 'row',
@@ -84,19 +84,19 @@ const styles = StyleSheet.create({
     flex: 0,
     width: '100%',
   },
-  PrimaryButtonButtonPressedDim: {
+
+  PrimaryButtonButtonPressedOpaco: {
     opacity: 0.85,
   },
 
-
-
-  PrimaryButtonLabelFiligrana: {
+  PrimaryButtonLabelLamina: {
     color: colors.buttonText,
     fontFamily: fonts.sansBold,
     fontSize: 15,
     fontWeight: '700',
   },
-  PrimaryButtonBackButtonPlinto: {
+
+  PrimaryButtonBackButtonPedestal: {
     alignItems: 'center',
     backgroundColor: colors.backBoton,
     borderColor: colors.backButtonBorde,
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
   },
 
-  PrimaryButtonBackButtonLabelFiligrana: {
+  PrimaryButtonBackButtonLabelLamina: {
     color: colors.backButtonText,
     fontFamily: fonts.sansBold,
     fontSize: 15,

@@ -1,11 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const storageClaves = {
-  tasks: '@brivexa/userTareas',
-  fields: '@brivexa/userCampos',
-  inventory: '@brivexa/userInventario',
-  equipment: '@brivexa/userEquipo',
-  transactions: '@brivexa/userTransacciones',
+  tasks: '@brivexa/userTareas.v2',
+  fields: '@brivexa/userCampos.v2',
+  inventory: '@brivexa/userInventario.v2',
+  equipment: '@brivexa/userEquipo.v2',
+  transactions: '@brivexa/userTransacciones.v2',
   savedCalculos: '@brivexa/savedCalculos',
 } as const;
 

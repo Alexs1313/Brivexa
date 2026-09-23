@@ -39,12 +39,12 @@ export function TaskDetailScreen({
 
   if (!task) {
     return (
-      <View style={styles.TaskDetailScreenMissingCasco}>
-        <Text style={styles.TaskDetailScreenMissingFiligrana}>
+      <View style={styles.TaskDetailScreenMissingAndamio}>
+        <Text style={styles.TaskDetailScreenMissingLamina}>
           Task not found
         </Text>
         <Pressable onPress={onBack}>
-          <Text style={styles.TaskDetailScreenNavLinkFiligrana}>‹ Work</Text>
+          <Text style={styles.TaskDetailScreenNavLinkLamina}>‹ Work</Text>
         </Pressable>
       </View>
     );
@@ -62,7 +62,7 @@ export function TaskDetailScreen({
   return (
     <ImageBackground
       source={appFondo}
-      style={styles.TaskDetailScreenRaizCasco}
+      style={styles.TaskDetailScreenNucleoAndamio}
       resizeMode="cover"
     >
       <ScrollView
@@ -76,15 +76,15 @@ export function TaskDetailScreen({
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.TaskDetailScreenHeaderRowDintel}>
+        <View style={styles.TaskDetailScreenHeaderRowFriso}>
           <Pressable
             onPress={onBack}
             hitSlop={12}
             style={styles.TaskDetailScreenNavSide}
           >
-            <Text style={styles.TaskDetailScreenNavLinkFiligrana}>‹ Work</Text>
+            <Text style={styles.TaskDetailScreenNavLinkLamina}>‹ Work</Text>
           </Pressable>
-          <Text style={styles.TaskDetailScreenTitleFiligrana}>Task</Text>
+          <Text style={styles.TaskDetailScreenTitleLamina}>Task</Text>
           <View style={styles.TaskDetailScreenNavSide} />
         </View>
 
@@ -97,10 +97,10 @@ export function TaskDetailScreen({
           </View>
         </View>
 
-        <Text style={styles.TaskDetailScreenHeadlineFiligrana}>
+        <Text style={styles.TaskDetailScreenHeadlineLamina}>
           {task.title}
         </Text>
-        <Text style={styles.TaskDetailScreenSubtitleFiligrana}>
+        <Text style={styles.TaskDetailScreenSubtitleLamina}>
           {task.workTipo} · {task.field}
         </Text>
 
@@ -130,7 +130,7 @@ export function TaskDetailScreen({
           onPress={onStartTrabajo}
           style={({ pressed }) => [
             styles.TaskDetailScreenSuccessBtn,
-            pressed && styles.TaskDetailScreenPressedDim,
+            pressed && styles.TaskDetailScreenPressedOpaco,
           ]}
         >
           <Text style={styles.TaskDetailScreenSuccessBtnLabel}>Start Work</Text>
@@ -140,7 +140,7 @@ export function TaskDetailScreen({
           onPress={onEdit}
           style={({ pressed }) => [
             styles.TaskDetailScreenSecondaryBtn,
-            pressed && styles.TaskDetailScreenPressedDim,
+            pressed && styles.TaskDetailScreenPressedOpaco,
           ]}
         >
           <Text style={styles.TaskDetailScreenSecondaryBtnLabel}>
@@ -152,7 +152,7 @@ export function TaskDetailScreen({
           onPress={onDelete}
           style={({ pressed }) => [
             styles.TaskDetailScreenDangerBtn,
-            pressed && styles.TaskDetailScreenPressedDim,
+            pressed && styles.TaskDetailScreenPressedOpaco,
           ]}
         >
           <Text style={styles.TaskDetailScreenDangerBtnLabel}>Delete Task</Text>
@@ -163,37 +163,40 @@ export function TaskDetailScreen({
 }
 
 const styles = StyleSheet.create({
-  TaskDetailScreenRaizCasco: { backgroundColor: colors.background, flex: 1 },
+  TaskDetailScreenNucleoAndamio: { backgroundColor: colors.background, flex: 1 },
+
   TaskDetailScreenScrollContent: { flexGrow: 1 },
-  TaskDetailScreenMissingCasco: {
+
+  TaskDetailScreenMissingAndamio: {
     alignItems: 'center',
     backgroundColor: colors.background,
     flex: 1,
     justifyContent: 'center',
   },
-  TaskDetailScreenMissingFiligrana: {
+
+  TaskDetailScreenMissingLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     marginBottom: 12,
   },
 
-
-  TaskDetailScreenHeaderRowDintel: {
+  TaskDetailScreenHeaderRowFriso: {
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: 16,
   },
+
   TaskDetailScreenNavSide: { minWidth: 72 },
-  TaskDetailScreenNavLinkFiligrana: {
+
+  TaskDetailScreenNavLinkLamina: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
-
-  TaskDetailScreenTitleFiligrana: {
+  TaskDetailScreenTitleLamina: {
     color: colors.cream,
     flex: 1,
     fontFamily: fonts.sansBold,
@@ -208,6 +211,7 @@ const styles = StyleSheet.create({
     gap: 8,
     marginBottom: 12,
   },
+
   TaskDetailScreenPriorityPill: {
     backgroundColor: colors.plannedSuave,
     borderRadius: 20,
@@ -222,14 +226,14 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-
-  TaskDetailScreenHeadlineFiligrana: {
+  TaskDetailScreenHeadlineLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 28,
     fontWeight: '700',
   },
-  TaskDetailScreenSubtitleFiligrana: {
+
+  TaskDetailScreenSubtitleLamina: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 14,
@@ -246,7 +250,6 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     paddingHorizontal: 16,
   },
-
 
   TaskDetailScreenKvRow: {
     alignItems: 'center',
@@ -268,7 +271,6 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
 
-
   TaskDetailScreenKvValue: {
     color: colors.cream,
     flexShrink: 1,
@@ -277,6 +279,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     textAlign: 'right',
   },
+
   TaskDetailScreenNotesCard: {
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -286,8 +289,6 @@ const styles = StyleSheet.create({
     padding: 16,
   },
 
-
-
   TaskDetailScreenNotesLabel: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
@@ -295,14 +296,12 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
 
-
   TaskDetailScreenNotesBody: {
     color: colors.cream,
     fontFamily: fonts.sansRegular,
     fontSize: 14,
     lineHeight: 20,
   },
-
 
   TaskDetailScreenSuccessBtn: {
     alignItems: 'center',
@@ -319,8 +318,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '700',
   },
-
-
 
   TaskDetailScreenSecondaryBtn: {
     alignItems: 'center',
@@ -339,6 +336,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '700',
   },
+
   TaskDetailScreenDangerBtn: {
     alignItems: 'center',
     backgroundColor: 'rgba(236, 91, 91, 0.12)',
@@ -349,8 +347,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-
-
   TaskDetailScreenDangerBtnLabel: {
     color: colors.danger,
     fontFamily: fonts.sansBold,
@@ -358,7 +354,5 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-
-
-  TaskDetailScreenPressedDim: { opacity: 0.85 },
+  TaskDetailScreenPressedOpaco: { opacity: 0.85 },
 });

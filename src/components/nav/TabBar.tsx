@@ -50,7 +50,7 @@ export function TabBar({ activeTab, onSelect }: TabBarProps) {
   return (
     <View
       style={[
-        styles.TabBarRaizCasco,
+        styles.TabBarNucleoAndamio,
         { paddingBottom: Math.max(insets.bottom, 8) },
       ]}
     >
@@ -61,25 +61,25 @@ export function TabBar({ activeTab, onSelect }: TabBarProps) {
             <Pressable
               key={tab.key}
               onPress={() => onSelect(tab.key)}
-              style={styles.TabBarCenterBolsillo}
+              style={styles.TabBarCenterRecinto}
               hitSlop={8}
             >
               <ImageBackground
                 source={todayRecursos.tabWorkBg}
-                style={styles.TabBarWorkOrbe}
-                imageStyle={styles.TabBarWorkOrbeImage}
+                style={styles.TabBarWorkDisco}
+                imageStyle={styles.TabBarWorkDiscoImage}
                 resizeMode="cover"
               >
                 <Image
                   source={todayRecursos.tabTrabajo}
-                  style={styles.TabBarWorkMarcaEmblema}
+                  style={styles.TabBarWorkSelloEscudo}
                   resizeMode="contain"
                 />
               </ImageBackground>
               <Text
                 style={[
-                  styles.TabBarLabelFiligrana,
-                  active && styles.TabBarLabelActiveFiligrana,
+                  styles.TabBarLabelLamina,
+                  active && styles.TabBarLabelActiveLamina,
                 ]}
               >
                 {tab.label}
@@ -92,13 +92,13 @@ export function TabBar({ activeTab, onSelect }: TabBarProps) {
           <Pressable
             key={tab.key}
             onPress={() => onSelect(tab.key)}
-            style={styles.TabBarBolsillo}
+            style={styles.TabBarRecinto}
             hitSlop={8}
           >
             <Image
               source={active && tab.iconActivo ? tab.iconActivo : tab.icon}
               style={[
-                styles.TabBarMarcaEmblema,
+                styles.TabBarSelloEscudo,
                 !tab.iconActivo && {
                   tintColor: active ? colors.gold : colors.tabInactivo,
                 },
@@ -107,8 +107,8 @@ export function TabBar({ activeTab, onSelect }: TabBarProps) {
             />
             <Text
               style={[
-                styles.TabBarLabelFiligrana,
-                active && styles.TabBarLabelActiveFiligrana,
+                styles.TabBarLabelLamina,
+                active && styles.TabBarLabelActiveLamina,
               ]}
             >
               {tab.label}
@@ -121,7 +121,7 @@ export function TabBar({ activeTab, onSelect }: TabBarProps) {
 }
 
 const styles = StyleSheet.create({
-  TabBarRaizCasco: {
+  TabBarNucleoAndamio: {
     backgroundColor: colors.tabBar,
     borderTopColor: colors.borderSuave,
     borderTopWidth: 1,
@@ -129,25 +129,27 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
     paddingTop: 10,
   },
-  TabBarBolsillo: {
+
+  TabBarRecinto: {
     alignItems: 'center',
     flex: 1,
     gap: 4,
     paddingBottom: 2,
   },
-  TabBarCenterBolsillo: {
+
+  TabBarCenterRecinto: {
     alignItems: 'center',
     flex: 1,
     gap: 4,
     marginTop: -20,
   },
 
-
-  TabBarMarcaEmblema: {
+  TabBarSelloEscudo: {
     height: 24,
     width: 24,
   },
-  TabBarWorkOrbe: {
+
+  TabBarWorkDisco: {
     alignItems: 'center',
     borderRadius: 17,
     elevation: 8,
@@ -160,26 +162,23 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     width: 50,
   },
-  TabBarWorkOrbeImage: {
+
+  TabBarWorkDiscoImage: {
     borderRadius: 17,
   },
 
-
-
-  TabBarWorkMarcaEmblema: {
+  TabBarWorkSelloEscudo: {
     height: 26,
     width: 26,
   },
 
-  TabBarLabelFiligrana: {
+  TabBarLabelLamina: {
     color: colors.tabInactivo,
     fontFamily: fonts.sansRegular,
     fontSize: 10,
   },
 
-
-
-  TabBarLabelActiveFiligrana: {
+  TabBarLabelActiveLamina: {
     color: colors.gold,
   },
 });

@@ -10,6 +10,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { AmountModal } from '../components/AmountModal';
+import { ProgressBar } from '../components/ProgressBar';
 import { PrimaryButton } from '../components/buttons/PrimaryButton';
 import { colors, fonts } from '../constants/theme';
 
@@ -43,12 +44,12 @@ export function EquipmentDetailScreen({
 
   if (!item) {
     return (
-      <View style={styles.EquipmentDetailScreenMissingBolsillo}>
-        <Text style={styles.EquipmentDetailScreenMissingFiligrana}>
+      <View style={styles.EquipmentDetailScreenMissingRecinto}>
+        <Text style={styles.EquipmentDetailScreenMissingLamina}>
           Equipment not found
         </Text>
         <Pressable onPress={onBack}>
-          <Text style={styles.EquipmentDetailScreenNavLinkFiligrana}>
+          <Text style={styles.EquipmentDetailScreenNavLinkLamina}>
             ‹ Farm
           </Text>
         </Pressable>
@@ -86,7 +87,7 @@ export function EquipmentDetailScreen({
   return (
     <ImageBackground
       source={appFondo}
-      style={styles.EquipmentDetailScreenRaizCasco}
+      style={styles.EquipmentDetailScreenNucleoAndamio}
       resizeMode="cover"
     >
       <ScrollView
@@ -99,17 +100,17 @@ export function EquipmentDetailScreen({
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.EquipmentDetailScreenHeaderRowDintel}>
+        <View style={styles.EquipmentDetailScreenHeaderRowFriso}>
           <Pressable
             onPress={onBack}
             hitSlop={12}
             style={styles.EquipmentDetailScreenNavSide}
           >
-            <Text style={styles.EquipmentDetailScreenNavLinkFiligrana}>
+            <Text style={styles.EquipmentDetailScreenNavLinkLamina}>
               ‹ Farm
             </Text>
           </Pressable>
-          <Text style={styles.EquipmentDetailScreenTitleFiligrana}>
+          <Text style={styles.EquipmentDetailScreenTitleLamina}>
             Equipment
           </Text>
           <Pressable
@@ -117,7 +118,7 @@ export function EquipmentDetailScreen({
             hitSlop={12}
             style={styles.EquipmentDetailScreenNavSideRight}
           >
-            <Text style={styles.EquipmentDetailScreenNavLinkBoldFiligrana}>
+            <Text style={styles.EquipmentDetailScreenNavLinkBoldLamina}>
               Edit
             </Text>
           </Pressable>
@@ -126,7 +127,7 @@ export function EquipmentDetailScreen({
         <View style={{ paddingHorizontal: adaptive.horizontalRelleno }}>
           <View style={styles.EquipmentDetailScreenIdentityRow}>
             <View style={styles.EquipmentDetailScreenIconBox}>
-              <Text style={styles.EquipmentDetailScreenIconMarca}>
+              <Text style={styles.EquipmentDetailScreenIconSello}>
                 {item.icon}
               </Text>
             </View>
@@ -174,14 +175,11 @@ export function EquipmentDetailScreen({
                 {serviceProgressEtiqueta}
               </Text>
             </View>
-            <View style={styles.EquipmentDetailScreenProgressTrack}>
-              <View
-                style={[
-                  styles.EquipmentDetailScreenProgressFill,
-                  { width: `${item.serviceProgreso * 100}%` },
-                ]}
-              />
-            </View>
+            <ProgressBar
+              progress={item.serviceProgreso}
+              height={8}
+              color={colors.gold}
+            />
           </View>
 
           <View style={styles.EquipmentDetailScreenActionRow}>
@@ -196,7 +194,7 @@ export function EquipmentDetailScreen({
               onPress={() => setHoursAbierto(true)}
               style={({ pressed }) => [
                 styles.EquipmentDetailScreenSecondaryHalf,
-                pressed && styles.EquipmentDetailScreenPressedDim,
+                pressed && styles.EquipmentDetailScreenPressedOpaco,
               ]}
             >
               <Text style={styles.EquipmentDetailScreenSecondaryHalfLabel}>
@@ -213,7 +211,7 @@ export function EquipmentDetailScreen({
             }}
             style={({ pressed }) => [
               styles.EquipmentDetailScreenChangeStatusBtn,
-              pressed && styles.EquipmentDetailScreenPressedDim,
+              pressed && styles.EquipmentDetailScreenPressedOpaco,
             ]}
           >
             <Text style={styles.EquipmentDetailScreenChangeStatusLabel}>
@@ -238,11 +236,11 @@ export function EquipmentDetailScreen({
       {toast ? (
         <View
           style={[
-            styles.EquipmentDetailScreenToastCasco,
+            styles.EquipmentDetailScreenToastAndamio,
             { bottom: insets.bottom + adaptive.verticalEscala(24) },
           ]}
         >
-          <Text style={styles.EquipmentDetailScreenToastFiligrana}>{toast}</Text>
+          <Text style={styles.EquipmentDetailScreenToastLamina}>{toast}</Text>
         </View>
       ) : null}
 
@@ -266,32 +264,30 @@ export function EquipmentDetailScreen({
 }
 
 const styles = StyleSheet.create({
-  EquipmentDetailScreenRaizCasco: {
+  EquipmentDetailScreenNucleoAndamio: {
     backgroundColor: colors.background,
     flex: 1,
   },
 
-
-  EquipmentDetailScreenMissingBolsillo: {
+  EquipmentDetailScreenMissingRecinto: {
     alignItems: 'center',
     backgroundColor: colors.background,
     flex: 1,
     justifyContent: 'center',
   },
 
-
-
-  EquipmentDetailScreenMissingFiligrana: {
+  EquipmentDetailScreenMissingLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 18,
     marginBottom: 12,
   },
+
   EquipmentDetailScreenScrollContent: {
     flexGrow: 1,
   },
 
-  EquipmentDetailScreenHeaderRowDintel: {
+  EquipmentDetailScreenHeaderRowFriso: {
     alignItems: 'center',
     borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
@@ -301,34 +297,35 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingHorizontal: 16,
   },
+
   EquipmentDetailScreenNavSide: {
     minWidth: 72,
   },
+
   EquipmentDetailScreenNavSideRight: {
     alignItems: 'flex-end',
     minWidth: 72,
   },
 
-  EquipmentDetailScreenNavLinkFiligrana: {
+  EquipmentDetailScreenNavLinkLamina: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
 
-  EquipmentDetailScreenNavLinkBoldFiligrana: {
+  EquipmentDetailScreenNavLinkBoldLamina: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 14,
     fontWeight: '700',
   },
-  EquipmentDetailScreenTitleFiligrana: {
+
+  EquipmentDetailScreenTitleLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
-
-
 
   EquipmentDetailScreenIdentityRow: {
     alignItems: 'center',
@@ -346,9 +343,7 @@ const styles = StyleSheet.create({
     width: 54,
   },
 
-
-
-  EquipmentDetailScreenIconMarca: {
+  EquipmentDetailScreenIconSello: {
     fontSize: 28,
   },
 
@@ -358,7 +353,6 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: '700',
   },
-
 
   EquipmentDetailScreenMeta: {
     color: colors.bodyApagado,
@@ -376,8 +370,6 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
 
-
-
   EquipmentDetailScreenKvRow: {
     alignItems: 'center',
     flexDirection: 'row',
@@ -392,21 +384,17 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
 
-
   EquipmentDetailScreenKvLabel: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
   },
 
-
-
   EquipmentDetailScreenKvValue: {
     color: colors.cream,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
   },
-
 
   EquipmentDetailScreenProgressCard: {
     backgroundColor: colors.card,
@@ -416,7 +404,6 @@ const styles = StyleSheet.create({
     marginBottom: 14,
     padding: 15,
   },
-
 
   EquipmentDetailScreenProgressHeader: {
     flexDirection: 'row',
@@ -436,19 +423,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 
-  EquipmentDetailScreenProgressTrack: {
-    backgroundColor: colors.progressTrackDeep,
-    borderRadius: 4,
-    height: 8,
-    overflow: 'hidden',
-  },
-
-  EquipmentDetailScreenProgressFill: {
-    backgroundColor: colors.danger,
-    borderRadius: 4,
-    height: '100%',
-  },
-
   EquipmentDetailScreenActionRow: {
     flexDirection: 'row',
     gap: 10,
@@ -458,8 +432,6 @@ const styles = StyleSheet.create({
   EquipmentDetailScreenHalfBtn: {
     flex: 1,
   },
-
-
 
   EquipmentDetailScreenSecondaryHalf: {
     alignItems: 'center',
@@ -472,7 +444,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-
   EquipmentDetailScreenSecondaryHalfLabel: {
     color: colors.backButtonText,
     fontFamily: fonts.sansBold,
@@ -480,11 +451,9 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-  EquipmentDetailScreenPressedDim: {
+  EquipmentDetailScreenPressedOpaco: {
     opacity: 0.88,
   },
-
-
 
   EquipmentDetailScreenChangeStatusBtn: {
     alignItems: 'center',
@@ -504,7 +473,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-
   EquipmentDetailScreenDeleteBtn: {
     alignItems: 'center',
     backgroundColor: colors.dangerSoftStrong,
@@ -522,8 +490,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-
-  EquipmentDetailScreenToastCasco: {
+  EquipmentDetailScreenToastAndamio: {
     alignSelf: 'center',
     backgroundColor: colors.toastBg,
     borderColor: colors.border,
@@ -534,9 +501,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 
-
-
-  EquipmentDetailScreenToastFiligrana: {
+  EquipmentDetailScreenToastLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 13,

@@ -52,7 +52,7 @@ export function WorkCompletedScreen({
   return (
     <ImageBackground
       source={appFondo}
-      style={styles.WorkCompletedScreenRaizCasco}
+      style={styles.WorkCompletedScreenNucleoAndamio}
       resizeMode="cover"
     >
       <ScrollView
@@ -66,33 +66,33 @@ export function WorkCompletedScreen({
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.WorkCompletedScreenHeaderRowDintel}>
+        <View style={styles.WorkCompletedScreenHeaderRowFriso}>
           <Pressable
             onPress={onBackToTrabajo}
             hitSlop={12}
             style={styles.WorkCompletedScreenNavSide}
           >
-            <Text style={styles.WorkCompletedScreenNavLinkFiligrana}>
+            <Text style={styles.WorkCompletedScreenNavLinkLamina}>
               ‹ Work
             </Text>
           </Pressable>
-          <Text style={styles.WorkCompletedScreenTitleFiligrana}>Completed</Text>
+          <Text style={styles.WorkCompletedScreenTitleLamina}>Completed</Text>
           <View style={styles.WorkCompletedScreenNavSide} />
         </View>
 
-        <View style={styles.WorkCompletedScreenHeroBolsillo}>
-          <View style={styles.WorkCompletedScreenCheckOrbe}>
-            <Text style={styles.WorkCompletedScreenCheckEmblema}>✓</Text>
+        <View style={styles.WorkCompletedScreenHeroRecinto}>
+          <View style={styles.WorkCompletedScreenCheckDisco}>
+            <Text style={styles.WorkCompletedScreenCheckEscudo}>✓</Text>
           </View>
-          <Text style={styles.WorkCompletedScreenHeroTitleFiligrana}>
+          <Text style={styles.WorkCompletedScreenHeroTitleLamina}>
             Work Completed
           </Text>
-          <Text style={styles.WorkCompletedScreenHeroHintFiligrana}>
+          <Text style={styles.WorkCompletedScreenHeroHintLamina}>
             The activity has been saved and farm records have been updated.
           </Text>
         </View>
 
-        <View style={styles.WorkCompletedScreenSummaryCasco}>
+        <View style={styles.WorkCompletedScreenSummaryAndamio}>
           {rows.map((row, index) => (
             <View
               key={row.label}
@@ -120,7 +120,7 @@ export function WorkCompletedScreen({
             onPress={onBackToTrabajo}
             style={({ pressed }) => [
               styles.WorkCompletedScreenSecondaryBtn,
-              pressed && styles.WorkCompletedScreenPressedDim,
+              pressed && styles.WorkCompletedScreenPressedOpaco,
             ]}
           >
             <Text style={styles.WorkCompletedScreenSecondaryBtnLabel}>
@@ -139,29 +139,29 @@ export function WorkCompletedScreen({
 }
 
 const styles = StyleSheet.create({
-  WorkCompletedScreenRaizCasco: {
+  WorkCompletedScreenNucleoAndamio: {
     backgroundColor: colors.background,
     flex: 1,
   },
 
   WorkCompletedScreenScrollContent: { flexGrow: 1 },
 
-
-
-  WorkCompletedScreenHeaderRowDintel: {
+  WorkCompletedScreenHeaderRowFriso: {
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: 28,
   },
+
   WorkCompletedScreenNavSide: { minWidth: 72 },
-  WorkCompletedScreenNavLinkFiligrana: {
+
+  WorkCompletedScreenNavLinkLamina: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
-  WorkCompletedScreenTitleFiligrana: {
+  WorkCompletedScreenTitleLamina: {
     color: colors.cream,
     flex: 1,
     fontFamily: fonts.sansBold,
@@ -169,11 +169,10 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     textAlign: 'center',
   },
-  WorkCompletedScreenHeroBolsillo: { alignItems: 'center', marginBottom: 28 },
 
+  WorkCompletedScreenHeroRecinto: { alignItems: 'center', marginBottom: 28 },
 
-
-  WorkCompletedScreenCheckOrbe: {
+  WorkCompletedScreenCheckDisco: {
     alignItems: 'center',
     backgroundColor: colors.successBoton,
     borderColor: colors.white,
@@ -185,7 +184,7 @@ const styles = StyleSheet.create({
     width: 72,
   },
 
-  WorkCompletedScreenCheckEmblema: {
+  WorkCompletedScreenCheckEscudo: {
     color: colors.white,
     fontFamily: fonts.sansBold,
     fontSize: 34,
@@ -193,16 +192,14 @@ const styles = StyleSheet.create({
     lineHeight: 38,
   },
 
-
-  WorkCompletedScreenHeroTitleFiligrana: {
+  WorkCompletedScreenHeroTitleLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 26,
     fontWeight: '700',
   },
 
-
-  WorkCompletedScreenHeroHintFiligrana: {
+  WorkCompletedScreenHeroHintLamina: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 14,
@@ -212,8 +209,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-
-  WorkCompletedScreenSummaryCasco: {
+  WorkCompletedScreenSummaryAndamio: {
     backgroundColor: colors.card,
     borderColor: colors.border,
     borderRadius: radius.card,
@@ -223,19 +219,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 
-
-
   WorkCompletedScreenKvRow: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingVertical: 14,
   },
+
   WorkCompletedScreenKvRowBorder: {
     borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
   },
-
 
   WorkCompletedScreenKvLabel: {
     color: colors.bodyApagado,
@@ -244,8 +238,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginRight: 10,
   },
-
-
 
   WorkCompletedScreenKvValue: {
     flexShrink: 1,
@@ -256,6 +248,7 @@ const styles = StyleSheet.create({
   },
 
   WorkCompletedScreenFooterRow: { flexDirection: 'row', gap: 10 },
+
   WorkCompletedScreenSecondaryBtn: {
     alignItems: 'center',
     backgroundColor: colors.card,
@@ -274,11 +267,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-
-
   WorkCompletedScreenPrimaryBtn: { flex: 1 },
 
-
-
-  WorkCompletedScreenPressedDim: { opacity: 0.85 },
+  WorkCompletedScreenPressedOpaco: { opacity: 0.85 },
 });

@@ -47,7 +47,6 @@ export function WorkScreen({ onOpenTarea, onAddTarea }: WorkScreenProps) {
   const adaptive = useAdaptativo();
   const { tasks: storedTareas } = useTareas();
   const [mode, setModo] = useState<WorkMode>('tasks');
-  const [demoVacio, setDemoVacio] = useState(false);
   const [filter, setFiltro] = useState<(typeof WORK_FILTROS)[number]>('All');
 
   const today = useMemo(() => {
@@ -63,7 +62,7 @@ export function WorkScreen({ onOpenTarea, onAddTarea }: WorkScreenProps) {
   const [viewMes, setViewMes] = useState(today.month);
   const [selectedDia, setSelectedDia] = useState(today.day);
 
-  const tasks = demoVacio ? [] : storedTareas;
+  const tasks = storedTareas;
   const stats = workEstadisticas(tasks);
 
   const filtered = useMemo(() => {
@@ -108,7 +107,7 @@ export function WorkScreen({ onOpenTarea, onAddTarea }: WorkScreenProps) {
   return (
     <ImageBackground
       source={appFondo}
-      style={styles.WorkScreenRaizCasco}
+      style={styles.WorkScreenNucleoAndamio}
       resizeMode="cover"
     >
       <ScrollView
@@ -122,23 +121,21 @@ export function WorkScreen({ onOpenTarea, onAddTarea }: WorkScreenProps) {
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.WorkScreenHeaderRowDintel}>
-          <Pressable onPress={() => setDemoVacio(v => !v)} hitSlop={8}>
-            <Text style={styles.WorkScreenTitleFiligrana}>Work</Text>
-          </Pressable>
+        <View style={styles.WorkScreenHeaderRowFriso}>
+          <Text style={styles.WorkScreenTitleLamina}>Work</Text>
           <Pressable onPress={onAddTarea} hitSlop={8}>
             <LinearGradient
               colors={[colors.buttonGradientStart, colors.buttonGradientEnd]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
-              style={styles.WorkScreenAddOrbe}
+              style={styles.WorkScreenAddDisco}
             >
-              <Text style={styles.WorkScreenAddMarca}>+</Text>
+              <Text style={styles.WorkScreenAddSello}>+</Text>
             </LinearGradient>
           </Pressable>
         </View>
 
-        <View style={styles.WorkScreenSegCasco}>
+        <View style={styles.WorkScreenSegAndamio}>
           <Pressable
             onPress={() => setModo('tasks')}
             style={[
@@ -219,9 +216,9 @@ export function WorkScreen({ onOpenTarea, onAddTarea }: WorkScreenProps) {
 
             {emptyTareas ? (
               <View style={styles.WorkScreenEmptyCard}>
-                <Text style={styles.WorkScreenEmptyEmblema}>✅</Text>
+                <Text style={styles.WorkScreenEmptyEscudo}>✅</Text>
                 <Text style={styles.WorkScreenEmptyTitle}>No tasks yet</Text>
-                <Text style={styles.WorkScreenEmptyHintFiligrana}>
+                <Text style={styles.WorkScreenEmptyHintLamina}>
                   Plan your first job to get started.
                 </Text>
                 <PrimaryButton
@@ -291,7 +288,7 @@ function TaskCard({ task, onPress }: { task: WorkTask; onPress: () => void }) {
       onPress={onPress}
       style={({ pressed }) => [
         styles.WorkScreenTaskCard,
-        pressed && styles.WorkScreenPressedDim,
+        pressed && styles.WorkScreenPressedOpaco,
       ]}
     >
       <View style={styles.WorkScreenTaskAccent} />
@@ -478,9 +475,9 @@ function CalendarPanel({
 
       {dayTareas.length === 0 ? (
         <View style={styles.WorkScreenEmptyCard}>
-          <Text style={styles.WorkScreenEmptyEmblema}>🗓️</Text>
+          <Text style={styles.WorkScreenEmptyEscudo}>🗓️</Text>
           <Text style={styles.WorkScreenEmptyTitle}>No tasks on this day</Text>
-          <Text style={styles.WorkScreenEmptyHintFiligrana}>
+          <Text style={styles.WorkScreenEmptyHintLamina}>
             Tap + to schedule work for {dayEtiqueta}.
           </Text>
           <PrimaryButton
@@ -510,42 +507,41 @@ function CalendarPanel({
 }
 
 const styles = StyleSheet.create({
-  WorkScreenRaizCasco: { backgroundColor: colors.background, flex: 1 },
+  WorkScreenNucleoAndamio: { backgroundColor: colors.background, flex: 1 },
+
   WorkScreenScrollContent: { flexGrow: 1 },
 
-
-  WorkScreenHeaderRowDintel: {
+  WorkScreenHeaderRowFriso: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 14,
   },
 
-
-  WorkScreenTitleFiligrana: {
+  WorkScreenTitleLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 24,
     fontWeight: '700',
   },
 
-
-
-  WorkScreenAddOrbe: {
+  WorkScreenAddDisco: {
     alignItems: 'center',
     borderRadius: 12,
     height: 40,
     justifyContent: 'center',
     width: 40,
   },
-  WorkScreenAddMarca: {
+
+  WorkScreenAddSello: {
     color: colors.buttonText,
     fontFamily: fonts.sansBold,
     fontSize: 22,
     fontWeight: '700',
     lineHeight: 24,
   },
-  WorkScreenSegCasco: {
+
+  WorkScreenSegAndamio: {
     backgroundColor: colors.card,
     borderColor: colors.border,
     borderRadius: 13,
@@ -562,7 +558,6 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
 
-
   WorkScreenSegItemOn: {},
 
   WorkScreenSegGradient: {
@@ -571,8 +566,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-
-
 
   WorkScreenSegLabel: {
     color: colors.bodyApagado,
@@ -583,14 +576,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-
   WorkScreenSegLabelOn: {
     color: colors.buttonText,
     fontFamily: fonts.sansBold,
     fontSize: 13,
     fontWeight: '700',
   },
+
   WorkScreenStatsRow: { flexDirection: 'row', gap: 8, marginBottom: 14 },
+
   WorkScreenStatCard: {
     alignItems: 'center',
     backgroundColor: colors.card,
@@ -602,14 +596,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-
-
   WorkScreenStatValue: {
     fontFamily: fonts.sansBold,
     fontSize: 21,
     fontWeight: '700',
   },
-
 
   WorkScreenStatLabel: {
     color: colors.bodyApagado,
@@ -617,8 +608,6 @@ const styles = StyleSheet.create({
     fontSize: 10,
     marginTop: 2,
   },
-
-
 
   WorkScreenFilterRow: {
     alignItems: 'center',
@@ -636,10 +625,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 9,
   },
 
-
   WorkScreenFilterChipActive: { backgroundColor: 'rgba(245, 182, 66, 0.16)' },
-
-
 
   WorkScreenFilterChipIdle: { backgroundColor: 'rgba(139, 148, 173, 0.16)' },
 
@@ -650,9 +636,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-
   WorkScreenFilterChipLabelActive: { color: colors.gold },
-
 
   WorkScreenTaskCard: {
     backgroundColor: colors.card,
@@ -664,25 +648,19 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
 
-
-
-  WorkScreenPressedDim: { opacity: 0.9 },
+  WorkScreenPressedOpaco: { opacity: 0.9 },
 
   WorkScreenTaskAccent: { backgroundColor: colors.border, width: 3 },
 
-
-
   WorkScreenTaskBody: { flex: 1, paddingHorizontal: 15, paddingVertical: 15 },
+
   WorkScreenTaskHeader: {
     alignItems: 'flex-start',
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
 
-
   WorkScreenTaskTitleCol: { flex: 1, marginRight: 8 },
-
-
 
   WorkScreenTaskTitle: {
     color: colors.cream,
@@ -698,14 +676,13 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
 
-
-
   WorkScreenTaskMeta: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginTop: 8,
   },
+
   WorkScreenPillRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -726,8 +703,6 @@ const styles = StyleSheet.create({
     fontSize: 11,
   },
 
-
-
   WorkScreenStatusChip: {
     alignSelf: 'flex-start',
     borderRadius: 20,
@@ -735,14 +710,11 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
   },
 
-
   WorkScreenStatusChipLabel: {
     fontFamily: fonts.sansBold,
     fontSize: 10,
     fontWeight: '700',
   },
-
-
 
   WorkScreenEmptyCard: {
     alignItems: 'center',
@@ -755,8 +727,8 @@ const styles = StyleSheet.create({
     paddingVertical: 28,
   },
 
+  WorkScreenEmptyEscudo: { fontSize: 34 },
 
-  WorkScreenEmptyEmblema: { fontSize: 34 },
   WorkScreenEmptyTitle: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -765,9 +737,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 
-
-
-  WorkScreenEmptyHintFiligrana: {
+  WorkScreenEmptyHintLamina: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
@@ -787,7 +757,6 @@ const styles = StyleSheet.create({
     padding: 14,
   },
 
-
   WorkScreenCalendarHeader: {
     alignItems: 'center',
     flexDirection: 'row',
@@ -800,6 +769,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingHorizontal: 8,
   },
+
   WorkScreenCalendarMonth: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -807,8 +777,8 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-
   WorkScreenWeekRow: { flexDirection: 'row', marginBottom: 6 },
+
   WorkScreenWeekday: {
     color: colors.bodyApagado,
     flex: 1,
@@ -817,17 +787,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-
-
   WorkScreenDaysGrid: { flexDirection: 'row', flexWrap: 'wrap' },
-
 
   WorkScreenDayCell: {
     alignItems: 'center',
     height: 44,
     width: '14.2857%',
   },
-
 
   WorkScreenDayBubble: {
     alignItems: 'center',
@@ -845,9 +811,8 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '700',
   },
+
   WorkScreenDayNumOn: { color: colors.buttonText },
-
-
 
   WorkScreenDayDot: {
     borderRadius: 3,
@@ -855,8 +820,6 @@ const styles = StyleSheet.create({
     marginTop: 2,
     width: 5,
   },
-
-
 
   WorkScreenDayDotSpacer: { height: 7 },
 
@@ -891,6 +854,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     padding: 14,
   },
+
   WorkScreenAgendaTime: {
     color: colors.gold,
     fontFamily: fonts.sansBold,

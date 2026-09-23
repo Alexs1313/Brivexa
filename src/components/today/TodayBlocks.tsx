@@ -12,7 +12,7 @@ const TINT: Record<QuickAction['tint'], string> = {
 };
 
 export function SectionTitle({ title }: { title: string }) {
-  return <Text style={styles.TodayBlocksSectionTitleFiligrana}>{title}</Text>;
+  return <Text style={styles.TodayBlocksSectionTitleLamina}>{title}</Text>;
 }
 
 export function StatusChip({ status }: { status: TodayTask['status'] }) {
@@ -20,7 +20,7 @@ export function StatusChip({ status }: { status: TodayTask['status'] }) {
     return (
       <View
         style={[
-          styles.TodayBlocksChipPlinto,
+          styles.TodayBlocksChipPedestal,
           { backgroundColor: colors.infoSuave },
         ]}
       >
@@ -34,7 +34,7 @@ export function StatusChip({ status }: { status: TodayTask['status'] }) {
     return (
       <View
         style={[
-          styles.TodayBlocksChipPlinto,
+          styles.TodayBlocksChipPedestal,
           { backgroundColor: colors.successSuave },
         ]}
       >
@@ -47,7 +47,7 @@ export function StatusChip({ status }: { status: TodayTask['status'] }) {
   return (
     <View
       style={[
-        styles.TodayBlocksChipPlinto,
+        styles.TodayBlocksChipPedestal,
         { backgroundColor: colors.plannedSuave },
       ]}
     >
@@ -64,14 +64,14 @@ export function TaskCard({ task }: { task: TodayTask }) {
   return (
     <View
       style={[
-        styles.TodayBlocksTaskCardCasco,
-        completed && styles.TodayBlocksTaskCardCompletedDim,
+        styles.TodayBlocksTaskCardAndamio,
+        completed && styles.TodayBlocksTaskCardCompletedOpaco,
       ]}
     >
       <View style={styles.TodayBlocksTaskCardAccentRail} />
       <View style={styles.TodayBlocksTaskCardBody}>
         <View style={styles.TodayBlocksTaskCardHeaderRow}>
-          <Text style={styles.TodayBlocksTaskCardTitleFiligrana}>
+          <Text style={styles.TodayBlocksTaskCardTitleLamina}>
             {task.title}
           </Text>
           <StatusChip status={task.status} />
@@ -82,21 +82,21 @@ export function TaskCard({ task }: { task: TodayTask }) {
         {!completed && (task.assignee || task.equipment || task.priority) ? (
           <View style={styles.TodayBlocksTaskCardPillRow}>
             {task.assignee ? (
-              <View style={styles.TodayBlocksPillPlinto}>
+              <View style={styles.TodayBlocksPillPedestal}>
                 <Text style={styles.TodayBlocksPillLabel}>
                   👤 {task.assignee}
                 </Text>
               </View>
             ) : null}
             {task.equipment ? (
-              <View style={styles.TodayBlocksPillPlinto}>
+              <View style={styles.TodayBlocksPillPedestal}>
                 <Text style={styles.TodayBlocksPillLabel}>
                   🚜 {task.equipment}
                 </Text>
               </View>
             ) : null}
             {task.priority ? (
-              <View style={styles.TodayBlocksPillPlinto}>
+              <View style={styles.TodayBlocksPillPedestal}>
                 <Text style={styles.TodayBlocksPillLabel}>
                   ⚑ {task.priority}
                 </Text>
@@ -111,7 +111,7 @@ export function TaskCard({ task }: { task: TodayTask }) {
 
 export function UpcomingList({ items }: { items: UpcomingWork[] }) {
   return (
-    <View style={styles.TodayBlocksUpcomingCasco}>
+    <View style={styles.TodayBlocksUpcomingAndamio}>
       {items.map((item, index) => (
         <View
           key={item.id}
@@ -121,13 +121,13 @@ export function UpcomingList({ items }: { items: UpcomingWork[] }) {
           ]}
         >
           <View style={styles.TodayBlocksUpcomingDateCol}>
-            <Text style={styles.TodayBlocksUpcomingDayFiligrana}>
+            <Text style={styles.TodayBlocksUpcomingDayLamina}>
               {item.day}
             </Text>
             <Text style={styles.TodayBlocksUpcomingMonth}>{item.month}</Text>
           </View>
           <View style={styles.TodayBlocksUpcomingCopy}>
-            <Text style={styles.TodayBlocksUpcomingTitleFiligrana}>
+            <Text style={styles.TodayBlocksUpcomingTitleLamina}>
               {item.title}
             </Text>
             <Text style={styles.TodayBlocksUpcomingSubtitle}>
@@ -166,7 +166,7 @@ export function QuickActionsGrid({
           >
             <Text style={styles.TodayBlocksQuickIcon}>{action.icon}</Text>
           </View>
-          <Text style={styles.TodayBlocksQuickLabelFiligrana}>
+          <Text style={styles.TodayBlocksQuickLabelLamina}>
             {action.label}
           </Text>
         </Pressable>
@@ -176,26 +176,27 @@ export function QuickActionsGrid({
 }
 
 const styles = StyleSheet.create({
-  TodayBlocksSectionTitleFiligrana: {
+  TodayBlocksSectionTitleLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 18,
     fontWeight: '700',
     marginBottom: 12,
   },
-  TodayBlocksChipPlinto: {
+
+  TodayBlocksChipPedestal: {
     borderRadius: 20,
     paddingHorizontal: 9,
     paddingVertical: 3,
   },
+
   TodayBlocksChipLabel: {
     fontFamily: fonts.sansBold,
     fontSize: 10,
     fontWeight: '700',
   },
 
-
-  TodayBlocksTaskCardCasco: {
+  TodayBlocksTaskCardAndamio: {
     backgroundColor: colors.card,
     borderColor: colors.border,
     borderRadius: radius.card,
@@ -205,9 +206,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
 
-
-
-  TodayBlocksTaskCardCompletedDim: {
+  TodayBlocksTaskCardCompletedOpaco: {
     opacity: 0.75,
   },
 
@@ -216,15 +215,11 @@ const styles = StyleSheet.create({
     width: 3,
   },
 
-
-
   TodayBlocksTaskCardBody: {
     flex: 1,
     paddingHorizontal: 15,
     paddingVertical: 15,
   },
-
-
 
   TodayBlocksTaskCardHeaderRow: {
     alignItems: 'center',
@@ -232,8 +227,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
 
-
-  TodayBlocksTaskCardTitleFiligrana: {
+  TodayBlocksTaskCardTitleLamina: {
     color: colors.cream,
     flexShrink: 1,
     fontFamily: fonts.sansBold,
@@ -241,12 +235,14 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginRight: 8,
   },
+
   TodayBlocksTaskCardMeta: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginTop: 6,
   },
+
   TodayBlocksTaskCardPillRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -254,14 +250,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 
-
-  TodayBlocksPillPlinto: {
+  TodayBlocksPillPedestal: {
     backgroundColor: colors.pill,
     borderRadius: 8,
     paddingHorizontal: 8,
     paddingVertical: 4,
   },
-
 
   TodayBlocksPillLabel: {
     color: colors.body,
@@ -269,15 +263,13 @@ const styles = StyleSheet.create({
     fontSize: 11,
   },
 
-  TodayBlocksUpcomingCasco: {
+  TodayBlocksUpcomingAndamio: {
     backgroundColor: colors.card,
     borderColor: colors.border,
     borderRadius: 16,
     borderWidth: 1,
     overflow: 'hidden',
   },
-
-
 
   TodayBlocksUpcomingRow: {
     alignItems: 'center',
@@ -286,20 +278,17 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
 
-
-
   TodayBlocksUpcomingRowDivider: {
     borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
   },
-
 
   TodayBlocksUpcomingDateCol: {
     alignItems: 'center',
     width: 40,
   },
 
-  TodayBlocksUpcomingDayFiligrana: {
+  TodayBlocksUpcomingDayLamina: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
@@ -318,8 +307,7 @@ const styles = StyleSheet.create({
     marginLeft: 12,
   },
 
-
-  TodayBlocksUpcomingTitleFiligrana: {
+  TodayBlocksUpcomingTitleLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 14,
@@ -332,6 +320,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginTop: 2,
   },
+
   TodayBlocksQuickGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -353,11 +342,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
   },
 
-
   TodayBlocksQuickCardPressed: {
     opacity: 0.85,
   },
-
 
   TodayBlocksQuickIconWell: {
     alignItems: 'center',
@@ -371,9 +358,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 
-
-
-  TodayBlocksQuickLabelFiligrana: {
+  TodayBlocksQuickLabelLamina: {
     color: colors.cream,
     flexShrink: 1,
     fontFamily: fonts.sansBold,

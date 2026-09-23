@@ -62,7 +62,7 @@ export function OnboardingScreen({ onCompletar }: OnboardingScreenProps) {
           ]}
           hitSlop={12}
         >
-          <Text style={styles.OnboardingScreenTopSkipFiligrana}>Skip</Text>
+          <Text style={styles.OnboardingScreenTopSkipLamina}>Skip</Text>
         </Pressable>
 
         <View
@@ -74,19 +74,19 @@ export function OnboardingScreen({ onCompletar }: OnboardingScreenProps) {
             },
           ]}
         >
-          <View style={styles.OnboardingScreenHeroBolsillo}>
+          <View style={styles.OnboardingScreenHeroRecinto}>
             <Image
               source={step.art}
               style={[
-                styles.OnboardingScreenArtEmblema,
+                styles.OnboardingScreenArtEscudo,
                 { width: adaptive.artTamano, height: adaptive.artTamano },
               ]}
               resizeMode="contain"
             />
           </View>
 
-          <View style={styles.OnboardingScreenCaptionBolsillo}>
-            <Text style={styles.OnboardingScreenTitleFiligrana}>
+          <View style={styles.OnboardingScreenCaptionRecinto}>
+            <Text style={styles.OnboardingScreenTitleLamina}>
               {step.title}
             </Text>
             <Text style={styles.OnboardingScreenDescription}>
@@ -119,18 +119,14 @@ export function OnboardingScreen({ onCompletar }: OnboardingScreenProps) {
 }
 
 const styles = StyleSheet.create({
-  OnboardingScreenRaizCasco: {
+  OnboardingScreenNucleoAndamio: {
     backgroundColor: colors.background,
     flex: 1,
   },
 
-
-
   OnboardingScreenBackground: {
     flex: 1,
   },
-
-
 
   OnboardingScreenTopSkip: {
     position: 'absolute',
@@ -138,12 +134,11 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
 
-  OnboardingScreenTopSkipFiligrana: {
+  OnboardingScreenTopSkipLamina: {
     color: colors.skip,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
-
 
   OnboardingScreenContent: {
     flex: 1,
@@ -151,23 +146,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 18,
   },
 
-  OnboardingScreenHeroBolsillo: {
+  OnboardingScreenHeroRecinto: {
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
   },
 
-
-  OnboardingScreenArtEmblema: {
+  OnboardingScreenArtEscudo: {
     maxHeight: 393,
   },
-  OnboardingScreenCaptionBolsillo: {
+
+  OnboardingScreenCaptionRecinto: {
     alignItems: 'center',
     paddingHorizontal: 12,
   },
 
-
-  OnboardingScreenTitleFiligrana: {
+  OnboardingScreenTitleLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 26,
@@ -185,21 +179,16 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-
   OnboardingScreenFooter: {
     gap: 24,
     paddingTop: 28,
   },
-
-
 
   OnboardingScreenActionRow: {
     alignItems: 'center',
     flexDirection: 'row',
     gap: 12,
   },
-
-
 
   OnboardingScreenPrimaryAction: {
     flex: 1,

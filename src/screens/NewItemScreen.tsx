@@ -44,7 +44,7 @@ export function NewItemScreen({ onCancel, onGuardar }: NewItemScreenProps) {
   return (
     <ImageBackground
       source={appFondo}
-      style={styles.NewItemScreenRaizCasco}
+      style={styles.NewItemScreenNucleoAndamio}
       resizeMode="cover"
     >
       <ScrollView
@@ -58,15 +58,15 @@ export function NewItemScreen({ onCancel, onGuardar }: NewItemScreenProps) {
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.NewItemScreenHeaderRowDintel}>
+        <View style={styles.NewItemScreenHeaderRowFriso}>
           <Pressable
             onPress={onCancel}
             hitSlop={12}
             style={styles.NewItemScreenNavSide}
           >
-            <Text style={styles.NewItemScreenNavLinkFiligrana}>‹ Cancel</Text>
+            <Text style={styles.NewItemScreenNavLinkLamina}>‹ Cancel</Text>
           </Pressable>
-          <Text style={styles.NewItemScreenTitleFiligrana}>New Item</Text>
+          <Text style={styles.NewItemScreenTitleLamina}>New Item</Text>
           <View style={styles.NewItemScreenNavSide} />
         </View>
 
@@ -141,8 +141,8 @@ export function NewItemScreen({ onCancel, onGuardar }: NewItemScreenProps) {
             }}
             fullWidth
             style={[
-              styles.NewItemScreenSavePlinto,
-              !canGuardar && styles.NewItemScreenSavePlintoDisabled,
+              styles.NewItemScreenSavePedestal,
+              !canGuardar && styles.NewItemScreenSavePedestalDisabled,
             ]}
           />
         </View>
@@ -168,13 +168,13 @@ export function FormField({
 }) {
   return (
     <View style={styles.NewItemScreenFieldGroup}>
-      <Text style={styles.NewItemScreenFieldLabelFiligrana}>
+      <Text style={styles.NewItemScreenFieldLabelLamina}>
         {label}
         {required ? (
-          <Text style={styles.NewItemScreenRequiredEmblema}> *</Text>
+          <Text style={styles.NewItemScreenRequiredEscudo}> *</Text>
         ) : null}
       </Text>
-      <View style={styles.NewItemScreenFieldInputCasco}>
+      <View style={styles.NewItemScreenFieldInputAndamio}>
         <TextInput
           value={value}
           onChangeText={onChangeText}
@@ -189,15 +189,16 @@ export function FormField({
 }
 
 const styles = StyleSheet.create({
-  NewItemScreenRaizCasco: {
+  NewItemScreenNucleoAndamio: {
     backgroundColor: colors.background,
     flex: 1,
   },
+
   NewItemScreenScrollContent: {
     flexGrow: 1,
   },
 
-  NewItemScreenHeaderRowDintel: {
+  NewItemScreenHeaderRowFriso: {
     alignItems: 'center',
     borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
@@ -208,46 +209,39 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 
-
-
   NewItemScreenNavSide: {
     minWidth: 72,
   },
 
-
-  NewItemScreenNavLinkFiligrana: {
+  NewItemScreenNavLinkLamina: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
 
-
-  NewItemScreenTitleFiligrana: {
+  NewItemScreenTitleLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
-
-
   NewItemScreenFieldGroup: {
     marginBottom: 14,
   },
 
-
-
-  NewItemScreenFieldLabelFiligrana: {
+  NewItemScreenFieldLabelLamina: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginBottom: 8,
   },
 
-  NewItemScreenRequiredEmblema: {
+  NewItemScreenRequiredEscudo: {
     color: colors.danger,
   },
-  NewItemScreenFieldInputCasco: {
+
+  NewItemScreenFieldInputAndamio: {
     alignItems: 'center',
     backgroundColor: colors.card,
     borderColor: colors.emptyBorde,
@@ -257,6 +251,7 @@ const styles = StyleSheet.create({
     height: 48,
     paddingHorizontal: 14,
   },
+
   NewItemScreenFieldInput: {
     color: colors.cream,
     flex: 1,
@@ -265,13 +260,11 @@ const styles = StyleSheet.create({
     padding: 0,
   },
 
-
-  NewItemScreenSavePlinto: {
+  NewItemScreenSavePedestal: {
     marginTop: 10,
   },
 
-
-  NewItemScreenSavePlintoDisabled: {
+  NewItemScreenSavePedestalDisabled: {
     opacity: 0.55,
   },
 });

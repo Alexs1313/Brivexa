@@ -292,74 +292,57 @@ export const EQUIPMENT: FarmEquipment[] = [
 ];
 
 export const FINANCE_SUMMARY = {
-  netProfitEtiqueta: '$33,600',
-  incomeEtiqueta: '$41,200',
-  expensesEtiqueta: '$7,600',
-  costPerHaEtiqueta: '$105',
+  netProfitEtiqueta: '$0',
+  incomeEtiqueta: '$0',
+  expensesEtiqueta: '$0',
+  costPerHaEtiqueta: '$0',
 };
 
 export const EXPENSE_CATEGORIAS: ExpenseCategory[] = [
   {
     id: 'fert',
     label: 'Fertilizer',
-    amountEtiqueta: '$2,640',
-    progress: 1,
+    amountEtiqueta: '$0',
+    progress: 0,
     color: '#5a8bff',
   },
   {
     id: 'fuel',
     label: 'Fuel',
-    amountEtiqueta: '$1,890',
-    progress: 0.72,
+    amountEtiqueta: '$0',
+    progress: 0,
     color: '#f0932b',
   },
   {
     id: 'labor',
     label: 'Labor',
-    amountEtiqueta: '$1,450',
-    progress: 0.55,
+    amountEtiqueta: '$0',
+    progress: 0,
     color: '#a06bff',
   },
   {
     id: 'equip',
     label: 'Equipment',
-    amountEtiqueta: '$820',
-    progress: 0.31,
+    amountEtiqueta: '$0',
+    progress: 0,
     color: '#e24bc0',
   },
 ];
 
-export const TRANSACTIONS: FarmTransaction[] = [
-  {
-    id: 'tx-wheat',
-    title: 'Winter Wheat Sale',
-    subtitle: 'Crop Sales · River Plot · Jul 12',
-    amountEtiqueta: '+$41,200',
-    kind: 'income',
-    icon: '💰',
-  },
-  {
-    id: 'tx-npk',
-    title: 'NPK Fertilizer',
-    subtitle: 'Fertilizer · North Field · Jul 8',
-    amountEtiqueta: '−$2,640',
-    kind: 'expense',
-    icon: '🧾',
-  },
-];
+export const TRANSACTIONS: FarmTransaction[] = [];
 
 export const SEASON_REPORT: SeasonReport = {
   id: 'rpt-2026',
   title: 'Season 2026',
   subtitle: 'Whole-farm season overview · Season 2026',
   metrics: [
-    {label: 'Total Fields', value: '4'},
-    {label: 'Farmed Area', value: '72.1 ha'},
-    {label: 'Completed Tasks', value: '12'},
-    {label: 'Total Income', value: '$41,200', tone: 'success'},
-    {label: 'Total Expenses', value: '$7,600', tone: 'danger'},
-    {label: 'Net Profit', value: '$33,600', tone: 'success'},
-    {label: 'Best Field', value: 'River Plot', tone: 'gold'},
+    {label: 'Total Fields', value: '0'},
+    {label: 'Farmed Area', value: '0 ha'},
+    {label: 'Completed Tasks', value: '0'},
+    {label: 'Total Income', value: '$0', tone: 'success'},
+    {label: 'Total Expenses', value: '$0', tone: 'danger'},
+    {label: 'Net Profit', value: '$0', tone: 'success'},
+    {label: 'Best Field', value: '—', tone: 'gold'},
   ],
 };
 

@@ -7,7 +7,6 @@ import React, {
 
 import {usePersistedState} from '../hooks/usePersistedState';
 import {
-  FIELDS,
   type FarmField,
   type FieldActivity,
   type FieldExpense,
@@ -154,11 +153,11 @@ function buildCampo(draft: FieldDraft, id?: string): FarmField {
 export function FieldsProvider({children}: {children: React.ReactNode}) {
   const [userCampos, setUserCampos] = usePersistedState<FarmField[] | null>(
     storageClaves.fields,
-    null,
+    [],
   );
 
-  const isMuestra = userCampos === null;
-  const fields = userCampos ?? FIELDS;
+  const isMuestra = false;
+  const fields = userCampos ?? [];
 
   const addCampo = useCallback((draft: FieldDraft) => {
     const field = buildCampo(draft);
@@ -168,7 +167,7 @@ export function FieldsProvider({children}: {children: React.ReactNode}) {
 
   const updateCampo = useCallback((id: string, draft: FieldDraft) => {
     setUserCampos(prev => {
-      const base = prev ?? FIELDS;
+      const base = prev ?? [];
       return base.map(field => {
         if (field.id !== id) {
           return field;
@@ -198,7 +197,7 @@ export function FieldsProvider({children}: {children: React.ReactNode}) {
 
   const removeCampo = useCallback((id: string) => {
     setUserCampos(prev => {
-      const base = prev ?? FIELDS;
+      const base = prev ?? [];
       return base.filter(field => field.id !== id);
     });
   }, []);
@@ -206,7 +205,7 @@ export function FieldsProvider({children}: {children: React.ReactNode}) {
   const mutateCampo = useCallback(
     (id: string, updater: (field: FarmField) => FarmField) => {
       setUserCampos(prev => {
-        const base = prev ?? FIELDS;
+        const base = prev ?? [];
         return base.map(field => (field.id === id ? updater(field) : field));
       });
     },

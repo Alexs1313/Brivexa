@@ -46,7 +46,7 @@ export function AddIncomeScreen({ onCancel, onGuardar }: AddIncomeScreenProps) {
   return (
     <ImageBackground
       source={appFondo}
-      style={styles.AddIncomeScreenRaizCasco}
+      style={styles.AddIncomeScreenNucleoAndamio}
       resizeMode="cover"
     >
       <ScrollView
@@ -60,15 +60,15 @@ export function AddIncomeScreen({ onCancel, onGuardar }: AddIncomeScreenProps) {
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.AddIncomeScreenHeaderRowDintel}>
+        <View style={styles.AddIncomeScreenHeaderRowFriso}>
           <Pressable
             onPress={onCancel}
             hitSlop={12}
             style={styles.AddIncomeScreenNavSide}
           >
-            <Text style={styles.AddIncomeScreenNavLinkFiligrana}>‹ Cancel</Text>
+            <Text style={styles.AddIncomeScreenNavLinkLamina}>‹ Cancel</Text>
           </Pressable>
-          <Text style={styles.AddIncomeScreenTitleFiligrana}>Add Income</Text>
+          <Text style={styles.AddIncomeScreenTitleLamina}>Add Income</Text>
           <View style={styles.AddIncomeScreenNavSide} />
         </View>
 
@@ -137,8 +137,8 @@ export function AddIncomeScreen({ onCancel, onGuardar }: AddIncomeScreenProps) {
             }}
             fullWidth
             style={[
-              styles.AddIncomeScreenSavePlinto,
-              !canGuardar && styles.AddIncomeScreenSavePlintoDisabled,
+              styles.AddIncomeScreenSavePedestal,
+              !canGuardar && styles.AddIncomeScreenSavePedestalDisabled,
             ]}
           />
         </View>
@@ -148,7 +148,7 @@ export function AddIncomeScreen({ onCancel, onGuardar }: AddIncomeScreenProps) {
 }
 
 const styles = StyleSheet.create({
-  AddIncomeScreenRaizCasco: {
+  AddIncomeScreenNucleoAndamio: {
     backgroundColor: colors.background,
     flex: 1,
   },
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 
-  AddIncomeScreenHeaderRowDintel: {
+  AddIncomeScreenHeaderRowFriso: {
     alignItems: 'center',
     borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
@@ -168,29 +168,28 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 
-
   AddIncomeScreenNavSide: {
     minWidth: 72,
   },
 
-
-  AddIncomeScreenNavLinkFiligrana: {
+  AddIncomeScreenNavLinkLamina: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
-  AddIncomeScreenTitleFiligrana: {
+
+  AddIncomeScreenTitleLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
-
-  AddIncomeScreenSavePlinto: {
+  AddIncomeScreenSavePedestal: {
     marginTop: 10,
   },
-  AddIncomeScreenSavePlintoDisabled: {
+
+  AddIncomeScreenSavePedestalDisabled: {
     opacity: 0.55,
   },
 });

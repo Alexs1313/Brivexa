@@ -54,17 +54,17 @@ export function AmountModal({
       animationType="fade"
       onRequestClose={onCancel}
     >
-      <Pressable style={styles.AmountModalBackdropVelo} onPress={onCancel}>
+      <Pressable style={styles.AmountModalBackdropManto} onPress={onCancel}>
         <Pressable
-          style={styles.AmountModalSheetCasco}
+          style={styles.AmountModalSheetAndamio}
           onPress={e => e.stopPropagation()}
         >
-          <Text style={styles.AmountModalTitleFiligrana}>{title}</Text>
+          <Text style={styles.AmountModalTitleLamina}>{title}</Text>
           {subtitle ? (
-            <Text style={styles.AmountModalSubtitleFiligrana}>{subtitle}</Text>
+            <Text style={styles.AmountModalSubtitleLamina}>{subtitle}</Text>
           ) : null}
 
-          <View style={styles.AmountModalFieldInputCasco}>
+          <View style={styles.AmountModalFieldInputAndamio}>
             <TextInput
               value={value}
               onChangeText={setValor}
@@ -89,12 +89,12 @@ export function AmountModal({
             }}
             fullWidth
             style={[
-              styles.AmountModalConfirmPlinto,
-              !canConfirmar && styles.AmountModalPlintoDisabled,
+              styles.AmountModalConfirmPedestal,
+              !canConfirmar && styles.AmountModalPedestalDisabled,
             ]}
           />
-          <Pressable onPress={onCancel} style={styles.AmountModalCancelPlinto}>
-            <Text style={styles.AmountModalCancelFiligrana}>Cancel</Text>
+          <Pressable onPress={onCancel} style={styles.AmountModalCancelPedestal}>
+            <Text style={styles.AmountModalCancelLamina}>Cancel</Text>
           </Pressable>
         </Pressable>
       </Pressable>
@@ -103,14 +103,15 @@ export function AmountModal({
 }
 
 const styles = StyleSheet.create({
-  AmountModalBackdropVelo: {
+  AmountModalBackdropManto: {
     alignItems: 'center',
     backgroundColor: 'rgba(8, 5, 24, 0.72)',
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 24,
   },
-  AmountModalSheetCasco: {
+
+  AmountModalSheetAndamio: {
     backgroundColor: colors.card,
     borderColor: colors.border,
     borderRadius: radius.card,
@@ -120,23 +121,21 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 
-  AmountModalTitleFiligrana: {
+  AmountModalTitleLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 17,
     fontWeight: '700',
   },
 
-
-  AmountModalSubtitleFiligrana: {
+  AmountModalSubtitleLamina: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginTop: 6,
   },
 
-
-  AmountModalFieldInputCasco: {
+  AmountModalFieldInputAndamio: {
     alignItems: 'center',
     backgroundColor: colors.surface,
     borderColor: colors.border,
@@ -147,6 +146,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
     paddingHorizontal: 14,
   },
+
   AmountModalFieldInput: {
     color: colors.cream,
     flex: 1,
@@ -155,8 +155,6 @@ const styles = StyleSheet.create({
     padding: 0,
   },
 
-
-
   AmountModalUnit: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
@@ -164,24 +162,22 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
 
-
-
-  AmountModalConfirmPlinto: {
+  AmountModalConfirmPedestal: {
     marginTop: 14,
   },
 
-
-  AmountModalPlintoDisabled: {
+  AmountModalPedestalDisabled: {
     opacity: 0.45,
   },
-  AmountModalCancelPlinto: {
+
+  AmountModalCancelPedestal: {
     alignItems: 'center',
     height: 44,
     justifyContent: 'center',
     marginTop: 4,
   },
 
-  AmountModalCancelFiligrana: {
+  AmountModalCancelLamina: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansBold,
     fontSize: 15,

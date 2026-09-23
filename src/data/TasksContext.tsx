@@ -9,10 +9,9 @@ import {usePersistedState} from '../hooks/usePersistedState';
 import {APP_TODAY_KEY} from './dates';
 import {storageClaves} from './storage';
 import type {TodayTask, UpcomingWork} from './today';
-import {
-  WORK_TAREAS,
-  type WorkPriority,
-  type WorkTask,
+import type {
+  WorkPriority,
+  WorkTask,
 } from './work';
 
 export {APP_TODAY_KEY};
@@ -180,11 +179,11 @@ function buildTarea(draft: NewTaskDraft): WorkTask {
 export function TasksProvider({children}: {children: React.ReactNode}) {
   const [userTareas, setUserTareas] = usePersistedState<WorkTask[] | null>(
     storageClaves.tasks,
-    null,
+    [],
   );
 
-  const isMuestra = userTareas === null;
-  const tasks = userTareas ?? WORK_TAREAS;
+  const isMuestra = false;
+  const tasks = userTareas ?? [];
 
   const addTarea = useCallback(
     (draft: NewTaskDraft) => {
@@ -203,7 +202,7 @@ export function TasksProvider({children}: {children: React.ReactNode}) {
   const removeTarea = useCallback(
     (id: string) => {
       setUserTareas(prev => {
-        const base = prev ?? WORK_TAREAS;
+        const base = prev ?? [];
         return base.filter(task => task.id !== id);
       });
     },
@@ -213,7 +212,7 @@ export function TasksProvider({children}: {children: React.ReactNode}) {
   const setTaskEstado = useCallback(
     (id: string, status: WorkTask['status']) => {
       setUserTareas(prev => {
-        const base = prev ?? WORK_TAREAS;
+        const base = prev ?? [];
         return base.map(task => (task.id === id ? {...task, status} : task));
       });
     },
@@ -223,7 +222,7 @@ export function TasksProvider({children}: {children: React.ReactNode}) {
   const completeTarea = useCallback(
     (id: string, draft: CompleteWorkDraft) => {
       setUserTareas(prev => {
-        const base = prev ?? WORK_TAREAS;
+        const base = prev ?? [];
         return base.map(task => {
           if (task.id !== id) {
             return task;
@@ -276,22 +275,13 @@ export function TasksProvider({children}: {children: React.ReactNode}) {
       .filter(task => task.status !== 'done')
       .reduce((sum, task) => sum + parseDurationHoras(task.duration), 0);
 
-    if (isMuestra) {
-      return {
-        done: 3,
-        total: 6,
-        planned: '5h 20m',
-        overdue: 1,
-      };
-    }
-
     return {
       done,
       total: todays.length,
       planned: formatDuracion(plannedHoras),
       overdue,
     };
-  }, [isMuestra, tasks]);
+  }, [tasks]);
 
   const value = useMemo(
     () => ({

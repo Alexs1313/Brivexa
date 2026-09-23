@@ -45,8 +45,16 @@ export function ActiveWorkScreen({
   const { getTarea } = useTareas();
 
   const task = getTarea(taskId);
-  const [seconds, setSegundos] = useState(1 * 3600 + 25 * 60 + 45);
+  const [seconds, setSegundos] = useState(0);
   const [paused, setPausado] = useState(false);
+  const [startedEtiqueta] = useState(() => {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const period = hours >= 12 ? 'PM' : 'AM';
+    const hour12 = hours % 12 || 12;
+    return `${hour12}:${minutes} ${period}`;
+  });
 
   const [materialsNota, setMaterialsNota] = useState<string | null>(null);
   const [photos, setFotos] = useState<string[]>([]);
@@ -66,12 +74,12 @@ export function ActiveWorkScreen({
 
   if (!task) {
     return (
-      <View style={styles.ActiveWorkScreenMissingCasco}>
-        <Text style={styles.ActiveWorkScreenMissingFiligrana}>
+      <View style={styles.ActiveWorkScreenMissingAndamio}>
+        <Text style={styles.ActiveWorkScreenMissingLamina}>
           Task not found
         </Text>
         <Pressable onPress={onBack}>
-          <Text style={styles.ActiveWorkScreenNavLinkFiligrana}>‹ Task</Text>
+          <Text style={styles.ActiveWorkScreenNavLinkLamina}>‹ Task</Text>
         </Pressable>
       </View>
     );
@@ -82,13 +90,13 @@ export function ActiveWorkScreen({
     { label: 'Equipment', value: task.equipment ?? '—' },
     {
       label: 'Materials Used',
-      value: materialsNota ?? task.materials ?? '—',
+      value: materialsNota ?? '—',
     },
     {
       label: 'Photos',
       value: photos.length > 0 ? `${photos.length} attached` : 'None',
     },
-    { label: 'Started', value: '07:32 AM' },
+    { label: 'Started', value: startedEtiqueta },
   ];
 
   const showAviso = (message: string) => {
@@ -125,7 +133,7 @@ export function ActiveWorkScreen({
   return (
     <ImageBackground
       source={appFondo}
-      style={styles.ActiveWorkScreenRaizCasco}
+      style={styles.ActiveWorkScreenNucleoAndamio}
       resizeMode="cover"
     >
       <ScrollView
@@ -139,19 +147,19 @@ export function ActiveWorkScreen({
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.ActiveWorkScreenHeaderRowDintel}>
+        <View style={styles.ActiveWorkScreenHeaderRowFriso}>
           <Pressable
             onPress={onBack}
             hitSlop={12}
             style={styles.ActiveWorkScreenNavSide}
           >
-            <Text style={styles.ActiveWorkScreenNavLinkFiligrana}>‹ Task</Text>
+            <Text style={styles.ActiveWorkScreenNavLinkLamina}>‹ Task</Text>
           </Pressable>
-          <Text style={styles.ActiveWorkScreenTitleFiligrana}>Active Work</Text>
+          <Text style={styles.ActiveWorkScreenTitleLamina}>Active Work</Text>
           <View style={styles.ActiveWorkScreenNavSide} />
         </View>
 
-        <Text style={styles.ActiveWorkScreenFieldLabelFiligrana}>
+        <Text style={styles.ActiveWorkScreenFieldLabelLamina}>
           {task.field}
         </Text>
         <Text style={styles.ActiveWorkScreenTaskTitle}>{task.title}</Text>
@@ -186,7 +194,7 @@ export function ActiveWorkScreen({
             onPress={() => setMaterialAbierto(true)}
             style={({ pressed }) => [
               styles.ActiveWorkScreenGhostBtn,
-              pressed && styles.ActiveWorkScreenPressedDim,
+              pressed && styles.ActiveWorkScreenPressedOpaco,
             ]}
           >
             <Text style={styles.ActiveWorkScreenGhostBtnLabel}>+ Material</Text>
@@ -195,7 +203,7 @@ export function ActiveWorkScreen({
             onPress={() => void onAddFoto()}
             style={({ pressed }) => [
               styles.ActiveWorkScreenGhostBtn,
-              pressed && styles.ActiveWorkScreenPressedDim,
+              pressed && styles.ActiveWorkScreenPressedOpaco,
             ]}
           >
             <Text style={styles.ActiveWorkScreenGhostBtnLabel}>📷 Photo</Text>
@@ -223,7 +231,7 @@ export function ActiveWorkScreen({
             onPress={() => setPausado(p => !p)}
             style={({ pressed }) => [
               styles.ActiveWorkScreenPauseBtn,
-              pressed && styles.ActiveWorkScreenPressedDim,
+              pressed && styles.ActiveWorkScreenPressedOpaco,
             ]}
           >
             <Text style={styles.ActiveWorkScreenPauseBtnLabel}>
@@ -234,7 +242,7 @@ export function ActiveWorkScreen({
             onPress={onCompletar}
             style={({ pressed }) => [
               styles.ActiveWorkScreenCompleteBtn,
-              pressed && styles.ActiveWorkScreenPressedDim,
+              pressed && styles.ActiveWorkScreenPressedOpaco,
             ]}
           >
             <Text style={styles.ActiveWorkScreenCompleteBtnLabel}>
@@ -247,11 +255,11 @@ export function ActiveWorkScreen({
       {toast ? (
         <View
           style={[
-            styles.ActiveWorkScreenToastCasco,
+            styles.ActiveWorkScreenToastAndamio,
             { bottom: insets.bottom + adaptive.verticalEscala(24) },
           ]}
         >
-          <Text style={styles.ActiveWorkScreenToastFiligrana}>{toast}</Text>
+          <Text style={styles.ActiveWorkScreenToastLamina}>{toast}</Text>
         </View>
       ) : null}
 
@@ -274,43 +282,40 @@ export function ActiveWorkScreen({
 }
 
 const styles = StyleSheet.create({
-  ActiveWorkScreenRaizCasco: { backgroundColor: colors.background, flex: 1 },
+  ActiveWorkScreenNucleoAndamio: { backgroundColor: colors.background, flex: 1 },
+
   ActiveWorkScreenScrollContent: { flexGrow: 1 },
 
-
-  ActiveWorkScreenMissingCasco: {
+  ActiveWorkScreenMissingAndamio: {
     alignItems: 'center',
     backgroundColor: colors.background,
     flex: 1,
     justifyContent: 'center',
   },
 
-
-  ActiveWorkScreenMissingFiligrana: {
+  ActiveWorkScreenMissingLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     marginBottom: 12,
   },
 
-
-  ActiveWorkScreenHeaderRowDintel: {
+  ActiveWorkScreenHeaderRowFriso: {
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: 18,
   },
 
   ActiveWorkScreenNavSide: { minWidth: 72 },
-  ActiveWorkScreenNavLinkFiligrana: {
+
+  ActiveWorkScreenNavLinkLamina: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
-
-
-  ActiveWorkScreenTitleFiligrana: {
+  ActiveWorkScreenTitleLamina: {
     color: colors.cream,
     flex: 1,
     fontFamily: fonts.sansBold,
@@ -319,12 +324,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-
-  ActiveWorkScreenFieldLabelFiligrana: {
+  ActiveWorkScreenFieldLabelLamina: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
   },
+
   ActiveWorkScreenTaskTitle: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -333,8 +338,6 @@ const styles = StyleSheet.create({
     marginBottom: 18,
     marginTop: 4,
   },
-
-
 
   ActiveWorkScreenTimerCard: {
     alignItems: 'center',
@@ -346,7 +349,6 @@ const styles = StyleSheet.create({
     paddingVertical: 28,
   },
 
-
   ActiveWorkScreenTimerStatus: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
@@ -354,8 +356,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     letterSpacing: 1,
   },
-
-
 
   ActiveWorkScreenTimerValue: {
     color: colors.cream,
@@ -365,13 +365,13 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
 
-
   ActiveWorkScreenTimerHint: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginTop: 6,
   },
+
   ActiveWorkScreenDetailsCard: {
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -381,7 +381,6 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     paddingHorizontal: 16,
   },
-
 
   ActiveWorkScreenKvRow: {
     alignItems: 'center',
@@ -407,6 +406,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '700',
   },
+
   ActiveWorkScreenActionRow: {
     flexDirection: 'row',
     gap: 10,
@@ -423,6 +423,7 @@ const styles = StyleSheet.create({
     height: layout.buttonHeightCompact,
     justifyContent: 'center',
   },
+
   ActiveWorkScreenGhostBtnLabel: {
     color: colors.infoBannerText,
     fontFamily: fonts.sansBold,
@@ -435,7 +436,6 @@ const styles = StyleSheet.create({
     marginBottom: 18,
   },
 
-
   ActiveWorkScreenPhotoThumb: {
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -444,6 +444,7 @@ const styles = StyleSheet.create({
     height: 72,
     width: 72,
   },
+
   ActiveWorkScreenFooterRow: { flexDirection: 'row', gap: 10 },
 
   ActiveWorkScreenPauseBtn: {
@@ -456,13 +457,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 22,
   },
+
   ActiveWorkScreenPauseBtnLabel: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 15,
     fontWeight: '700',
   },
-
 
   ActiveWorkScreenCompleteBtn: {
     alignItems: 'center',
@@ -473,8 +474,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-
-
   ActiveWorkScreenCompleteBtnLabel: {
     color: colors.successButtonText,
     fontFamily: fonts.sansBold,
@@ -482,10 +481,9 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
+  ActiveWorkScreenPressedOpaco: { opacity: 0.85 },
 
-  ActiveWorkScreenPressedDim: { opacity: 0.85 },
-
-  ActiveWorkScreenToastCasco: {
+  ActiveWorkScreenToastAndamio: {
     alignSelf: 'center',
     backgroundColor: colors.toastBg,
     borderColor: colors.border,
@@ -495,7 +493,8 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     position: 'absolute',
   },
-  ActiveWorkScreenToastFiligrana: {
+
+  ActiveWorkScreenToastLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 13,

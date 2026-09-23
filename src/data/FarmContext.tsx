@@ -7,9 +7,6 @@ import React, {
 
 import {usePersistedState} from '../hooks/usePersistedState';
 import {
-  EQUIPMENT,
-  INVENTORY_ITEMS,
-  TRANSACTIONS,
   type EquipmentStatus,
   type FarmEquipment,
   type FarmTransaction,
@@ -232,20 +229,20 @@ function prependMovimiento(
 export function FarmProvider({children}: {children: React.ReactNode}) {
   const [userInventario, setUserInventario] = usePersistedState<
     InventoryItem[] | null
-  >(storageClaves.inventory, null);
+  >(storageClaves.inventory, []);
   const [userEquipo, setUserEquipo] = usePersistedState<
     FarmEquipment[] | null
-  >(storageClaves.equipment, null);
+  >(storageClaves.equipment, []);
   const [userTransacciones, setUserTransacciones] = usePersistedState<
     FarmTransaction[] | null
-  >(storageClaves.transactions, null);
+  >(storageClaves.transactions, []);
 
-  const isInventoryMuestra = userInventario === null;
-  const isEquipmentMuestra = userEquipo === null;
-  const isTransactionsMuestra = userTransacciones === null;
-  const inventory = userInventario ?? INVENTORY_ITEMS;
-  const equipment = userEquipo ?? EQUIPMENT;
-  const transactions = userTransacciones ?? TRANSACTIONS;
+  const isInventoryMuestra = false;
+  const isEquipmentMuestra = false;
+  const isTransactionsMuestra = false;
+  const inventory = userInventario ?? [];
+  const equipment = userEquipo ?? [];
+  const transactions = userTransacciones ?? [];
 
   const getInventoryArticulo = useCallback(
     (id: string) => inventory.find(item => item.id === id),
@@ -318,14 +315,14 @@ export function FarmProvider({children}: {children: React.ReactNode}) {
 
   const mutateInventario = useCallback(
     (updater: (items: InventoryItem[]) => InventoryItem[]) => {
-      setUserInventario(prev => updater(prev ?? INVENTORY_ITEMS));
+      setUserInventario(prev => updater(prev ?? []));
     },
     [],
   );
 
   const mutateEquipo = useCallback(
     (updater: (items: FarmEquipment[]) => FarmEquipment[]) => {
-      setUserEquipo(prev => updater(prev ?? EQUIPMENT));
+      setUserEquipo(prev => updater(prev ?? []));
     },
     [],
   );
@@ -440,14 +437,14 @@ export function FarmProvider({children}: {children: React.ReactNode}) {
 
   const removeInventoryArticulo = useCallback((itemId: string) => {
     setUserInventario(prev => {
-      const base = prev ?? INVENTORY_ITEMS;
+      const base = prev ?? [];
       return base.filter(item => item.id !== itemId);
     });
   }, []);
 
   const removeEquipo = useCallback((equipmentId: string) => {
     setUserEquipo(prev => {
-      const base = prev ?? EQUIPMENT;
+      const base = prev ?? [];
       return base.filter(item => item.id !== equipmentId);
     });
   }, [setUserEquipo]);

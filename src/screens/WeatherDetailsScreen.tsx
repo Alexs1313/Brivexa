@@ -46,22 +46,22 @@ export function WeatherDetailsScreen({ onBack }: WeatherDetailsScreenProps) {
             hitSlop={12}
             style={styles.WeatherDetailsScreenWeatherScreenBack}
           >
-            <Text style={styles.WeatherDetailsScreenWeatherScreenBackFiligrana}>
+            <Text style={styles.WeatherDetailsScreenWeatherScreenBackLamina}>
               ‹ Today
             </Text>
           </Pressable>
-          <Text style={styles.WeatherDetailsScreenWeatherScreenTitleFiligrana}>
+          <Text style={styles.WeatherDetailsScreenWeatherScreenTitleLamina}>
             Weather
           </Text>
           <View style={styles.WeatherDetailsScreenWeatherScreenNavSpacer} />
         </View>
 
         <View style={{ paddingHorizontal: adaptive.horizontalRelleno }}>
-          <View style={styles.WeatherDetailsScreenHeroCardCasco}>
+          <View style={styles.WeatherDetailsScreenHeroCardAndamio}>
             <Text style={styles.WeatherDetailsScreenHeroIcon}>
               {TODAY_WEATHER.icon}
             </Text>
-            <Text style={styles.WeatherDetailsScreenHeroTempFiligrana}>
+            <Text style={styles.WeatherDetailsScreenHeroTempLamina}>
               {TODAY_WEATHER.temp}°C
             </Text>
             <Text style={styles.WeatherDetailsScreenHeroCondition}>
@@ -79,7 +79,7 @@ export function WeatherDetailsScreen({ onBack }: WeatherDetailsScreenProps) {
             />
           </View>
 
-          <Text style={styles.WeatherDetailsScreenSectionTitleFiligrana}>
+          <Text style={styles.WeatherDetailsScreenSectionTitleLamina}>
             Hourly
           </Text>
           <ScrollView
@@ -95,17 +95,17 @@ export function WeatherDetailsScreen({ onBack }: WeatherDetailsScreenProps) {
                 <Text style={styles.WeatherDetailsScreenHourlyIcon}>
                   {hour.icon}
                 </Text>
-                <Text style={styles.WeatherDetailsScreenHourlyTempFiligrana}>
+                <Text style={styles.WeatherDetailsScreenHourlyTempLamina}>
                   {hour.temp}°
                 </Text>
               </View>
             ))}
           </ScrollView>
 
-          <Text style={styles.WeatherDetailsScreenSectionTitleFiligrana}>
+          <Text style={styles.WeatherDetailsScreenSectionTitleLamina}>
             7-Day Forecast
           </Text>
-          <View style={styles.WeatherDetailsScreenWeekCardCasco}>
+          <View style={styles.WeatherDetailsScreenWeekCardAndamio}>
             {WEEK_PRONOSTICO.map((day, index) => (
               <View
                 key={day.id}
@@ -124,7 +124,7 @@ export function WeatherDetailsScreen({ onBack }: WeatherDetailsScreenProps) {
                 <Text style={styles.WeatherDetailsScreenWeekRain}>
                   🌧 {day.rain}
                 </Text>
-                <Text style={styles.WeatherDetailsScreenWeekTempFiligrana}>
+                <Text style={styles.WeatherDetailsScreenWeekTempLamina}>
                   {day.high}° / {day.low}°
                 </Text>
               </View>
@@ -140,7 +140,7 @@ function MetricCard({ label, value }: { label: string; value: string }) {
   return (
     <View style={styles.WeatherDetailsScreenMetricCard}>
       <Text style={styles.WeatherDetailsScreenMetricLabel}>{label}</Text>
-      <Text style={styles.WeatherDetailsScreenMetricValueFiligrana}>
+      <Text style={styles.WeatherDetailsScreenMetricValueLamina}>
         {value}
       </Text>
     </View>
@@ -152,8 +152,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     flex: 1,
   },
-
-
 
   WeatherDetailsScreenWeatherScreenNav: {
     alignItems: 'center',
@@ -170,30 +168,28 @@ const styles = StyleSheet.create({
     minWidth: 72,
   },
 
-
-  WeatherDetailsScreenWeatherScreenBackFiligrana: {
+  WeatherDetailsScreenWeatherScreenBackLamina: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
 
-
-  WeatherDetailsScreenWeatherScreenTitleFiligrana: {
+  WeatherDetailsScreenWeatherScreenTitleLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
-
   WeatherDetailsScreenWeatherScreenNavSpacer: {
     minWidth: 72,
   },
+
   WeatherDetailsScreenWeatherScreenScroll: {
     flexGrow: 1,
   },
 
-  WeatherDetailsScreenHeroCardCasco: {
+  WeatherDetailsScreenHeroCardAndamio: {
     alignItems: 'center',
     backgroundColor: 'rgba(27, 21, 80, 0.72)',
     borderColor: colors.border,
@@ -203,25 +199,24 @@ const styles = StyleSheet.create({
     paddingVertical: 18,
   },
 
-
   WeatherDetailsScreenHeroIcon: {
     fontSize: 50,
   },
-  WeatherDetailsScreenHeroTempFiligrana: {
+
+  WeatherDetailsScreenHeroTempLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 40,
     fontWeight: '700',
     marginTop: 4,
   },
+
   WeatherDetailsScreenHeroCondition: {
     color: colors.bodySuave,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
     marginTop: 4,
   },
-
-
 
   WeatherDetailsScreenMetricsGrid: {
     flexDirection: 'row',
@@ -247,9 +242,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 
-
-
-  WeatherDetailsScreenMetricValueFiligrana: {
+  WeatherDetailsScreenMetricValueLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 18,
@@ -257,9 +250,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
 
-
-
-  WeatherDetailsScreenSectionTitleFiligrana: {
+  WeatherDetailsScreenSectionTitleLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 15,
@@ -267,13 +258,12 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 
-
-
   WeatherDetailsScreenHourlyRow: {
     gap: 8,
     marginBottom: 22,
     paddingRight: 8,
   },
+
   WeatherDetailsScreenHourlyCard: {
     alignItems: 'center',
     backgroundColor: colors.card,
@@ -285,7 +275,6 @@ const styles = StyleSheet.create({
     width: 56,
   },
 
-
   WeatherDetailsScreenHourlyLabel: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
@@ -296,15 +285,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginVertical: 4,
   },
-  WeatherDetailsScreenHourlyTempFiligrana: {
+
+  WeatherDetailsScreenHourlyTempLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 13,
     fontWeight: '700',
   },
 
-
-  WeatherDetailsScreenWeekCardCasco: {
+  WeatherDetailsScreenWeekCardAndamio: {
     backgroundColor: colors.card,
     borderColor: colors.border,
     borderRadius: 16,
@@ -318,12 +307,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 12,
   },
+
   WeatherDetailsScreenWeekRowDivider: {
     borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
   },
-
-
 
   WeatherDetailsScreenWeekDay: {
     color: colors.bodySuave,
@@ -332,13 +320,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 
-
-
   WeatherDetailsScreenWeekIcon: {
     fontSize: 16,
     marginRight: 10,
     width: 24,
   },
+
   WeatherDetailsScreenWeekRain: {
     color: colors.info,
     fontFamily: fonts.sansRegular,
@@ -347,8 +334,7 @@ const styles = StyleSheet.create({
     width: 52,
   },
 
-
-  WeatherDetailsScreenWeekTempFiligrana: {
+  WeatherDetailsScreenWeekTempLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 14,

@@ -1,60 +1,45 @@
-import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-
+import type { CalculatorId } from '../../data/calculators';
 import { CalculatorsScreen } from '../../screens/CalculatorsScreen';
 import { FertilizerScreen } from '../../screens/FertilizerScreen';
-
 import { SeedRateScreen } from '../../screens/SeedRateScreen';
-
 import { SprayMixtureScreen } from '../../screens/SprayMixtureScreen';
-import { CALCULATOR_ROUTES, type CalcStackParamList } from '../types';
 
-const Stack = createNativeStackNavigator<CalcStackParamList>();
+export function CalcTabHost() {
+  const navigation = useNavigation();
+  const [active, setActive] = useState<CalculatorId | null>(null);
 
-const screenOptions = {
-  headerShown: false,
-  animation: 'slide_from_right' as const,
-  contentStyle: { backgroundColor: '#1a1140' },
-};
+  const closeCalculadora = useCallback(() => {
+    setActive(null);
+  }, []);
 
-function CalcHomeScreen({
-  navigation,
-}: NativeStackScreenProps<CalcStackParamList, 'CalcHome'>) {
-  return (
-    <CalculatorsScreen
-      onOpenCalculadora={id => navigation.navigate(CALCULATOR_ROUTES[id])}
-    />
-  );
-}
+  useEffect(() => {
+    // Re-tapping the Calc tab returns to the calculator list.
+    const unsubscribe = (
+      navigation as {
+        addListener: (
+          event: string,
+          callback: () => void,
+        ) => () => void;
+      }
+    ).addListener('tabPress', () => {
+      setActive(null);
+    });
 
-function SeedRateRoute({
-  navigation,
-}: NativeStackScreenProps<CalcStackParamList, 'SeedRate'>) {
-  return <SeedRateScreen onBack={() => navigation.goBack()} />;
-}
+    return unsubscribe;
+  }, [navigation]);
 
-function FertilizerRoute({
-  navigation,
-}: NativeStackScreenProps<CalcStackParamList, 'Fertilizer'>) {
-  return <FertilizerScreen onBack={() => navigation.goBack()} />;
-}
+  if (active === 'seed') {
+    return <SeedRateScreen onBack={closeCalculadora} />;
+  }
+  if (active === 'fertilizer') {
+    return <FertilizerScreen onBack={closeCalculadora} />;
+  }
+  if (active === 'spray') {
+    return <SprayMixtureScreen onBack={closeCalculadora} />;
+  }
 
-function SprayMixtureRoute({
-  navigation,
-}: NativeStackScreenProps<CalcStackParamList, 'SprayMixture'>) {
-  return <SprayMixtureScreen onBack={() => navigation.goBack()} />;
-}
-
-export function CalcStackNavigator() {
-  return (
-    <Stack.Navigator screenOptions={screenOptions}>
-      <Stack.Screen name="CalcHome" component={CalcHomeScreen} />
-      <Stack.Screen name="SeedRate" component={SeedRateRoute} />
-
-      <Stack.Screen name="Fertilizer" component={FertilizerRoute} />
-      <Stack.Screen name="SprayMixture" component={SprayMixtureRoute} />
-    </Stack.Navigator>
-  );
+  return <CalculatorsScreen onOpenCalculadora={setActive} />;
 }

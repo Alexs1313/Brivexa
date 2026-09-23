@@ -28,7 +28,6 @@ import {
   QUICK_ACTIONS,
   TODAY_HEADER,
   TODAY_WEATHER,
-  UPCOMING_WORK,
 } from '../data/today';
 import { useTareas } from '../data/TasksContext';
 import { useAdaptativo } from '../hooks/useAdaptativo';
@@ -50,13 +49,12 @@ export function TodayScreen({
 }: TodayScreenProps) {
   const insets = useSafeAreaInsets();
   const adaptive = useAdaptativo();
-  const { isMuestra, todayTareas, upcomingTrabajo, todayProgreso } =
-    useTareas();
+  const { todayTareas, upcomingTrabajo, todayProgreso } = useTareas();
 
   const tasks = todayTareas;
-  const upcoming = isMuestra ? UPCOMING_WORK : upcomingTrabajo;
+  const upcoming = upcomingTrabajo;
   const empty = tasks.length === 0;
-  const showProgreso = isMuestra || todayProgreso.total > 0;
+  const showProgreso = todayProgreso.total > 0;
   const allHecho =
     todayProgreso.total > 0 && todayProgreso.done >= todayProgreso.total;
 
@@ -85,12 +83,12 @@ export function TodayScreen({
           <View style={styles.TodayScreenHeader}>
             <View>
               <View style={styles.TodayScreenBrandRow}>
-                <Text style={styles.TodayScreenCowEmblema}>🐂</Text>
-                <Text style={styles.TodayScreenBrandFiligrana}>
-                  Terra Bull Farm
+                <Text style={styles.TodayScreenCowEscudo}>🐂</Text>
+                <Text style={styles.TodayScreenBrandLamina}>
+                  {APP_BRAND_LINE}
                 </Text>
               </View>
-              <Text style={styles.TodayScreenGreetingFiligrana}>
+              <Text style={styles.TodayScreenGreetingLamina}>
                 {TODAY_HEADER.greeting}
               </Text>
               <Text style={styles.TodayScreenDate}>
@@ -102,9 +100,9 @@ export function TodayScreen({
                 colors={[colors.buttonGradientStart, colors.buttonGradientEnd]}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
-                style={styles.TodayScreenAddOrbe}
+                style={styles.TodayScreenAddDisco}
               >
-                <Text style={styles.TodayScreenAddMarca}>+</Text>
+                <Text style={styles.TodayScreenAddSello}>+</Text>
               </LinearGradient>
             </Pressable>
           </View>
@@ -112,8 +110,8 @@ export function TodayScreen({
           <Pressable
             onPress={onOpenClima}
             style={({ pressed }) => [
-              styles.TodayScreenWeatherCardCasco,
-              pressed && styles.TodayScreenPressedDim,
+              styles.TodayScreenWeatherCardAndamio,
+              pressed && styles.TodayScreenPressedOpaco,
             ]}
           >
             <View style={styles.TodayScreenWeatherCardMain}>
@@ -121,7 +119,7 @@ export function TodayScreen({
                 <Text style={styles.TodayScreenWeatherCardIcon}>
                   {TODAY_WEATHER.icon}
                 </Text>
-                <Text style={styles.TodayScreenWeatherCardTempFiligrana}>
+                <Text style={styles.TodayScreenWeatherCardTempLamina}>
                   {TODAY_WEATHER.temp}°
                 </Text>
               </View>
@@ -143,15 +141,15 @@ export function TodayScreen({
           </Pressable>
 
           {showProgreso ? (
-            <View style={styles.TodayScreenProgressCardCasco}>
+            <View style={styles.TodayScreenProgressCardAndamio}>
               <ProgressRing
                 done={todayProgreso.done}
                 total={todayProgreso.total}
               />
-              <View style={styles.TodayScreenProgressCopyBolsillo}>
+              <View style={styles.TodayScreenProgressCopyRecinto}>
                 <Text
                   style={[
-                    styles.TodayScreenProgressTitleFiligrana,
+                    styles.TodayScreenProgressTitleLamina,
                     allHecho && styles.TodayScreenProgressTitleDone,
                   ]}
                 >
@@ -182,31 +180,41 @@ export function TodayScreen({
           <SectionTitle title="Today's Tasks" />
 
           {empty ? (
-            <View style={styles.TodayScreenEmptyCardCasco}>
-              <Text style={styles.TodayScreenEmptyEmblema}>🗓️</Text>
-              <Text style={styles.TodayScreenEmptyTitleFiligrana}>
+            <View style={styles.TodayScreenEmptyCardAndamio}>
+              <Text style={styles.TodayScreenEmptyEscudo}>🗓️</Text>
+              <Text style={styles.TodayScreenEmptyTitleLamina}>
                 No tasks today
               </Text>
-              <Text style={styles.TodayScreenEmptyHintFiligrana}>
+              <Text style={styles.TodayScreenEmptyHintLamina}>
                 Enjoy the quiet — or plan ahead.
               </Text>
               <PrimaryButton
                 label="+ Add Task"
                 onPress={onAddTarea}
-                style={styles.TodayScreenEmptyPlinto}
+                style={styles.TodayScreenEmptyPedestal}
               />
             </View>
           ) : (
             tasks.map(task => <TaskCard key={task.id} task={task} />)
           )}
 
+          <SectionTitle title="Upcoming Work" />
           {upcoming.length > 0 ? (
             <>
-              <SectionTitle title="Upcoming Work" />
               <UpcomingList items={upcoming} />
               <View style={styles.TodayScreenSectionSpacer} />
             </>
-          ) : null}
+          ) : (
+            <View style={styles.TodayScreenEmptyCardAndamio}>
+              <Text style={styles.TodayScreenEmptyEscudo}>📌</Text>
+              <Text style={styles.TodayScreenEmptyTitleLamina}>
+                Nothing upcoming
+              </Text>
+              <Text style={styles.TodayScreenEmptyHintLamina}>
+                Scheduled jobs for later will show up here.
+              </Text>
+            </View>
+          )}
 
           <SectionTitle title="Quick Actions" />
           <QuickActionsGrid
@@ -235,18 +243,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-
-
   TodayScreenScroll: {
     flexGrow: 1,
   },
 
-
-
   TodayScreenContent: {
     gap: 0,
   },
-
 
   TodayScreenHeader: {
     alignItems: 'flex-start',
@@ -255,23 +258,17 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
 
-
-
   TodayScreenBrandRow: {
     alignItems: 'center',
     flexDirection: 'row',
     gap: 4,
   },
 
-
-
-  TodayScreenCowEmblema: {
+  TodayScreenCowEscudo: {
     fontSize: 14,
   },
 
-
-
-  TodayScreenBrandFiligrana: {
+  TodayScreenBrandLamina: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 14,
@@ -279,13 +276,14 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
 
-  TodayScreenGreetingFiligrana: {
+  TodayScreenGreetingLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 22,
     fontWeight: '700',
     marginTop: 6,
   },
+
   TodayScreenDate: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
@@ -293,8 +291,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
 
-
-  TodayScreenAddOrbe: {
+  TodayScreenAddDisco: {
     alignItems: 'center',
     borderRadius: 12,
     height: 40,
@@ -302,14 +299,15 @@ const styles = StyleSheet.create({
     width: 40,
   },
 
-  TodayScreenAddMarca: {
+  TodayScreenAddSello: {
     color: colors.buttonText,
     fontFamily: fonts.sansBold,
     fontSize: 22,
     fontWeight: '700',
     lineHeight: 24,
   },
-  TodayScreenDemoBannerCasco: {
+
+  TodayScreenDemoBannerAndamio: {
     backgroundColor: colors.infoBanda,
     borderColor: colors.infoBannerBorde,
     borderRadius: radius.card,
@@ -321,19 +319,20 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
 
-  TodayScreenDemoBannerEmblema: {
+  TodayScreenDemoBannerEscudo: {
     fontSize: 16,
     marginTop: 2,
   },
 
-  TodayScreenDemoBannerFiligrana: {
+  TodayScreenDemoBannerLamina: {
     color: colors.infoBannerText,
     flex: 1,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     lineHeight: 18,
   },
-  TodayScreenWeatherCardCasco: {
+
+  TodayScreenWeatherCardAndamio: {
     backgroundColor: 'rgba(27, 21, 80, 0.72)',
     borderColor: colors.border,
     borderRadius: radius.card,
@@ -344,24 +343,27 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 15,
   },
-  TodayScreenPressedDim: {
+
+  TodayScreenPressedOpaco: {
     opacity: 0.88,
   },
+
   TodayScreenWeatherCardMain: {
     flex: 1,
     marginRight: 12,
   },
+
   TodayScreenWeatherCardTempRow: {
     alignItems: 'center',
     flexDirection: 'row',
     gap: 6,
   },
 
-
   TodayScreenWeatherCardIcon: {
     fontSize: 34,
   },
-  TodayScreenWeatherCardTempFiligrana: {
+
+  TodayScreenWeatherCardTempLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 38,
@@ -375,14 +377,10 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
 
-
-
   TodayScreenWeatherCardStats: {
     alignItems: 'flex-end',
     gap: 4,
   },
-
-
 
   TodayScreenWeatherCardStat: {
     color: colors.bodyApagado,
@@ -390,7 +388,8 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: 'right',
   },
-  TodayScreenProgressCardCasco: {
+
+  TodayScreenProgressCardAndamio: {
     alignItems: 'center',
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -402,11 +401,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 15,
   },
-  TodayScreenProgressCopyBolsillo: {
+
+  TodayScreenProgressCopyRecinto: {
     flex: 1,
   },
 
-  TodayScreenProgressTitleFiligrana: {
+  TodayScreenProgressTitleLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 15,
@@ -417,6 +417,7 @@ const styles = StyleSheet.create({
   TodayScreenProgressTitleDone: {
     color: colors.success,
   },
+
   TodayScreenProgressStatsRow: {
     flexDirection: 'row',
     gap: 20,
@@ -426,15 +427,12 @@ const styles = StyleSheet.create({
     minWidth: 48,
   },
 
-
-
   TodayScreenProgressStatValue: {
     color: colors.bodySuave,
     fontFamily: fonts.sansBold,
     fontSize: 17,
     fontWeight: '700',
   },
-
 
   TodayScreenProgressOverdueValue: {
     color: colors.danger,
@@ -443,15 +441,14 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-
-
   TodayScreenProgressStatLabel: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 11,
     marginTop: 2,
   },
-  TodayScreenEmptyCardCasco: {
+
+  TodayScreenEmptyCardAndamio: {
     alignItems: 'center',
     backgroundColor: colors.emptyRelleno,
     borderColor: colors.emptyBorde,
@@ -464,14 +461,11 @@ const styles = StyleSheet.create({
     paddingTop: 18,
   },
 
-
-
-  TodayScreenEmptyEmblema: {
+  TodayScreenEmptyEscudo: {
     fontSize: 38,
   },
 
-
-  TodayScreenEmptyTitleFiligrana: {
+  TodayScreenEmptyTitleLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
@@ -479,8 +473,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 
-
-  TodayScreenEmptyHintFiligrana: {
+  TodayScreenEmptyHintLamina: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
@@ -489,13 +482,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-
-
-  TodayScreenEmptyPlinto: {
+  TodayScreenEmptyPedestal: {
     minWidth: 122,
   },
-
-
 
   TodayScreenSectionSpacer: {
     height: 22,

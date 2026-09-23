@@ -73,7 +73,7 @@ export function NewTaskScreen({ onCancel, onGuardar }: NewTaskScreenProps) {
   return (
     <ImageBackground
       source={appFondo}
-      style={styles.NewTaskScreenRaizCasco}
+      style={styles.NewTaskScreenNucleoAndamio}
       resizeMode="cover"
     >
       <ScrollView
@@ -88,15 +88,15 @@ export function NewTaskScreen({ onCancel, onGuardar }: NewTaskScreenProps) {
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.NewTaskScreenHeaderRowDintel}>
+        <View style={styles.NewTaskScreenHeaderRowFriso}>
           <Pressable
             onPress={onCancel}
             hitSlop={12}
             style={styles.NewTaskScreenNavSide}
           >
-            <Text style={styles.NewTaskScreenNavLinkFiligrana}>‹ Cancel</Text>
+            <Text style={styles.NewTaskScreenNavLinkLamina}>‹ Cancel</Text>
           </Pressable>
-          <Text style={styles.NewTaskScreenTitleFiligrana}>New Task</Text>
+          <Text style={styles.NewTaskScreenTitleLamina}>New Task</Text>
           <View style={styles.NewTaskScreenNavSide} />
         </View>
 
@@ -193,8 +193,8 @@ export function NewTaskScreen({ onCancel, onGuardar }: NewTaskScreenProps) {
           }}
           fullWidth
           style={[
-            styles.NewTaskScreenSavePlinto,
-            !canGuardar && styles.NewTaskScreenSavePlintoDisabled,
+            styles.NewTaskScreenSavePedestal,
+            !canGuardar && styles.NewTaskScreenSavePedestalDisabled,
           ]}
         />
       </ScrollView>
@@ -217,13 +217,13 @@ function FormField({
 }) {
   return (
     <View style={styles.NewTaskScreenFieldBlock}>
-      <Text style={styles.NewTaskScreenFieldLabelFiligrana}>
+      <Text style={styles.NewTaskScreenFieldLabelLamina}>
         {label}
         {required ? (
-          <Text style={styles.NewTaskScreenRequiredEmblema}> *</Text>
+          <Text style={styles.NewTaskScreenRequiredEscudo}> *</Text>
         ) : null}
       </Text>
-      <View style={styles.NewTaskScreenFieldInputCasco}>
+      <View style={styles.NewTaskScreenFieldInputAndamio}>
         <TextInput
           value={value}
           onChangeText={onChangeText}
@@ -237,28 +237,26 @@ function FormField({
 }
 
 const styles = StyleSheet.create({
-  NewTaskScreenRaizCasco: { backgroundColor: colors.background, flex: 1 },
+  NewTaskScreenNucleoAndamio: { backgroundColor: colors.background, flex: 1 },
 
   NewTaskScreenScrollContent: { flexGrow: 1 },
-  NewTaskScreenHeaderRowDintel: {
+
+  NewTaskScreenHeaderRowFriso: {
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: 16,
   },
+
   NewTaskScreenNavSide: { minWidth: 80 },
 
-
-
-  NewTaskScreenNavLinkFiligrana: {
+  NewTaskScreenNavLinkLamina: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
-
-
-  NewTaskScreenTitleFiligrana: {
+  NewTaskScreenTitleLamina: {
     color: colors.cream,
     flex: 1,
     fontFamily: fonts.sansBold,
@@ -267,21 +265,18 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-
   NewTaskScreenFieldBlock: { marginBottom: 14 },
 
-
-  NewTaskScreenFieldLabelFiligrana: {
+  NewTaskScreenFieldLabelLamina: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginBottom: 8,
   },
 
-  NewTaskScreenRequiredEmblema: { color: colors.danger },
+  NewTaskScreenRequiredEscudo: { color: colors.danger },
 
-
-  NewTaskScreenFieldInputCasco: {
+  NewTaskScreenFieldInputAndamio: {
     alignItems: 'center',
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -292,7 +287,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
   },
 
-
   NewTaskScreenFieldInput: {
     color: colors.cream,
     flex: 1,
@@ -301,6 +295,7 @@ const styles = StyleSheet.create({
     padding: 0,
   },
 
-  NewTaskScreenSavePlinto: { marginTop: 8 },
-  NewTaskScreenSavePlintoDisabled: { opacity: 0.45 },
+  NewTaskScreenSavePedestal: { marginTop: 8 },
+
+  NewTaskScreenSavePedestalDisabled: { opacity: 0.45 },
 });

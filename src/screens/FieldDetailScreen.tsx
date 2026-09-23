@@ -59,12 +59,12 @@ export function FieldDetailScreen({
 
   if (!field) {
     return (
-      <View style={styles.FieldDetailScreenMissingCasco}>
-        <Text style={styles.FieldDetailScreenMissingFiligrana}>
+      <View style={styles.FieldDetailScreenMissingAndamio}>
+        <Text style={styles.FieldDetailScreenMissingLamina}>
           Field not found
         </Text>
         <Pressable onPress={onBack}>
-          <Text style={styles.FieldDetailScreenNavLinkFiligrana}>‹ Fields</Text>
+          <Text style={styles.FieldDetailScreenNavLinkLamina}>‹ Fields</Text>
         </Pressable>
       </View>
     );
@@ -75,7 +75,7 @@ export function FieldDetailScreen({
   return (
     <ImageBackground
       source={appFondo}
-      style={styles.FieldDetailScreenRaizCasco}
+      style={styles.FieldDetailScreenNucleoAndamio}
       resizeMode="cover"
     >
       <ScrollView
@@ -88,23 +88,23 @@ export function FieldDetailScreen({
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.FieldDetailScreenHeaderRowDintel}>
+        <View style={styles.FieldDetailScreenHeaderRowFriso}>
           <Pressable
             onPress={onBack}
             hitSlop={12}
             style={styles.FieldDetailScreenNavSide}
           >
-            <Text style={styles.FieldDetailScreenNavLinkFiligrana}>
+            <Text style={styles.FieldDetailScreenNavLinkLamina}>
               ‹ Fields
             </Text>
           </Pressable>
-          <Text style={styles.FieldDetailScreenNavTitleFiligrana}>Field</Text>
+          <Text style={styles.FieldDetailScreenNavTitleLamina}>Field</Text>
           <Pressable
             onPress={onEdit}
             hitSlop={12}
             style={styles.FieldDetailScreenNavSideRight}
           >
-            <Text style={styles.FieldDetailScreenNavLinkBoldFiligrana}>
+            <Text style={styles.FieldDetailScreenNavLinkBoldLamina}>
               Edit
             </Text>
           </Pressable>
@@ -114,10 +114,10 @@ export function FieldDetailScreen({
           {showCubierta ? <FieldCover field={field} /> : null}
 
           <View style={styles.FieldDetailScreenTitleRow}>
-            <Text style={styles.FieldDetailScreenFieldNameFiligrana}>
+            <Text style={styles.FieldDetailScreenFieldNameLamina}>
               {field.name}
             </Text>
-            <Text style={styles.FieldDetailScreenFieldAreaFiligrana}>
+            <Text style={styles.FieldDetailScreenFieldAreaLamina}>
               {field.areaEtiqueta}
             </Text>
           </View>
@@ -183,11 +183,11 @@ export function FieldDetailScreen({
       {toast ? (
         <View
           style={[
-            styles.FieldDetailScreenToastCasco,
+            styles.FieldDetailScreenToastAndamio,
             { bottom: insets.bottom + adaptive.verticalEscala(24) },
           ]}
         >
-          <Text style={styles.FieldDetailScreenToastFiligrana}>{toast}</Text>
+          <Text style={styles.FieldDetailScreenToastLamina}>{toast}</Text>
         </View>
       ) : null}
     </ImageBackground>
@@ -223,7 +223,7 @@ function SegmentedTabs({
 }) {
   const tabs: FieldTab[] = ['Overview', 'Activities', 'Expenses', 'Harvest'];
   return (
-    <View style={styles.FieldDetailScreenSegCasco}>
+    <View style={styles.FieldDetailScreenSegAndamio}>
       {tabs.map(tab => {
         const on = tab === active;
         return (
@@ -296,7 +296,7 @@ function OverviewTab({
         ))}
       </View>
 
-      <Text style={styles.FieldDetailScreenSectionTitleFiligrana}>
+      <Text style={styles.FieldDetailScreenSectionTitleLamina}>
         Status Timeline
       </Text>
       <View style={styles.FieldDetailScreenTimelineRow}>
@@ -333,7 +333,7 @@ function OverviewTab({
         onPress={onChangeEstado}
         style={({ pressed }) => [
           styles.FieldDetailScreenGhostBtn,
-          pressed && styles.FieldDetailScreenPressedDim,
+          pressed && styles.FieldDetailScreenPressedOpaco,
         ]}
       >
         <Text style={styles.FieldDetailScreenGhostBtnLabel}>
@@ -344,7 +344,7 @@ function OverviewTab({
         onPress={onDelete}
         style={({ pressed }) => [
           styles.FieldDetailScreenDangerBtn,
-          pressed && styles.FieldDetailScreenPressedDim,
+          pressed && styles.FieldDetailScreenPressedOpaco,
         ]}
       >
         <Text style={styles.FieldDetailScreenDangerBtnLabel}>Delete Field</Text>
@@ -360,36 +360,50 @@ function ActivitiesTab({
   field: FarmField;
   onAddActividad: () => void;
 }) {
+  const empty = field.activities.length === 0;
+
   return (
     <View>
-      {field.activities.map(item => (
-        <View key={item.id} style={styles.FieldDetailScreenActivityCard}>
-          <View style={styles.FieldDetailScreenActivityAccent} />
-          <View style={styles.FieldDetailScreenActivityBody}>
-            <View style={styles.FieldDetailScreenActivityHeader}>
-              <Text style={styles.FieldDetailScreenActivityTitle}>
-                {item.title}
-              </Text>
-              <Text
-                style={[
-                  styles.FieldDetailScreenActivityStatus,
-                  { color: activityColor(item.status) },
-                ]}
-              >
-                {activityEtiqueta(item.status)}
+      {empty ? (
+        <View style={styles.FieldDetailScreenEmptyAndamio}>
+          <Text style={styles.FieldDetailScreenEmptyEscudo}>📋</Text>
+          <Text style={styles.FieldDetailScreenEmptyTitle}>
+            No activities yet
+          </Text>
+          <Text style={styles.FieldDetailScreenEmptyHint}>
+            Log planting, spraying, and fieldwork for this field.
+          </Text>
+        </View>
+      ) : (
+        field.activities.map(item => (
+          <View key={item.id} style={styles.FieldDetailScreenActivityCard}>
+            <View style={styles.FieldDetailScreenActivityAccent} />
+            <View style={styles.FieldDetailScreenActivityBody}>
+              <View style={styles.FieldDetailScreenActivityHeader}>
+                <Text style={styles.FieldDetailScreenActivityTitle}>
+                  {item.title}
+                </Text>
+                <Text
+                  style={[
+                    styles.FieldDetailScreenActivityStatus,
+                    { color: activityColor(item.status) },
+                  ]}
+                >
+                  {activityEtiqueta(item.status)}
+                </Text>
+              </View>
+              <Text style={styles.FieldDetailScreenActivityMeta}>
+                {item.date} · {item.person} · {item.cost}
               </Text>
             </View>
-            <Text style={styles.FieldDetailScreenActivityMeta}>
-              {item.date} · {item.person} · {item.cost}
-            </Text>
           </View>
-        </View>
-      ))}
+        ))
+      )}
       <Pressable
         onPress={onAddActividad}
         style={({ pressed }) => [
           styles.FieldDetailScreenGhostBtn,
-          pressed && styles.FieldDetailScreenPressedDim,
+          pressed && styles.FieldDetailScreenPressedOpaco,
         ]}
       >
         <Text style={styles.FieldDetailScreenGhostBtnLabel}>
@@ -407,6 +421,8 @@ function ExpensesTab({
   field: FarmField;
   onAddGasto: () => void;
 }) {
+  const empty = field.expenses.length === 0;
+
   return (
     <View>
       <View style={styles.FieldDetailScreenExpenseSummary}>
@@ -427,26 +443,38 @@ function ExpensesTab({
           </Text>
         </View>
       </View>
-      {field.expenses.map(item => (
-        <View key={item.id} style={styles.FieldDetailScreenExpenseCard}>
-          <View style={styles.FieldDetailScreenExpenseCopy}>
-            <Text style={styles.FieldDetailScreenExpenseTitle}>
-              {item.title}
-            </Text>
-            <Text style={styles.FieldDetailScreenExpenseMeta}>
-              {item.category} · {item.date}
-            </Text>
-          </View>
-          <Text style={styles.FieldDetailScreenExpenseAmount}>
-            {item.amount}
+      {empty ? (
+        <View style={styles.FieldDetailScreenEmptyAndamio}>
+          <Text style={styles.FieldDetailScreenEmptyEscudo}>💸</Text>
+          <Text style={styles.FieldDetailScreenEmptyTitle}>
+            No expenses yet
+          </Text>
+          <Text style={styles.FieldDetailScreenEmptyHint}>
+            Track seed, fertilizer, and other costs for this field.
           </Text>
         </View>
-      ))}
+      ) : (
+        field.expenses.map(item => (
+          <View key={item.id} style={styles.FieldDetailScreenExpenseCard}>
+            <View style={styles.FieldDetailScreenExpenseCopy}>
+              <Text style={styles.FieldDetailScreenExpenseTitle}>
+                {item.title}
+              </Text>
+              <Text style={styles.FieldDetailScreenExpenseMeta}>
+                {item.category} · {item.date}
+              </Text>
+            </View>
+            <Text style={styles.FieldDetailScreenExpenseAmount}>
+              {item.amount}
+            </Text>
+          </View>
+        ))
+      )}
       <Pressable
         onPress={onAddGasto}
         style={({ pressed }) => [
           styles.FieldDetailScreenGhostBtn,
-          pressed && styles.FieldDetailScreenPressedDim,
+          pressed && styles.FieldDetailScreenPressedOpaco,
         ]}
       >
         <Text style={styles.FieldDetailScreenGhostBtnLabel}>+ Add Expense</Text>
@@ -536,7 +564,7 @@ function HarvestTab({
           style={({ pressed }) => [
             styles.FieldDetailScreenGhostBtn,
             styles.FieldDetailScreenHarvestActionHalf,
-            pressed && styles.FieldDetailScreenPressedDim,
+            pressed && styles.FieldDetailScreenPressedOpaco,
           ]}
         >
           <Text style={styles.FieldDetailScreenGhostBtnLabel}>
@@ -548,7 +576,7 @@ function HarvestTab({
           style={({ pressed }) => [
             styles.FieldDetailScreenDangerOutlineBtn,
             styles.FieldDetailScreenHarvestActionHalf,
-            pressed && styles.FieldDetailScreenPressedDim,
+            pressed && styles.FieldDetailScreenPressedOpaco,
           ]}
         >
           <Text style={styles.FieldDetailScreenDangerBtnLabel}>Delete</Text>
@@ -579,16 +607,16 @@ function activityColor(status: ActivityStatus) {
 }
 
 const styles = StyleSheet.create({
-  FieldDetailScreenRaizCasco: {
+  FieldDetailScreenNucleoAndamio: {
     backgroundColor: colors.background,
     flex: 1,
   },
 
-
-  FieldDetailScreenPressedDim: {
+  FieldDetailScreenPressedOpaco: {
     opacity: 0.88,
   },
-  FieldDetailScreenToastCasco: {
+
+  FieldDetailScreenToastAndamio: {
     alignSelf: 'center',
     backgroundColor: colors.toastBg,
     borderColor: colors.border,
@@ -599,17 +627,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 
-
-  FieldDetailScreenToastFiligrana: {
+  FieldDetailScreenToastLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 13,
     fontWeight: '700',
   },
 
-
-
-  FieldDetailScreenMissingCasco: {
+  FieldDetailScreenMissingAndamio: {
     alignItems: 'center',
     backgroundColor: colors.background,
     flex: 1,
@@ -617,15 +642,13 @@ const styles = StyleSheet.create({
     gap: 12,
   },
 
-
-  FieldDetailScreenMissingFiligrana: {
+  FieldDetailScreenMissingLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 18,
   },
 
-
-  FieldDetailScreenHeaderRowDintel: {
+  FieldDetailScreenHeaderRowFriso: {
     alignItems: 'center',
     borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
@@ -635,6 +658,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingHorizontal: 16,
   },
+
   FieldDetailScreenNavSide: {
     minWidth: 72,
   },
@@ -643,26 +667,27 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     minWidth: 72,
   },
-  FieldDetailScreenNavLinkFiligrana: {
+
+  FieldDetailScreenNavLinkLamina: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
-  FieldDetailScreenNavLinkBoldFiligrana: {
+
+  FieldDetailScreenNavLinkBoldLamina: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 14,
     fontWeight: '700',
   },
 
-
-
-  FieldDetailScreenNavTitleFiligrana: {
+  FieldDetailScreenNavTitleLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
+
   FieldDetailScreenScrollContent: {
     flexGrow: 1,
   },
@@ -680,19 +705,19 @@ const styles = StyleSheet.create({
     borderRadius: 14,
   },
 
-
-
   FieldDetailScreenCoverChipRow: {
     alignItems: 'center',
     alignSelf: 'flex-start',
     flexDirection: 'row',
   },
+
   FieldDetailScreenTitleRow: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  FieldDetailScreenFieldNameFiligrana: {
+
+  FieldDetailScreenFieldNameLamina: {
     color: colors.cream,
     flexShrink: 1,
     fontFamily: fonts.sansBold,
@@ -701,14 +726,12 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
 
-  FieldDetailScreenFieldAreaFiligrana: {
+  FieldDetailScreenFieldAreaLamina: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
-
-
 
   FieldDetailScreenCropLine: {
     color: colors.bodyApagado,
@@ -718,8 +741,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
 
-
-  FieldDetailScreenSegCasco: {
+  FieldDetailScreenSegAndamio: {
     backgroundColor: colors.card,
     borderColor: colors.border,
     borderRadius: 12,
@@ -740,10 +762,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 2,
   },
 
-
   FieldDetailScreenSegItemOn: {
     backgroundColor: colors.gold,
   },
+
   FieldDetailScreenSegLabel: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansBold,
@@ -752,13 +774,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-
-
   FieldDetailScreenSegLabelOn: {
     color: colors.buttonText,
   },
-
-
 
   FieldDetailScreenKvCard: {
     backgroundColor: colors.card,
@@ -768,6 +786,7 @@ const styles = StyleSheet.create({
     marginBottom: 18,
     overflow: 'hidden',
   },
+
   FieldDetailScreenKvRow: {
     alignItems: 'center',
     flexDirection: 'row',
@@ -781,15 +800,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
 
-
-
   FieldDetailScreenKvLabel: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
   },
-
-
 
   FieldDetailScreenKvValue: {
     color: colors.cream,
@@ -805,13 +820,14 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-  FieldDetailScreenSectionTitleFiligrana: {
+  FieldDetailScreenSectionTitleLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 14,
     fontWeight: '700',
     marginBottom: 10,
   },
+
   FieldDetailScreenTimelineRow: {
     alignItems: 'flex-start',
     flexDirection: 'row',
@@ -819,15 +835,11 @@ const styles = StyleSheet.create({
     marginBottom: 18,
   },
 
-
-
   FieldDetailScreenTimelineCol: {
     alignItems: 'center',
     flex: 1,
     minWidth: 0,
   },
-
-
 
   FieldDetailScreenTimelineTrack: {
     backgroundColor: '#160c3c',
@@ -842,8 +854,6 @@ const styles = StyleSheet.create({
     height: 6,
   },
 
-
-
   FieldDetailScreenTimelineFillOn: {
     backgroundColor: colors.success,
     width: '100%',
@@ -853,8 +863,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.border,
     width: 0,
   },
-
-
 
   FieldDetailScreenTimelineLabel: {
     fontFamily: fonts.sansRegular,
@@ -884,14 +892,13 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
 
-
-
   FieldDetailScreenGhostBtnLabel: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 15,
     fontWeight: '700',
   },
+
   FieldDetailScreenDangerBtn: {
     alignItems: 'center',
     backgroundColor: 'rgba(236, 91, 91, 0.1)',
@@ -901,7 +908,6 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
   },
-
 
   FieldDetailScreenDangerOutlineBtn: {
     alignItems: 'center',
@@ -920,8 +926,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-
-
   FieldDetailScreenActivityCard: {
     backgroundColor: colors.card,
     borderColor: colors.border,
@@ -936,19 +940,19 @@ const styles = StyleSheet.create({
     backgroundColor: colors.border,
     width: 3,
   },
+
   FieldDetailScreenActivityBody: {
     flex: 1,
     paddingHorizontal: 15,
     paddingVertical: 15,
   },
 
-
-
   FieldDetailScreenActivityHeader: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+
   FieldDetailScreenActivityTitle: {
     color: colors.cream,
     flexShrink: 1,
@@ -964,15 +968,12 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-
   FieldDetailScreenActivityMeta: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
     marginTop: 6,
   },
-
-
 
   FieldDetailScreenExpenseSummary: {
     backgroundColor: colors.card,
@@ -999,11 +1000,10 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginTop: 2,
   },
+
   FieldDetailScreenExpenseSummaryRight: {
     alignItems: 'flex-end',
   },
-
-
 
   FieldDetailScreenExpenseSummaryPerHa: {
     color: colors.cream,
@@ -1012,7 +1012,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginTop: 2,
   },
-
 
   FieldDetailScreenExpenseCard: {
     alignItems: 'center',
@@ -1027,14 +1026,10 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
 
-
-
   FieldDetailScreenExpenseCopy: {
     flex: 1,
     marginRight: 12,
   },
-
-
 
   FieldDetailScreenExpenseTitle: {
     color: colors.cream,
@@ -1049,7 +1044,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginTop: 2,
   },
-
 
   FieldDetailScreenExpenseAmount: {
     color: colors.expenseDinero,
@@ -1069,6 +1063,39 @@ const styles = StyleSheet.create({
     paddingVertical: 28,
   },
 
+  FieldDetailScreenEmptyAndamio: {
+    alignItems: 'center',
+    backgroundColor: colors.emptyRelleno,
+    borderColor: colors.emptyBorde,
+    borderRadius: radius.card,
+    borderStyle: 'dashed',
+    borderWidth: 1,
+    marginBottom: 12,
+    paddingHorizontal: 20,
+    paddingVertical: 28,
+  },
+
+  FieldDetailScreenEmptyEscudo: {
+    fontSize: 34,
+  },
+
+  FieldDetailScreenEmptyTitle: {
+    color: colors.cream,
+    fontFamily: fonts.sansBold,
+    fontSize: 16,
+    fontWeight: '700',
+    marginTop: 10,
+    textAlign: 'center',
+  },
+
+  FieldDetailScreenEmptyHint: {
+    color: colors.bodyApagado,
+    fontFamily: fonts.sansRegular,
+    fontSize: 13,
+    lineHeight: 18,
+    marginTop: 6,
+    textAlign: 'center',
+  },
 
   FieldDetailScreenHarvestEmptyIcon: {
     fontSize: 36,
@@ -1082,8 +1109,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 
-
-
   FieldDetailScreenHarvestEmptyHint: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
@@ -1093,11 +1118,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-
   FieldDetailScreenHarvestEmptyBtn: {
     minWidth: 180,
   },
-
 
   FieldDetailScreenNotesCard: {
     backgroundColor: colors.card,
@@ -1107,6 +1130,7 @@ const styles = StyleSheet.create({
     marginBottom: 14,
     padding: 14,
   },
+
   FieldDetailScreenNotesTitle: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -1114,7 +1138,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginBottom: 6,
   },
-
 
   FieldDetailScreenNotesBody: {
     color: colors.bodyApagado,
@@ -1127,8 +1150,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 10,
   },
-
-
 
   FieldDetailScreenHarvestActionHalf: {
     flex: 1,

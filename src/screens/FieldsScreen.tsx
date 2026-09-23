@@ -13,10 +13,10 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { PrimaryButton } from '../components/buttons/PrimaryButton';
 import { colors, fonts, radius } from '../constants/theme';
 import { appFondo, fieldRecursos } from '../data/assets';
 import {
-  DEMO_BANDA,
   FIELD_STATUS_FILTROS,
   type FarmField,
   type FieldStatus,
@@ -33,7 +33,7 @@ type FieldsScreenProps = {
 export function FieldsScreen({ onOpenCampo, onAddCampo }: FieldsScreenProps) {
   const insets = useSafeAreaInsets();
   const adaptive = useAdaptativo();
-  const { fields, isMuestra } = useCampos();
+  const { fields } = useCampos();
   const [query, setConsulta] = useState('');
   const [filter, setFiltro] =
     useState<(typeof FIELD_STATUS_FILTROS)[number]>('All');
@@ -76,20 +76,20 @@ export function FieldsScreen({ onOpenCampo, onAddCampo }: FieldsScreenProps) {
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.FieldsScreenHeader}>
-          <Text style={styles.FieldsScreenTitleFiligrana}>Fields</Text>
+          <Text style={styles.FieldsScreenTitleLamina}>Fields</Text>
           <Pressable onPress={onAddCampo} hitSlop={8}>
             <LinearGradient
               colors={[colors.buttonGradientStart, colors.buttonGradientEnd]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
-              style={styles.FieldsScreenAddOrbe}
+              style={styles.FieldsScreenAddDisco}
             >
-              <Text style={styles.FieldsScreenAddMarca}>+</Text>
+              <Text style={styles.FieldsScreenAddSello}>+</Text>
             </LinearGradient>
           </Pressable>
         </View>
 
-        <View style={styles.FieldsScreenSearchCasco}>
+        <View style={styles.FieldsScreenSearchAndamio}>
           <TextInput
             value={query}
             onChangeText={setConsulta}
@@ -126,23 +126,39 @@ export function FieldsScreen({ onOpenCampo, onAddCampo }: FieldsScreenProps) {
           })}
         </View>
 
-        {isMuestra ? (
-          <View style={styles.FieldsScreenDemoBannerCasco}>
-            <Text style={styles.FieldsScreenDemoBannerEmblema}>ℹ️</Text>
-            <Text style={styles.FieldsScreenDemoBannerFiligrana}>
-              {DEMO_BANDA}
-            </Text>
-          </View>
-        ) : null}
-
         <View style={styles.FieldsScreenListStack}>
-          {visible.map(field => (
-            <FieldCard
-              key={field.id}
-              field={field}
-              onPress={() => onOpenCampo(field.id)}
-            />
-          ))}
+          {visible.length === 0 ? (
+            <View style={styles.FieldsScreenEmptyAndamio}>
+              <Text style={styles.FieldsScreenEmptyEscudo}>
+                {fields.length === 0 ? '🌾' : '🔍'}
+              </Text>
+              <Text style={styles.FieldsScreenEmptyTitleLamina}>
+                {fields.length === 0
+                  ? 'No fields yet'
+                  : 'No matching fields'}
+              </Text>
+              <Text style={styles.FieldsScreenEmptyHintLamina}>
+                {fields.length === 0
+                  ? 'Add your first field to track crops, status, and season progress.'
+                  : 'Try another status or clear the search.'}
+              </Text>
+              {fields.length === 0 ? (
+                <PrimaryButton
+                  label="+ Add Field"
+                  onPress={onAddCampo}
+                  style={styles.FieldsScreenEmptyPedestal}
+                />
+              ) : null}
+            </View>
+          ) : (
+            visible.map(field => (
+              <FieldCard
+                key={field.id}
+                field={field}
+                onPress={() => onOpenCampo(field.id)}
+              />
+            ))
+          )}
         </View>
       </ScrollView>
     </ImageBackground>
@@ -165,8 +181,8 @@ function FieldCard({
     <Pressable
       onPress={onPress}
       style={({ pressed }) => [
-        styles.FieldsScreenFieldCardCasco,
-        pressed && styles.FieldsScreenPressedDim,
+        styles.FieldsScreenFieldCardAndamio,
+        pressed && styles.FieldsScreenPressedOpaco,
       ]}
     >
       <ImageBackground
@@ -192,10 +208,10 @@ function FieldCard({
       </ImageBackground>
       <View style={styles.FieldsScreenFieldCardBody}>
         <View style={styles.FieldsScreenFieldCardTitleRow}>
-          <Text style={styles.FieldsScreenFieldCardNameFiligrana}>
+          <Text style={styles.FieldsScreenFieldCardNameLamina}>
             {field.name}
           </Text>
-          <Text style={styles.FieldsScreenFieldCardAreaFiligrana}>
+          <Text style={styles.FieldsScreenFieldCardAreaLamina}>
             {field.areaEtiqueta}
           </Text>
         </View>
@@ -251,12 +267,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-
-
   FieldsScreenScroll: {
     flexGrow: 1,
   },
-
 
   FieldsScreenHeader: {
     alignItems: 'center',
@@ -265,17 +278,14 @@ const styles = StyleSheet.create({
     marginBottom: 14,
   },
 
-
-  FieldsScreenTitleFiligrana: {
+  FieldsScreenTitleLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 24,
     fontWeight: '700',
   },
 
-
-
-  FieldsScreenAddOrbe: {
+  FieldsScreenAddDisco: {
     alignItems: 'center',
     borderRadius: 12,
     height: 40,
@@ -283,7 +293,7 @@ const styles = StyleSheet.create({
     width: 40,
   },
 
-  FieldsScreenAddMarca: {
+  FieldsScreenAddSello: {
     color: colors.buttonText,
     fontFamily: fonts.sansBold,
     fontSize: 22,
@@ -291,9 +301,7 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
 
-
-
-  FieldsScreenSearchCasco: {
+  FieldsScreenSearchAndamio: {
     backgroundColor: colors.card,
     borderColor: colors.emptyBorde,
     borderRadius: 12,
@@ -304,16 +312,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
   },
 
-
-
   FieldsScreenSearchInput: {
     color: colors.cream,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
     padding: 0,
   },
-
-
 
   FieldsScreenFilterRow: {
     alignItems: 'center',
@@ -323,8 +327,6 @@ const styles = StyleSheet.create({
     marginBottom: 14,
   },
 
-
-
   FieldsScreenFilterChip: {
     alignSelf: 'flex-start',
     borderRadius: 20,
@@ -333,17 +335,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 9,
   },
 
-
   FieldsScreenFilterChipActive: {
     backgroundColor: 'rgba(245, 182, 66, 0.16)',
   },
 
-
-
   FieldsScreenFilterChipIdle: {
     backgroundColor: 'rgba(139, 148, 173, 0.16)',
   },
-
 
   FieldsScreenFilterChipLabel: {
     color: colors.bodyApagado,
@@ -352,14 +350,11 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-
   FieldsScreenFilterChipLabelActive: {
     color: colors.gold,
   },
 
-
-
-  FieldsScreenDemoBannerCasco: {
+  FieldsScreenDemoBannerAndamio: {
     backgroundColor: colors.infoBanda,
     borderColor: colors.infoBannerBorde,
     borderRadius: radius.card,
@@ -370,11 +365,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 12,
   },
-  FieldsScreenDemoBannerEmblema: {
+
+  FieldsScreenDemoBannerEscudo: {
     fontSize: 16,
     marginTop: 2,
   },
-  FieldsScreenDemoBannerFiligrana: {
+
+  FieldsScreenDemoBannerLamina: {
     color: colors.infoBannerText,
     flex: 1,
     fontFamily: fonts.sansRegular,
@@ -382,13 +379,50 @@ const styles = StyleSheet.create({
     lineHeight: 18,
   },
 
-
-
   FieldsScreenListStack: {
     gap: 12,
   },
 
-  FieldsScreenFieldCardCasco: {
+  FieldsScreenEmptyAndamio: {
+    alignItems: 'center',
+    backgroundColor: colors.emptyRelleno,
+    borderColor: colors.emptyBorde,
+    borderRadius: radius.card,
+    borderStyle: 'dashed',
+    borderWidth: 1,
+    marginTop: 4,
+    paddingHorizontal: 24,
+    paddingVertical: 36,
+  },
+
+  FieldsScreenEmptyEscudo: {
+    fontSize: 36,
+    marginBottom: 10,
+  },
+
+  FieldsScreenEmptyTitleLamina: {
+    color: colors.cream,
+    fontFamily: fonts.sansBold,
+    fontSize: 16,
+    fontWeight: '700',
+    textAlign: 'center',
+  },
+
+  FieldsScreenEmptyHintLamina: {
+    color: colors.bodyApagado,
+    fontFamily: fonts.sansRegular,
+    fontSize: 13,
+    lineHeight: 18,
+    marginTop: 8,
+    textAlign: 'center',
+  },
+
+  FieldsScreenEmptyPedestal: {
+    marginTop: 18,
+    minWidth: 150,
+  },
+
+  FieldsScreenFieldCardAndamio: {
     backgroundColor: colors.card,
     borderColor: colors.border,
     borderRadius: radius.card,
@@ -396,10 +430,9 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
 
-  FieldsScreenPressedDim: {
+  FieldsScreenPressedOpaco: {
     opacity: 0.9,
   },
-
 
   FieldsScreenFieldCardCover: {
     alignItems: 'flex-start',
@@ -408,17 +441,15 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingHorizontal: 12,
   },
+
   FieldsScreenFieldCardCoverHarvested: {
     opacity: 0.85,
   },
-
-
 
   FieldsScreenFieldCardCoverImage: {
     borderTopLeftRadius: 14,
     borderTopRightRadius: 14,
   },
-
 
   FieldsScreenFieldCardChipRow: {
     alignItems: 'center',
@@ -427,6 +458,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     gap: 8,
   },
+
   FieldsScreenStatusPill: {
     alignSelf: 'flex-start',
     borderRadius: 20,
@@ -437,11 +469,10 @@ const styles = StyleSheet.create({
   FieldsScreenStatusPillSuccess: {
     backgroundColor: colors.successSuave,
   },
+
   FieldsScreenStatusPillGold: {
     backgroundColor: 'rgba(245, 182, 66, 0.16)',
   },
-
-
 
   FieldsScreenStatusPillMuted: {
     backgroundColor: colors.plannedSuave,
@@ -453,8 +484,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-
-
   FieldsScreenWarningPill: {
     alignSelf: 'flex-start',
     backgroundColor: 'rgba(236, 91, 91, 0.16)',
@@ -462,6 +491,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 9,
     paddingVertical: 3,
   },
+
   FieldsScreenWarningPillLabel: {
     color: colors.danger,
     fontFamily: fonts.sansBold,
@@ -474,15 +504,13 @@ const styles = StyleSheet.create({
     paddingTop: 12,
   },
 
-
-
   FieldsScreenFieldCardTitleRow: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
 
-  FieldsScreenFieldCardNameFiligrana: {
+  FieldsScreenFieldCardNameLamina: {
     color: colors.cream,
     flexShrink: 1,
     fontFamily: fonts.sansBold,
@@ -491,14 +519,12 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
 
-  FieldsScreenFieldCardAreaFiligrana: {
+  FieldsScreenFieldCardAreaLamina: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
-
-
 
   FieldsScreenFieldCardCrop: {
     color: colors.bodyApagado,
@@ -506,6 +532,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginTop: 4,
   },
+
   FieldsScreenFieldCardFooter: {
     borderTopColor: colors.borderSuave,
     borderTopWidth: 1,
@@ -513,8 +540,6 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
     paddingTop: 8,
   },
-
-
 
   FieldsScreenFieldCardNext: {
     color: colors.bodyApagado,

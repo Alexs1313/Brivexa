@@ -40,7 +40,7 @@ export function CalculatorShell({
   return (
     <ImageBackground
       source={appFondo}
-      style={styles.CalculatorPartsRaizCasco}
+      style={styles.CalculatorPartsNucleoAndamio}
       resizeMode="cover"
     >
       <ScrollView
@@ -48,23 +48,23 @@ export function CalculatorShell({
           styles.CalculatorPartsScrollContent,
           {
             paddingTop: insets.top + adaptive.verticalEscala(6),
-            paddingBottom: insets.bottom + adaptive.verticalEscala(28),
+            paddingBottom: adaptive.verticalEscala(110),
           },
         ]}
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.CalculatorPartsHeaderRowDintel}>
+        <View style={styles.CalculatorPartsHeaderRowFriso}>
           <Pressable
             onPress={onBack}
             hitSlop={12}
             style={styles.CalculatorPartsNavSide}
           >
-            <Text style={styles.CalculatorPartsNavLinkFiligrana}>
+            <Text style={styles.CalculatorPartsNavLinkLamina}>
               ‹ Calculators
             </Text>
           </Pressable>
-          <Text style={styles.CalculatorPartsTitleFiligrana}>{title}</Text>
+          <Text style={styles.CalculatorPartsTitleLamina}>{title}</Text>
           <View style={styles.CalculatorPartsNavSide} />
         </View>
         <View style={{ paddingHorizontal: adaptive.horizontalRelleno }}>
@@ -97,8 +97,8 @@ export function UnitField({
         flex && styles.CalculatorPartsFieldFlex,
       ]}
     >
-      <Text style={styles.CalculatorPartsFieldLabelFiligrana}>{label}</Text>
-      <View style={styles.CalculatorPartsFieldInputCasco}>
+      <Text style={styles.CalculatorPartsFieldLabelLamina}>{label}</Text>
+      <View style={styles.CalculatorPartsFieldInputAndamio}>
         <TextInput
           value={value}
           onChangeText={onChangeText}
@@ -124,10 +124,10 @@ export function SelectField({
 }) {
   return (
     <View style={styles.CalculatorPartsFieldGroup}>
-      <Text style={styles.CalculatorPartsFieldLabelFiligrana}>{label}</Text>
+      <Text style={styles.CalculatorPartsFieldLabelLamina}>{label}</Text>
       <Pressable
         onPress={onPress}
-        style={styles.CalculatorPartsFieldInputCasco}
+        style={styles.CalculatorPartsFieldInputAndamio}
       >
         <Text style={styles.CalculatorPartsSelectValue}>{value}</Text>
         <Text style={styles.CalculatorPartsChevron}>⌄</Text>
@@ -155,12 +155,12 @@ export function FieldDropdown({
 
   return (
     <View style={styles.CalculatorPartsFieldGroup}>
-      <Text style={styles.CalculatorPartsFieldLabelFiligrana}>{label}</Text>
+      <Text style={styles.CalculatorPartsFieldLabelLamina}>{label}</Text>
       <Pressable
         onPress={() => setAbierto(true)}
         style={[
-          styles.CalculatorPartsFieldInputCasco,
-          open && styles.CalculatorPartsInputCascoOpen,
+          styles.CalculatorPartsFieldInputAndamio,
+          open && styles.CalculatorPartsInputAndamioOpen,
         ]}
       >
         <Text
@@ -365,8 +365,8 @@ export function SaveShareRow({
         </Pressable>
       </View>
       {toast ? (
-        <View style={styles.CalculatorPartsToastCasco}>
-          <Text style={styles.CalculatorPartsToastFiligrana}>{toast}</Text>
+        <View style={styles.CalculatorPartsToastAndamio}>
+          <Text style={styles.CalculatorPartsToastLamina}>{toast}</Text>
         </View>
       ) : null}
     </View>
@@ -374,17 +374,16 @@ export function SaveShareRow({
 }
 
 const styles = StyleSheet.create({
-  CalculatorPartsRaizCasco: {
+  CalculatorPartsNucleoAndamio: {
     backgroundColor: colors.background,
     flex: 1,
   },
 
-
-
   CalculatorPartsScrollContent: {
     flexGrow: 1,
   },
-  CalculatorPartsHeaderRowDintel: {
+
+  CalculatorPartsHeaderRowFriso: {
     alignItems: 'center',
     borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
@@ -399,39 +398,35 @@ const styles = StyleSheet.create({
     minWidth: 110,
   },
 
-  CalculatorPartsNavLinkFiligrana: {
+  CalculatorPartsNavLinkLamina: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
 
-  CalculatorPartsTitleFiligrana: {
+  CalculatorPartsTitleLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
-
   CalculatorPartsFieldGroup: {
     marginBottom: 14,
   },
-
 
   CalculatorPartsFieldFlex: {
     flex: 1,
   },
 
-
-  CalculatorPartsFieldLabelFiligrana: {
+  CalculatorPartsFieldLabelLamina: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     marginBottom: 8,
   },
 
-
-  CalculatorPartsFieldInputCasco: {
+  CalculatorPartsFieldInputAndamio: {
     alignItems: 'center',
     backgroundColor: colors.card,
     borderColor: colors.emptyBorde,
@@ -441,6 +436,7 @@ const styles = StyleSheet.create({
     height: 48,
     paddingHorizontal: 14,
   },
+
   CalculatorPartsFieldInput: {
     color: colors.cream,
     flex: 1,
@@ -456,8 +452,6 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
 
-
-
   CalculatorPartsSelectValue: {
     color: colors.cream,
     flex: 1,
@@ -468,26 +462,27 @@ const styles = StyleSheet.create({
   CalculatorPartsSelectPlaceholder: {
     color: colors.tabInactivo,
   },
+
   CalculatorPartsChevron: {
     color: colors.tabInactivo,
     fontSize: 15,
   },
 
-
   CalculatorPartsChevronOpen: {
     color: colors.gold,
     transform: [{ rotate: '180deg' }],
   },
-  CalculatorPartsInputCascoOpen: {
+
+  CalculatorPartsInputAndamioOpen: {
     borderColor: colors.goldBorde,
   },
+
   CalculatorPartsDropdownBackdrop: {
     backgroundColor: 'rgba(8, 4, 24, 0.72)',
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 24,
   },
-
 
   CalculatorPartsDropdownSheet: {
     backgroundColor: colors.card,
@@ -498,7 +493,6 @@ const styles = StyleSheet.create({
     paddingBottom: 6,
     paddingTop: 14,
   },
-
 
   CalculatorPartsDropdownTitle: {
     color: colors.bodyApagado,
@@ -517,12 +511,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 14,
   },
+
   CalculatorPartsDropdownOptionBorder: {
     borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
   },
-
-
 
   CalculatorPartsDropdownOptionActive: {
     backgroundColor: colors.goldSuave,
@@ -533,8 +526,6 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
 
-
-
   CalculatorPartsDropdownOptionTitle: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
@@ -542,12 +533,9 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-
   CalculatorPartsDropdownOptionTitleActive: {
     color: colors.gold,
   },
-
-
 
   CalculatorPartsDropdownOptionMeta: {
     color: colors.bodyApagado,
@@ -555,19 +543,20 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginTop: 3,
   },
+
   CalculatorPartsDropdownCheck: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
+
   CalculatorPartsActionRow: {
     flexDirection: 'row',
     gap: 11,
     marginBottom: 14,
     marginTop: 2,
   },
-
 
   CalculatorPartsResetBtn: {
     alignItems: 'center',
@@ -579,6 +568,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 90,
   },
+
   CalculatorPartsResetLabel: {
     color: colors.bodyApagado,
     fontFamily: fonts.sansBold,
@@ -586,13 +576,9 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-
-
   CalculatorPartsCalcBtnWrap: {
     flex: 1,
   },
-
-
 
   CalculatorPartsResultCard: {
     backgroundColor: colors.card,
@@ -602,13 +588,13 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     overflow: 'hidden',
   },
+
   CalculatorPartsResultHeader: {
     borderBottomColor: colors.border,
     borderBottomWidth: 1,
     paddingHorizontal: 16,
     paddingVertical: 13,
   },
-
 
   CalculatorPartsResultTitle: {
     color: colors.gold,
@@ -626,11 +612,11 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
 
-
   CalculatorPartsResultRowBorder: {
     borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
   },
+
   CalculatorPartsResultLabel: {
     color: colors.bodyApagado,
     flex: 1,
@@ -639,15 +625,12 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
 
-
   CalculatorPartsResultValue: {
     color: colors.cream,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     textAlign: 'right',
   },
-
-
 
   CalculatorPartsSaveShareRow: {
     flexDirection: 'row',
@@ -665,8 +648,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-
-
   CalculatorPartsSecondaryBtnPressed: {
     opacity: 0.85,
   },
@@ -678,8 +659,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-
-  CalculatorPartsToastCasco: {
+  CalculatorPartsToastAndamio: {
     alignSelf: 'center',
     backgroundColor: colors.toastBg,
     borderColor: colors.border,
@@ -690,8 +670,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
 
-
-  CalculatorPartsToastFiligrana: {
+  CalculatorPartsToastLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 13,

@@ -44,12 +44,12 @@ export function InventoryItemDetailScreen({
 
   if (!item) {
     return (
-      <View style={styles.InventoryItemDetailScreenMissingBolsillo}>
-        <Text style={styles.InventoryItemDetailScreenMissingFiligrana}>
+      <View style={styles.InventoryItemDetailScreenMissingRecinto}>
+        <Text style={styles.InventoryItemDetailScreenMissingLamina}>
           Item not found
         </Text>
         <Pressable onPress={onBack}>
-          <Text style={styles.InventoryItemDetailScreenNavLinkFiligrana}>
+          <Text style={styles.InventoryItemDetailScreenNavLinkLamina}>
             ‹ Inventory
           </Text>
         </Pressable>
@@ -74,7 +74,7 @@ export function InventoryItemDetailScreen({
   return (
     <ImageBackground
       source={appFondo}
-      style={styles.InventoryItemDetailScreenRaizCasco}
+      style={styles.InventoryItemDetailScreenNucleoAndamio}
       resizeMode="cover"
     >
       <ScrollView
@@ -87,17 +87,17 @@ export function InventoryItemDetailScreen({
         ]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.InventoryItemDetailScreenHeaderRowDintel}>
+        <View style={styles.InventoryItemDetailScreenHeaderRowFriso}>
           <Pressable
             onPress={onBack}
             hitSlop={12}
             style={styles.InventoryItemDetailScreenNavSide}
           >
-            <Text style={styles.InventoryItemDetailScreenNavLinkFiligrana}>
+            <Text style={styles.InventoryItemDetailScreenNavLinkLamina}>
               ‹ Inventory
             </Text>
           </Pressable>
-          <Text style={styles.InventoryItemDetailScreenTitleFiligrana}>
+          <Text style={styles.InventoryItemDetailScreenTitleLamina}>
             Item
           </Text>
           <Pressable
@@ -105,15 +105,15 @@ export function InventoryItemDetailScreen({
             hitSlop={12}
             style={styles.InventoryItemDetailScreenNavSideRight}
           >
-            <Text style={styles.InventoryItemDetailScreenNavLinkBoldFiligrana}>
+            <Text style={styles.InventoryItemDetailScreenNavLinkBoldLamina}>
               Edit
             </Text>
           </Pressable>
         </View>
 
         <View style={{ paddingHorizontal: adaptive.horizontalRelleno }}>
-          <View style={styles.InventoryItemDetailScreenIdentityRowDintel}>
-            <View style={styles.InventoryItemDetailScreenFlexBolsillo}>
+          <View style={styles.InventoryItemDetailScreenIdentityRowFriso}>
+            <View style={styles.InventoryItemDetailScreenFlexRecinto}>
               <Text style={styles.InventoryItemDetailScreenItemName}>
                 {item.name}
               </Text>
@@ -149,7 +149,7 @@ export function InventoryItemDetailScreen({
               onPress={() => setStockModo('add')}
               style={({ pressed }) => [
                 styles.InventoryItemDetailScreenAddStockBtn,
-                pressed && styles.InventoryItemDetailScreenPressedDim,
+                pressed && styles.InventoryItemDetailScreenPressedOpaco,
               ]}
             >
               <Text style={styles.InventoryItemDetailScreenAddStockLabel}>
@@ -160,7 +160,7 @@ export function InventoryItemDetailScreen({
               onPress={() => setStockModo('use')}
               style={({ pressed }) => [
                 styles.InventoryItemDetailScreenUseStockBtn,
-                pressed && styles.InventoryItemDetailScreenPressedDim,
+                pressed && styles.InventoryItemDetailScreenPressedOpaco,
               ]}
             >
               <Text style={styles.InventoryItemDetailScreenUseStockLabel}>
@@ -169,44 +169,55 @@ export function InventoryItemDetailScreen({
             </Pressable>
           </View>
 
-          <Text style={styles.InventoryItemDetailScreenSectionTitleFiligrana}>
+          <Text style={styles.InventoryItemDetailScreenSectionTitleLamina}>
             Stock Movement
           </Text>
           <View style={styles.InventoryItemDetailScreenMovementList}>
-            {item.movements.map((move, index) => (
-              <View
-                key={move.id}
-                style={[
-                  styles.InventoryItemDetailScreenMovementRow,
-                  index < item.movements.length - 1 &&
-                    styles.InventoryItemDetailScreenKvRowBorder,
-                ]}
-              >
-                <View style={styles.InventoryItemDetailScreenFlexBolsillo}>
-                  <Text style={styles.InventoryItemDetailScreenMovementTitle}>
-                    {move.title}
-                  </Text>
-                  {move.date ? (
-                    <Text style={styles.InventoryItemDetailScreenMovementDate}>
-                      {move.date}
-                    </Text>
-                  ) : null}
-                </View>
-                <Text
-                  style={[
-                    styles.InventoryItemDetailScreenMovementAmount,
-                    move.kind === 'in' &&
-                      styles.InventoryItemDetailScreenAmountIn,
-                    move.kind === 'out' &&
-                      styles.InventoryItemDetailScreenAmountOut,
-                    move.kind === 'balance' &&
-                      styles.InventoryItemDetailScreenAmountBalance,
-                  ]}
-                >
-                  {move.amountEtiqueta}
+            {item.movements.length === 0 ? (
+              <View style={styles.InventoryItemDetailScreenEmptyMove}>
+                <Text style={styles.InventoryItemDetailScreenEmptyMoveTitle}>
+                  No movements yet
+                </Text>
+                <Text style={styles.InventoryItemDetailScreenEmptyMoveHint}>
+                  Add or use stock to start a history.
                 </Text>
               </View>
-            ))}
+            ) : (
+              item.movements.map((move, index) => (
+                <View
+                  key={move.id}
+                  style={[
+                    styles.InventoryItemDetailScreenMovementRow,
+                    index < item.movements.length - 1 &&
+                      styles.InventoryItemDetailScreenKvRowBorder,
+                  ]}
+                >
+                  <View style={styles.InventoryItemDetailScreenFlexRecinto}>
+                    <Text style={styles.InventoryItemDetailScreenMovementTitle}>
+                      {move.title}
+                    </Text>
+                    {move.date ? (
+                      <Text style={styles.InventoryItemDetailScreenMovementDate}>
+                        {move.date}
+                      </Text>
+                    ) : null}
+                  </View>
+                  <Text
+                    style={[
+                      styles.InventoryItemDetailScreenMovementAmount,
+                      move.kind === 'in' &&
+                        styles.InventoryItemDetailScreenAmountIn,
+                      move.kind === 'out' &&
+                        styles.InventoryItemDetailScreenAmountOut,
+                      move.kind === 'balance' &&
+                        styles.InventoryItemDetailScreenAmountBalance,
+                    ]}
+                  >
+                    {move.amountEtiqueta}
+                  </Text>
+                </View>
+              ))
+            )}
           </View>
 
           {item.alert ? (
@@ -237,11 +248,11 @@ export function InventoryItemDetailScreen({
       {toast ? (
         <View
           style={[
-            styles.InventoryItemDetailScreenToastCasco,
+            styles.InventoryItemDetailScreenToastAndamio,
             { bottom: insets.bottom + adaptive.verticalEscala(24) },
           ]}
         >
-          <Text style={styles.InventoryItemDetailScreenToastFiligrana}>
+          <Text style={styles.InventoryItemDetailScreenToastLamina}>
             {toast}
           </Text>
         </View>
@@ -310,18 +321,19 @@ function StatusChip({ status }: { status: StockStatus }) {
 }
 
 const styles = StyleSheet.create({
-  InventoryItemDetailScreenRaizCasco: {
+  InventoryItemDetailScreenNucleoAndamio: {
     backgroundColor: colors.background,
     flex: 1,
   },
-  InventoryItemDetailScreenMissingBolsillo: {
+
+  InventoryItemDetailScreenMissingRecinto: {
     alignItems: 'center',
     backgroundColor: colors.background,
     flex: 1,
     justifyContent: 'center',
   },
 
-  InventoryItemDetailScreenMissingFiligrana: {
+  InventoryItemDetailScreenMissingLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 18,
@@ -330,9 +342,7 @@ const styles = StyleSheet.create({
 
   InventoryItemDetailScreenScrollContent: { flexGrow: 1 },
 
-
-
-  InventoryItemDetailScreenHeaderRowDintel: {
+  InventoryItemDetailScreenHeaderRowFriso: {
     alignItems: 'center',
     borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
@@ -343,55 +353,48 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 
-
   InventoryItemDetailScreenNavSide: { minWidth: 90 },
-
-
 
   InventoryItemDetailScreenNavSideRight: {
     alignItems: 'flex-end',
     minWidth: 90,
   },
 
-
-
-  InventoryItemDetailScreenNavLinkFiligrana: {
+  InventoryItemDetailScreenNavLinkLamina: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
 
-  InventoryItemDetailScreenNavLinkBoldFiligrana: {
+  InventoryItemDetailScreenNavLinkBoldLamina: {
     color: colors.gold,
     fontFamily: fonts.sansBold,
     fontSize: 14,
     fontWeight: '700',
   },
 
-
-
-  InventoryItemDetailScreenTitleFiligrana: {
+  InventoryItemDetailScreenTitleLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
-  InventoryItemDetailScreenIdentityRowDintel: {
+
+  InventoryItemDetailScreenIdentityRowFriso: {
     alignItems: 'flex-start',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 14,
   },
 
-  InventoryItemDetailScreenFlexBolsillo: { flex: 1 },
+  InventoryItemDetailScreenFlexRecinto: { flex: 1 },
+
   InventoryItemDetailScreenItemName: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 22,
     fontWeight: '700',
   },
-
-
 
   InventoryItemDetailScreenItemCategory: {
     color: colors.bodyApagado,
@@ -406,14 +409,11 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
   },
 
-
   InventoryItemDetailScreenStatusChipLabel: {
     fontFamily: fonts.sansBold,
     fontSize: 10,
     fontWeight: '700',
   },
-
-
 
   InventoryItemDetailScreenKvList: {
     backgroundColor: colors.card,
@@ -423,8 +423,6 @@ const styles = StyleSheet.create({
     marginBottom: 14,
     overflow: 'hidden',
   },
-
-
 
   InventoryItemDetailScreenKvRow: {
     alignItems: 'center',
@@ -446,8 +444,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
 
-
-
   InventoryItemDetailScreenKvValue: {
     color: colors.cream,
     fontFamily: fonts.sansRegular,
@@ -461,8 +457,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 
-
-
   InventoryItemDetailScreenAddStockBtn: {
     alignItems: 'center',
     backgroundColor: colors.successBoton,
@@ -471,6 +465,7 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
   },
+
   InventoryItemDetailScreenAddStockLabel: {
     color: colors.successButtonDark,
     fontFamily: fonts.sansBold,
@@ -496,19 +491,15 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-  InventoryItemDetailScreenPressedDim: { opacity: 0.88 },
+  InventoryItemDetailScreenPressedOpaco: { opacity: 0.88 },
 
-
-
-  InventoryItemDetailScreenSectionTitleFiligrana: {
+  InventoryItemDetailScreenSectionTitleLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 14,
     fontWeight: '700',
     marginBottom: 10,
   },
-
-
 
   InventoryItemDetailScreenMovementList: {
     backgroundColor: colors.card,
@@ -517,6 +508,28 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 16,
     overflow: 'hidden',
+  },
+
+  InventoryItemDetailScreenEmptyMove: {
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 24,
+  },
+
+  InventoryItemDetailScreenEmptyMoveTitle: {
+    color: colors.cream,
+    fontFamily: fonts.sansBold,
+    fontSize: 14,
+    fontWeight: '700',
+    textAlign: 'center',
+  },
+
+  InventoryItemDetailScreenEmptyMoveHint: {
+    color: colors.bodyApagado,
+    fontFamily: fonts.sansRegular,
+    fontSize: 13,
+    marginTop: 6,
+    textAlign: 'center',
   },
 
   InventoryItemDetailScreenMovementRow: {
@@ -528,15 +541,12 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
 
-
   InventoryItemDetailScreenMovementTitle: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 13,
     fontWeight: '700',
   },
-
-
 
   InventoryItemDetailScreenMovementDate: {
     color: colors.bodyApagado,
@@ -545,24 +555,17 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
 
-
   InventoryItemDetailScreenMovementAmount: {
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
 
-
   InventoryItemDetailScreenAmountIn: { color: colors.success },
-
-
 
   InventoryItemDetailScreenAmountOut: { color: colors.expenseDinero },
 
-
   InventoryItemDetailScreenAmountBalance: { color: colors.cream },
-
-
 
   InventoryItemDetailScreenAlertCard: {
     backgroundColor: colors.dangerSoftStrong,
@@ -582,16 +585,12 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
 
-
-
   InventoryItemDetailScreenAlertText: {
     color: colors.bodySuave,
     fontFamily: fonts.sansRegular,
     fontSize: 13,
     lineHeight: 18,
   },
-
-
 
   InventoryItemDetailScreenDeleteBtn: {
     alignItems: 'center',
@@ -603,7 +602,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-
   InventoryItemDetailScreenDeleteLabel: {
     color: colors.danger,
     fontFamily: fonts.sansBold,
@@ -611,9 +609,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-
-
-  InventoryItemDetailScreenToastCasco: {
+  InventoryItemDetailScreenToastAndamio: {
     alignSelf: 'center',
     backgroundColor: colors.toastBg,
     borderColor: colors.border,
@@ -624,8 +620,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 
-
-  InventoryItemDetailScreenToastFiligrana: {
+  InventoryItemDetailScreenToastLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 13,

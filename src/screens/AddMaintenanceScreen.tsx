@@ -42,7 +42,7 @@ export function AddMaintenanceScreen({
   return (
     <ImageBackground
       source={appFondo}
-      style={styles.AddMaintenanceScreenRaizCasco}
+      style={styles.AddMaintenanceScreenNucleoAndamio}
       resizeMode="cover"
     >
       <ScrollView
@@ -56,17 +56,17 @@ export function AddMaintenanceScreen({
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.AddMaintenanceScreenHeaderRowDintel}>
+        <View style={styles.AddMaintenanceScreenHeaderRowFriso}>
           <Pressable
             onPress={onCancel}
             hitSlop={12}
             style={styles.AddMaintenanceScreenNavSide}
           >
-            <Text style={styles.AddMaintenanceScreenNavLinkFiligrana}>
+            <Text style={styles.AddMaintenanceScreenNavLinkLamina}>
               ‹ Cancel
             </Text>
           </Pressable>
-          <Text style={styles.AddMaintenanceScreenTitleFiligrana}>
+          <Text style={styles.AddMaintenanceScreenTitleLamina}>
             Add Maintenance
           </Text>
           <View style={styles.AddMaintenanceScreenNavSide} />
@@ -115,8 +115,8 @@ export function AddMaintenanceScreen({
             keyboardType="decimal-pad"
           />
 
-          <View style={styles.AddMaintenanceScreenInfoBannerCasco}>
-            <Text style={styles.AddMaintenanceScreenInfoBannerFiligrana}>
+          <View style={styles.AddMaintenanceScreenInfoBannerAndamio}>
+            <Text style={styles.AddMaintenanceScreenInfoBannerLamina}>
               On save: ${cost || '0'} added to finance · maintenance history
               updated · next-service status reset.
             </Text>
@@ -135,7 +135,7 @@ export function AddMaintenanceScreen({
               })
             }
             fullWidth
-            style={styles.AddMaintenanceScreenSavePlinto}
+            style={styles.AddMaintenanceScreenSavePedestal}
           />
         </View>
       </ScrollView>
@@ -144,17 +144,16 @@ export function AddMaintenanceScreen({
 }
 
 const styles = StyleSheet.create({
-  AddMaintenanceScreenRaizCasco: {
+  AddMaintenanceScreenNucleoAndamio: {
     backgroundColor: colors.background,
     flex: 1,
   },
-
 
   AddMaintenanceScreenScrollContent: {
     flexGrow: 1,
   },
 
-  AddMaintenanceScreenHeaderRowDintel: {
+  AddMaintenanceScreenHeaderRowFriso: {
     alignItems: 'center',
     borderBottomColor: colors.borderSuave,
     borderBottomWidth: 1,
@@ -164,25 +163,25 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingHorizontal: 16,
   },
+
   AddMaintenanceScreenNavSide: {
     minWidth: 72,
   },
 
-
-  AddMaintenanceScreenNavLinkFiligrana: {
+  AddMaintenanceScreenNavLinkLamina: {
     color: colors.gold,
     fontFamily: fonts.sansRegular,
     fontSize: 15,
   },
 
-
-  AddMaintenanceScreenTitleFiligrana: {
+  AddMaintenanceScreenTitleLamina: {
     color: colors.cream,
     fontFamily: fonts.sansBold,
     fontSize: 16,
     fontWeight: '700',
   },
-  AddMaintenanceScreenInfoBannerCasco: {
+
+  AddMaintenanceScreenInfoBannerAndamio: {
     backgroundColor: colors.infoBanda,
     borderColor: colors.infoBannerBorde,
     borderRadius: radius.card,
@@ -192,15 +191,14 @@ const styles = StyleSheet.create({
     padding: 15,
   },
 
-  AddMaintenanceScreenInfoBannerFiligrana: {
+  AddMaintenanceScreenInfoBannerLamina: {
     color: colors.infoBannerText,
     fontFamily: fonts.sansRegular,
     fontSize: 12,
     lineHeight: 18,
   },
 
-
-  AddMaintenanceScreenSavePlinto: {
+  AddMaintenanceScreenSavePedestal: {
     marginTop: 4,
   },
 });

@@ -2,7 +2,7 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {TabBar} from '../components/nav/TabBar';
-import {CalcStackNavigator} from './stacks/CalcStack';
+import {CalcTabHost} from './stacks/CalcStack';
 import {FarmStackNavigator} from './stacks/FarmStack';
 import {FieldsStackNavigator} from './stacks/FieldsStack';
 import {TodayStackNavigator} from './stacks/TodayStack';
@@ -11,11 +11,10 @@ import type {GuestTab, MainTabParamList} from './types';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
-const TAB_ROOTS: Record<GuestTab, string> = {
+const TAB_ROOTS: Partial<Record<GuestTab, string>> = {
   TodayTab: 'TodayHome',
   FieldsTab: 'FieldsHome',
   WorkTab: 'WorkHome',
-  CalcTab: 'CalcHome',
   FarmTab: 'FarmHome',
 };
 
@@ -29,14 +28,19 @@ export function MainTabs() {
         <TabBar
           activeTab={state.routes[state.index]?.name as GuestTab}
           onSelect={tab => {
-            navigation.navigate(tab, {screen: TAB_ROOTS[tab]});
+            const root = TAB_ROOTS[tab];
+            if (root) {
+              navigation.navigate(tab, {screen: root});
+              return;
+            }
+            navigation.navigate(tab);
           }}
         />
       )}>
       <Tab.Screen name="TodayTab" component={TodayStackNavigator} />
       <Tab.Screen name="FieldsTab" component={FieldsStackNavigator} />
       <Tab.Screen name="WorkTab" component={WorkStackNavigator} />
-      <Tab.Screen name="CalcTab" component={CalcStackNavigator} />
+      <Tab.Screen name="CalcTab" component={CalcTabHost} />
       <Tab.Screen name="FarmTab" component={FarmStackNavigator} />
     </Tab.Navigator>
   );

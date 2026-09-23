@@ -1,7 +1,5 @@
 import type {NavigatorScreenParams} from '@react-navigation/native';
 
-import type {CalculatorId} from '../data/calculators';
-
 export type GuestTab =
   | 'TodayTab'
   | 'FieldsTab'
@@ -30,13 +28,6 @@ export type WorkStackParamList = {
   WorkCompleted: {taskId: string};
 };
 
-export type CalcStackParamList = {
-  CalcHome: undefined;
-  SeedRate: undefined;
-  Fertilizer: undefined;
-  SprayMixture: undefined;
-};
-
 export type FarmStackParamList = {
   FarmHome: undefined;
   InventoryItemDetail: {itemId: string};
@@ -51,7 +42,7 @@ export type MainTabParamList = {
   TodayTab: NavigatorScreenParams<TodayStackParamList>;
   FieldsTab: NavigatorScreenParams<FieldsStackParamList>;
   WorkTab: NavigatorScreenParams<WorkStackParamList>;
-  CalcTab: NavigatorScreenParams<CalcStackParamList>;
+  CalcTab: undefined;
   FarmTab: NavigatorScreenParams<FarmStackParamList>;
 };
 
@@ -59,13 +50,4 @@ export type RootStackParamList = {
   Loader: undefined;
   Onboarding: undefined;
   Main: undefined;
-};
-
-export const CALCULATOR_ROUTES: Record<
-  CalculatorId,
-  keyof CalcStackParamList
-> = {
-  seed: 'SeedRate',
-  fertilizer: 'Fertilizer',
-  spray: 'SprayMixture',
 };
