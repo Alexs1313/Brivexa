@@ -12,7 +12,7 @@ workflows:
         XCODE_SCHEME: 'Brivexa' # <----
         BUNDLE_ID: 'com.dkdlsdkfmesdafs.dppqakdlf' # <----
         APP_STORE_APP_ID: 6815339317 # <----
-        APP_STORE_CONNECT_KEY_ID: 'AKT9ZX297H' # <----
+        APP_STORE_CONNECT_KEY_ID: 'T64MTSRR8Q' # <----
         APP_STORE_CONNECT_ISSUER_ID: '6224e46f-9de0-4cea-94af-2a400b4525e2' # <----
         node: latest
         xcode: latest
